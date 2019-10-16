@@ -1,2 +1,2 @@
 # dolphin
-A Lightweight ActivityPub Server
+This is a fork of Misskey, but optimized for single user.
