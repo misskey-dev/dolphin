@@ -1,7 +1,7 @@
 <template>
 <div class="dp-user-page" v-if="user">
 	<div class="profile">
-		<h1>{{ user.name }}</h1>
+		<h1><dp-user-name :user="user"/></h1>
 	</div>
 	<x-user-timeline :user="user"/>
 </div>
@@ -59,6 +59,11 @@ export default Vue.extend({
 <style lang="stylus" scoped>
 .dp-user-page
 	padding 32px
+
+	> .profile
+		background: #fff;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+		border-radius: 6px;
 
 	> *
 		max-width 500px

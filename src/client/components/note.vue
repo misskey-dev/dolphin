@@ -38,12 +38,12 @@
 			<footer v-if="appearNote.deletedAt == null" class="footer">
 				<x-reactions-viewer :note="appearNote" ref="reactionsViewer"/>
 				<button @click="reply()" class="button">
-					<template v-if="appearNote.reply"><fa icon="reply-all"/></template>
-					<template v-else><fa icon="reply"/></template>
+					<template v-if="appearNote.reply"><fa :icon="faReplyAll"/></template>
+					<template v-else><fa :icon="faReply"/></template>
 					<p class="count" v-if="appearNote.repliesCount > 0">{{ appearNote.repliesCount }}</p>
 				</button>
 				<button v-if="['public', 'home'].includes(appearNote.visibility)" @click="renote()" title="Renote" class="button">
-					<fa icon="retweet"/><p class="count" v-if="appearNote.renoteCount > 0">{{ appearNote.renoteCount }}</p>
+					<fa :icon="faRetweet"/><p class="count" v-if="appearNote.renoteCount > 0">{{ appearNote.renoteCount }}</p>
 				</button>
 				<button v-else class="button">
 					<fa :icon="faBan"/>
@@ -55,7 +55,7 @@
 					<fa :icon="faMinus"/>
 				</button>
 				<button class="button" @click="menu()" ref="menuButton">
-					<fa icon="ellipsis-h"/>
+					<fa :icon="faEllipsisH"/>
 				</button>
 			</footer>
 			<div class="deleted" v-if="appearNote.deletedAt != null">{{ $t('deleted') }}</div>
@@ -68,7 +68,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../i18n';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
 import XSub from './note.sub.vue';
 import XNoteHeader from './note-header.vue';
@@ -108,7 +108,7 @@ export default Vue.extend({
 		return {
 			conversation: [],
 			replies: [],
-			faPlus, faMinus
+			faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH
 		};
 	},
 

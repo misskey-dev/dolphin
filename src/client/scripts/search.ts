@@ -36,7 +36,7 @@ export async function search(v: any, q: string) {
 	if (q.startsWith('https://')) {
 		const dialog = v.$root.dialog({
 			type: 'waiting',
-			text: v.$t('@.fetching-as-ap-object'),
+			text: v.$t('fetchingAsApObject') + '...',
 			showOkButton: false,
 			showCancelButton: false,
 			cancelableByBgClick: false

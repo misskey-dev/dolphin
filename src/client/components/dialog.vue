@@ -10,15 +10,15 @@
 				<fa :icon="icon"/>
 			</div>
 			<div class="icon" v-else-if="!input && !select && !user" :class="type">
-				<fa icon="check" v-if="type === 'success'"/>
+				<fa :icon="faCheck" v-if="type === 'success'"/>
 				<fa :icon="faTimesCircle" v-if="type === 'error'"/>
-				<fa icon="exclamation-triangle" v-if="type === 'warning'"/>
-				<fa icon="info-circle" v-if="type === 'info'"/>
+				<fa :icon="faExclamationTriangle" v-if="type === 'warning'"/>
+				<fa :icon="faInfoCircle" v-if="type === 'info'"/>
 				<fa :icon="faQuestionCircle" v-if="type === 'question'"/>
-				<fa icon="spinner" pulse v-if="type === 'waiting'"/>
+				<fa :icon="faSpinner" pulse v-if="type === 'waiting'"/>
 			</div>
 			<header v-if="title" v-html="title"></header>
-			<header v-if="title == null && user">{{ $t('@.enter-username') }}</header>
+			<header v-if="title == null && user">{{ $t('enterUsername') }}</header>
 			<div class="body" v-if="text" v-html="text"></div>
 			<ui-input v-if="input" v-model="inputValue" autofocus :type="input.type || 'text'" :placeholder="input.placeholder" @keydown="onInputKeydown"></ui-input>
 			<ui-input v-if="user" v-model="userInputValue" autofocus @keydown="onInputKeydown"><template #prefix>@</template></ui-input>
@@ -33,8 +33,8 @@
 				</template>
 			</ui-select>
 			<ui-horizon-group no-grow class="buttons fit-bottom" v-if="!splash && (showOkButton || showCancelButton)">
-				<ui-button @click="ok" v-if="showOkButton" primary :autofocus="!input && !select && !user" :disabled="!canOk">{{ (showCancelButton || input || select || user) ? $t('@.ok') : $t('@.got-it') }}</ui-button>
-				<ui-button @click="cancel" v-if="showCancelButton || input || select || user">{{ $t('@.cancel') }}</ui-button>
+				<ui-button @click="ok" v-if="showOkButton" primary :autofocus="!input && !select && !user" :disabled="!canOk">{{ (showCancelButton || input || select || user) ? $t('ok') : $t('gotIt') }}</ui-button>
+				<ui-button @click="cancel" v-if="showCancelButton || input || select || user">{{ $t('cancel') }}</ui-button>
 			</ui-horizon-group>
 		</template>
 	</div>
@@ -44,12 +44,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import anime from 'animejs';
+import { faSpinner, faInfoCircle, faExclamationTriangle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import parseAcct from '../../misc/acct/parse';
 import i18n from '../i18n';
 
 export default Vue.extend({
 	i18n: i18n(),
+
 	props: {
 		type: {
 			type: String,
@@ -100,7 +102,7 @@ export default Vue.extend({
 			userInputValue: null,
 			selectedValue: this.select ? this.select.default ? this.select.default : this.select.items ? this.select.items[0].value : this.select.groupedItems[0].items[0].value : null,
 			canOk: true,
-			faTimesCircle, faQuestionCircle
+			faTimesCircle, faQuestionCircle, faSpinner, faInfoCircle, faExclamationTriangle, faCheck
 		};
 	},
 
@@ -243,6 +245,7 @@ export default Vue.extend({
 		padding 32px
 		min-width 320px
 		max-width 480px
+		box-sizing border-box
 		width calc(100% - 32px)
 		text-align center
 		background #fff

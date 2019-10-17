@@ -10,10 +10,15 @@
 <script lang="ts">
 import Vue from 'vue';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import i18n from './i18n';
+import { search } from './scripts/search';
 
 export default Vue.extend({
+	i18n: i18n(),
+
 	data() {
 		return {
+			searching: false,
 			faPencilAlt
 		};
 	},
@@ -22,6 +27,7 @@ export default Vue.extend({
 		keymap(): any {
 			return {
 				'p|n': this.post,
+				's': this.search,
 			};
 		}
 	},
@@ -29,7 +35,23 @@ export default Vue.extend({
 	methods: {
 		post() {
 			this.$root.post();
-		}
+		},
+
+		search() {
+			if (this.searching) return;
+
+			this.$root.dialog({
+				title: this.$t('search'),
+				input: true
+			}).then(async ({ canceled, result: query }) => {
+				if (canceled) return;
+
+				this.searching = true;
+				search(this, query).finally(() => {
+					this.searching = false;
+				});
+			});
+		},
 	}
 });
 </script>

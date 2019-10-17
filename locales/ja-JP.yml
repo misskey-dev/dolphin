@@ -11,3 +11,12 @@ timeAgo:
   yearsAgo: "{}年前"
 
 monthAndDay: "{month}月 {day}日"
+
+search: "検索"
+username: "ユーザー名"
+password: "パスワード"
+fetchingAsApObject: "連合に照会中"
+ok: "OK"
+gotIt: "わかった"
+cancel: "キャンセル"
+enterUsername: "ユーザー名を入力してください"
