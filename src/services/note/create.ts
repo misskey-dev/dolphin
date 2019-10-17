@@ -79,8 +79,6 @@ type Option = {
 	renote?: Note | null;
 	files?: DriveFile[] | null;
 	poll?: IPoll | null;
-	viaMobile?: boolean | null;
-	localOnly?: boolean | null;
 	cw?: string | null;
 	visibility?: string;
 	visibleUsers?: User[] | null;
@@ -93,8 +91,6 @@ type Option = {
 export default async (user: User, data: Option, silent = false) => new Promise<Note>(async (res, rej) => {
 	if (data.createdAt == null) data.createdAt = new Date();
 	if (data.visibility == null) data.visibility = 'public';
-	if (data.viaMobile == null) data.viaMobile = false;
-	if (data.localOnly == null) data.localOnly = false;
 
 	// Renote対象が「ホームまたは全体」以外の公開範囲ならreject
 	if (data.renote && data.renote.visibility != 'public' && data.renote.visibility != 'home') {
@@ -254,8 +250,6 @@ export default async (user: User, data: Option, silent = false) => new Promise<N
 });
 
 async function renderNoteOrRenoteActivity(data: Option, note: Note) {
-	if (data.localOnly) return null;
-
 	const content = data.renote && data.text == null && data.poll == null && (data.files == null || data.files.length == 0)
 		? renderAnnounce(data.renote.uri ? data.renote.uri : `${config.url}/notes/${data.renote.id}`, note)
 		: renderCreate(await renderNote(note, false), note);

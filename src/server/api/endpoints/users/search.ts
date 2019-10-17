@@ -36,14 +36,6 @@ export const meta = {
 			}
 		},
 
-		localOnly: {
-			validator: $.optional.bool,
-			default: false,
-			desc: {
-				'ja-JP': 'ローカルユーザーのみ検索対象にするか否か'
-			}
-		},
-
 		detail: {
 			validator: $.optional.bool,
 			default: true,
@@ -65,7 +57,7 @@ export const meta = {
 };
 
 export default define(meta, async (ps, me) => {
-	const isUsername = ps.localOnly ? Users.validateLocalUsername.ok(ps.query.replace('@', '')) : Users.validateRemoteUsername.ok(ps.query.replace('@', ''));
+	const isUsername = Users.validateRemoteUsername.ok(ps.query.replace('@', ''));
 
 	let users: User[] = [];
 
@@ -78,7 +70,7 @@ export default define(meta, async (ps, me) => {
 			.skip(ps.offset)
 			.getMany();
 
-		if (users.length < ps.limit! && !ps.localOnly) {
+		if (users.length < ps.limit!) {
 			const otherUsers = await Users.createQueryBuilder('user')
 				.where('user.host IS NOT NULL')
 				.andWhere('user.isSuspended = FALSE')

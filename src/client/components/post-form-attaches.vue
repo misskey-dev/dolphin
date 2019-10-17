@@ -17,7 +17,7 @@
 import Vue from 'vue';
 import i18n from '../i18n';
 import * as XDraggable from 'vuedraggable';
-import XMenu from '../../../common/views/components/menu.vue';
+import XMenu from './menu.vue';
 import { faTimesCircle, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import XFileThumbnail from './drive-file-thumbnail.vue'

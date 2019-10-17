@@ -75,7 +75,6 @@ export const meta = {
 export default define(meta, async (ps) => {
 	const query = makePaginationQuery(Notes.createQueryBuilder('note'), ps.sinceId, ps.untilId)
 		.andWhere(`note.visibility = 'public'`)
-		.andWhere(`note.localOnly = FALSE`)
 		.leftJoinAndSelect('note.user', 'user');
 
 	if (ps.local) {

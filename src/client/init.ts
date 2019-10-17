@@ -16,7 +16,7 @@ import VueSize from './scripts/size';
 import App from './app.vue';
 import MiOS from './mios';
 import { version, codename, lang } from './config';
-import UI from './components/ui.vue';
+import PostFormDialog from './components/post-form-dialog.vue';
 import Dialog from './components/dialog.vue';
 import DpIndex from './components/index.vue';
 import i18n from './i18n';
@@ -151,7 +151,29 @@ os.init(() => {
 					vm.close();
 				};
 				return p;
-			}
+			},
+			post(opts) {
+				const o = opts || {};
+
+				document.documentElement.style.overflow = 'hidden';
+
+				function recover() {
+					document.documentElement.style.overflow = 'auto';
+				}
+
+				const vm = this.new(PostFormDialog, {
+					reply: o.reply,
+					mention: o.mention,
+					renote: o.renote,
+					initialText: o.initialText,
+					instant: o.instant,
+					initialNote: o.initialNote,
+				});
+				vm.$once('cancel', recover);
+				vm.$once('posted', recover);
+				if (o.cb) vm.$once('closed', o.cb);
+				(vm as any).focus();
+			},
 		},
 		router,
 		render: createEl => createEl(App)

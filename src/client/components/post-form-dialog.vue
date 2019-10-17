@@ -138,4 +138,7 @@ export default Vue.extend({
 		opacity 0
 		transform translateY(-16px)
 
+		> *
+			background #fff
+
 </style>

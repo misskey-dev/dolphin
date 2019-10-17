@@ -73,22 +73,6 @@ export const meta = {
 			}
 		},
 
-		viaMobile: {
-			validator: $.optional.bool,
-			default: false,
-			desc: {
-				'ja-JP': 'モバイルデバイスからの投稿か否か。'
-			}
-		},
-
-		localOnly: {
-			validator: $.optional.bool,
-			default: false,
-			desc: {
-				'ja-JP': 'ローカルのみに投稿か否か。'
-			}
-		},
-
 		noExtractMentions: {
 			validator: $.optional.bool,
 			default: false,
@@ -283,8 +267,6 @@ export default define(meta, async (ps, user, app) => {
 		reply,
 		renote,
 		cw: ps.cw,
-		viaMobile: ps.viaMobile,
-		localOnly: ps.localOnly,
 		visibility: ps.visibility,
 		visibleUsers,
 		apMentions: ps.noExtractMentions ? [] : undefined,
