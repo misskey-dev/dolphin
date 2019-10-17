@@ -32,16 +32,21 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-reactions-viewer
-	margin: 4px -2px
+.dp-reactions-viewer {
+	margin: 4px -2px;
 
-	&:empty
-		display none
+	&:empty {
+		display: none;
+	}
 
-	&.isMe
-		> span
-			cursor default !important
+	&.isMe {
+		> span {
+			cursor: default !important;
 
-			&:hover
-				background var(--reactionViewerButtonBg) !important
+			&:hover {
+				background: var(--reactionViewerButtonBg) !important;
+			}
+		}
+	}
+}
 </style>

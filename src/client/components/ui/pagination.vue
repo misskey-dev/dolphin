@@ -29,8 +29,9 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.mwermpua
-	> .more
-		margin-top 16px
-
+.mwermpua {
+	> .more {
+		margin-top: 16px;
+	}
+}
 </style>

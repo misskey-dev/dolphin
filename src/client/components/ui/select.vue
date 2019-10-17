@@ -23,11 +23,6 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-	inject: {
-		horizonGrouped: {
-			default: false
-		}
-	},
 	props: {
 		value: {
 			required: false
@@ -40,17 +35,10 @@ export default Vue.extend({
 			type: Boolean,
 			required: false
 		},
-		styl: {
-			type: String,
-			required: false,
-			default: 'line'
-		},
 		inline: {
 			type: Boolean,
 			required: false,
-			default(): boolean {
-				return this.horizonGrouped;
-			}
+			default: false
 		},
 	},
 	data() {

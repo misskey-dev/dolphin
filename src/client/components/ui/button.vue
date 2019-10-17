@@ -1,7 +1,7 @@
 <template>
 <component class="dmtdnykelhudezerjlfpbhgovrgnqqgr"
 	:is="link ? 'a' : 'button'"
-	:class="{ inline, primary, wait }"
+	:class="{ inline, primary }"
 	:type="type"
 	@click="$emit('click')"
 	@mousedown="onMousedown"
@@ -16,11 +16,6 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-	inject: {
-		horizonGrouped: {
-			default: false
-		}
-	},
 	props: {
 		type: {
 			type: String,
@@ -34,9 +29,7 @@ export default Vue.extend({
 		inline: {
 			type: Boolean,
 			required: false,
-			default(): boolean {
-				return this.horizonGrouped;
-			}
+			default: false
 		},
 		link: {
 			type: Boolean,
@@ -105,121 +98,116 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dmtdnykelhudezerjlfpbhgovrgnqqgr
-	position relative
-	display block
-	min-width 100px
-	margin 0
-	padding 8px 10px
-	text-align center
-	font-weight normal
-	font-size 14px
-	line-height 24px
-	border none
-	outline none
-	box-shadow none
-	text-decoration none
-	user-select none
-	color var(--text)
-	background var(--buttonBg)
-	border-radius 6px
-	overflow hidden
-	cursor pointer
+.dmtdnykelhudezerjlfpbhgovrgnqqgr {
+	position: relative;
+	display: block;
+	min-width: 100px;
+	margin: 0;
+	padding: 8px 10px;
+	text-align: center;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 24px;
+	border: none;
+	outline: none;
+	box-shadow: none;
+	text-decoration: none;
+	user-select: none;
+	color: var(--text);
+	background: var(--buttonBg);
+	border-radius: 6px;
+	overflow: hidden;
+	cursor: pointer;
 
-	&:not(:disabled):hover
-		background var(--buttonHoverBg)
+	&:not(:disabled):hover {
+		background: var(--buttonHoverBg);
+	}
 
-	&:not(:disabled):active
-		background var(--buttonActiveBg)
+	&:not(:disabled):active {
+		background: var(--buttonActiveBg);
+	}
 
-	&.primary
-		color #fff
-		background #5da1c1
+	&.primary {
+		color: #fff;
+		background: #5da1c1;
 
-		&:not(:disabled):hover
-			background lighten(#5da1c1, 5%)
+		&:not(:disabled):hover {
+			background: lighten(#5da1c1, 5%);
+		}
 
-		&:not(:disabled):active
-			background darken(#5da1c1, 5%)
+		&:not(:disabled):active {
+			background: darken(#5da1c1, 5%);
+		}
+	}
 
-	*
-		pointer-events none
-		user-select none
+	* {
+		pointer-events: none;
+		user-select: none;
+	}
 
-	&:disabled
-		opacity 0.7
+	&:disabled {
+		opacity: 0.7;
+	}
 
-	&:focus
-		&:after
-			content ""
-			pointer-events none
-			position absolute
-			top -5px
-			right -5px
-			bottom -5px
-			left -5px
-			border 2px solid var(--primaryAlpha03)
+	&:focus {
+		&:after {
+			content: "";
+			pointer-events: none;
+			position: absolute;
+			top: -5px;
+			right: -5px;
+			bottom: -5px;
+			left: -5px;
+			border: 2px solid var(--primaryAlpha03);
+			border-radius: 10px;
+		}
+	}
 
-	&.round:focus:after
-		border-radius 10px
+	&:not(.inline) + .dmtdnykelhudezerjlfpbhgovrgnqqgr {
+		margin-top: 16px;
+	}
 
-	&:not(.inline) + .dmtdnykelhudezerjlfpbhgovrgnqqgr
-		margin-top 16px
+	&.inline {
+		display: inline-block;
+		width: auto;
+		min-width: 100px;
+	}
 
-	&.inline
-		display inline-block
-		width auto
-		min-width 100px
+	&.primary {
+		font-weight: bold;
+	}
 
-	&.primary
-		font-weight bold
+	> .ripples {
+		position: absolute;
+		z-index: 0;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
 
-	&.wait
-		background linear-gradient(
-			45deg,
-			var(--primaryDarken10) 25%,
-			#5da1c1              25%,
-			#5da1c1              50%,
-			var(--primaryDarken10) 50%,
-			var(--primaryDarken10) 75%,
-			#5da1c1              75%,
-			#5da1c1
-		)
-		background-size 32px 32px
-		animation stripe-bg 1.5s linear infinite
-		opacity 0.7
-		cursor wait
+		>>> div {
+			position: absolute;
+			width: 2px;
+			height: 2px;
+			border-radius: 100%;
+			background: rgba(0, 0, 0, 0.1);
+			opacity: 1;
+			transform: scale(1);
+			transition: all 0.5s cubic-bezier(0, .5, .5, 1);
+		}
+	}
 
-		@keyframes stripe-bg
-			from {background-position: 0 0;}
-			to   {background-position: -64px 32px;}
+	&.round > .ripples {
+		border-radius: 6px;
+	}
 
-	> .ripples
-		position absolute
-		z-index 0
-		top 0
-		left 0
-		width 100%
-		height 100%
-		overflow hidden
+	&.primary > .ripples >>> div {
+		background: rgba(0, 0, 0, 0.15);
+	}
 
-		>>> div
-			position absolute
-			width 2px
-			height 2px
-			border-radius 100%
-			background rgba(0, 0, 0, 0.1)
-			opacity 1
-			transform scale(1)
-			transition all 0.5s cubic-bezier(0, .5, .5, 1)
-
-	&.round > .ripples
-		border-radius 6px
-
-	&.primary > .ripples >>> div
-		background rgba(0, 0, 0, 0.15)
-
-	> .content
-		z-index 1
-
+	> .content {
+		z-index: 1;
+	}
+}
 </style>

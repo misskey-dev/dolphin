@@ -32,10 +32,10 @@
 					</optgroup>
 				</template>
 			</ui-select>
-			<ui-horizon-group no-grow class="buttons fit-bottom" v-if="!splash && (showOkButton || showCancelButton)">
+			<div class="buttons" v-if="!splash && (showOkButton || showCancelButton)">
 				<ui-button @click="ok" v-if="showOkButton" primary :autofocus="!input && !select && !user" :disabled="!canOk">{{ (showCancelButton || input || select || user) ? $t('ok') : $t('gotIt') }}</ui-button>
 				<ui-button @click="cancel" v-if="showCancelButton || input || select || user">{{ $t('cancel') }}</ui-button>
-			</ui-horizon-group>
+			</div>
 		</template>
 	</div>
 </div>

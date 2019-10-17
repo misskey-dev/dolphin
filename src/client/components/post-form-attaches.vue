@@ -81,59 +81,67 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.skeikyzd
-	padding 4px
+.skeikyzd {
+	padding: 4px;
 
-	> .files
-		display flex
-		flex-wrap wrap
+	> .files {
+		display: flex;
+		flex-wrap: wrap;
 
-		> div
-			width 64px
-			height 64px
-			margin 4px
-			cursor move
+		> div {
+			width: 64px;
+			height: 64px;
+			margin: 4px;
+			cursor: move;
 
-			&:hover > .remove
-				display block
+			&:hover > .remove {
+				display: block;
+			}
 
-			> .thumbnail
-				width 100%
-				height 100%
-				z-index 1
-				color var(--text)
+			> .thumbnail {
+				width: 100%;
+				height: 100%;
+				z-index: 1;
+				color: var(--text);
+			}
 
-			> .remove
-				display none
-				position absolute
-				top -6px
-				right -6px
-				width 16px
-				height 16px
-				cursor pointer
-				z-index 1000
+			> .remove {
+				display: none;
+				position: absolute;
+				top: -6px;
+				right: -6px;
+				width: 16px;
+				height: 16px;
+				cursor: pointer;
+				z-index: 1000;
+			}
 
-			> .sensitive
-				display flex
-				position absolute
-				width 64px
-				height 64px
-				top 0
-				left 0
-				z-index 2
-				background rgba(17, 17, 17, .7)
-				color #fff
+			> .sensitive {
+				display: flex;
+				position: absolute;
+				width: 64px;
+				height: 64px;
+				top: 0;
+				left: 0;
+				z-index: 2;
+				background: rgba(17, 17, 17, .7);
+				color: #fff;
 
-				> .icon
-					margin auto
+				> .icon {
+					margin: auto;
+				}
+			}
+		}
+	}
 
-	> .remain
-		display block
-		position absolute
-		top 8px
-		right 8px
-		margin 0
-		padding 0
-		color var(--primaryAlpha04)
-
+	> .remain {
+		display: block;
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		margin: 0;
+		padding: 0;
+		color: var(--primaryAlpha04);
+	}
+}
 </style>

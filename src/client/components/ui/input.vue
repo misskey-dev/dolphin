@@ -1,5 +1,5 @@
 <template>
-<div class="ui-input" :class="[{ focused, filled, inline, disabled }, styl]">
+<div class="ui-input" :class="{ focused, filled, inline, disabled }">
 	<div class="icon" ref="icon"><slot name="icon"></slot></div>
 	<div class="input">
 		<span class="label" ref="label"><slot></slot></span>
@@ -74,11 +74,6 @@ export default Vue.extend({
 	directives: {
 		debounce
 	},
-	inject: {
-		horizonGrouped: {
-			default: false
-		}
-	},
 	props: {
 		value: {
 			required: false
@@ -128,15 +123,8 @@ export default Vue.extend({
 		inline: {
 			type: Boolean,
 			required: false,
-			default(): boolean {
-				return this.horizonGrouped;
-			}
+			default: false
 		},
-		styl: {
-			type: String,
-			required: false,
-			default: 'line'
-		}
 	},
 	data() {
 		return {
@@ -248,205 +236,201 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.ui-input
+.ui-input {
 	position: relative;
-	margin 32px 0
+	margin: 32px 0;
 
-	> .icon
-		position absolute
-		top 0
-		left 0
-		width 24px
-		text-align center
-		line-height 32px
-		color var(--inputLabel)
+	> .icon {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 24px;
+		text-align: center;
+		line-height: 32px;
+		color: var(--inputLabel);
 
-		&:not(:empty) + .input
-			margin-left 28px
+		&:not(:empty) + .input {
+			margin-left: 28px;
+		}
+	}
 
-	> .input
-		&:before
-			content ''
-			display block
-			position absolute
-			bottom 0
-			left 0
-			right 0
-			height 1px
-			background #dae0e4
+	> .input {
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 1px;
+			background: #dae0e4;
+		}
 
-		&:after
-			content ''
-			display block
-			position absolute
-			bottom 0
-			left 0
-			right 0
-			height 2px
-			background #5da1c1
-			opacity 0
-			transform scaleX(0.12)
-			transition border 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)
-			will-change border opacity transform
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 2px;
+			background: #5da1c1;
+			opacity: 0;
+			transform: scaleX(0.12);
+			transition: border 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			will-change: border opacity transform;
+		}
 
-		> .password-meter
-			position absolute
-			top 0
-			left 0
-			width 100%
-			height 100%
-			border-radius 6px
-			overflow hidden
-			opacity 0.3
-
-			&[data-strength='']
-				display none
-
-			&[data-strength='low']
-				> .value
-					background #d73612
-
-			&[data-strength='medium']
-				> .value
-					background #d7ca12
-
-			&[data-strength='high']
-				> .value
-					background #61bb22
-
-			> .value
-				display block
-				width 0
-				height 100%
-				background transparent
-				border-radius 6px
-				transition all 0.1s ease
-
-		> .label
-			position absolute
-			z-index 1
-			top 0
-			left 0
-			pointer-events none
-			transition 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)
-			transition-duration 0.3s
-			font-size 16px
-			line-height 32px
-			color var(--inputLabel)
-			pointer-events none
+		> .label {
+			position: absolute;
+			z-index: 1;
+			top: 0;
+			left: 0;
+			pointer-events: none;
+			transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+			transition-duration: 0.3s;
+			font-size: 16px;
+			line-height: 32px;
+			color: var(--inputLabel);
+			pointer-events: none;
 			//will-change transform
-			transform-origin top left
-			transform scale(1)
+			transform-origin: top left;
+			transform: scale(1);
+		}
 
-		> .title
-			position absolute
-			z-index 1
-			top -17px
-			left 0 !important
-			pointer-events none
-			font-size 16px
-			line-height 32px
-			color var(--inputLabel)
-			pointer-events none
+		> .title {
+			position: absolute;
+			z-index: 1;
+			top: -17px;
+			left: 0 !important;
+			pointer-events: none;
+			font-size: 16px;
+			line-height: 32px;
+			color: var(--inputLabel);
+			pointer-events: none;
 			//will-change transform
-			transform-origin top left
-			transform scale(.75)
-			white-space nowrap
-			width 133%
-			overflow hidden
-			text-overflow ellipsis
+			transform-origin: top left;
+			transform: scale(.75);
+			white-space: nowrap;
+			width: 133%;
+			overflow: hidden;
+			text-overflow: ellipsis;
 
-			> .warning
-				margin-left 0.5em
-				color var(--infoWarnFg)
+			> .warning {
+				margin-left: 0.5em;
+				color: var(--infoWarnFg);
 
-				> svg
-					margin-right 0.1em
+				> svg {
+					margin-right: 0.1em;
+				}
+			}
+		}
 
-		> input
-			display block
-			width 100%
-			margin 0
-			padding 0
-			font inherit
-			font-weight normal
-			font-size 16px
-			line-height 32px
-			color var(--inputText)
-			background transparent
-			border none
-			border-radius 0
-			outline none
-			box-shadow none
+		> input {
+			display: block;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			font: inherit;
+			font-weight: normal;
+			font-size: 16px;
+			line-height: 32px;
+			color: var(--inputText);
+			background: transparent;
+			border: none;
+			border-radius: 0;
+			outline: none;
+			box-shadow: none;
 
-			&[type='file']
-				display none
+			&[type='file'] {
+				display: none;
+			}
+		}
 
-		> .prefix
-		> .suffix
-			display block
-			position absolute
-			z-index 1
-			top 0
-			font-size 16px
-			line-height 32px
-			color var(--inputLabel)
-			pointer-events none
+		> .prefix,
+		> .suffix {
+			display: block;
+			position: absolute;
+			z-index: 1;
+			top: 0;
+			font-size: 16px;
+			line-height: 32px;
+			color: var(--inputLabel);
+			pointer-events: none;
 
-			&:empty
-				display none
+			&:empty {
+				display: none;
+			}
 
-			> *
-				display inline-block
-				min-width 16px
-				max-width 150px
-				overflow hidden
-				white-space nowrap
-				text-overflow ellipsis
+			> * {
+				display: inline-block;
+				min-width: 16px;
+				max-width: 150px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+		}
 
-		> .prefix
-			left 0
-			padding-right 4px
+		> .prefix {
+			left: 0;
+			padding-right: 4px;
+		}
 
-		> .suffix
-			right 0
-			padding-left 4px
+		> .suffix {
+			right: 0;
+			padding-left: 4px;
+		}
+	}
 
-	> .desc
-		margin 6px 0
-		font-size 13px
+	> .desc {
+		margin: 6px 0;
+		font-size: 13px;
 
-		&:empty
-			display none
+		&:empty {
+			display: none;
+		}
 
-		*
-			margin 0
+		* {
+			margin: 0;
+		}
+	}
 
-	&.focused
-		> .input
-			&:after
-				opacity 1
-				transform scaleX(1)
+	&.focused {
+		> .input {
+			&:after {
+				opacity: 1;
+				transform: scaleX(1);
+			}
 
-			> .label
-				color #5da1c1
+			> .label {
+				color: #5da1c1;
+			}
+		}
+	}
 
-	&.focused
-	&.filled
-		> .input
-			> .label
-				top -17px
-				left 0 !important
-				transform scale(0.75)
+	&.focused,
+	&.filled {
+		> .input {
+			> .label {
+				top: -17px;
+				left: 0 !important;
+				transform: scale(0.75);
+			}
+		}
+	}
 
-	&.inline
-		display inline-block
-		margin 0
+	&.inline {
+		display: inline-block;
+		margin: 0;
+	}
 
-	&.disabled
-		opacity 0.7
+	&.disabled {
+		opacity: 0.7;
 
-		&, *
-			cursor not-allowed !important
-
+		&, * {
+			cursor: not-allowed !important;
+		}
+	}
+}
 </style>

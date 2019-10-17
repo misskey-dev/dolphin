@@ -241,7 +241,7 @@ export default Vue.extend({
 					margin-right 16px
 
 	> *
-		max-width 550px
+		max-width 600px
 		margin 0 auto
 
 </style>
