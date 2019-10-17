@@ -1,25 +1,18 @@
 <template>
-<div class="ivaojijs" :class="{ shadow: $store.state.device.useShadow, round: $store.state.device.roundedCorners }">
+<div class="dp-notes">
 	<div class="empty" v-if="empty">{{ $t('@.no-notes') }}</div>
 
 	<dp-error v-if="error" @retry="init()"/>
 
-	<div class="placeholder" v-if="fetching">
-		<template v-for="i in 10">
-			<dp-note-skeleton :key="i"/>
-		</template>
-	</div>
-
-	<!-- トランジションを有効にするとなぜかメモリリークする -->
-	<component :is="!$store.state.device.reduceMotion ? 'transition-group' : 'div'" name="dp-notes" class="transition" tag="div">
+	<transition-group name="dp-notes" class="transition" tag="div">
 		<template v-for="(note, i) in _notes">
-			<dp-note :note="note" :key="note.id"/>
+			<x-note :note="note" :key="note.id"/>
 			<p class="date" :key="note.id + '_date'" v-if="i != items.length - 1 && note._date != _notes[i + 1]._date">
 				<span><fa icon="angle-up"/>{{ note._datetext }}</span>
 				<span><fa icon="angle-down"/>{{ _notes[i + 1]._datetext }}</span>
 			</p>
 		</template>
-	</component>
+	</transition-group>
 
 	<footer v-if="more">
 		<button @click="fetchMore()" :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }">
@@ -34,9 +27,14 @@
 import Vue from 'vue';
 import i18n from '../i18n';
 import paging from '../scripts/paging';
+import XNote from './note.vue';
 
 export default Vue.extend({
 	i18n: i18n(),
+
+	components: {
+		XNote
+	},
 
 	mixins: [
 		paging({
@@ -84,23 +82,10 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
-.ivaojijs
-	overflow hidden
-	background var(--face)
-
-	&.round
-		border-radius 8px
-
-	&.shadow
-		box-shadow 0 4px 16px rgba(#000, 0.1)
-
-		@media (min-width 500px)
-			box-shadow 0 8px 32px rgba(#000, 0.1)
-
+.dp-notes
 	> .empty
 		padding 16px
 		text-align center
-		color var(--text)
 
 	.transition
 		.dp-notes-enter
@@ -110,6 +95,9 @@ export default Vue.extend({
 
 		> *
 			transition transform .3s ease, opacity .3s ease
+
+		> *:not(.date)
+			margin 16px 0
 
 		> .date
 			display block
@@ -126,13 +114,6 @@ export default Vue.extend({
 
 			[data-icon]
 				margin-right 8px
-
-	> .placeholder
-		padding 16px
-		opacity 0.3
-
-		@media (min-width 500px)
-			padding 32px
 
 	> .empty
 		margin 0 auto

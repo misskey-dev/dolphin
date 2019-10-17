@@ -36,7 +36,7 @@
 				</div>
 			</div>
 			<footer v-if="appearNote.deletedAt == null" class="footer">
-				<dp-reactions-viewer :note="appearNote" ref="reactionsViewer"/>
+				<x-reactions-viewer :note="appearNote" ref="reactionsViewer"/>
 				<button @click="reply()" class="button">
 					<template v-if="appearNote.reply"><fa icon="reply-all"/></template>
 					<template v-else><fa icon="reply"/></template>
@@ -71,14 +71,17 @@ import i18n from '../i18n';
 
 import XSub from './note.sub.vue';
 import XNoteHeader from './note-header.vue';
+import XReactionsViewer from './reactions-viewer.vue';
 import noteMixin from '../scripts/note-mixin';
 import noteSubscriber from '../scripts/note-subscriber';
 
 export default Vue.extend({
 	i18n: i18n('mobile/views/components/note.vue'),
+	
 	components: {
 		XSub,
-		XNoteHeader
+		XNoteHeader,
+		XReactionsViewer,
 	},
 
 	mixins: [

@@ -17,6 +17,8 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .dp-home
+	padding 32px
+
 	> *
 		max-width 500px
 		margin 0 auto
