@@ -60,7 +60,7 @@ module.exports = {
 						modules: true
 					}
 				}, postcss, {
-					loader: 'scss-loader'
+					loader: 'sass-loader'
 				}]
 			}, {
 				use: [{
@@ -68,7 +68,7 @@ module.exports = {
 				}, {
 					loader: 'css-loader'
 				}, postcss, {
-					loader: 'scss-loader'
+					loader: 'sass-loader'
 				}]
 			}]
 		}, {

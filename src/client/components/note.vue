@@ -132,108 +132,128 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.note
-	overflow hidden
-	font-size 16px
-	background #fff
+.note {
+	overflow: hidden;
+	font-size: 16px;
+	background: #fff;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 	border-radius: 6px;
 
-	> .renote + .article
-		padding-top 8px
+	> .renote + .article {
+		padding-top: 8px;
+	}
 
-	> .article
-		display flex
-		padding 28px 32px 18px
+	> .article {
+		display: flex;
+		padding: 28px 32px 18px;
 
-		> .avatar
-			flex-shrink 0
-			display block
-			margin 0 10px 8px 0
-			width 58px
-			height 58px
+		> .avatar {
+			flex-shrink: 0;
+			display: block;
+			margin: 0 10px 8px 0;
+			width: 58px;
+			height: 58px;
+		}
 
-		> .main
-			flex 1
-			min-width 0
+		> .main {
+			flex: 1;
+			min-width: 0;
 
-			> .body
-				> .cw
-					cursor default
-					display block
-					margin 0
-					padding 0
-					overflow-wrap break-word
+			> .body {
+				> .cw {
+					cursor: default;
+					display: block;
+					margin: 0;
+					padding: 0;
+					overflow-wrap: break-word;
 
-					> .text
-						margin-right 8px
+					> .text {
+						margin-right: 8px;
+					}
+				}
 
-				> .content
+				> .content {
 
-					> .text
-						display block
-						margin 0
-						padding 0
-						overflow-wrap break-word
-						font-size 1em
+					> .text {
+						display: block;
+						margin: 0;
+						padding: 0;
+						overflow-wrap: break-word;
+						font-size: 1em;
 
-						> .reply
-							margin-right 8px
+						> .reply {
+							margin-right: 8px;
+						}
 
-						> .rp
-							margin-left 4px
-							font-style oblique
-							color var(--renoteText)
+						> .rp {
+							margin-left: 4px;
+							font-style: oblique;
+							color: var(--renoteText);
+						}
+					}
 
-					.dp-url-preview
-						margin-top 8px
+					.dp-url-preview {
+						margin-top: 8px;
+					}
 
-					> .files
-						> img
-							display block
-							max-width 100%
+					> .files {
+						> img {
+							display: block;
+							max-width: 100%;
+						}
+					}
 
-					> .dp-poll
-						font-size 80%
+					> .dp-poll {
+						font-size: 80%;
+					}
 
-					> .renote
-						margin 8px 0
+					> .renote {
+						margin: 8px 0;
 
-						> *
-							padding 16px
-							border dashed var(--lineWidth) var(--quoteBorder)
-							border-radius 8px
+						> * {
+							padding: 16px;
+							border: dashed 1px var(--quoteBorder);
+							border-radius: 8px;
+						}
+					}
+				}
+			}
 
-				> .app
-					font-size 12px
-					color #ccc
+			> .footer {
+				> .button {
+					margin: 0;
+					padding: 8px;
+					background: transparent;
+					border: none;
+					box-shadow: none;
+					font-size: 1em;
+					cursor: pointer;
+					color: #5c6a73;
 
-			> .footer
-				> .button
-					margin 0
-					padding 8px
-					background transparent
-					border none
-					box-shadow none
-					font-size 1em
-					cursor pointer
-					color #5c6a73
+					&:not(:last-child) {
+						margin-right: 28px;
+					}
 
-					&:not(:last-child)
-						margin-right 28px
+					&:hover {
+						color: darken(#5c6a73, 30%);
+					}
 
-					&:hover
-						color darken(#5c6a73, 30%)
+					> .count {
+						display: inline;
+						margin: 0 0 0 8px;
+						opacity: 0.7;
+					}
 
-					> .count
-						display inline
-						margin 0 0 0 8px
-						opacity 0.7
+					&.reacted {
+						color: #5da1c1;
+					}
+				}
+			}
 
-					&.reacted
-						color #5da1c1
-
-			> .deleted
-				opacity 0.7
-
+			> .deleted {
+				opacity: 0.7;
+			}
+		}
+	}
+}
 </style>

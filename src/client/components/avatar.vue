@@ -57,23 +57,24 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-avatar
-	position relative
-	display inline-block
-	vertical-align bottom
-	flex-shrink 0
-	overflow hidden
-	border-radius 100%
-
-	.inner
-		background-position center center
-		background-size cover
-		bottom 0
-		left 0
-		position absolute
-		right 0
-		top 0
-		border-radius 100%
-		z-index 1
-
+.dp-avatar {
+	position: relative;
+	display: inline-block;
+	vertical-align: bottom;
+	flex-shrink: 0;
+	overflow: hidden;
+	border-radius: 100%;
+	
+	.inner {
+		background-position: center center;
+		background-size: cover;
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		border-radius: 100%;
+		z-index: 1;
+	}
+}
 </style>

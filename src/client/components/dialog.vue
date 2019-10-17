@@ -1,5 +1,5 @@
 <template>
-<div class="felqjxyj" :class="{ splash }">
+<div class="dp-dialog" :class="{ splash }">
 	<div class="bg" ref="bg" @click="onBgClick"></div>
 	<div class="main" ref="main">
 		<template v-if="type == 'signin'">
@@ -211,78 +211,91 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.felqjxyj
-	display flex
-	align-items center
-	justify-content center
-	position fixed
-	z-index 30000
-	top 0
-	left 0
-	width 100%
-	height 100%
+.dp-dialog {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	z-index: 30000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 
-	&.splash
-		> .main
-			min-width 0
-			width initial
+	&.splash > .main {
+		min-width: 0;
+		width: initial;
+	}
 
-	> .bg
-		display block
-		position fixed
-		top 0
-		left 0
-		width 100%
-		height 100%
-		background rgba(#000, 0.7)
-		opacity 0
-		pointer-events none
+	> .bg {
+		display: block;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,0.7);
+		opacity: 0;
+		pointer-events: none;
+	}
 
-	> .main
-		display block
-		position fixed
-		margin auto
-		padding 32px
-		min-width 320px
-		max-width 480px
-		box-sizing border-box
-		width calc(100% - 32px)
-		text-align center
-		background #fff
-		opacity 0
-		border-radius 8px
+	> .main {
+		display: block;
+		position: fixed;
+		margin: auto;
+		padding: 32px;
+		min-width: 320px;
+		max-width: 480px;
+		box-sizing: border-box;
+		width: calc(100% - 32px);
+		text-align: center;
+		background: #fff;
+		opacity: 0;
+		border-radius: 8px;
 
-		> .icon
-			font-size 32px
+		> .icon {
+			font-size: 32px;
 
-			&.success
-				color #85da5a
+			&.success {
+				color: #85da5a;
+			}
 
-			&.error
-				color #ec4137
+			&.error {
+				color: #ec4137;
+			}
 
-			&.warning
-				color #ecb637
+			&.warning {
+				color: #ecb637;
+			}
 
-			> *
-				display block
-				margin 0 auto
+			> * {
+				display: block;
+				margin: 0 auto;
+			}
 
-			& + header
-				margin-top 16px
+			& + header {
+				margin-top: 16px;
+			}
+		}
 
-		> header
-			margin 0 0 8px 0
-			font-weight bold
-			font-size 20px
+		> header {
+			margin: 0 0 8px 0;
+			font-weight: bold;
+			font-size: 20px;
 
-			& + .body
-				margin-top 8px
+			& + .body {
+				margin-top: 8px;
+			}
+		}
 
-		> .body
-			margin 16px 0 0 0
+		> .body {
+			margin: 16px 0 0 0;
+		}
 
-		> .buttons
-			margin-top 16px
+		> .buttons {
+			margin-top: 16px;
+		}
+	}
+}
 
 </style>

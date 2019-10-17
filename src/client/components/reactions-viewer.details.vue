@@ -80,43 +80,45 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.buebdbiu
-	$bgcolor = var(--popupBg)
-	z-index 10000
-	display block
-	position absolute
-	max-width 240px
-	font-size 0.8em
-	padding 6px 8px
-	background $bgcolor
-	text-align center
-	color var(--text)
-	border-radius 4px
-	box-shadow 0 var(--lineWidth) 4px rgba(#000, 0.25)
-	pointer-events none
-	transform-origin center -16px
+.buebdbiu {
+	z-index: 10000;
+	display: block;
+	position: absolute;
+	max-width: 240px;
+	font-size: 0.8em;
+	padding: 6px 8px;
+	background: var(--popupBg);
+	text-align: center;
+	color: var(--text);
+	border-radius: 4px;
+	box-shadow: 0 var(--lineWidth) 4px rgba(0,0,0,0.25);
+	pointer-events: none;
+	transform-origin: center -16px;
 
-	&:before
-		content ""
-		pointer-events none
-		display block
-		position absolute
-		top -28px
-		left 12px
-		border-top solid 14px transparent
-		border-right solid 14px transparent
-		border-bottom solid 14px rgba(#000, 0.1)
-		border-left solid 14px transparent
+	&:before {
+		content: "";
+		pointer-events: none;
+		display: block;
+		position: absolute;
+		top: -28px;
+		left: 12px;
+		border-top: solid 14px transparent;
+		border-right: solid 14px transparent;
+		border-bottom: solid 14px rgba(0,0,0,0.1);
+		border-left: solid 14px transparent;
+	}
 
-	&:after
-		content ""
-		pointer-events none
-		display block
-		position absolute
-		top -27px
-		left 12px
-		border-top solid 14px transparent
-		border-right solid 14px transparent
-		border-bottom solid 14px $bgcolor
-		border-left solid 14px transparent
+	&:after {
+		content: "";
+		pointer-events: none;
+		display: block;
+		position: absolute;
+		top: -27px;
+		left: 12px;
+		border-top: solid 14px transparent;
+		border-right: solid 14px transparent;
+		border-bottom: solid 14px var(--popupBg);
+		border-left: solid 14px transparent;
+	}
+}
 </style>
