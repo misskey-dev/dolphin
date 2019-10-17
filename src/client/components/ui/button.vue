@@ -106,6 +106,7 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .dmtdnykelhudezerjlfpbhgovrgnqqgr
+	position relative
 	display block
 	min-width 100px
 	margin 0

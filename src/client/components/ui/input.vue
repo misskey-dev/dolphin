@@ -2,9 +2,6 @@
 <div class="ui-input" :class="[{ focused, filled, inline, disabled }, styl]">
 	<div class="icon" ref="icon"><slot name="icon"></slot></div>
 	<div class="input">
-		<div class="password-meter" v-if="withPasswordMeter" v-show="passwordStrength != ''" :data-strength="passwordStrength">
-			<div class="value" ref="passwordMetar"></div>
-		</div>
 		<span class="label" ref="label"><slot></slot></span>
 		<span class="title" ref="title">
 			<slot name="title"></slot>
@@ -63,12 +60,6 @@
 			>
 		</template>
 		<div class="suffix" ref="suffix"><slot name="suffix"></slot></div>
-	</div>
-	<div class="toggle" v-if="withPasswordToggle">
-		<a @click="togglePassword">
-			<span v-if="type == 'password'"><fa :icon="['fa', 'eye']"/> {{ $t('@.show-password') }}</span>
-			<span v-if="type != 'password'"><fa :icon="['far', 'eye-slash']"/> {{ $t('@.hide-password') }}</span>
-		</a>
 	</div>
 	<div class="desc"><slot name="desc"></slot></div>
 </div>
@@ -129,16 +120,6 @@ export default Vue.extend({
 		},
 		debounce: {
 			required: false
-		},
-		withPasswordMeter: {
-			type: Boolean,
-			required: false,
-			default: false
-		},
-		withPasswordToggle: {
-			type: Boolean,
-			required: false,
-			default: false
 		},
 		datalist: {
 			type: Array,
@@ -267,7 +248,8 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus" scoped>
-root(fill)
+.ui-input
+	position: relative;
 	margin 32px 0
 
 	> .icon
@@ -283,31 +265,29 @@ root(fill)
 			margin-left 28px
 
 	> .input
+		&:before
+			content ''
+			display block
+			position absolute
+			bottom 0
+			left 0
+			right 0
+			height 1px
+			background #dae0e4
 
-		if !fill
-			&:before
-				content ''
-				display block
-				position absolute
-				bottom 0
-				left 0
-				right 0
-				height 1px
-				background #dae0e4
-
-			&:after
-				content ''
-				display block
-				position absolute
-				bottom 0
-				left 0
-				right 0
-				height 2px
-				background #5da1c1
-				opacity 0
-				transform scaleX(0.12)
-				transition border 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)
-				will-change border opacity transform
+		&:after
+			content ''
+			display block
+			position absolute
+			bottom 0
+			left 0
+			right 0
+			height 2px
+			background #5da1c1
+			opacity 0
+			transform scaleX(0.12)
+			transition border 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+			will-change border opacity transform
 
 		> .password-meter
 			position absolute
@@ -345,7 +325,7 @@ root(fill)
 		> .label
 			position absolute
 			z-index 1
-			top fill ? 6px : 0
+			top 0
 			left 0
 			pointer-events none
 			transition 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)
@@ -361,7 +341,7 @@ root(fill)
 		> .title
 			position absolute
 			z-index 1
-			top fill ? -24px : -17px
+			top -17px
 			left 0 !important
 			pointer-events none
 			font-size 16px
@@ -389,7 +369,7 @@ root(fill)
 			margin 0
 			padding 0
 			font inherit
-			font-weight fill ? bold : normal
+			font-weight normal
 			font-size 16px
 			line-height 32px
 			color var(--inputText)
@@ -398,11 +378,6 @@ root(fill)
 			border-radius 0
 			outline none
 			box-shadow none
-
-			if fill
-				padding 6px 12px
-				background rgba(#000, 0.035)
-				border-radius 6px
 
 			&[type='file']
 				display none
@@ -414,7 +389,7 @@ root(fill)
 			z-index 1
 			top 0
 			font-size 16px
-			line-height fill ? 44px : 32px
+			line-height 32px
 			color var(--inputLabel)
 			pointer-events none
 
@@ -433,26 +408,9 @@ root(fill)
 			left 0
 			padding-right 4px
 
-			if fill
-				padding-left 12px
-
 		> .suffix
 			right 0
 			padding-left 4px
-
-			if fill
-				padding-right 12px
-
-	> .toggle
-		cursor pointer
-		padding-left 0.5em
-		font-size 0.7em
-		opacity 0.7
-		text-align left
-
-		> a
-			color var(--inputLabel)
-			text-decoration none
 
 	> .desc
 		margin 6px 0
@@ -466,12 +424,9 @@ root(fill)
 
 	&.focused
 		> .input
-			if fill
-				background rgba(#000, 0.05)
-			else
-				&:after
-					opacity 1
-					transform scaleX(1)
+			&:after
+				opacity 1
+				transform scaleX(1)
 
 			> .label
 				color #5da1c1
@@ -480,15 +435,9 @@ root(fill)
 	&.filled
 		> .input
 			> .label
-				top fill ? -24px : -17px
+				top -17px
 				left 0 !important
 				transform scale(0.75)
-
-.ui-input
-	&.fill
-		root(true)
-	&:not(.fill)
-		root(false)
 
 	&.inline
 		display inline-block

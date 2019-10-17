@@ -12,9 +12,9 @@
 	</div>
 	<dp-renote class="renote" v-if="isRenote" :note="note"/>
 	<article class="article">
-		<dp-avatar class="avatar" :user="appearNote.user" v-if="$store.state.device.postStyle != 'smart'"/>
+		<dp-avatar class="avatar" :user="appearNote.user"/>
 		<div class="main">
-			<dp-note-header class="header" :note="appearNote" :mini="true"/>
+			<x-note-header class="header" :note="appearNote" :mini="true"/>
 			<div class="body" v-if="appearNote.deletedAt == null">
 				<p v-if="appearNote.cw != null" class="cw">
 				<mfm v-if="appearNote.cw != ''" class="text" :text="appearNote.cw" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis" />
@@ -32,10 +32,8 @@
 					</div>
 					<dp-poll v-if="appearNote.poll" :note="appearNote" ref="pollViewer"/>
 					<dp-url-preview v-for="url in urls" :url="url" :key="url" :compact="true"/>
-					<a class="location" v-if="appearNote.geo" :href="`https://maps.google.com/maps?q=${appearNote.geo.coordinates[1]},${appearNote.geo.coordinates[0]}`" rel="noopener" target="_blank"><fa icon="map-marker-alt"/> {{ $t('location') }}</a>
 					<div class="renote" v-if="appearNote.renote"><dp-note-preview :note="appearNote.renote"/></div>
 				</div>
-				<span class="app" v-if="appearNote.app && $store.state.settings.showVia">via <b>{{ appearNote.app.name }}</b></span>
 			</div>
 			<footer v-if="appearNote.deletedAt == null" class="footer">
 				<dp-reactions-viewer :note="appearNote" ref="reactionsViewer"/>
@@ -72,13 +70,15 @@ import Vue from 'vue';
 import i18n from '../i18n';
 
 import XSub from './note.sub.vue';
+import XNoteHeader from './note-header.vue';
 import noteMixin from '../scripts/note-mixin';
 import noteSubscriber from '../scripts/note-subscriber';
 
 export default Vue.extend({
 	i18n: i18n('mobile/views/components/note.vue'),
 	components: {
-		XSub
+		XSub,
+		XNoteHeader
 	},
 
 	mixins: [
@@ -136,50 +136,39 @@ export default Vue.extend({
 .note
 	overflow hidden
 	font-size 13px
-	border-bottom solid var(--lineWidth) var(--faceDivider)
+	background #fff
+	max-width 500px
 
-	&:last-of-type
-		border-bottom none
+	@media (min-width 350px)
+		font-size 14px
 
-	&:not(.mini)
+	@media (min-width 500px)
+		font-size 16px
 
-		@media (min-width 350px)
-			font-size 14px
+	> .article
+		@media (min-width 600px)
+			padding 32px 32px 22px
 
-		@media (min-width 500px)
-			font-size 16px
+		> .avatar
+			@media (min-width 350px)
+				width 48px
+				height 48px
+				border-radius 6px
 
-		> .article
-			@media (min-width 600px)
-				padding 32px 32px 22px
+			@media (min-width 500px)
+				margin-right 16px
+				width 58px
+				height 58px
+				border-radius 8px
 
-			> .avatar
-				@media (min-width 350px)
-					width 48px
-					height 48px
-					border-radius 6px
-
+		> .main
+			> .header
 				@media (min-width 500px)
-					margin-right 16px
-					width 58px
-					height 58px
-					border-radius 8px
+					margin-bottom 2px
 
-			> .main
-				> .header
-					@media (min-width 500px)
-						margin-bottom 2px
-
-				> .body
-					@media (min-width 700px)
-						font-size 1.1em
-
-	&.smart
-		> .article
-			> .main
-				> header
-					align-items center
-					margin-bottom 4px
+			> .body
+				@media (min-width 700px)
+					font-size 1.1em
 
 	> .renote + .article
 		padding-top 8px

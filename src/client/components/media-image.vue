@@ -45,7 +45,7 @@ export default Vue.extend({
 					: this.image.thumbnailUrl
 			})`;
 
-			if (this.$store.state.device.loadRemoteMedia || this.$store.state.device.lightmode) {
+			if (this.$store.state.device.loadRemoteMedia) {
 				url = null;
 			} else if (this.raw || this.$store.state.device.loadRawImages) {
 				url = `url(${this.image.url})`;

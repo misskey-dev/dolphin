@@ -7,7 +7,7 @@
 			<template #prefix>@</template>
 			<template #suffix>@{{ host }}</template>
 		</ui-input>
-		<ui-input v-model="password" type="password" :with-password-toggle="true" v-if="!user || user && !user.usePasswordLessLogin" required>
+		<ui-input v-model="password" type="password" v-if="!user || user && !user.usePasswordLessLogin" required>
 			<span>{{ $t('password') }}</span>
 			<template #prefix><fa :icon="faLock"/></template>
 		</ui-input>

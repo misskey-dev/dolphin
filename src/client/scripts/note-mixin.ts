@@ -106,10 +106,6 @@ export default (opts: Opts = {}) => ({
 		}
 	},
 
-	created() {
-		this.hideThisNote = shouldMuteNote(this.$store.state.i, this.$store.state.settings, this.appearNote);
-	},
-
 	methods: {
 		reply(viaKeyboard = false) {
 			pleaseLogin(this.$root);
