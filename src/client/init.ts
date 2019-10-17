@@ -82,10 +82,10 @@ const router = new VueRouter({
 	mode: 'history',
 	routes: [
 		{ path: '/', name: 'index', component: DpIndex },
-		/*{ path: '/@:user', name: 'user', component: () => import('./components/pages/user/index.vue').then(m => m.default), children: [
-			{ path: 'following', component: () => import('./components/pages/following.vue').then(m => m.default) },
-			{ path: 'followers', component: () => import('./components/pages/followers.vue').then(m => m.default) },
-		]},
+		{ path: '/@:user', name: 'user', component: () => import('./components/pages/user/index.vue').then(m => m.default), children: [
+			{ path: 'following', component: () => import('./components/pages/user/following.vue').then(m => m.default) },
+			{ path: 'followers', component: () => import('./components/pages/user/followers.vue').then(m => m.default) },
+		]},/*
 		{ path: '/notes/:note', component: DpNote },
 		{ path: '/authorize-follow', component: DpFollow },
 		{ path: '*', component: DpNotFound }*/

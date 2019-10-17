@@ -20,7 +20,7 @@ export default Vue.extend({
 	padding 32px
 
 	> *
-		max-width 500px
+		max-width 550px
 		margin 0 auto
 
 </style>

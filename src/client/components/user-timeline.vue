@@ -1,15 +1,27 @@
 <template>
-<dp-notes ref="timeline" :pagination="pagination" @inited="() => $emit('loaded')"/>
+<x-notes ref="timeline" :pagination="pagination" @inited="() => $emit('loaded')"/>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import i18n from '../i18n';
+import XNotes from './notes.vue';
 
 export default Vue.extend({
-	i18n: i18n('mobile/views/components/user-timeline.vue'),
+	components: {
+		XNotes
+	},
 
-	props: ['user', 'withMedia'],
+	props: {
+		user: {
+			type: Object,
+			required: true,
+		},
+		withMedia: {
+			type: Boolean,
+			required: false,
+			default: false
+		}
+	},
 
 	data() {
 		return {
@@ -25,19 +37,5 @@ export default Vue.extend({
 			}
 		};
 	},
-
-	created() {
-		this.$root.$on('warp', this.warp);
-		this.$once('hook:beforeDestroy', () => {
-			this.$root.$off('warp', this.warp);
-		});
-	},
-
-	methods: {
-		warp(date) {
-			this.date = date;
-			(this.$refs.timeline as any).reload();
-		}
-	}
 });
 </script>

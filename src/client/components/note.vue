@@ -46,13 +46,13 @@
 					<fa icon="retweet"/><p class="count" v-if="appearNote.renoteCount > 0">{{ appearNote.renoteCount }}</p>
 				</button>
 				<button v-else class="button">
-					<fa icon="ban"/>
+					<fa :icon="faBan"/>
 				</button>
 				<button v-if="!isMyNote && appearNote.myReaction == null" class="button" @click="react()" ref="reactButton">
-					<fa icon="plus"/>
+					<fa :icon="faPlus"/>
 				</button>
 				<button v-if="!isMyNote && appearNote.myReaction != null" class="button reacted" @click="undoReact(appearNote)" ref="reactButton">
-					<fa icon="minus"/>
+					<fa :icon="faMinus"/>
 				</button>
 				<button class="button" @click="menu()" ref="menuButton">
 					<fa icon="ellipsis-h"/>
@@ -68,6 +68,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../i18n';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 import XSub from './note.sub.vue';
 import XNoteHeader from './note-header.vue';
@@ -103,16 +104,11 @@ export default Vue.extend({
 		},
 	},
 
-	inject: {
-		narrow: {
-			default: false
-		}
-	},
-
 	data() {
 		return {
 			conversation: [],
-			replies: []
+			replies: [],
+			faPlus, faMinus
 		};
 	},
 
@@ -149,48 +145,19 @@ export default Vue.extend({
 	@media (min-width 500px)
 		font-size 16px
 
-	> .article
-		@media (min-width 600px)
-			padding 32px 32px 22px
-
-		> .avatar
-			@media (min-width 350px)
-				width 48px
-				height 48px
-				border-radius 6px
-
-			@media (min-width 500px)
-				margin-right 16px
-				width 58px
-				height 58px
-				border-radius 8px
-
-		> .main
-			> .header
-				@media (min-width 500px)
-					margin-bottom 2px
-
-			> .body
-				@media (min-width 700px)
-					font-size 1.1em
-
 	> .renote + .article
 		padding-top 8px
 
 	> .article
 		display flex
-		padding 16px 16px 9px
+		padding 28px 32px 18px
 
 		> .avatar
 			flex-shrink 0
 			display block
 			margin 0 10px 8px 0
-			width 42px
-			height 42px
-			border-radius 6px
-			//position -webkit-sticky
-			//position sticky
-			//top 62px
+			width 58px
+			height 58px
 
 		> .main
 			flex 1
@@ -232,18 +199,6 @@ export default Vue.extend({
 							display block
 							max-width 100%
 
-					> .location
-						margin 4px 0
-						font-size 12px
-						color #ccc
-
-					> .map
-						width 100%
-						height 200px
-
-						&:empty
-							display none
-
 					> .dp-poll
 						font-size 80%
 
@@ -267,7 +222,6 @@ export default Vue.extend({
 					border none
 					box-shadow none
 					font-size 1em
-					color var(--noteActions)
 					cursor pointer
 
 					&:not(:last-child)
