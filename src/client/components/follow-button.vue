@@ -1,6 +1,6 @@
 <template>
 <button class="wfliddvnhxvyusikowhxozkyxyenqxqr"
-	:class="{ wait, block, inline, mini, transparent, active: isFollowing || hasPendingFollowRequestFromYou }"
+	:class="{ wait, block, inline, transparent, active: isFollowing || hasPendingFollowRequestFromYou }"
 	@click="onClick"
 	:disabled="wait"
 	:inline="inline"
@@ -30,11 +30,6 @@ export default Vue.extend({
 			default: false
 		},
 		inline: {
-			type: Boolean,
-			required: false,
-			default: false
-		},
-		mini: {
 			type: Boolean,
 			required: false,
 			default: false
@@ -131,79 +126,85 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.wfliddvnhxvyusikowhxozkyxyenqxqr
-	display block
-	user-select none
-	cursor pointer
-	padding 0 16px
-	margin 0
-	min-width 100px
-	line-height 36px
-	font-size 14px
-	font-weight bold
-	color #5da1c1
-	background transparent
-	outline none
-	border solid 1px #5da1c1
-	border-radius 36px
+.wfliddvnhxvyusikowhxozkyxyenqxqr {
+	display: block;
+	user-select: none;
+	cursor: pointer;
+	padding: 0 16px;
+	margin: 0;
+	min-width: 100px;
+	line-height: 36px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #5da1c1;
+	background: transparent;
+	outline: none;
+	border: solid 1px #5da1c1;
+	border-radius: 36px;
+	padding: 0;
+	min-width: 0;
+	width: 32px;
+	height: 32px;
+	font-size: 16px;
+	border-radius: 4px;
+	line-height: 32px;
 
-	&:not(.transparent)
-		background #fff
+	&:not(.transparent) {
+		background: #fff;
+	}
 
-	&.inline
-		display inline-block
+	&.inline {
+		display: inline-block;
+	}
 
-	&.mini
-		padding 0
-		min-width 0
-		width 32px
-		height 32px
-		font-size 16px
-		border-radius 4px
-		line-height 32px
+	&.block {
+		width: 100%;
+	}
 
-		&:focus
-			&:after
-				border-radius 8px
+	&:focus {
+		&:after {
+			content: "";
+			pointer-events: none;
+			position: absolute;
+			top: -5px;
+			right: -5px;
+			bottom: -5px;
+			left: -5px;
+			border: 2px solid var(--primaryAlpha03);
+			border-radius: 36px;
+		}
+	}
 
-	&.block
-		width 100%
+	&:hover {
+		background: var(--primaryAlpha01);
+	}
 
-	&:focus
-		&:after
-			content ""
-			pointer-events none
-			position absolute
-			top -5px
-			right -5px
-			bottom -5px
-			left -5px
-			border 2px solid var(--primaryAlpha03)
-			border-radius 36px
+	&:active {
+		background: var(--primaryAlpha02);
+	}
 
-	&:hover
-		background var(--primaryAlpha01)
+	&.active {
+		color: var(--primaryForeground);
+		background: #5da1c1;
 
-	&:active
-		background var(--primaryAlpha02)
+		&:hover {
+			background: var(--primaryLighten10);
+			border-color: var(--primaryLighten10);
+		}
 
-	&.active
-		color var(--primaryForeground)
-		background #5da1c1
+		&:active {
+			background: var(--primaryDarken10);
+			border-color: var(--primaryDarken10);
+		}
+	}
 
-		&:hover
-			background var(--primaryLighten10)
-			border-color var(--primaryLighten10)
+	&.wait {
+		cursor: wait !important;
+		opacity: 0.7;
+	}
 
-		&:active
-			background var(--primaryDarken10)
-			border-color var(--primaryDarken10)
-
-	&.wait
-		cursor wait !important
-		opacity 0.7
-
-	*
-		pointer-events none
-
+	* {
+		pointer-events: none;
+	}
+}
 </style>

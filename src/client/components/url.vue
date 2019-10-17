@@ -11,7 +11,7 @@
 	<span class="pathname" v-if="pathname != ''">{{ self ? pathname.substr(1) : pathname }}</span>
 	<span class="query">{{ query }}</span>
 	<span class="hash">{{ hash }}</span>
-	<fa icon="external-link-square-alt" v-if="target === '_blank'"/>
+	<fa icon="external-link-square-alt" v-if="target === '_blank'" class="icon"/>
 </component>
 </template>
 
@@ -57,30 +57,38 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-url
-	word-break break-all
+.dp-url {
+	word-break: break-all;
 
-	> [data-icon]
-		padding-left 2px
-		font-size .9em
-		font-weight 400
-		font-style normal
+	> .icon {
+		padding-left: 2px;
+		font-size: .9em;
+		font-weight: 400;
+		font-style: normal;
+	}
 
-	> .self
-		font-weight bold
+	> .self {
+		font-weight: bold;
+	}
 
-	> .schema
-		opacity 0.5
+	> .schema {
+		opacity: 0.5;
+	}
 
-	> .hostname
-		font-weight bold
+	> .hostname {
+		font-weight: bold;
+	}
 
-	> .pathname
-		opacity 0.8
+	> .pathname {
+		opacity: 0.8;
+	}
 
-	> .query
-		opacity 0.5
+	> .query {
+		opacity: 0.5;
+	}
 
-	> .hash
-		font-style italic
+	> .hash {
+		font-style: italic;
+	}
+}
 </style>

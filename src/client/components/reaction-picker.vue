@@ -4,7 +4,7 @@
 	<div class="popover" :class="{ isMobile: $root.isMobile }" ref="popover">
 		<p v-if="!$root.isMobile">{{ title }}</p>
 		<div class="buttons" ref="buttons" :class="{ showFocus }">
-			<button v-for="(reaction, i) in $store.state.settings.reactions" :key="reaction" @click="react(reaction)" @mouseover="onMouseover" @mouseout="onMouseout" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction" v-particle><dp-reaction-icon :reaction="reaction"/></button>
+			<button v-for="(reaction, i) in $store.state.settings.reactions" :key="reaction" @click="react(reaction)" @mouseover="onMouseover" @mouseout="onMouseout" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction"><dp-reaction-icon :reaction="reaction"/></button>
 		</div>
 		<div v-if="enableEmojiReaction" class="text">
 			<input v-model="text" :placeholder="$t('input-reaction-placeholder')" @keyup.enter="reactText" @input="tryReactText" v-autocomplete="{ model: 'text' }">

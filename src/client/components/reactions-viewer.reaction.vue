@@ -4,7 +4,6 @@
 	:class="{ reacted: note.myReaction == reaction }"
 	@click="toggleReaction(reaction)"
 	v-if="count > 0"
-	v-particle="!isMe"
 	@mouseover="onMouseover"
 	@mouseleave="onMouseleave"
 	ref="reaction"
