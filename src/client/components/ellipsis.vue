@@ -4,7 +4,7 @@
 	</span>
 </template>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dp-ellipsis
 	> span
 		animation ellipsis 1.4s infinite ease-in-out both

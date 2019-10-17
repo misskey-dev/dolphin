@@ -15,12 +15,13 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
-.dp-home
-	padding 32px
+<style lang="scss" scoped>
+.dp-home {
+	padding: 32px;
 
-	> *
-		max-width 550px
-		margin 0 auto
-
+	> * {
+		max-width: 550px;
+		margin: 0 auto;
+	}
+}
 </style>

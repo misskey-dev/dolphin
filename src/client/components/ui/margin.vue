@@ -9,7 +9,7 @@ import Vue from 'vue';
 export default Vue.extend({});
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .zdcrxcne
 	margin 16px
 

@@ -48,7 +48,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .uywduthvrdnlpsvsjkqigicixgyfctto
 	display inline-flex
 	margin 0 16px 0 0

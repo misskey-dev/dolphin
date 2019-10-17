@@ -48,7 +48,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dp-media-list
 	> .gird-container
 		width 100%

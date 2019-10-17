@@ -247,7 +247,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .ui-input
 	position: relative;
 	margin 32px 0

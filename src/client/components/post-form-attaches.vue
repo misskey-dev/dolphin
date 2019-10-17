@@ -80,7 +80,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .skeikyzd
 	padding 4px
 

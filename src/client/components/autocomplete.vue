@@ -328,7 +328,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dp-autocomplete
 	position fixed
 	z-index 65535

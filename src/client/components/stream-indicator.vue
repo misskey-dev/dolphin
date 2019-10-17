@@ -64,7 +64,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dp-stream-indicator
 	pointer-events none
 	position fixed

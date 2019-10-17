@@ -7,7 +7,7 @@ import Vue from 'vue';
 export default Vue.extend({});
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .evrzpitu
 	margin 16px 0
 	border-bottom solid var(--lineWidth) var(--faceDivider)

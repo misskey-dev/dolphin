@@ -78,7 +78,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dp-notification-preview
 	margin 0
 	padding 8px

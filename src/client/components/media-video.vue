@@ -43,7 +43,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .kkjnbbplepmiyuadieoenjgutgcmtsvu
 	display flex
 	justify-content center

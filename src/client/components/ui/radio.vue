@@ -48,7 +48,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .ui-radio
 	display inline-block
 	margin 0 32px 0 0

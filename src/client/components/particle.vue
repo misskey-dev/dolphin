@@ -33,7 +33,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .vswabwbm
 	pointer-events none
 	position fixed

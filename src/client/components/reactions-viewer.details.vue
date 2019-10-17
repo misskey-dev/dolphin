@@ -79,7 +79,7 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .buebdbiu
 	$bgcolor = var(--popupBg)
 	z-index 10000

@@ -31,7 +31,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dp-reactions-viewer
 	margin: 4px -2px
 

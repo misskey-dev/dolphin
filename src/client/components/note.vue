@@ -131,7 +131,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .note
 	overflow hidden
 	font-size 16px

@@ -19,7 +19,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .ymxyweixqwsxauxldgpvecjepnwxbylu
 	margin 16px 0
 	padding 16px

@@ -70,7 +70,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .gqnyydlzavusgskkfvwvjiattxdzsqlf
 	display block
 	cursor zoom-in

@@ -56,7 +56,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .ui-switch
 	display flex
 	margin 32px 0

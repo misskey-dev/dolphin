@@ -114,7 +114,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .prlncendiewqqkrevzeruhndoakghvtx
 	width 350px
 	background var(--face)

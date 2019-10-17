@@ -14,7 +14,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .wjqjnyhzogztorhrdgcpqlkxhkmuetgj
 	max-width 350px
 	margin 0 auto

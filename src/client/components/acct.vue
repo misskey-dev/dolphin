@@ -20,12 +20,15 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
-.dp-acct
-	> .host.fade
-		opacity 0.5
+<style lang="scss" scoped>
+.dp-acct {
+	> .host.fade {
+		opacity: 0.5;
+	}
 
-	> .locked
-		opacity 0.8
-		margin-left 0.5em
+	> .locked {
+		opacity: 0.8;
+		margin-left: 0.5em;
+	}
+}
 </style>

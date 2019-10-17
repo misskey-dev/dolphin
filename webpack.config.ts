@@ -2,7 +2,6 @@
  * webpack configuration
  */
 
-import * as fs from 'fs';
 import * as webpack from 'webpack';
 import chalk from 'chalk';
 const { VueLoaderPlugin } = require('vue-loader');
@@ -10,19 +9,9 @@ const { VueLoaderPlugin } = require('vue-loader');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-class WebpackOnBuildPlugin {
-	constructor(readonly callback: (stats: any) => void) {
-	}
-
-	public apply(compiler: any) {
-		compiler.hooks.done.tap('WebpackOnBuildPlugin', this.callback);
-	}
-}
-
 const isProduction = process.env.NODE_ENV == 'production';
 
 const constants = require('./src/const.json');
-
 const locales = require('./locales');
 const meta = require('./package.json');
 const codename = meta.codename;
@@ -59,7 +48,7 @@ module.exports = {
 				loader: 'vue-svg-inline-loader'
 			}]
 		}, {
-			test: /\.styl(us)?$/,
+			test: /\.scss?$/,
 			exclude: /node_modules/,
 			oneOf: [{
 				resourceQuery: /module/,
@@ -71,7 +60,7 @@ module.exports = {
 						modules: true
 					}
 				}, postcss, {
-					loader: 'stylus-loader'
+					loader: 'scss-loader'
 				}]
 			}, {
 				use: [{
@@ -79,7 +68,7 @@ module.exports = {
 				}, {
 					loader: 'css-loader'
 				}, postcss, {
-					loader: 'stylus-loader'
+					loader: 'scss-loader'
 				}]
 			}]
 		}, {
@@ -123,14 +112,6 @@ module.exports = {
 		}),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development')
-		}),
-		new WebpackOnBuildPlugin((stats: any) => {
-			fs.writeFileSync('./built/client/meta.json', JSON.stringify({ version: meta.version }), 'utf-8');
-
-			fs.mkdirSync('./built/client/assets/locales', { recursive: true });
-
-			for (const [lang, locale] of Object.entries(locales))
-				fs.writeFileSync(`./built/client/assets/locales/${lang}.json`, JSON.stringify(locale), 'utf-8');
 		}),
 		new VueLoaderPlugin(),
 		new webpack.optimize.ModuleConcatenationPlugin()

@@ -45,7 +45,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .nrvgflfuaxwgkxoynpnumyookecqrrvh
 	display inline-block
 	padding 4px 8px

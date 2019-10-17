@@ -44,7 +44,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dp-reaction-icon
 	img
 		vertical-align middle

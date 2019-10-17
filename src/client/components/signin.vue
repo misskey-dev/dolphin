@@ -88,7 +88,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dp-signin
 	max-width: 450px;
 	background: #fff;

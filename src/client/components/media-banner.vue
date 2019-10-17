@@ -55,7 +55,7 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dp-media-banner
 	width 100%
 	border-radius 4px

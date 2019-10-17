@@ -139,7 +139,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .zmdxowus
 	padding 8px
 

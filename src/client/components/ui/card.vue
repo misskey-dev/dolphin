@@ -19,7 +19,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .ui-card
 	margin 16px
 	max-width 850px

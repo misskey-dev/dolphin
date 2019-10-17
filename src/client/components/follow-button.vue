@@ -130,7 +130,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .wfliddvnhxvyusikowhxozkyxyenqxqr
 	display block
 	user-select none

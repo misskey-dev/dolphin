@@ -46,7 +46,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .zlrxdaqttccpwhpaagdmkawtzklsccam
 	display flex
 	padding 16px

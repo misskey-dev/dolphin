@@ -27,7 +27,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dp-sub-note-content
 	overflow-wrap break-word
 

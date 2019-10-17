@@ -104,7 +104,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dmtdnykelhudezerjlfpbhgovrgnqqgr
 	position relative
 	display block

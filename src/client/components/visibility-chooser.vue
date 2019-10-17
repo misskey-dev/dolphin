@@ -149,7 +149,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .gqyayizv
 	position initial
 

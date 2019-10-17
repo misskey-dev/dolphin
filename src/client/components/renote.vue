@@ -40,7 +40,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .puqkfets
 	display flex
 	align-items center

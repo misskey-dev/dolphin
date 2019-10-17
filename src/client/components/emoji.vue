@@ -96,7 +96,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .fvgwvorwhxigeolkkrcderjzcawqrscl
 	height 1.25em
 	vertical-align -0.25em

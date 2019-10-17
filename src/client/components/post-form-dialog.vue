@@ -111,7 +111,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .ulveipglmagnxfgvitaxyszerjwiqmwl
 	> .bg
 		display block

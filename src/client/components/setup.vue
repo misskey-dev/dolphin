@@ -67,7 +67,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .dp-setup
 	max-width: 500px;
 	background: #fff;

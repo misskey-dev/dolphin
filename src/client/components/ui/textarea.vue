@@ -71,7 +71,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 root(fill)
 	margin 42px 0 32px 0
 

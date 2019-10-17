@@ -210,7 +210,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
 .felqjxyj
 	display flex
 	align-items center
