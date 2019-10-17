@@ -134,16 +134,10 @@ export default Vue.extend({
 <style lang="stylus" scoped>
 .note
 	overflow hidden
-	font-size 13px
+	font-size 16px
 	background #fff
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 	border-radius: 6px;
-
-	@media (min-width 350px)
-		font-size 14px
-
-	@media (min-width 500px)
-		font-size 16px
 
 	> .renote + .article
 		padding-top 8px
@@ -223,12 +217,13 @@ export default Vue.extend({
 					box-shadow none
 					font-size 1em
 					cursor pointer
+					color #5c6a73
 
 					&:not(:last-child)
 						margin-right 28px
 
 					&:hover
-						color var(--noteActionsHover)
+						color darken(#5c6a73, 30%)
 
 					> .count
 						display inline

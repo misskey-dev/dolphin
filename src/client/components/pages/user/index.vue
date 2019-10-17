@@ -66,7 +66,7 @@ export default Vue.extend({
 		border-radius: 6px;
 
 	> *
-		max-width 500px
+		max-width 550px
 		margin 0 auto
 
 </style>
