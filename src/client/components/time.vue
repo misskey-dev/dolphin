@@ -1,8 +1,8 @@
 <template>
 <time class="dp-time" :title="absolute">
-	<span v-if=" mode == 'relative' ">{{ relative }}</span>
-	<span v-if=" mode == 'absolute' ">{{ absolute }}</span>
-	<span v-if=" mode == 'detail' ">{{ absolute }} ({{ relative }})</span>
+	<span v-if="mode == 'relative'">{{ relative }}</span>
+	<span v-if="mode == 'absolute'">{{ absolute }}</span>
+	<span v-if="mode == 'detail'">{{ absolute }} ({{ relative }})</span>
 </time>
 </template>
 
@@ -39,15 +39,15 @@ export default Vue.extend({
 			const time = this._time;
 			const ago = (this.now.getTime() - time.getTime()) / 1000/*ms*/;
 			return (
-				ago >= 31536000 ? this.$t('@.time.years_ago')  .replace('{}', (~~(ago / 31536000)).toString()) :
-				ago >= 2592000  ? this.$t('@.time.months_ago') .replace('{}', (~~(ago / 2592000)).toString()) :
-				ago >= 604800   ? this.$t('@.time.weeks_ago')  .replace('{}', (~~(ago / 604800)).toString()) :
-				ago >= 86400    ? this.$t('@.time.days_ago')   .replace('{}', (~~(ago / 86400)).toString()) :
-				ago >= 3600     ? this.$t('@.time.hours_ago')  .replace('{}', (~~(ago / 3600)).toString()) :
-				ago >= 60       ? this.$t('@.time.minutes_ago').replace('{}', (~~(ago / 60)).toString()) :
-				ago >= 10       ? this.$t('@.time.seconds_ago').replace('{}', (~~(ago % 60)).toString()) :
-				ago >= -1       ? this.$t('@.time.just_now') :
-				ago <  -1       ? this.$t('@.time.future') :
+				ago >= 31536000 ? this.$t('timeAgo.yearsAgo')  .replace('{}', (~~(ago / 31536000)).toString()) :
+				ago >= 2592000  ? this.$t('timeAgo.monthsAgo') .replace('{}', (~~(ago / 2592000)).toString()) :
+				ago >= 604800   ? this.$t('timeAgo.weeksAgo')  .replace('{}', (~~(ago / 604800)).toString()) :
+				ago >= 86400    ? this.$t('timeAgo.daysAgo')   .replace('{}', (~~(ago / 86400)).toString()) :
+				ago >= 3600     ? this.$t('timeAgo.hoursAgo')  .replace('{}', (~~(ago / 3600)).toString()) :
+				ago >= 60       ? this.$t('timeAgo.minutesAgo').replace('{}', (~~(ago / 60)).toString()) :
+				ago >= 10       ? this.$t('timeAgo.secondsAgo').replace('{}', (~~(ago % 60)).toString()) :
+				ago >= -1       ? this.$t('timeAgo.justNow') :
+				ago <  -1       ? this.$t('timeAgo.future') :
 				this.$t('@.time.unknown'));
 		}
 	},

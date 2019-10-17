@@ -1,0 +1,13 @@
+timeAgo:
+  unknown: "謎"
+  future: "未来"
+  justNow: "たった今"
+  secondsAgo: "{}秒前"
+  minutesAgo: "{}分前"
+  hoursAgo: "{}時間前"
+  daysAgo: "{}日前"
+  weeksAgo: "{}週間前"
+  monthsAgo: "{}ヶ月前"
+  yearsAgo: "{}年前"
+
+monthAndDay: "{month}月 {day}日"
