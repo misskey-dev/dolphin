@@ -1,5 +1,7 @@
 <template>
-<x-home-timeline/>
+<div class="dp-home">
+	<x-home-timeline/>
+</div>
 </template>
 
 <script lang="ts">
@@ -12,3 +14,11 @@ export default Vue.extend({
 	}
 });
 </script>
+
+<style lang="stylus" scoped>
+.dp-home
+	> *
+		max-width 500px
+		margin 0 auto
+
+</style>

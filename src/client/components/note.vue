@@ -3,11 +3,11 @@
 	class="note"
 	v-show="appearNote.deletedAt == null && !hideThisNote"
 	:tabindex="appearNote.deletedAt == null ? '-1' : null"
-	:class="{ renote: isRenote, smart: $store.state.device.postStyle == 'smart', mini: narrow }"
+	:class="{ renote: isRenote }"
 	v-hotkey="keymap"
 >
 	<x-sub v-for="note in conversation" :key="note.id" :note="note"/>
-	<div class="reply-to" v-if="appearNote.reply && (!$store.getters.isSignedIn || $store.state.settings.showReplyTarget)">
+	<div class="reply-to" v-if="appearNote.reply">
 		<x-sub :note="appearNote.reply"/>
 	</div>
 	<dp-renote class="renote" v-if="isRenote" :note="note"/>
@@ -137,7 +137,8 @@ export default Vue.extend({
 	overflow hidden
 	font-size 13px
 	background #fff
-	max-width 500px
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	border-radius: 6px;
 
 	@media (min-width 350px)
 		font-size 14px
@@ -199,7 +200,6 @@ export default Vue.extend({
 					margin 0
 					padding 0
 					overflow-wrap break-word
-					color var(--noteText)
 
 					> .text
 						margin-right 8px
@@ -211,12 +211,10 @@ export default Vue.extend({
 						margin 0
 						padding 0
 						overflow-wrap break-word
-						color var(--noteText)
-						font-size calc(1em + var(--fontSize))
+						font-size 1em
 
 						> .reply
 							margin-right 8px
-							color var(--noteText)
 
 						> .rp
 							margin-left 4px
@@ -278,14 +276,12 @@ export default Vue.extend({
 					> .count
 						display inline
 						margin 0 0 0 8px
-						color var(--text)
 						opacity 0.7
 
 					&.reacted
 						color #5da1c1
 
 			> .deleted
-				color var(--noteText)
 				opacity 0.7
 
 </style>

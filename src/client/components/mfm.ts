@@ -1,20 +1,10 @@
 import Vue, { VNode } from 'vue';
-import { length } from 'stringz';
-import { MfmForest } from '../../../../../mfm/types';
+import { MfmForest } from '../../mfm/prelude';
 import { parse, parsePlain } from '../../mfm/parse';
 import DpUrl from './url.vue';
 import DpMention from './mention.vue';
-import { concat, sum } from '../../prelude/array';
-import DpFormula from './formula.vue';
-import DpCode from './code.vue';
-import DpGoogle from './google.vue';
+import { concat } from '../../prelude/array';
 import { host } from '../config';
-import { preorderF, countNodesF } from '../../prelude/tree';
-
-function sumTextsLength(ts: MfmForest): number {
-	const textNodes = preorderF(ts).filter(n => n.type === 'text');
-	return sum(textNodes.map(x => length(x.props.text)));
-}
 
 export default Vue.component('misskey-flavored-markdown', {
 	props: {
@@ -52,9 +42,6 @@ export default Vue.component('misskey-flavored-markdown', {
 
 		const ast = (this.plain ? parsePlain : parse)(this.text);
 
-		let bigCount = 0;
-		let motionCount = 0;
-
 		const genEl = (ast: MfmForest) => concat(ast.map((token): VNode[] => {
 			switch (token.node.type) {
 				case 'text': {
@@ -86,87 +73,12 @@ export default Vue.component('misskey-flavored-markdown', {
 					}, genEl(token.children));
 				}
 
-				case 'big': {
-					bigCount++;
-					const isLong = sumTextsLength(token.children) > 15 || countNodesF(token.children) > 5;
-					const isMany = bigCount > 3;
-					return (createElement as any)('strong', {
-						attrs: {
-							style: `display: inline-block; font-size: ${ isMany ? '100%' : '150%' };`
-						},
-						directives: [this.$store.state.settings.disableAnimatedMfm || isLong || isMany ? {} : {
-							name: 'animate-css',
-							value: { classes: 'tada', iteration: 'infinite' }
-						}]
-					}, genEl(token.children));
-				}
-
 				case 'small': {
 					return [createElement('small', {
 						attrs: {
 							style: 'opacity: 0.7;'
 						},
 					}, genEl(token.children))];
-				}
-
-				case 'center': {
-					return [createElement('div', {
-						attrs: {
-							style: 'text-align:center;'
-						}
-					}, genEl(token.children))];
-				}
-
-				case 'motion': {
-					motionCount++;
-					const isLong = sumTextsLength(token.children) > 15 || countNodesF(token.children) > 5;
-					const isMany = motionCount > 5;
-					return (createElement as any)('span', {
-						attrs: {
-							style: 'display: inline-block;'
-						},
-						directives: [this.$store.state.settings.disableAnimatedMfm || isLong || isMany ? {} : {
-							name: 'animate-css',
-							value: { classes: 'rubberBand', iteration: 'infinite' }
-						}]
-					}, genEl(token.children));
-				}
-
-				case 'spin': {
-					motionCount++;
-					const isLong = sumTextsLength(token.children) > 10 || countNodesF(token.children) > 5;
-					const isMany = motionCount > 5;
-					const direction =
-						token.node.props.attr == 'left' ? 'reverse' :
-						token.node.props.attr == 'alternate' ? 'alternate' :
-						'normal';
-					const style = (this.$store.state.settings.disableAnimatedMfm || isLong || isMany)
-						? ''
-						: `animation: spin 1.5s linear infinite; animation-direction: ${direction};`;
-					return (createElement as any)('span', {
-						attrs: {
-							style: 'display: inline-block;' + style
-						},
-					}, genEl(token.children));
-				}
-
-				case 'jump': {
-					motionCount++;
-					const isLong = sumTextsLength(token.children) > 30 || countNodesF(token.children) > 5;
-					const isMany = motionCount > 5;
-					return (createElement as any)('span', {
-						attrs: {
-							style: (this.$store.state.settings.disableAnimatedMfm || isLong || isMany) ? 'display: inline-block;' : 'display: inline-block; animation: jump 0.75s linear infinite;'
-						},
-					}, genEl(token.children));
-				}
-
-				case 'flip': {
-					return (createElement as any)('span', {
-						attrs: {
-							style: 'display: inline-block; transform: scaleX(-1);'
-						},
-					}, genEl(token.children));
 				}
 
 				case 'url': {
@@ -215,27 +127,6 @@ export default Vue.component('misskey-flavored-markdown', {
 					}, `#${token.node.props.hashtag}`)];
 				}
 
-				case 'blockCode': {
-					return [createElement(DpCode, {
-						key: Math.random(),
-						props: {
-							code: token.node.props.code,
-							lang: token.node.props.lang,
-						}
-					})];
-				}
-
-				case 'inlineCode': {
-					return [createElement(DpCode, {
-						key: Math.random(),
-						props: {
-							code: token.node.props.code,
-							lang: token.node.props.lang,
-							inline: true
-						}
-					})];
-				}
-
 				case 'quote': {
 					if (this.shouldBreak) {
 						return [createElement('div', {
@@ -271,38 +162,6 @@ export default Vue.component('misskey-flavored-markdown', {
 						props: {
 							customEmojis: this.customEmojis || customEmojis,
 							normal: this.plain
-						}
-					})];
-				}
-
-				case 'mathInline': {
-					//const DpFormula = () => import('./formula.vue').then(m => m.default);
-					return [createElement(DpFormula, {
-						key: Math.random(),
-						props: {
-							formula: token.node.props.formula,
-							block: false
-						}
-					})];
-				}
-
-				case 'mathBlock': {
-					//const DpFormula = () => import('./formula.vue').then(m => m.default);
-					return [createElement(DpFormula, {
-						key: Math.random(),
-						props: {
-							formula: token.node.props.formula,
-							block: true
-						}
-					})];
-				}
-
-				case 'search': {
-					//const DpGoogle = () => import('./google.vue').then(m => m.default);
-					return [createElement(DpGoogle, {
-						key: Math.random(),
-						props: {
-							q: token.node.props.query
 						}
 					})];
 				}
