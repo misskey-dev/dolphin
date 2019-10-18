@@ -33,8 +33,8 @@
 				</template>
 			</ui-select>
 			<div class="buttons" v-if="!splash && (showOkButton || showCancelButton)">
-				<ui-button @click="ok" v-if="showOkButton" primary :autofocus="!input && !select && !user" :disabled="!canOk">{{ (showCancelButton || input || select || user) ? $t('ok') : $t('gotIt') }}</ui-button>
-				<ui-button @click="cancel" v-if="showCancelButton || input || select || user">{{ $t('cancel') }}</ui-button>
+				<ui-button inline @click="ok" v-if="showOkButton" primary :autofocus="!input && !select && !user" :disabled="!canOk">{{ (showCancelButton || input || select || user) ? $t('ok') : $t('gotIt') }}</ui-button>
+				<ui-button inline @click="cancel" v-if="showCancelButton || input || select || user">{{ $t('cancel') }}</ui-button>
 			</div>
 		</template>
 	</div>
@@ -294,8 +294,11 @@ export default Vue.extend({
 
 		> .buttons {
 			margin-top: 16px;
+
+			> * {
+				margin: 0 8px;
+			}
 		}
 	}
 }
-
 </style>

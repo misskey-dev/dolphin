@@ -11,7 +11,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
-const constants = require('./src/const.json');
 const locales = require('./locales');
 const meta = require('./package.json');
 const codename = meta.codename;
@@ -104,7 +103,6 @@ module.exports = {
 			clear: false
 		}),
 		new webpack.DefinePlugin({
-			_COPYRIGHT_: JSON.stringify(constants.copyright),
 			_VERSION_: JSON.stringify(meta.version),
 			_CODENAME_: JSON.stringify(codename),
 			_LANGS_: JSON.stringify(Object.entries(locales).map(([k, v]: [string, any]) => [k, v && v.meta && v.meta.lang])),
