@@ -16,9 +16,6 @@
 	}
 	//#endregion
 
-	// Script version
-	const ver = localStorage.getItem('v') || VERSION;
-
 	//#region Detect the user language
 	let lang = null;
 
@@ -44,14 +41,12 @@
 
 	//#region Fetch locale data
 	const cachedLocale = localStorage.getItem('locale');
-	const localeKey = localStorage.getItem('localeKey');
 
-	if (cachedLocale == null || localeKey != `${ver}.${lang}`) {
-		const locale = await fetch(`/assets/locales/${lang}.json?ver=${ver}`)
+	if (cachedLocale == null) {
+		const locale = await fetch(`/assets/locales/${lang}.json`)
 			.then(response => response.json());
 
 		localStorage.setItem('locale', JSON.stringify(locale));
-		localStorage.setItem('localeKey', `${ver}.${lang}`);
 	}
 	//#endregion
 
