@@ -46,14 +46,9 @@ export default Vue.extend({
 			this.$root.api('admin/accounts/create', {
 				username: this.username,
 				password: this.password,
-			}).then(() => {
-				this.$root.api('signin', {
-					username: this.username,
-					password: this.password
-				}).then(res => {
-					localStorage.setItem('i', res.i);
-					location.href = '/';
-				});
+			}).then(res => {
+				localStorage.setItem('i', res.token);
+				location.href = '/';
 			}).catch(() => {
 				this.submitting = false;
 
@@ -71,8 +66,7 @@ export default Vue.extend({
 @import '../theme';
 
 .dp-setup {
-	max-width: 500px;
-	background: #fff;
+	max-width: 470px;
 	border-radius: 6px;
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
@@ -82,12 +76,14 @@ export default Vue.extend({
 		font-size: 1.5em;
 		text-align: center;
 		padding: 32px;
-		background: $primary;
+		background: rgba($primary, 0.5);
+		backdrop-filter: blur(8px);
 		color: #fff;
 	}
 
 	> div {
 		padding: 32px;
+		background: #fff;
 
 		> p {
 			margin-top: 0;

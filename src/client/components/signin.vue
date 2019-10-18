@@ -90,7 +90,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .dp-signin {
-	max-width: 450px;
+	max-width: 420px;
 	box-sizing: border-box;
 	background: #fff;
 	border-radius: 6px;
