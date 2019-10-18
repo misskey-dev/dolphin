@@ -90,59 +90,73 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-poll
-	> ul
-		display block
-		margin 0
-		padding 0
-		list-style none
+.dp-poll {
+	> ul {
+		display: block;
+		margin: 0;
+		padding: 0;
+		list-style: none;
 
-		> li
-			display block
-			margin 4px 0
-			padding 4px 8px
-			width 100%
-			color var(--pollChoiceText)
-			border solid 1px var(--pollChoiceBorder)
-			border-radius 4px
-			overflow hidden
-			cursor pointer
+		> li {
+			display: block;
+			margin: 4px 0;
+			padding: 4px 8px;
+			width: 100%;
+			color: var(--pollChoiceText);
+			border: solid 1px var(--pollChoiceBorder);
+			border-radius: 4px;
+			overflow: hidden;
+			cursor: pointer;
 
-			&:hover
-				background rgba(#000, 0.05)
+			&:hover {
+				background: rgba(#000, 0.05);
+			}
 
-			&:active
-				background rgba(#000, 0.1)
+			&:active {
+				background: rgba(#000, 0.1);
+			}
 
-			> .backdrop
-				position absolute
-				top 0
-				left 0
-				height 100%
-				background #5da1c1
-				transition width 1s ease
+			> .backdrop {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				background: #5da1c1;
+				transition: width 1s ease;
+			}
 
-			> span
-				> [data-icon]
-					margin-right 4px
+			> span {
+				> [data-icon] {
+					margin-right: 4px;
+				}
 
-				> .votes
-					margin-left 4px
+				> .votes {
+					margin-left: 4px;
+				}
+			}
+		}
+	}
 
-	> p
-		color var(--text)
+	> p {
+		color: var(--text);
 
-		a
-			color inherit
+		a {
+			color: inherit;
+		}
+	}
 
-	&[data-done]
-		> ul > li
-			cursor default
+	&[data-done] {
+		> ul > li {
+			cursor: default;
 
-			&:hover
-				background transparent
+			&:hover {
+				background: transparent;
+			}
 
-			&:active
-				background transparent
-
+			&:active {
+				background: transparent;
+			}
+		}
+	}
+}
 </style>

@@ -140,96 +140,119 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.zmdxowus
-	padding 8px
+.zmdxowus {
+	padding: 8px;
 
-	> .caution
-		margin 0 0 8px 0
-		font-size 0.8em
-		color #f00
+	> .caution {
+		margin: 0 0 8px 0;
+		font-size: 0.8em;
+		color: #f00;
 
-		> [data-icon]
-			margin-right 4px
+		> [data-icon] {
+			margin-right: 4px;
+		}
+	}
 
-	> ul
-		display block
-		margin 0
-		padding 0
-		list-style none
+	> ul {
+		display: block;
+		margin: 0;
+		padding: 0;
+		list-style: none;
 
-		> li
-			display block
-			margin 8px 0
-			padding 0
-			width 100%
+		> li {
+			display: block;
+			margin: 8px 0;
+			padding: 0;
+			width: 100%;
 
-			&:first-child
-				margin-top 0
+			&:first-child {
+				margin-top: 0;
+			}
 
-			&:last-child
-				margin-bottom 0
+			&:last-child {
+				margin-bottom: 0;
+			}
 
-			> input
-				padding 6px 8px
-				width 300px
-				font-size 14px
-				color var(--inputText)
-				background var(--pollEditorInputBg)
-				border solid 1px var(--primaryAlpha01)
-				border-radius 4px
+			> input {
+				padding: 6px 8px;
+				width: 300px;
+				font-size: 14px;
+				color: var(--inputText);
+				background: var(--pollEditorInputBg);
+				border: solid 1px var(--primaryAlpha01);
+				border-radius: 4px;
 
-				&:hover
-					border-color var(--primaryAlpha02)
+				&:hover {
+					border-color: var(--primaryAlpha02);
+				}
 
-				&:focus
-					border-color var(--primaryAlpha05)
+				&:focus {
+					border-color: var(--primaryAlpha05);
+				}
+			}
 
-			> button
-				padding 4px 8px
-				color var(--primaryAlpha04)
+			> button {
+				padding: 4px 8px;
+				color: var(--primaryAlpha04);
 
-				&:hover
-					color var(--primaryAlpha06)
+				&:hover {
+					color: var(--primaryAlpha06);
+				}
 
-				&:active
-					color var(--primaryDarken30)
+				&:active {
+					color: var(--primaryDarken30);
+				}
+			}
+		}
+	}
 
-	> .add
-		margin 8px 0 0 0
-		vertical-align top
-		color #5da1c1
-		z-index 1
+	> .add {
+		margin: 8px 0 0 0;
+		vertical-align: top;
+		color: #5da1c1;
+		z-index: 1;
+	}
 
-	> .destroy
-		position absolute
-		top 0
-		right 0
-		padding 4px 8px
-		color var(--primaryAlpha04)
+	> .destroy {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 4px 8px;
+		color: var(--primaryAlpha04);
 
-		&:hover
-			color var(--primaryAlpha06)
+		&:hover {
+			color: var(--primaryAlpha06);
+		}
 
-		&:active
-			color var(--primaryDarken30)
+		&:active {
+			color: var(--primaryDarken30);
+		}
+	}
 
-	> section
-		margin 16px 0 -16px 0
+	> section {
+		margin: 16px 0 -16px 0;
 
-		> div
-			margin 0 8px
+		> div {
+			margin: 0 8px;
 
-			&:last-child
-				flex 1 0 auto
+			&:last-child {
+				flex: 1 0 auto;
 
-				> section
-					align-items center
-					display flex
-					margin -32px 0 0
+				> section {
+					align-items: center;
+					display: flex
+					margin: -32px 0 0;
 
-					> :first-child
-						margin-right 16px
+					> &:first-child {
+						margin-right: 16px;
+					}
 
-					> .ui-input
-						flex 1 0 auto
+					> .ui-input {
+						flex: 1 0 auto;
+					}
+				}
+			}
+		}
+	}
+}
 </style>
