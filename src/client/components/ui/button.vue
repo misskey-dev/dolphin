@@ -115,8 +115,7 @@ export default Vue.extend({
 	box-shadow: none;
 	text-decoration: none;
 	user-select: none;
-	color: var(--text);
-	background: var(--buttonBg);
+	background: #e0e9ec;
 	border-radius: 6px;
 	overflow: hidden;
 	cursor: pointer;
@@ -186,9 +185,10 @@ export default Vue.extend({
 		left: 0;
 		width: 100%;
 		height: 100%;
+		border-radius: 6px;
 		overflow: hidden;
 
-		>>> div {
+		/deep/ div {
 			position: absolute;
 			width: 2px;
 			height: 2px;
@@ -200,15 +200,12 @@ export default Vue.extend({
 		}
 	}
 
-	&.round > .ripples {
-		border-radius: 6px;
-	}
-
-	&.primary > .ripples >>> div {
+	&.primary > .ripples /deep/ div {
 		background: rgba(0, 0, 0, 0.15);
 	}
 
 	> .content {
+		position: relative;
 		z-index: 1;
 	}
 }

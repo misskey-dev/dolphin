@@ -12,7 +12,7 @@
 			<template #prefix><fa :icon="faLock"/></template>
 		</ui-input>
 		<footer>
-			<ui-button type="submit" :disabled="signing">{{ signing ? $t('signing-in') : $t('@.signin') }}</ui-button>
+			<ui-button primary type="submit" :disabled="signing">{{ signing ? $t('signing-in') : $t('@.signin') }}</ui-button>
 		</footer>
 	</div>
 </form>
