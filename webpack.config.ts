@@ -13,7 +13,6 @@ const isProduction = process.env.NODE_ENV == 'production';
 
 const locales = require('./locales');
 const meta = require('./package.json');
-const codename = meta.codename;
 
 const postcss = {
 	loader: 'postcss-loader',
@@ -104,7 +103,6 @@ module.exports = {
 		}),
 		new webpack.DefinePlugin({
 			_VERSION_: JSON.stringify(meta.version),
-			_CODENAME_: JSON.stringify(codename),
 			_LANGS_: JSON.stringify(Object.entries(locales).map(([k, v]: [string, any]) => [k, v && v.meta && v.meta.lang])),
 			_ENV_: JSON.stringify(process.env.NODE_ENV)
 		}),

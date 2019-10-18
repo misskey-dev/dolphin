@@ -15,7 +15,7 @@ import VueHotkey from './scripts/hotkey';
 import VueSize from './scripts/size';
 import App from './app.vue';
 import MiOS from './mios';
-import { version, codename, lang } from './config';
+import { version, lang } from './config';
 import PostFormDialog from './components/post-form-dialog.vue';
 import Dialog from './components/dialog.vue';
 import DpIndex from './components/index.vue';
@@ -57,7 +57,7 @@ Vue.mixin({
  * APP ENTRY POINT!
  */
 
-console.info(`Dolphin v${version} (${codename})`);
+console.info(`Dolphin v${version}`);
 
 //#region Set lang attr
 const html = document.documentElement;
