@@ -15,7 +15,7 @@
 			</div>
 			<span class="followed" v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed">{{ $t('follows-you') }}</span>
 			<div class="actions" v-if="$store.getters.isSignedIn">
-				<button @click="menu" class="menu" ref="menu"><fa :icon="faEllipsisH"/></button>
+				<button @click="menu" class="menu _buttonPlain" ref="menu"><fa :icon="faEllipsisH"/></button>
 				<dp-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
 			</div>
 		</div>
@@ -159,9 +159,6 @@ export default Vue.extend({
 					color: #fff;
 					text-shadow: 0 0 8px #000;
 					font-size: 16px;
-					background: none;
-					border: none;
-					cursor: pointer;
 				}
 			}
 

@@ -4,7 +4,7 @@
 	<div class="popover" :class="{ bubble }" ref="popover">
 		<template v-for="item, i in items">
 			<div v-if="item === null"></div>
-			<button v-if="item" @click="clicked(item.action)" :tabindex="i">
+			<button v-if="item" @click="clicked(item.action)" :tabindex="i" class="_buttonPlain">
 				<fa v-if="item.icon" :icon="item.icon"/>{{ item.text }}
 			</button>
 		</template>
@@ -121,7 +121,7 @@ export default Vue.extend({
 @import '../theme';
 
 .onchrpzrvnoruiaenfcqvccjfuupzzwv {
-	$bg-color: var(--popupBg);
+	$bg-color: #fff;
 	position: initial;
 
 	> .backdrop {
@@ -131,7 +131,7 @@ export default Vue.extend({
 		z-index: 10000;
 		width: 100%;
 		height: 100%;
-		background: var(--modalBackdrop);
+		background: rgba(0, 0, 0, 0.3);
 		opacity: 0;
 	}
 
@@ -145,22 +145,46 @@ export default Vue.extend({
 		transform: scale(0.5);
 		opacity: 0;
 
+		$balloon-size: 16px;
+
+		&.bubble {
+			margin-top: $balloon-size;
+			transform-origin: center (-$balloon-size);
+
+			&:before,
+			&:after {
+				content: "";
+				display: block;
+				position: absolute;
+				pointer-events: none;
+			}
+
+			&:before {
+				top: -($balloon-size * 2);
+				left: calc(50% - #{$balloon-size});
+				border-top: solid $balloon-size transparent;
+				border-left: solid $balloon-size transparent;
+				border-right: solid $balloon-size transparent;
+				border-bottom: solid $balloon-size $bg-color;
+			}
+		}
+
 		> button {
 			display: block;
 			padding: 8px 16px;
 			width: 100%;
-			color: var(--popupFg);
 			white-space: nowrap;
+			color: $text;
 
 			&:hover {
-				color: var(--primaryForeground);
+				color: #fff;
 				background: $primary;
 				text-decoration: none;
 			}
 
 			&:active {
-				color: var(--primaryForeground);
-				background: var(--primaryDarken10);
+				color: #fff;
+				background: darken($primary, 10);
 			}
 
 			> [data-icon] {
@@ -170,8 +194,8 @@ export default Vue.extend({
 
 		> div {
 			margin: 8px 0;
-			height: var(--lineWidth);
-			background: var(--faceDivider);
+			height: 1px;
+			background: rgba(0, 0, 0, 0.1);
 		}
 	}
 }

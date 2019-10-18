@@ -7,10 +7,10 @@
 		@drop.stop="onDrop"
 	>
 		<header>
-			<button class="cancel" @click="cancel"><fa :icon="faTimes"/></button>
+			<button class="cancel _buttonPlain" @click="cancel"><fa :icon="faTimes"/></button>
 			<div>
 				<span class="text-count" :class="{ over: trimmedLength(text) > 500 }">{{ 500 - trimmedLength(text) }}</span>
-				<button class="submit" :disabled="!canPost" @click="post">{{ submitText }}</button>
+				<button class="submit _buttonPrimary" :disabled="!canPost" @click="post">{{ submitText }}</button>
 			</div>
 		</header>
 		<div class="form">
@@ -135,21 +135,11 @@ export default Vue.extend({
 		},
 
 		placeholder(): string {
-			const xs = [
-				this.$t('@.note-placeholders.a'),
-				this.$t('@.note-placeholders.b'),
-				this.$t('@.note-placeholders.c'),
-				this.$t('@.note-placeholders.d'),
-				this.$t('@.note-placeholders.e'),
-				this.$t('@.note-placeholders.f')
-			];
-			const x = xs[Math.floor(Math.random() * xs.length)];
-
 			return this.renote
 				? opts.mobile ? this.$t('@.post-form.option-quote-placeholder') : this.$t('@.post-form.quote-placeholder')
 				: this.reply
 					? this.$t('@.post-form.reply-placeholder')
-					: x;
+					: this.$t('@.post-form.placeholder');
 		},
 
 		submitText(): string {
@@ -545,7 +535,7 @@ export default Vue.extend({
 	margin: 8px auto;
 
 	> .form {
-		background: var(--face);
+		background: #fff;
 		border-radius: 8px;
 		box-shadow: 0 0 2px rgba(#000, 0.1);
 
@@ -649,6 +639,7 @@ export default Vue.extend({
 			> input,
 			> textarea {
 				display: block;
+				box-sizing: border-box;
 				padding: 12px;
 				margin: 0;
 				width: 100%;

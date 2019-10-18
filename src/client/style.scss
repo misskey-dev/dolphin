@@ -129,6 +129,37 @@ a {
 	}
 }
 
+._buttonPlain {
+	appearance: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+._buttonPrimary {
+	appearance: none;
+	border: none;
+	cursor: pointer;
+	color: #fff;
+	background: $primary;
+
+	&:not(:disabled):hover {
+		background: lighten($primary, 5%);
+	}
+
+	&:not(:disabled):active {
+		background: darken($primary, 5%);
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
 .zoom-in-top-enter-active,
 .zoom-in-top-leave-active {
 	opacity: 1;

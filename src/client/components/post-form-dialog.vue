@@ -138,10 +138,6 @@ export default Vue.extend({
 		margin: 0 auto 0 auto;
 		opacity: 0;
 		transform: translateY(-16px);
-
-		> * {
-			background: #fff;
-		}
 	}
 }
 </style>
