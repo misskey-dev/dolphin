@@ -28,20 +28,24 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-sub-note-content
-	overflow-wrap break-word
+.dp-sub-note-content {
+	overflow-wrap: break-word;
 
-	> .body
-		> .reply
-			margin-right 6px
-			color #717171
+	> .body {
+		> .reply {
+			margin-right: 6px;
+			color: #717171;
+		}
 
-		> .rp
-			margin-left 4px
-			font-style oblique
-			color var(--renoteText)
+		> .rp {
+			margin-left: 4px;
+			font-style: oblique;
+			color: var(--renoteText);
+		}
+	}
 
-	dp-poll
-		font-size 80%
-
+	dp-poll {
+		font-size: 80%;
+	}
+}
 </style>

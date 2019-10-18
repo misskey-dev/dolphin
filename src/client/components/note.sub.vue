@@ -2,14 +2,14 @@
 <div class="zlrxdaqttccpwhpaagdmkawtzklsccam">
 	<dp-avatar class="avatar" :user="note.user"/>
 	<div class="main">
-		<dp-note-header class="header" :note="note" :mini="true"/>
+		<x-note-header class="header" :note="note" :mini="true"/>
 		<div class="body">
 			<p v-if="note.cw != null" class="cw">
 				<mfm v-if="note.cw != ''" class="text" :text="note.cw" :author="note.user" :i="$store.state.i" :custom-emojis="note.emojis" />
 				<dp-cw-button v-model="showContent" :note="note"/>
 			</p>
 			<div class="content" v-show="note.cw == null || showContent">
-				<dp-sub-note-content class="text" :note="note"/>
+				<x-sub-note-content class="text" :note="note"/>
 			</div>
 		</div>
 	</div>
@@ -18,8 +18,15 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import XNoteHeader from './note-header.vue';
+import XSubNoteContent from './sub-note-content.vue';
 
 export default Vue.extend({
+	components: {
+		XNoteHeader,
+		XSubNoteContent,
+	},
+
 	props: {
 		note: {
 			type: Object,
@@ -50,8 +57,8 @@ export default Vue.extend({
 .zlrxdaqttccpwhpaagdmkawtzklsccam {
 	display: flex;
 	padding: 16px;
-	font-size: 10px;
-	background: var(--subNoteBg);
+	font-size: 0.9em;
+	background: rgba(0, 0, 0, 0.03);
 
 	> .avatar {
 		flex-shrink: 0;

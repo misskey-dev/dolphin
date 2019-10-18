@@ -14,8 +14,8 @@
 			</div>
 		</header>
 		<div class="form">
-			<dp-note-preview class="preview" v-if="reply" :note="reply"/>
-			<dp-note-preview class="preview" v-if="renote" :note="renote"/>
+			<x-note-preview class="preview" v-if="reply" :note="reply"/>
+			<x-note-preview class="preview" v-if="renote" :note="renote"/>
 			<div class="with-quote" v-if="quoteId"><fa icon="quote-left"/> {{ $t('@.post-form.quote-attached') }}<button @click="quoteId = null"><fa icon="times"/></button></div>
 			<div v-if="visibility === 'specified'" class="to-specified">
 				<fa icon="envelope"/> {{ $t('@.post-form.specified-recipient') }}
@@ -31,7 +31,7 @@
 			<textarea v-model="text" ref="text" :disabled="posting" :placeholder="placeholder" v-autocomplete="{ model: 'text' }" @paste="onPaste"></textarea>
 			<x-post-form-attaches class="attaches" :files="files"/>
 			<x-poll-editor v-if="poll" ref="poll" @destroyed="poll = false" @updated="onPollUpdate()"/>
-			<dp-uploader ref="uploader" @uploaded="attachMedia" @change="onChangeUploadings"/>
+			<x-uploader ref="uploader" @uploaded="attachMedia" @change="onChangeUploadings"/>
 			<footer>
 				<button class="upload" @click="chooseFile"><fa icon="upload"/></button>
 				<button class="drive" @click="chooseFileFromDrive"><fa icon="cloud"/></button>
@@ -60,7 +60,8 @@ import insertTextAtCursor from 'insert-text-at-cursor';
 import { length } from 'stringz';
 import { toASCII } from 'punycode';
 import i18n from '../i18n';
-import DpVisibilityChooser from '../components/visibility-chooser.vue';
+import DpVisibilityChooser from './visibility-chooser.vue';
+import XNotePreview from './note-preview.vue';
 import { parse } from '../../mfm/parse';
 import { host, url } from '../config';
 import { erase, unique } from '../../prelude/array';
@@ -71,8 +72,9 @@ export default Vue.extend({
 	i18n: i18n(),
 
 	components: {
-		XPostFormAttaches: () => import('../components/post-form-attaches.vue').then(m => m.default),
-		XPollEditor: () => import('../components/poll-editor.vue').then(m => m.default)
+		XNotePreview,
+		XPostFormAttaches: () => import('./post-form-attaches.vue').then(m => m.default),
+		XPollEditor: () => import('./poll-editor.vue').then(m => m.default)
 	},
 
 	props: {
@@ -549,14 +551,12 @@ export default Vue.extend({
 				width: 50px;
 				line-height: 50px;
 				font-size: 24px;
-				color: var(--text);
 			}
 
 			> div {
 				position: absolute;
 				top: 0;
 				right: 0;
-				color: var(--text);
 
 				> .text-count {
 					line-height: 50px;
@@ -567,8 +567,6 @@ export default Vue.extend({
 					padding: 0 16px;
 					line-height: 34px;
 					vertical-align: bottom;
-					color: var(--primaryForeground);
-					background: $primary;
 					border-radius: 4px;
 
 					&:disabled {
@@ -644,11 +642,8 @@ export default Vue.extend({
 				margin: 0;
 				width: 100%;
 				font-size: 16px;
-				color: var(--inputText);
-				background: var(--mobilePostFormTextareaBg);
 				border: none;
 				border-radius: 0;
-				box-shadow: 0 1px 0 0 var(--mobilePostFormDivider);
 
 				&:disabled {
 					opacity: 0.5;
