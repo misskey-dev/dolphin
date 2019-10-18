@@ -7,9 +7,9 @@
 		@drop.stop="onDrop"
 	>
 		<header>
-			<button class="cancel" @click="cancel"><fa icon="times"/></button>
+			<button class="cancel" @click="cancel"><fa :icon="faTimes"/></button>
 			<div>
-				<span class="text-count" :class="{ over: trimmedLength(text) > maxNoteTextLength }">{{ maxNoteTextLength - trimmedLength(text) }}</span>
+				<span class="text-count" :class="{ over: trimmedLength(text) > 500 }">{{ 500 - trimmedLength(text) }}</span>
 				<button class="submit" :disabled="!canPost" @click="post">{{ submitText }}</button>
 			</div>
 		</header>
@@ -55,10 +55,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import i18n from '../i18n';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import insertTextAtCursor from 'insert-text-at-cursor';
 import { length } from 'stringz';
 import { toASCII } from 'punycode';
+import i18n from '../i18n';
 import DpVisibilityChooser from '../components/visibility-chooser.vue';
 import { parse } from '../../mfm/parse';
 import { host, url } from '../config';
@@ -120,7 +121,7 @@ export default Vue.extend({
 			draghover: false,
 			quoteId: null,
 			recentHashtags: JSON.parse(localStorage.getItem('hashtags') || '[]'),
-			maxNoteTextLength: 1000
+			faTimes
 		};
 	},
 
@@ -162,15 +163,9 @@ export default Vue.extend({
 		canPost(): boolean {
 			return !this.posting &&
 				(1 <= this.text.length || 1 <= this.files.length || this.poll || this.renote) &&
-				(length(this.text.trim()) <= this.maxNoteTextLength) &&
+				(length(this.text.trim()) <= 500) &&
 				(!this.poll || this.pollChoices.length >= 2);
 		}
-	},
-
-	created() {
-		this.$root.getMeta().then(meta => {
-			this.maxNoteTextLength = meta.maxNoteTextLength;
-		});
 	},
 
 	mounted() {

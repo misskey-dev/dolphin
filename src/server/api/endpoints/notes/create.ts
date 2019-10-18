@@ -3,22 +3,12 @@ import * as ms from 'ms';
 import { length } from 'stringz';
 import create from '../../../../services/note/create';
 import define from '../../define';
-import { fetchMeta } from '../../../../misc/fetch-meta';
 import { ApiError } from '../../error';
 import { ID } from '../../../../misc/cafy-id';
 import { User } from '../../../../models/entities/user';
 import { Users, DriveFiles, Notes } from '../../../../models';
 import { DriveFile } from '../../../../models/entities/drive-file';
 import { Note } from '../../../../models/entities/note';
-import { DB_MAX_NOTE_TEXT_LENGTH } from '../../../../misc/hard-limits';
-
-let maxNoteTextLength = 1000;
-
-setInterval(() => {
-	fetchMeta().then(m => {
-		maxNoteTextLength = m.maxNoteTextLength;
-	});
-}, 3000);
 
 export const meta = {
 	stability: 'stable',
@@ -56,9 +46,7 @@ export const meta = {
 
 		text: {
 			validator: $.optional.nullable.str.pipe(text =>
-				text.trim() != ''
-					&& length(text.trim()) <= maxNoteTextLength
-					&& Array.from(text.trim()).length <= DB_MAX_NOTE_TEXT_LENGTH	// DB limit
+				text.trim() != '' && length(text.trim()) <= 500
 			),
 			default: null as any,
 			desc: {

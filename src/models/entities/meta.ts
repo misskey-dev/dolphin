@@ -78,12 +78,6 @@ export class Meta {
 	})
 	public remoteDriveCapacityMb: number;
 
-	@Column('integer', {
-		default: 500,
-		comment: 'Max allowed note text length in characters'
-	})
-	public maxNoteTextLength: number;
-
 	@Column('varchar', {
 		length: 128,
 		nullable: true

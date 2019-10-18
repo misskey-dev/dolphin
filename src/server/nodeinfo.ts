@@ -26,7 +26,6 @@ const nodeinfo2 = async () => {
 			maintainerName,
 			maintainerEmail,
 			enableRecaptcha,
-			maxNoteTextLength,
 			enableServiceWorker
 		},
 		// total,
@@ -68,7 +67,7 @@ const nodeinfo2 = async () => {
 				email: maintainerEmail
 			},
 			enableRecaptcha,
-			maxNoteTextLength,
+			maxNoteTextLength: 500,
 			enableServiceWorker
 		}
 	};
