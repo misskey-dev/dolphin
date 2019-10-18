@@ -168,40 +168,48 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.reaction
-	display inline-block
-	height 32px
-	margin 2px
-	padding 0 6px
-	border-radius 4px
-	cursor pointer
+.reaction {
+	display: inline-block;
+	height: 32px;
+	margin: 2px;
+	padding: 0 6px;
+	border-radius: 4px;
+	cursor: pointer;
 
-	&, *
-		-webkit-touch-callout none
-		-webkit-user-select none
-		-khtml-user-select none
-		-moz-user-select none
-		-ms-user-select none
-		user-select none
+	&, * {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
 
-	*
-		user-select none
-		pointer-events none
+	* {
+		user-select: none;
+		pointer-events: none;
+	}
 
-	&.reacted
-		background #5da1c1
+	&.reacted {
+		background: #5da1c1;
 
-		> span
-			color var(--primaryForeground)
+		> span {
+			color: var(--primaryForeground);
+		}
+	}
 
-	&:not(.reacted)
-		background var(--reactionViewerButtonBg)
+	&:not(.reacted) {
+		background: var(--reactionViewerButtonBg);
 
-		&:hover
-			background var(--reactionViewerButtonHoverBg)
+		&:hover {
+			background: var(--reactionViewerButtonHoverBg);
+		}
+	}
 
-	> span
-		font-size 1.1em
-		line-height 32px
-		color var(--text)
+	> span {
+		font-size: 1.1em;
+		line-height: 32px;
+		color: var(--text);
+	}
+}
 </style>

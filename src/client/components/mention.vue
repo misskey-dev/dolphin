@@ -63,25 +63,29 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.ldlomzub
-	color var(--mfmMention)
+.ldlomzub {
+	color: var(--mfmMention);
 
-	> .me
-		pointer-events none
-		user-select none
-		padding 0 4px
-		background var(--mfmMention)
-		border solid var(--lineWidth) var(--mfmMention)
-		border-radius 4px 0 0 4px
-		color var(--mfmMentionForeground)
+	> .me {
+		pointer-events: none;
+		user-select: none;
+		padding: 0 4px;
+		background: var(--mfmMention);
+		border: solid var(--lineWidth) var(--mfmMention);
+		border-radius: 4px 0 0 4px;
+		color: var(--mfmMentionForeground);
 
-		& + .main
-			padding 0 4px
-			border solid var(--lineWidth) var(--mfmMention)
-			border-radius 0 4px 4px 0
+		& + .main {
+			padding: 0 4px;
+			border: solid var(--lineWidth) var(--mfmMention);
+			border-radius: 0 4px 4px 0;
+		}
+	}
 
-	> .main
-		> .host.fade
-			opacity 0.5
-
+	> .main {
+		> .host.fade {
+			opacity: 0.5;
+		}
+	}
+}
 </style>

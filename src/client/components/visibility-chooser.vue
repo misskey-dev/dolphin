@@ -1,7 +1,7 @@
 <template>
 <div class="gqyayizv">
 	<div class="backdrop" ref="backdrop" @click="close"></div>
-	<div class="popover" :class="{ isMobile: $root.isMobile }" ref="popover">
+	<div class="popover" ref="popover">
 		<div @click="choose('public')" :class="{ active: v == 'public' }">
 			<div><fa icon="globe"/></div>
 			<div>
@@ -150,84 +150,78 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.gqyayizv
-	position initial
+.gqyayizv {
+	position: initial;
 
-	> .backdrop
-		position fixed
-		top 0
-		left 0
-		z-index 10000
-		width 100%
-		height 100%
-		background var(--modalBackdrop)
-		opacity 0
+	> .backdrop {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 10000;
+		width: 100%;
+		height: 100%;
+		background: var(--modalBackdrop);
+		opacity: 0;
+	}
 
-	> .popover
-		$bgcolor = var(--popupBg)
-		position absolute
-		z-index 10001
-		width 240px
-		padding 8px 0
-		background $bgcolor
-		border-radius 4px
-		box-shadow 0 3px 12px rgba(27, 31, 35, 0.15)
-		transform scale(0.5)
-		opacity 0
+	> .popover {
+		$bgcolor: var(--popupBg);
+		position: absolute;
+		z-index: 10001;
+		width: 240px;
+		padding: 8px 0;
+		background: $bgcolor;
+		border-radius: 4px;
+		box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+		transform: scale(0.5);
+		opacity: 0;
 
-		&:not(.isMobile)
-			$arrow-size = 10px
+		> div {
+			display: flex;
+			padding: 8px 14px;
+			font-size: 12px;
+			color: var(--popupFg);
+			cursor: pointer;
 
-			margin-top $arrow-size
-			transform-origin center -($arrow-size)
+			&:hover {
+				background: var(--faceClearButtonHover);
+			}
 
-			&:before
-				content ""
-				display block
-				position absolute
-				top -($arrow-size * 2)
-				left s('calc(50% - %s)', $arrow-size)
-				border-top solid $arrow-size transparent
-				border-left solid $arrow-size transparent
-				border-right solid $arrow-size transparent
-				border-bottom solid $arrow-size $bgcolor
+			&:active {
+				background: var(--faceClearButtonActive);
+			}
 
-		> div
-			display flex
-			padding 8px 14px
-			font-size 12px
-			color var(--popupFg)
-			cursor pointer
+			&.active {
+				color: var(--primaryForeground);
+				background: #5da1c1;
+			}
 
-			&:hover
-				background var(--faceClearButtonHover)
+			> * {
+				user-select: none;
+				pointer-events: none;
+			}
 
-			&:active
-				background var(--faceClearButtonActive)
+			> *:first-child {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-right: 10px;
+				width: 16px;
+			}
 
-			&.active
-				color var(--primaryForeground)
-				background #5da1c1
+			> *:last-child {
+				flex: 1 1 auto;
 
-			> *
-				user-select none
-				pointer-events none
+				> span:first-child {
+					display: block;
+					font-weight: bold;
+				}
 
-			> *:first-child
-				display flex
-				justify-content center
-				align-items center
-				margin-right 10px
-				width 16px
-
-			> *:last-child
-				flex 1 1 auto
-
-				> span:first-child
-					display block
-					font-weight bold
-
-				> span:last-child:not(:first-child)
-					opacity 0.6
-
+				> span:last-child:not(:first-child) {
+					opacity: 0.6;
+				}
+			}
+		}
+	}
+}
 </style>

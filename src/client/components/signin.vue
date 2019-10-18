@@ -89,7 +89,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-signin
+.dp-signin {
 	max-width: 450px;
 	background: #fff;
 	border-radius: 6px;
@@ -97,17 +97,22 @@ export default Vue.extend({
 	overflow: hidden;
 	padding: 32px;
 
-	> .avatar
-		margin 0 auto 0 auto
-		width 64px
-		height 64px
-		background #ddd
-		background-position center
-		background-size cover
-		border-radius 100%
+	> .avatar {
+		margin: 0 auto 0 auto;
+		width: 64px;
+		height: 64px;
+		background: #ddd;
+		background-position: center;
+		background-size: cover;
+		border-radius: 100%;
+	}
 
-	> div
-		> footer
-			> *
+	> div {
+		> footer {
+			> * {
 				margin: 0 auto;
+			}
+		}
+	}
+}
 </style>
