@@ -51,6 +51,7 @@ export default Vue.extend({
 		
 	> .date {
 		display: inline-block;
+		position: relative;
 		margin: 0;
 		padding: 0 16px;
 		line-height: 32px;

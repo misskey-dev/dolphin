@@ -322,11 +322,11 @@ export default async function(
 	}
 
 	//#region Check drive usage
-	if (!isLink) {
+	if (!isLink && isRemoteUser(user)) {
 		const usage = await DriveFiles.clacDriveUsageOf(user);
 
 		const instance = await fetchMeta();
-		const driveCapacity = 1024 * 1024 * (Users.isLocalUser(user) ? instance.localDriveCapacityMb : instance.remoteDriveCapacityMb);
+		const driveCapacity = 1024 * 1024 * instance.remoteDriveCapacityMb;
 
 		logger.debug(`drive usage is ${usage} (max: ${driveCapacity})`);
 

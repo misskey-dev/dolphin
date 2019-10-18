@@ -120,7 +120,6 @@ export default define(meta, async (ps, me) => {
 			cores: os.cpus().length
 		},
 
-		driveCapacityPerLocalUserMb: instance.localDriveCapacityMb,
 		driveCapacityPerRemoteUserMb: instance.remoteDriveCapacityMb,
 		cacheRemoteFiles: instance.cacheRemoteFiles,
 		enableRecaptcha: instance.enableRecaptcha,
@@ -153,16 +152,6 @@ export default define(meta, async (ps, me) => {
 		response.proxyAccount = instance.proxyAccount;
 		response.summalyProxy = instance.summalyProxy;
 		response.swPrivateKey = instance.swPrivateKey;
-		response.useObjectStorage = instance.useObjectStorage;
-		response.objectStorageBaseUrl = instance.objectStorageBaseUrl;
-		response.objectStorageBucket = instance.objectStorageBucket;
-		response.objectStoragePrefix = instance.objectStoragePrefix;
-		response.objectStorageEndpoint = instance.objectStorageEndpoint;
-		response.objectStorageRegion = instance.objectStorageRegion;
-		response.objectStoragePort = instance.objectStoragePort;
-		response.objectStorageAccessKey = instance.objectStorageAccessKey;
-		response.objectStorageSecretKey = instance.objectStorageSecretKey;
-		response.objectStorageUseSSL = instance.objectStorageUseSSL;
 	}
 
 	return response;

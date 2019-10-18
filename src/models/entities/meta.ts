@@ -73,12 +73,6 @@ export class Meta {
 	public recaptchaSecretKey: string | null;
 
 	@Column('integer', {
-		default: 1024,
-		comment: 'Drive capacity of a local user (MB)'
-	})
-	public localDriveCapacityMb: number;
-
-	@Column('integer', {
 		default: 32,
 		comment: 'Drive capacity of a remote user (MB)'
 	})
@@ -112,61 +106,4 @@ export class Meta {
 		nullable: true
 	})
 	public swPrivateKey: string | null;
-
-	@Column('boolean', {
-		default: false,
-	})
-	public useObjectStorage: boolean;
-
-	@Column('varchar', {
-		length: 512,
-		nullable: true
-	})
-	public objectStorageBucket: string | null;
-
-	@Column('varchar', {
-		length: 512,
-		nullable: true
-	})
-	public objectStoragePrefix: string | null;
-
-	@Column('varchar', {
-		length: 512,
-		nullable: true
-	})
-	public objectStorageBaseUrl: string | null;
-
-	@Column('varchar', {
-		length: 512,
-		nullable: true
-	})
-	public objectStorageEndpoint: string | null;
-
-	@Column('varchar', {
-		length: 512,
-		nullable: true
-	})
-	public objectStorageRegion: string | null;
-
-	@Column('varchar', {
-		length: 512,
-		nullable: true
-	})
-	public objectStorageAccessKey: string | null;
-
-	@Column('varchar', {
-		length: 512,
-		nullable: true
-	})
-	public objectStorageSecretKey: string | null;
-
-	@Column('integer', {
-		nullable: true
-	})
-	public objectStoragePort: number | null;
-
-	@Column('boolean', {
-		default: true,
-	})
-	public objectStorageUseSSL: boolean;
 }

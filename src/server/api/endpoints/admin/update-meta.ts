@@ -127,14 +127,6 @@ export const meta = {
 			}
 		},
 
-		localDriveCapacityMb: {
-			validator: $.optional.num.min(0),
-			desc: {
-				'ja-JP': 'ローカルユーザーひとりあたりのドライブ容量 (メガバイト単位)',
-				'en-US': 'Drive capacity of a local user (MB)'
-			}
-		},
-
 		remoteDriveCapacityMb: {
 			validator: $.optional.num.min(0),
 			desc: {
@@ -226,46 +218,6 @@ export const meta = {
 				'ja-JP': 'ServiceWorkerのVAPIDキーペアの秘密鍵'
 			}
 		},
-
-		useObjectStorage: {
-			validator: $.optional.bool
-		},
-
-		objectStorageBaseUrl: {
-			validator: $.optional.nullable.str
-		},
-
-		objectStorageBucket: {
-			validator: $.optional.nullable.str
-		},
-
-		objectStoragePrefix: {
-			validator: $.optional.nullable.str
-		},
-
-		objectStorageEndpoint: {
-			validator: $.optional.nullable.str
-		},
-
-		objectStorageRegion: {
-			validator: $.optional.nullable.str
-		},
-
-		objectStoragePort: {
-			validator: $.optional.nullable.num
-		},
-
-		objectStorageAccessKey: {
-			validator: $.optional.nullable.str
-		},
-
-		objectStorageSecretKey: {
-			validator: $.optional.nullable.str
-		},
-
-		objectStorageUseSSL: {
-			validator: $.optional.bool
-		},
 	}
 };
 
@@ -290,10 +242,6 @@ export default define(meta, async (ps, me) => {
 
 	if (ps.maxNoteTextLength) {
 		set.maxNoteTextLength = ps.maxNoteTextLength;
-	}
-
-	if (ps.localDriveCapacityMb !== undefined) {
-		set.localDriveCapacityMb = ps.localDriveCapacityMb;
 	}
 
 	if (ps.remoteDriveCapacityMb !== undefined) {
@@ -342,46 +290,6 @@ export default define(meta, async (ps, me) => {
 
 	if (ps.swPrivateKey !== undefined) {
 		set.swPrivateKey = ps.swPrivateKey;
-	}
-
-	if (ps.useObjectStorage !== undefined) {
-		set.useObjectStorage = ps.useObjectStorage;
-	}
-
-	if (ps.objectStorageBaseUrl !== undefined) {
-		set.objectStorageBaseUrl = ps.objectStorageBaseUrl;
-	}
-
-	if (ps.objectStorageBucket !== undefined) {
-		set.objectStorageBucket = ps.objectStorageBucket;
-	}
-
-	if (ps.objectStoragePrefix !== undefined) {
-		set.objectStoragePrefix = ps.objectStoragePrefix;
-	}
-
-	if (ps.objectStorageEndpoint !== undefined) {
-		set.objectStorageEndpoint = ps.objectStorageEndpoint;
-	}
-
-	if (ps.objectStorageRegion !== undefined) {
-		set.objectStorageRegion = ps.objectStorageRegion;
-	}
-
-	if (ps.objectStoragePort !== undefined) {
-		set.objectStoragePort = ps.objectStoragePort;
-	}
-
-	if (ps.objectStorageAccessKey !== undefined) {
-		set.objectStorageAccessKey = ps.objectStorageAccessKey;
-	}
-
-	if (ps.objectStorageSecretKey !== undefined) {
-		set.objectStorageSecretKey = ps.objectStorageSecretKey;
-	}
-
-	if (ps.objectStorageUseSSL !== undefined) {
-		set.objectStorageUseSSL = ps.objectStorageUseSSL;
 	}
 
 	await getConnection().transaction(async transactionalEntityManager => {
