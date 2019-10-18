@@ -1,17 +1,22 @@
 <template>
 <div style="position:initial">
-	<dp-menu :source="source" :items="items" @closed="closed"/>
+	<x-menu :source="source" :items="items" @closed="closed"/>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import i18n from '../i18n';
 import { faExclamationCircle, faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
 import { faSnowflake } from '@fortawesome/free-regular-svg-icons';
+import i18n from '../i18n';
+import XMenu from './menu.vue';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/user-menu.vue'),
+
+	components: {
+		XMenu
+	},
 
 	props: ['user', 'source'],
 
@@ -88,36 +93,6 @@ export default Vue.extend({
 			});
 		},
 
-		async toggleMute() {
-			if (this.user.isMuted) {
-				if (!await this.getConfirmed(this.$t('unmute-confirm'))) return;
-
-				this.$root.api('mute/delete', {
-					userId: this.user.id
-				}).then(() => {
-					this.user.isMuted = false;
-				}, () => {
-					this.$root.dialog({
-						type: 'error',
-						text: e
-					});
-				});
-			} else {
-				if (!await this.getConfirmed(this.$t('mute-confirm'))) return;
-
-				this.$root.api('mute/create', {
-					userId: this.user.id
-				}).then(() => {
-					this.user.isMuted = true;
-				}, () => {
-					this.$root.dialog({
-						type: 'error',
-						text: e
-					});
-				});
-			}
-		},
-
 		async toggleBlock() {
 			if (this.user.isBlocking) {
 				if (!await this.getConfirmed(this.$t('unblock-confirm'))) return;
@@ -146,48 +121,6 @@ export default Vue.extend({
 					});
 				});
 			}
-		},
-
-		async reportAbuse() {
-			const reported = this.$t('report-abuse-reported'); // なぜか後で参照すると null になるので最初にメモリに確保しておく
-			const { canceled, result: comment } = await this.$root.dialog({
-				title: this.$t('report-abuse-detail'),
-				input: true
-			});
-			if (canceled) return;
-			this.$root.api('users/report-abuse', {
-				userId: this.user.id,
-				comment: comment
-			}).then(() => {
-				this.$root.dialog({
-					type: 'success',
-					text: reported
-				});
-			}, e => {
-				this.$root.dialog({
-					type: 'error',
-					text: e
-				});
-			});
-		},
-
-		async toggleSilence() {
-			if (!await this.getConfirmed(this.$t(this.user.isSilenced ? 'unsilence-confirm' : 'silence-confirm'))) return;
-
-			this.$root.api(this.user.isSilenced ? 'admin/unsilence-user' : 'admin/silence-user', {
-				userId: this.user.id
-			}).then(() => {
-				this.user.isSilenced = !this.user.isSilenced;
-				this.$root.dialog({
-					type: 'success',
-					splash: true
-				});
-			}, e => {
-				this.$root.dialog({
-					type: 'error',
-					text: e
-				});
-			});
 		},
 
 		async toggleSuspend() {

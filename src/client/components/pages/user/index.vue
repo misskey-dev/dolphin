@@ -134,7 +134,6 @@ export default Vue.extend({
 				width: 100%;
 				height: 78px;
 				background: linear-gradient(transparent, rgba(#000, 0.7));
-				backdrop-filter: blur(4px);
 			}
 
 			> .followed {
@@ -151,13 +150,20 @@ export default Vue.extend({
 				position: absolute;
 				top: 12px;
 				right: 12px;
-
+				backdrop-filter: blur(8px);
+				padding: 8px;
+				border-radius: 24px;
+		
 				> .menu {
-					height: 100%;
+					vertical-align: bottom;
+					height: 32px;
 					padding: 0 14px;
 					color: #fff;
 					text-shadow: 0 0 8px #000;
 					font-size: 16px;
+					background: none;
+					border: none;
+					cursor: pointer;
 				}
 			}
 

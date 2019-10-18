@@ -1,18 +1,22 @@
 <template>
 <div style="position:initial">
-	<dp-menu :source="source" :items="items" @closed="closed"/>
+	<x-menu :source="source" :items="items" @closed="closed"/>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import { faCopy, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import i18n from '../i18n';
 import { url } from '../config';
 import copyToClipboard from '../scripts/copy-to-clipboard';
-import { faCopy, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import XMenu from './menu.vue';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/note-menu.vue'),
+	components: {
+		XMenu
+	},
 	props: ['note', 'source'],
 	data() {
 		return {
@@ -204,18 +208,6 @@ export default Vue.extend({
 
 		toggleFavorite(favorite: boolean) {
 			this.$root.api(favorite ? 'notes/favorites/create' : 'notes/favorites/delete', {
-				noteId: this.note.id
-			}).then(() => {
-				this.$root.dialog({
-					type: 'success',
-					splash: true
-				});
-				this.destroyDom();
-			});
-		},
-
-		toggleWatch(watch: boolean) {
-			this.$root.api(watch ? 'notes/watching/create' : 'notes/watching/delete', {
 				noteId: this.note.id
 			}).then(() => {
 				this.$root.dialog({

@@ -22,7 +22,7 @@ import i18n from '../i18n';
 import { faSpinner, faPlus, faMinus, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/follow-button.vue'),
+	i18n: i18n(),
 
 	props: {
 		user: {
@@ -107,7 +107,8 @@ export default Vue.extend({
 @import '../theme';
 
 .wfliddvnhxvyusikowhxozkyxyenqxqr {
-	display: block;
+	position: relative;
+	display: inline-block;
 	user-select: none;
 	cursor: pointer;
 	font-weight: bold;
@@ -138,11 +139,11 @@ export default Vue.extend({
 	}
 
 	&:hover {
-		background: var(--primaryAlpha01);
+		background: mix($primary, #fff, 20);
 	}
 
 	&:active {
-		background: var(--primaryAlpha02);
+		background: mix($primary, #fff, 40);
 	}
 
 	&.active {
