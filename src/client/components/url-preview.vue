@@ -9,7 +9,7 @@
 	</blockquote>
 </div>
 <div v-else class="dp-url-preview">
-	<component :is="hasRoute ? 'router-link' : 'a'" :class="{ mini: narrow, compact }" :[attr]="hasRoute ? url.substr(local.length) : url" rel="nofollow noopener" :target="target" :title="url" v-if="!fetching">
+	<component :is="hasRoute ? 'router-link' : 'a'" :class="{ compact }" :[attr]="hasRoute ? url.substr(local.length) : url" rel="nofollow noopener" :target="target" :title="url" v-if="!fetching">
 		<div class="thumbnail" v-if="thumbnail" :style="`background-image: url('${thumbnail}')`">
 			<button v-if="!playerEnabled && player.url" @click.prevent="playerEnabled = true" :title="$t('enable-player')"><fa :icon="['far', 'play-circle']"/></button>
 		</div>
@@ -30,7 +30,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../i18n';
-import { url as local, lang } from '../../../config';
+import { url as local, lang } from '../config';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/url-preview.vue'),
@@ -54,20 +54,13 @@ export default Vue.extend({
 		},
 	},
 
-	inject: {
-		narrow: {
-			default: false
-		}
-	},
-
 	data() {
 		const isSelf = this.url.startsWith(local);
 		const hasRoute =
 			(this.url.substr(local.length) === '/') ||
 			this.url.substr(local.length).startsWith('/@') ||
 			this.url.substr(local.length).startsWith('/notes/') ||
-			this.url.substr(local.length).startsWith('/tags/') ||
-			this.url.substr(local.length).startsWith('/pages/');
+			this.url.substr(local.length).startsWith('/tags/');
 		return {
 			local,
 			fetching: true,
@@ -140,204 +133,205 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.player
-	position relative
-	width 100%
+.player {
+	position: relative;
+	width: 100%;
 
-	> button
-		position absolute
-		top -1.5em
-		right 0
-		font-size 1em
-		width 1.5em
-		height 1.5em
-		padding 0
-		margin 0
-		color var(--text)
-		background rgba(128, 128, 128, 0.2)
-		opacity 0.7
+	> button {
+		position: absolute;
+		top: -1.5em;
+		right: 0;
+		font-size: 1em;
+		width: 1.5em;
+		height: 1.5em;
+		padding: 0;
+		margin: 0;
+		color: var(--text);
+		background: rgba(128, 128, 128, 0.2);
+		opacity: 0.7;
 
-		&:hover
-			opacity 0.9
+		&:hover {
+			opacity: 0.9;
+		}
+	}
 
-	> iframe
-		height 100%
-		left 0
-		position absolute
-		top 0
-		width 100%
+	> iframe {
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+}
 
-.dp-url-preview
-	> a
-		display block
-		font-size 14px
-		border solid var(--lineWidth) var(--urlPreviewBorder)
-		border-radius 4px
-		overflow hidden
+.dp-url-preview {
+	> a {
+		position: relative;
+		display: block;
+		font-size: 14px;
+		border: solid var(--lineWidth) var(--urlPreviewBorder);
+		border-radius: 4px;
+		overflow: hidden;
 
-		&:hover
-			text-decoration none
-			border-color var(--urlPreviewBorderHover)
+		&:hover {
+			text-decoration: none;
+			border-color: var(--urlPreviewBorderHover);
 
-			> article > header > h1
-				text-decoration underline
+			> article > header > h1 {
+				text-decoration: underline;
+			}
+		}
 
-		> .thumbnail
-			position absolute
-			width 100px
-			height 100%
-			background-position center
-			background-size cover
-			display flex
-			justify-content center
-			align-items center
+		> .thumbnail {
+			position: absolute;
+			width: 100px;
+			height: 100%;
+			background-position: center;
+			background-size: cover;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 
-			> button
-				font-size 3.5em
-				opacity: 0.7
+			> button {
+				font-size: 3.5em;
+				opacity: 0.7;
 
-				&:hover
-					font-size 4em
-					opacity 0.9
+				&:hover {
+					font-size: 4em;
+					opacity: 0.9;
+				}
+			}
 
-			& + article
-				left 100px
-				width calc(100% - 100px)
+			& + article {
+				left: 100px;
+				width: calc(100% - 100px);
+			}
+		}
 
-		> article
-			padding 16px
+		> article {
+			position: relative;
+			padding: 16px;
 
-			> header
-				margin-bottom 8px
+			> header {
+				margin-bottom: 8px;
 
-				> h1
-					margin 0
-					font-size 1em
-					color var(--urlPreviewTitle)
+				> h1 {
+					margin: 0;
+					font-size: 1em;
+					color: var(--urlPreviewTitle);
+				}
+			}
 
-			> p
-				margin 0
-				color var(--urlPreviewText)
-				font-size 0.8em
+			> p {
+				margin: 0;
+				color: var(--urlPreviewText);
+				font-size: 0.8em;
+			}
 
-			> footer
-				margin-top 8px
-				height 16px
+			> footer {
+				margin-top: 8px;
+				height: 16px;
 
-				> img
-					display inline-block
-					width 16px
-					height 16px
-					margin-right 4px
-					vertical-align top
+				> img {
+					display: inline-block;
+					width: 16px;
+					height: 16px;
+					margin-right: 4px;
+					vertical-align: top;
+				}
 
-				> p
-					display inline-block
-					margin 0
-					color var(--urlPreviewInfo)
-					font-size 0.8em
-					line-height 16px
-					vertical-align top
+				> p {
+					display: inline-block;
+					margin: 0;
+					color: var(--urlPreviewInfo);
+					font-size: 0.8em;
+					line-height: 16px;
+					vertical-align: top;
+				}
+			}
+		}
 
-		@media (max-width 700px)
-			> .thumbnail
-				position relative
-				width 100%
-				height 100px
+		@media (max-width: 700px) {
+			> .thumbnail {
+				position: relative;
+				width: 100%;
+				height: 100px;
 
-				& + article
-					left 0
-					width 100%
+				& + article {
+					left: 0;
+					width: 100%;
+				}
+			}
+		}
 
-		@media (max-width 550px)
-			font-size 12px
+		@media (max-width: 550px) {
+			font-size: 12px;
 
-			> .thumbnail
-				height 80px
+			> .thumbnail {
+				height: 80px;
+			}
 
-			> article
-				padding 12px
+			> article {
+				padding: 12px;
+			}
+		}
 
-		@media (max-width 500px)
-			font-size 10px
+		@media (max-width: 500px) {
+			font-size: 10px;
 
-			> .thumbnail
-				height 70px
+			> .thumbnail {
+				height: 70px;
+			}
 
-			> article
-				padding 8px
+			> article {
+				padding: 8px;
 
-				> header
-					margin-bottom 4px
+				> header {
+					margin-bottom: 4px;
+				}
 
-				> footer
-					margin-top 4px
+				> footer {
+					margin-top: 4px;
 
-					> img
-						width 12px
-						height 12px
+					> img {
+						width: 12px;
+						height: 12px;
+					}
+				}
+			}
 
-			&.compact
-				> .thumbnail
-					position: absolute
-					width 56px
-					height 100%
+			&.compact {
+				> .thumbnail {
+					position: absolute;
+					width: 56px;
+					height: 100%;
+				}
 
-				> article
-					left 56px
-					width calc(100% - 56px)
-					padding 4px
+				> article {
+					left: 56px;
+					width: calc(100% - 56px);
+					padding: 4px;
 
-					> header
-						margin-bottom 2px
+					> header {
+						margin-bottom: 2px;
+					}
 
-					> footer
-						margin-top 2px
+					> footer {
+						margin-top: 2px;
+					}
+				}
+			}
+		}
 
-		&.mini
-			font-size 10px
-
-			> .thumbnail
-				position relative
-				width 100%
-				height 60px
-
-			> article
-				left 0
-				width 100%
-				padding 8px
-
-				> header
-					margin-bottom 4px
-
-				> footer
-					margin-top 4px
-
-					> img
-						width 12px
-						height 12px
-
-			&.compact
-				> .thumbnail
-					position absolute
-					width 56px
-					height 100%
-
-				> article
-					left 56px
-					width calc(100% - 56px)
-					padding 4px
-
-					> header
-						margin-bottom 2px
-
-					> footer
-						margin-top 2px
-
-		&.compact
-			> article
-				> header h1, p, footer
-					overflow hidden
-					white-space nowrap
-					text-overflow ellipsis
+		&.compact {
+			> article {
+				> header h1, p, footer {
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+	}
+}
 </style>

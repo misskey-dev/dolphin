@@ -3,7 +3,6 @@
 	:class="{ wait, active: isFollowing || hasPendingFollowRequestFromYou }"
 	@click="onClick"
 	:disabled="wait"
-	:inline="inline"
 >
 	<template v-if="!wait">
 		<fa v-if="hasPendingFollowRequestFromYou && user.isLocked" :icon="faHourglassHalf"/>
