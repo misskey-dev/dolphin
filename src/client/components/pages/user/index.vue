@@ -106,6 +106,7 @@ export default Vue.extend({
 
 	> .profile {
 		position: relative;
+		margin-bottom: 16px;
 		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 		border-radius: 6px;
 		overflow: hidden;

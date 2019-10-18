@@ -109,7 +109,7 @@ export default (opts: Opts = {}) => ({
 	methods: {
 		reply(viaKeyboard = false) {
 			pleaseLogin(this.$root);
-			this.$root.$post({
+			this.$root.post({
 				reply: this.appearNote,
 				animation: !viaKeyboard,
 				cb: () => {
@@ -120,7 +120,7 @@ export default (opts: Opts = {}) => ({
 
 		renote(viaKeyboard = false) {
 			pleaseLogin(this.$root);
-			this.$root.$post({
+			this.$root.post({
 				renote: this.appearNote,
 				animation: !viaKeyboard,
 				cb: () => {
