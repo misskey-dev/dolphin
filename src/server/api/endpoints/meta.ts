@@ -140,7 +140,7 @@ export default define(meta, async (ps, me) => {
 		response.features = {
 			elasticsearch: config.elasticsearch ? true : false,
 			recaptcha: instance.enableRecaptcha,
-			objectStorage: instance.useObjectStorage,
+			objectStorage: config.drive.storage !== 'fs',
 			serviceWorker: instance.enableServiceWorker,
 		};
 	}

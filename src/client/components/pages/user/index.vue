@@ -20,21 +20,19 @@
 			</div>
 		</div>
 		<dp-avatar class="avatar" :user="user" :disable-preview="true"/>
-		<div class="body">
-			<div class="description">
-				<mfm v-if="user.description" :text="user.description" :is-note="false" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
-				<p v-else class="empty">{{ $t('no-description') }}</p>
-			</div>
-			<div class="fields" v-if="user.fields">
-				<dl class="field" v-for="(field, i) in user.fields" :key="i">
-					<dt class="name">
-						<mfm :text="field.name" :plain="true" :custom-emojis="user.emojis"/>
-					</dt>
-					<dd class="value">
-						<mfm :text="field.value" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
-					</dd>
-				</dl>
-			</div>
+		<div class="description">
+			<mfm v-if="user.description" :text="user.description" :is-note="false" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
+			<p v-else class="empty">{{ $t('no-description') }}</p>
+		</div>
+		<div class="fields" v-if="user.fields">
+			<dl class="field" v-for="(field, i) in user.fields" :key="i">
+				<dt class="name">
+					<mfm :text="field.name" :plain="true" :custom-emojis="user.emojis"/>
+				</dt>
+				<dd class="value">
+					<mfm :text="field.value" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
+				</dd>
+			</dl>
 		</div>
 	</div>
 	<x-user-timeline :user="user"/>
@@ -45,6 +43,7 @@
 import Vue from 'vue';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import XUserTimeline from '../../user-timeline.vue';
+import XUserMenu from '../../user-menu.vue';
 import Progress from '../../../scripts/loading';
 import parseAcct from '../../../../misc/acct/parse';
 
@@ -107,7 +106,6 @@ export default Vue.extend({
 
 	> .profile {
 		position: relative;
-		background: #fff;
 		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 		border-radius: 6px;
 		overflow: hidden;
@@ -210,63 +208,54 @@ export default Vue.extend({
 			box-shadow: 1px 1px 3px rgba(#000, 0.2);
 		}
 
-		> .body {
-			padding: 16px 16px 16px 154px;
+		> .description {
+			padding: 24px 24px 24px 154px;
 			color: var(--text);
+			font-size: 15px;
+			background: #fff;
 
-			> .description {
-				font-size: 15px;
-
-				> .empty {
-					margin: 0;
-					opacity: 0.5;
-				}
+			> .empty {
+				margin: 0;
+				opacity: 0.5;
 			}
+		}
 
-			> .fields {
-				margin-top: 16px;
+		> .fields {
+			padding: 24px;
+			background: rgba(0, 0, 0, 0.3);
+			color: #fff;
+			backdrop-filter: blur(16px);
+			font-size: 14px;
+		
+			> .field {
+				display: flex;
+				padding: 0;
+				margin: 0;
+				align-items: center;
 
-				> .field {
-					display: flex;
-					padding: 0;
-					margin: 0;
-					align-items: center;
-
-					> .name {
-						border-right: solid 1px var(--faceDivider);
-						padding: 4px;
-						margin: 4px;
-						width: 30%;
-						overflow: hidden;
-						white-space: nowrap;
-						text-overflow: ellipsis;
-						font-weight: bold;
-						text-align: center;
-					}
-
-					> .value {
-						padding: 4px;
-						margin: 4px;
-						width: 70%;
-						overflow: hidden;
-						white-space: nowrap;
-						text-overflow: ellipsis;
-					}
-				}
-			}
-
-			> .info {
-				margin-top: 16px;
-				padding-top: 16px;
-				border-top: solid 1px var(--faceDivider);
-				font-size: 15px;
-
-				&:empty {
-					display: none;
+				&:not(:last-child) {
+					border-bottom: solid 1px rgba(0, 0, 0, 0.1);
 				}
 
-				> * {
-					margin-right: 16px;
+				> .name {
+					border-right: solid 1px var(--faceDivider);
+					padding: 4px;
+					margin: 4px;
+					width: 30%;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					font-weight: bold;
+					text-align: center;
+				}
+
+				> .value {
+					padding: 4px;
+					margin: 4px;
+					width: 70%;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
 				}
 			}
 		}

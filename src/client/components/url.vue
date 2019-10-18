@@ -11,12 +11,13 @@
 	<span class="pathname" v-if="pathname != ''">{{ self ? pathname.substr(1) : pathname }}</span>
 	<span class="query">{{ query }}</span>
 	<span class="hash">{{ hash }}</span>
-	<fa icon="external-link-square-alt" v-if="target === '_blank'" class="icon"/>
+	<fa :icon="faExternalLinkSquareAlt" v-if="target === '_blank'" class="icon"/>
 </component>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import { faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
 import { toUnicode as decodePunycode } from 'punycode';
 import { url as local } from '../config';
 
@@ -40,7 +41,8 @@ export default Vue.extend({
 			self: isSelf,
 			hasRoute: hasRoute,
 			attr: hasRoute ? 'to' : 'href',
-			target: hasRoute ? null : '_blank'
+			target: hasRoute ? null : '_blank',
+			faExternalLinkSquareAlt
 		};
 	},
 	created() {
