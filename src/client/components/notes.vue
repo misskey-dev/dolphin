@@ -4,12 +4,12 @@
 
 	<dp-error v-if="error" @retry="init()"/>
 
-	<transition-group name="dp-notes" class="transition" tag="div">
+	<sequential-entrance animation="entranceFromTop" delay="25" class="notes">
 		<template v-for="(note, i) in _notes">
 			<x-note :note="note" :key="note.id"/>
 			<x-date-separator class="date" :key="note.id + '_date'" v-if="i != items.length - 1 && note._date != _notes[i + 1]._date" :newer="note.createdAt" :older="_notes[i + 1].createdAt"/>
 		</template>
-	</transition-group>
+	</sequential-entrance>
 
 	<footer v-if="more">
 		<button @click="fetchMore()" :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }">
@@ -81,37 +81,20 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .dp-notes {
 	> .empty {
-		padding: 16px;
-		text-align: center;
-	}
-
-	.transition {
-		.dp-notes-enter,
-		.dp-notes-leave-to {
-			opacity: 0;
-			transform: translateY(-30px);
-		}
-
-		> * {
-			transition: transform .3s ease, opacity .3s ease;
-		}
-
-		> *:not(.date) {
-			margin: 16px 0;
-		}
-	}
-
-	> .empty {
 		margin: 0 auto;
 		padding: 32px;
 		max-width: 400px;
 		text-align: center;
-		color: var(--text);
+	}
+
+	> .notes {
+		> div {
+			margin-bottom: 16px;
+		}
 	}
 
 	> footer {
 		text-align: center;
-		border-top: solid var(--lineWidth) var(--faceDivider);
 
 		&:empty {
 			display: none;
@@ -121,7 +104,6 @@ export default Vue.extend({
 			margin: 0;
 			padding: 16px;
 			width: 100%;
-			color: var(--text);
 
 			&:disabled {
 				opacity: 0.7;

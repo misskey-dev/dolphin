@@ -48,6 +48,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .dp-date-separator {
 	text-align: center;
+	margin: 16px 0;
 		
 	> .date {
 		display: inline-block;

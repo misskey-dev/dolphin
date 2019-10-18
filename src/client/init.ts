@@ -8,7 +8,6 @@ import VueRouter from 'vue-router';
 import VAnimateCss from 'v-animate-css';
 import VModal from 'vue-js-modal';
 import VueI18n from 'vue-i18n';
-import SequentialEntrance from 'vue-sequential-entrance';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import VueHotkey from './scripts/hotkey';
@@ -20,6 +19,7 @@ import PostFormDialog from './components/post-form-dialog.vue';
 import Dialog from './components/dialog.vue';
 import DpIndex from './components/index.vue';
 import i18n from './i18n';
+import SequentialEntrance from './components/sequential-entrance';
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
@@ -28,8 +28,7 @@ Vue.use(VModal);
 Vue.use(VueHotkey);
 Vue.use(VueSize);
 Vue.use(VueI18n);
-Vue.use(SequentialEntrance);
-
+Vue.component('sequential-entrance', SequentialEntrance);
 Vue.component('fa', FontAwesomeIcon);
 
 // Register global directives
