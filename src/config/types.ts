@@ -30,6 +30,17 @@ export type Source = {
 		pass: string;
 		index?: string;
 	};
+	drive: {
+		storage: string;
+		bucket?: string;
+		prefix?: string;
+		baseUrl?: string;
+		endpoint?: string;
+		port?: number;
+		useSSL?: boolean;
+		accessKey?: string;
+		secretKey?: string;
+	};
 
 	proxy?: string;
 	proxySmtp?: string;

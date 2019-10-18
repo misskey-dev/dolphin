@@ -20,7 +20,6 @@ export default async function(ctx: Koa.BaseContext) {
 	const file = await DriveFiles.createQueryBuilder('file')
 		.where('file.accessKey = :accessKey', { accessKey: key })
 		.orWhere('file.thumbnailAccessKey = :thumbnailAccessKey', { thumbnailAccessKey: key })
-		.orWhere('file.webpublicAccessKey = :webpublicAccessKey', { webpublicAccessKey: key })
 		.getOne();
 
 	if (file == null) {
@@ -35,15 +34,10 @@ export default async function(ctx: Koa.BaseContext) {
 	}
 
 	const isThumbnail = file.thumbnailAccessKey === key;
-	const isWebpublic = file.webpublicAccessKey === key;
 
 	if (isThumbnail) {
 		ctx.set('Content-Type', 'image/jpeg');
 		ctx.set('Content-Disposition', contentDisposition('inline', `${rename(file.name, { suffix: '-thumb', extname: '.jpeg' })}`));
-		ctx.body = InternalStorage.read(key);
-	} else if (isWebpublic) {
-		ctx.set('Content-Type', file.type === 'image/apng' ? 'image/png' : file.type);
-		ctx.set('Content-Disposition', contentDisposition('inline', `${rename(file.name, { suffix: '-web' })}`));
 		ctx.body = InternalStorage.read(key);
 	} else {
 		ctx.set('Content-Disposition', contentDisposition('inline', `${file.name}`));

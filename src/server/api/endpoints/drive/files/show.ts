@@ -74,8 +74,6 @@ export default define(meta, async (ps, user) => {
 			where: [{
 				url: ps.url
 			}, {
-				webpublicUrl: ps.url
-			}, {
 				thumbnailUrl: ps.url
 			}],
 		});

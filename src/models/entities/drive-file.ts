@@ -88,12 +88,6 @@ export class DriveFile {
 	})
 	public thumbnailUrl: string | null;
 
-	@Column('varchar', {
-		length: 512, nullable: true,
-		comment: 'The URL of the webpublic of the DriveFile.'
-	})
-	public webpublicUrl: string | null;
-
 	@Index({ unique: true })
 	@Column('varchar', {
 		length: 256, nullable: true,
@@ -105,12 +99,6 @@ export class DriveFile {
 		length: 256, nullable: true,
 	})
 	public thumbnailAccessKey: string | null;
-
-	@Index({ unique: true })
-	@Column('varchar', {
-		length: 256, nullable: true,
-	})
-	public webpublicAccessKey: string | null;
 
 	@Index()
 	@Column('varchar', {

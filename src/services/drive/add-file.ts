@@ -10,7 +10,7 @@ import { deleteFile } from './delete-file';
 import { fetchMeta } from '../../misc/fetch-meta';
 import { GenerateVideoThumbnail } from './generate-video-thumbnail';
 import { driveLogger } from './logger';
-import { IImage, convertToJpeg, convertToWebp, convertToPng, convertToGif, convertToApng } from './image-processor';
+import { IImage, convertToJpeg, convertToPng, convertToGif, convertToApng } from './image-processor';
 import { contentDisposition } from '../../misc/content-disposition';
 import { detectMine } from '../../misc/detect-mine';
 import { DriveFiles, DriveFolders, Users, Instances, UserProfiles } from '../../models';
@@ -22,6 +22,7 @@ import { genId } from '../../misc/gen-id';
 import { isDuplicateKeyValueError } from '../../misc/is-duplicate-key-value-error';
 import * as S3 from 'aws-sdk/clients/s3';
 import { getS3 } from './s3';
+import config from '../../config';
 
 const logger = driveLogger.createSubLogger('register', 'yellow');
 
@@ -34,12 +35,10 @@ const logger = driveLogger.createSubLogger('register', 'yellow');
  * @param size Size for original
  */
 async function save(file: DriveFile, path: string, name: string, type: string, hash: string, size: number): Promise<DriveFile> {
-	// thunbnail, webpublic を必要なら生成
-	const alts = await generateAlts(path, type, !file.uri);
+	// thunbnailを必要なら生成
+	const thumb = await generateThumbnail(path, type);
 
-	const meta = await fetchMeta();
-
-	if (meta.useObjectStorage) {
+	if (config.drive.storage !== 'fs') {
 		//#region ObjectStorage params
 		let [ext] = (name.match(/\.([a-zA-Z0-9_-]+)$/) || ['']);
 
@@ -51,19 +50,15 @@ async function save(file: DriveFile, path: string, name: string, type: string, h
 			if (type === 'image/vnd.mozilla.apng') ext = '.apng';
 		}
 
-		const baseUrl = meta.objectStorageBaseUrl
-			|| `${ meta.objectStorageUseSSL ? 'https' : 'http' }://${ meta.objectStorageEndpoint }${ meta.objectStoragePort ? `:${meta.objectStoragePort}` : '' }/${ meta.objectStorageBucket }`;
+		const baseUrl = config.drive.baseUrl
+			|| `${ config.drive.useSSL ? 'https' : 'http' }://${ config.drive.endpoint }${ config.drive.port ? `:${config.drive.port}` : '' }/${ config.drive.bucket }`;
 
 		// for original
-		const key = `${meta.objectStoragePrefix}/${uuid()}${ext}`;
-		const url = `${ baseUrl }/${ key }`;
+		const key = `${config.drive.prefix}/${uuid()}${ext}`;
+		const url = `${baseUrl}/${key}`;
 
-		// for alts
-		let webpublicKey: string | null = null;
-		let webpublicUrl: string | null = null;
 		let thumbnailKey: string | null = null;
 		let thumbnailUrl: string | null = null;
-		//#endregion
 
 		//#region Uploads
 		logger.info(`uploading original: ${key}`);
@@ -71,20 +66,12 @@ async function save(file: DriveFile, path: string, name: string, type: string, h
 			upload(key, fs.createReadStream(path), type, name)
 		];
 
-		if (alts.webpublic) {
-			webpublicKey = `${meta.objectStoragePrefix}/webpublic-${uuid()}.${alts.webpublic.ext}`;
-			webpublicUrl = `${ baseUrl }/${ webpublicKey }`;
-
-			logger.info(`uploading webpublic: ${webpublicKey}`);
-			uploads.push(upload(webpublicKey, alts.webpublic.data, alts.webpublic.type, name));
-		}
-
-		if (alts.thumbnail) {
-			thumbnailKey = `${meta.objectStoragePrefix}/thumbnail-${uuid()}.${alts.thumbnail.ext}`;
-			thumbnailUrl = `${ baseUrl }/${ thumbnailKey }`;
+		if (thumb) {
+			thumbnailKey = `${config.drive.prefix}/thumbnail-${uuid()}.${thumb.ext}`;
+			thumbnailUrl = `${baseUrl}/${thumbnailKey}`;
 
 			logger.info(`uploading thumbnail: ${thumbnailKey}`);
-			uploads.push(upload(thumbnailKey, alts.thumbnail.data, alts.thumbnail.type));
+			uploads.push(upload(thumbnailKey, thumb.data, thumb.type));
 		}
 
 		await Promise.all(uploads);
@@ -92,10 +79,8 @@ async function save(file: DriveFile, path: string, name: string, type: string, h
 
 		file.url = url;
 		file.thumbnailUrl = thumbnailUrl;
-		file.webpublicUrl = webpublicUrl;
 		file.accessKey = key;
 		file.thumbnailAccessKey = thumbnailKey;
-		file.webpublicAccessKey = webpublicKey;
 		file.name = name;
 		file.type = type;
 		file.md5 = hash;
@@ -106,30 +91,21 @@ async function save(file: DriveFile, path: string, name: string, type: string, h
 	} else { // use internal storage
 		const accessKey = uuid();
 		const thumbnailAccessKey = 'thumbnail-' + uuid();
-		const webpublicAccessKey = 'webpublic-' + uuid();
 
 		const url = InternalStorage.saveFromPath(accessKey, path);
 
 		let thumbnailUrl: string | null = null;
-		let webpublicUrl: string | null = null;
 
-		if (alts.thumbnail) {
-			thumbnailUrl = InternalStorage.saveFromBuffer(thumbnailAccessKey, alts.thumbnail.data);
+		if (thumb) {
+			thumbnailUrl = InternalStorage.saveFromBuffer(thumbnailAccessKey, thumb.data);
 			logger.info(`thumbnail stored: ${thumbnailAccessKey}`);
-		}
-
-		if (alts.webpublic) {
-			webpublicUrl = InternalStorage.saveFromBuffer(webpublicAccessKey, alts.webpublic.data);
-			logger.info(`web stored: ${webpublicAccessKey}`);
 		}
 
 		file.storedInternal = true;
 		file.url = url;
 		file.thumbnailUrl = thumbnailUrl;
-		file.webpublicUrl = webpublicUrl;
 		file.accessKey = accessKey;
 		file.thumbnailAccessKey = thumbnailAccessKey;
-		file.webpublicAccessKey = webpublicAccessKey;
 		file.name = name;
 		file.type = type;
 		file.md5 = hash;
@@ -140,40 +116,11 @@ async function save(file: DriveFile, path: string, name: string, type: string, h
 }
 
 /**
- * Generate webpublic, thumbnail, etc
+ * Generate thumbnail
  * @param path Path for original
  * @param type Content-Type for original
- * @param generateWeb Generate webpublic or not
  */
-export async function generateAlts(path: string, type: string, generateWeb: boolean) {
-	// #region webpublic
-	let webpublic: IImage | null = null;
-
-	if (generateWeb) {
-		logger.info(`creating web image`);
-
-		try {
-			if (['image/jpeg'].includes(type)) {
-				webpublic = await convertToJpeg(path, 2048, 2048);
-			} else if (['image/webp'].includes(type)) {
-				webpublic = await convertToWebp(path, 2048, 2048);
-			} else if (['image/png'].includes(type)) {
-				webpublic = await convertToPng(path, 2048, 2048);
-			} else if (['image/apng', 'image/vnd.mozilla.apng'].includes(type)) {
-				webpublic = await convertToApng(path);
-			} else if (['image/gif'].includes(type)) {
-				webpublic = await convertToGif(path);
-			} else {
-				logger.info(`web image not created (not an image)`);
-			}
-		} catch (e) {
-			logger.warn(`web image not created (an error occured)`, e);
-		}
-	} else {
-		logger.info(`web image not created (from remote)`);
-	}
-	// #endregion webpublic
-
+export async function generateThumbnail(path: string, type: string) {
 	// #region thumbnail
 	let thumbnail: IImage | null = null;
 
@@ -198,10 +145,7 @@ export async function generateAlts(path: string, type: string, generateWeb: bool
 	}
 	// #endregion thumbnail
 
-	return {
-		webpublic,
-		thumbnail,
-	};
+	return thumbnail;
 }
 
 /**
@@ -213,7 +157,7 @@ async function upload(key: string, stream: fs.ReadStream | Buffer, type: string,
 	const meta = await fetchMeta();
 
 	const params = {
-		Bucket: meta.objectStorageBucket,
+		Bucket: config.drive.bucket,
 		Key: key,
 		Body: stream,
 		ContentType: type,
@@ -322,7 +266,7 @@ export default async function(
 	}
 
 	//#region Check drive usage
-	if (!isLink && isRemoteUser(user)) {
+	if (!isLink && Users.isRemoteUser(user)) {
 		const usage = await DriveFiles.clacDriveUsageOf(user);
 
 		const instance = await fetchMeta();
@@ -423,7 +367,6 @@ export default async function(
 		if (isLink) {
 			file.url = url;
 			file.thumbnailUrl = url;
-			file.webpublicUrl = url;
 		}
 	}
 
