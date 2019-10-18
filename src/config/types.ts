@@ -40,6 +40,7 @@ export type Source = {
 		useSSL?: boolean;
 		accessKey?: string;
 		secretKey?: string;
+		region?: string;
 	};
 
 	proxy?: string;
