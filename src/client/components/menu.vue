@@ -118,6 +118,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .onchrpzrvnoruiaenfcqvccjfuupzzwv {
 	$bg-color: var(--popupBg);
 	position: initial;
@@ -152,7 +154,7 @@ export default Vue.extend({
 
 			&:hover {
 				color: var(--primaryForeground);
-				background: #5da1c1;
+				background: $primary;
 				text-decoration: none;
 			}
 

@@ -57,6 +57,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import './theme';
+
 .dp-app {
 	> .button {
 		position: fixed;
@@ -90,7 +92,7 @@ export default Vue.extend({
 
 		&.post {
 			right: 28px;
-			background: #5da1c1;
+			background: $primary;
 			color: #fff;
 		}
 	}

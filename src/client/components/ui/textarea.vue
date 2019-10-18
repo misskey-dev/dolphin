@@ -107,7 +107,7 @@ root(fill)
 				left 0
 				right 0
 				background none
-				border solid 2px #5da1c1
+				border solid 2px $primary
 				border-radius 3px
 				opacity 0
 				transition opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)
@@ -165,7 +165,7 @@ root(fill)
 					opacity 1
 
 			> .label
-				color #5da1c1
+				color $primary
 
 	&.focused
 	&.filled

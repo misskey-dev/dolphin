@@ -209,6 +209,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .rdfaahpb {
 	position: initial;
 
@@ -283,7 +285,7 @@ export default Vue.extend({
 				}
 
 				&:active {
-					background: #5da1c1;
+					background: $primary;
 					box-shadow: inset 0 0.15em 0.3em rgba(27, 31, 35, 0.15);
 				}
 			}

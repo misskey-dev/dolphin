@@ -140,6 +140,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .zmdxowus {
 	padding: 8px;
 
@@ -209,7 +211,7 @@ export default Vue.extend({
 	> .add {
 		margin: 8px 0 0 0;
 		vertical-align: top;
-		color: #5da1c1;
+		color: $primary;
 		z-index: 1;
 	}
 

@@ -121,7 +121,7 @@ export default Vue.extend({
 				top: 0;
 				left: 0;
 				height: 100%;
-				background: #5da1c1;
+				background: $primary;
 				transition: width 1s ease;
 			}
 

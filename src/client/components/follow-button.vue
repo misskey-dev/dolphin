@@ -1,12 +1,16 @@
 <template>
 <button class="wfliddvnhxvyusikowhxozkyxyenqxqr"
-	:class="{ wait, block, inline, transparent, active: isFollowing || hasPendingFollowRequestFromYou }"
+	:class="{ wait, active: isFollowing || hasPendingFollowRequestFromYou }"
 	@click="onClick"
 	:disabled="wait"
 	:inline="inline"
 >
 	<template v-if="!wait">
-		<fa :icon="iconAndText[0]"/> <template v-if="!mini">{{ iconAndText[1] }}</template>
+		<fa v-if="hasPendingFollowRequestFromYou && user.isLocked" :icon="faHourglassHalf"/>
+		<fa v-else-if="hasPendingFollowRequestFromYou && !user.isLocked" :icon="faSpinner" pulse/>
+		<fa v-else-if="isFollowing" :icon="faMinus"/>
+		<fa v-else-if="!isFollowing && user.isLocked" :icon="faPlus"/>
+		<fa v-else-if="!isFollowing && !user.isLocked" :icon="faPlus"/>
 	</template>
 	<template v-else><fa icon="spinner" pulse fixed-width/></template>
 </button>
@@ -15,6 +19,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../i18n';
+import { faSpinner, faPlus, faMinus, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/follow-button.vue'),
@@ -24,21 +29,6 @@ export default Vue.extend({
 			type: Object,
 			required: true
 		},
-		block: {
-			type: Boolean,
-			required: false,
-			default: false
-		},
-		inline: {
-			type: Boolean,
-			required: false,
-			default: false
-		},
-		transparent: {
-			type: Boolean,
-			required: false,
-			default: true
-		},
 	},
 
 	data() {
@@ -46,21 +36,9 @@ export default Vue.extend({
 			isFollowing: this.user.isFollowing,
 			hasPendingFollowRequestFromYou: this.user.hasPendingFollowRequestFromYou,
 			wait: false,
-			connection: null
+			connection: null,
+			faSpinner, faPlus, faMinus, faHourglassHalf
 		};
-	},
-
-	computed: {
-		iconAndText(): any[] {
-			return (
-				(this.hasPendingFollowRequestFromYou && this.user.isLocked) ? ['hourglass-half', this.$t('request-pending')] :
-				(this.hasPendingFollowRequestFromYou && !this.user.isLocked) ? ['spinner', this.$t('follow-processing')] :
-				(this.isFollowing) ? ['minus', this.$t('following')] :
-				(!this.isFollowing && this.user.isLocked) ? ['plus', this.$t('follow-request')] :
-				(!this.isFollowing && !this.user.isLocked) ? ['plus', this.$t('follow')] :
-				[]
-			);
-		}
 	},
 
 	mounted() {
@@ -126,40 +104,24 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .wfliddvnhxvyusikowhxozkyxyenqxqr {
 	display: block;
 	user-select: none;
 	cursor: pointer;
-	padding: 0 16px;
-	margin: 0;
-	min-width: 100px;
-	line-height: 36px;
-	font-size: 14px;
 	font-weight: bold;
-	color: #5da1c1;
+	color: $primary;
 	background: transparent;
 	outline: none;
-	border: solid 1px #5da1c1;
-	border-radius: 36px;
+	border: solid 1px $primary;
 	padding: 0;
-	min-width: 0;
 	width: 32px;
 	height: 32px;
 	font-size: 16px;
-	border-radius: 4px;
+	border-radius: 100%;
 	line-height: 32px;
-
-	&:not(.transparent) {
-		background: #fff;
-	}
-
-	&.inline {
-		display: inline-block;
-	}
-
-	&.block {
-		width: 100%;
-	}
+	background: #fff;
 
 	&:focus {
 		&:after {
@@ -170,8 +132,8 @@ export default Vue.extend({
 			right: -5px;
 			bottom: -5px;
 			left: -5px;
-			border: 2px solid var(--primaryAlpha03);
-			border-radius: 36px;
+			border: 2px solid rgba($primary, 0.3);
+			border-radius: 100%;
 		}
 	}
 
@@ -185,7 +147,7 @@ export default Vue.extend({
 
 	&.active {
 		color: var(--primaryForeground);
-		background: #5da1c1;
+		background: $primary;
 
 		&:hover {
 			background: var(--primaryLighten10);

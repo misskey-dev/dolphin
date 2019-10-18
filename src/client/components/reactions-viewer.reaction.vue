@@ -168,6 +168,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .reaction {
 	display: inline-block;
 	height: 32px;
@@ -191,7 +193,7 @@ export default Vue.extend({
 	}
 
 	&.reacted {
-		background: #5da1c1;
+		background: $primary;
 
 		> span {
 			color: var(--primaryForeground);

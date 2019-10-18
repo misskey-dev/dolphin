@@ -15,7 +15,7 @@
 			</div>
 			<span class="followed" v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed">{{ $t('follows-you') }}</span>
 			<div class="actions" v-if="$store.getters.isSignedIn">
-				<button @click="menu" class="menu" ref="menu"><fa icon="ellipsis-h"/></button>
+				<button @click="menu" class="menu" ref="menu"><fa :icon="faEllipsisH"/></button>
 				<dp-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
 			</div>
 		</div>
@@ -43,6 +43,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import XUserTimeline from '../../user-timeline.vue';
 import Progress from '../../../scripts/loading';
 import parseAcct from '../../../../misc/acct/parse';
@@ -56,6 +57,7 @@ export default Vue.extend({
 		return {
 			fetching: true,
 			user: null,
+			faEllipsisH
 		};
 	},
 
@@ -108,6 +110,7 @@ export default Vue.extend({
 		background: #fff;
 		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 		border-radius: 6px;
+		overflow: hidden;
 
 		> .banner-container {
 			position: relative;

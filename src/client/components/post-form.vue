@@ -541,6 +541,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .gafaadew {
 	position: relative;
 	max-width: 500px;
@@ -581,7 +583,7 @@ export default Vue.extend({
 					line-height: 34px;
 					vertical-align: bottom;
 					color: var(--primaryForeground);
-					background: #5da1c1;
+					background: $primary;
 					border-radius: 4px;
 
 					&:disabled {
@@ -601,7 +603,7 @@ export default Vue.extend({
 
 			> .with-quote {
 				margin: 0 0 8px 0;
-				color: #5da1c1;
+				color: $primary;
 
 				> button {
 					padding: 4px 8px;
@@ -619,7 +621,7 @@ export default Vue.extend({
 
 			> .to-specified {
 				margin: 0 0 8px 0;
-				color: #5da1c1;
+				color: $primary;
 
 				> .visibleUsers {
 					display: inline;

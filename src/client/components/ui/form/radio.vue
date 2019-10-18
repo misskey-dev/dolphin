@@ -68,15 +68,15 @@ export default Vue.extend({
 
 	&.checked
 		> .button
-			border-color #5da1c1
+			border-color $primary
 
 			&:after
-				background-color #5da1c1
+				background-color $primary
 				transform scale(1)
 				opacity 1
 
 		> .label
-			color #5da1c1
+			color $primary
 
 	> input
 		position absolute

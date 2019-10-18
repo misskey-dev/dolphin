@@ -196,7 +196,7 @@ export default Vue.extend({
 				z-index 2
 
 				&::-webkit-progress-value
-					background #5da1c1
+					background $primary
 
 				&::-webkit-progress-bar
 					background var(--primaryAlpha01)
@@ -208,12 +208,12 @@ export default Vue.extend({
 				background linear-gradient(
 					45deg,
 					var(--primaryLighten30) 25%,
-					#5da1c1               25%,
-					#5da1c1               50%,
+					$primary               25%,
+					$primary               50%,
 					var(--primaryLighten30) 50%,
 					var(--primaryLighten30) 75%,
-					#5da1c1               75%,
-					#5da1c1
+					$primary               75%,
+					$primary
 				)
 				background-size 32px 32px
 				animation bg 1.5s linear infinite

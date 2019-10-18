@@ -150,6 +150,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .gqyayizv {
 	position: initial;
 
@@ -193,7 +195,7 @@ export default Vue.extend({
 
 			&.active {
 				color: var(--primaryForeground);
-				background: #5da1c1;
+				background: $primary;
 			}
 
 			> * {

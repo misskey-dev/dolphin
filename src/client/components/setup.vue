@@ -68,6 +68,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .dp-setup {
 	max-width: 500px;
 	background: #fff;
@@ -80,7 +82,7 @@ export default Vue.extend({
 		font-size: 1.5em;
 		text-align: center;
 		padding: 32px;
-		background: #5da1c1;
+		background: $primary;
 		color: #fff;
 	}
 

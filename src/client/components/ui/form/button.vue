@@ -48,20 +48,20 @@ export default Vue.extend({
 
 		&:hover
 		&:focus
-			color #5da1c1
+			color $primary
 			background var(--formButtonHoverBg)
 			border-color var(--formButtonHoverBorder)
 
 		&:active
 			color var(--primaryDarken20)
 			background var(--formButtonActiveBg)
-			border-color #5da1c1
+			border-color $primary
 			transition all 0s
 
 	&.primary
 		> button
-			border 1px solid #5da1c1
-			background #5da1c1
+			border 1px solid $primary
+			background $primary
 			color var(--primaryForeground)
 
 			&:hover

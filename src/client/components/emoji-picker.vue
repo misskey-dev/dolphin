@@ -134,7 +134,7 @@ export default Vue.extend({
 				transition color 0s
 
 			&.active
-				color #5da1c1
+				color $primary
 				transition color 0s
 
 	> .emojis

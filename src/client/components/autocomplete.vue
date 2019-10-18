@@ -329,6 +329,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .dp-autocomplete {
 	position: fixed;
 	z-index: 65535;
@@ -373,7 +375,7 @@ export default Vue.extend({
 			}
 
 			&[data-selected='true'] {
-				background: #5da1c1;
+				background: $primary;
 
 				&, * {
 					color: #fff !important;

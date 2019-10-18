@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+@import 'theme';
+
 * {
 	tap-highlight-color: transparent;
 	-webkit-tap-highlight-color: transparent;
@@ -13,24 +15,25 @@ html {
 
 body {
 	overflow-wrap: break-word;
-}
 
-body > noscript {
-	position: fixed;
-	z-index: 2;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	background: #fff;
-}
-	body > noscript > p {
-		display: block;
-		margin: 32px;
-		font-size: 2em;
-		color: #555;
+	> noscript {
+		position: fixed;
+		z-index: 2;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		background: #fff;
+
+		> p {
+			display: block;
+			margin: 32px;
+			font-size: 2em;
+			color: #555;
+		}
 	}
+}
 
 #ini {
 	position: fixed;
@@ -39,10 +42,9 @@ body > noscript {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: var(--bg);
 	cursor: wait;
-}
-	#ini > svg {
+
+	> svg {
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -53,6 +55,7 @@ body > noscript {
 		height: 64px;
 		animation: ini 0.6s infinite linear;
 	}
+}
 
 html, body {
 	margin: 0;
@@ -68,21 +71,23 @@ a {
 	cursor: pointer;
 	tap-highlight-color: var(--linkTapHighlight) !important;
 	-webkit-tap-highlight-color: var(--linkTapHighlight) !important;
-}
-	a:hover {
+
+	&:hover {
 		text-decoration: underline;
 	}
-	a * {
+
+	* {
 		cursor: pointer;
 	}
+}
 
 #nprogress {
 	pointer-events: none;
 	position: absolute;
 	z-index: 10000;
-}
-	#nprogress .bar {
-		background: #5da1c1;
+
+	.bar {
+		background: $primary;
 		position: fixed;
 		z-index: 10001;
 		top: 0;
@@ -90,16 +95,18 @@ a {
 		width: 100%;
 		height: 2px;
 	}
-	#nprogress .peg {
+
+	.peg {
 		display: block;
 		position: absolute;
 		right: 0;
 		width: 100px;
 		height: 100%;
-		box-shadow: 0 0 10px #5da1c1, 0 0 5px #5da1c1;
+		box-shadow: 0 0 10px $primary, 0 0 5px $primary;
 		opacity: 1;
 		transform: rotate(3deg) translate(0px, -4px);
 	}
+}
 
 #wait {
 	display: block;
@@ -107,19 +114,20 @@ a {
 	z-index: 10000;
 	top: 15px;
 	right: 15px;
-}
-	#wait:before {
+
+	&:before {
 		content: "";
 		display: block;
 		width: 18px;
 		height: 18px;
 		box-sizing: border-box;
 		border: solid 2px transparent;
-		border-top-color: #5da1c1;
-		border-left-color: #5da1c1;
+		border-top-color: $primary;
+		border-left-color: $primary;
 		border-radius: 50%;
 		animation: progress-spinner 400ms linear infinite;
 	}
+}
 
 .zoom-in-top-enter-active,
 .zoom-in-top-leave-active {

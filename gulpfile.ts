@@ -16,6 +16,7 @@ import * as rename from 'gulp-rename';
 import * as mocha from 'gulp-mocha';
 import * as replace from 'gulp-replace';
 const uglifyes = require('uglify-es');
+const sass = require('gulp-sass');
 
 const locales = require('./locales');
 
@@ -106,7 +107,8 @@ gulp.task('build:client:script', () => {
 });
 
 gulp.task('build:client:styles', () =>
-	gulp.src('./src/client/style.css')
+	gulp.src('./src/client/style.scss')
+		.pipe(sass())
 		.pipe(isProduction
 			? (cssnano as any)()
 			: gutil.noop())

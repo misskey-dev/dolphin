@@ -132,6 +132,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .note {
 	overflow: hidden;
 	font-size: 16px;
@@ -245,7 +247,7 @@ export default Vue.extend({
 					}
 
 					&.reacted {
-						color: #5da1c1;
+						color: $primary;
 					}
 				}
 			}

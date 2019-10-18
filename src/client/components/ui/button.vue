@@ -98,6 +98,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../../theme';
+
 .dmtdnykelhudezerjlfpbhgovrgnqqgr {
 	position: relative;
 	display: block;
@@ -129,14 +131,14 @@ export default Vue.extend({
 
 	&.primary {
 		color: #fff;
-		background: #5da1c1;
+		background: $primary;
 
 		&:not(:disabled):hover {
-			background: lighten(#5da1c1, 5%);
+			background: lighten($primary, 5%);
 		}
 
 		&:not(:disabled):active {
-			background: darken(#5da1c1, 5%);
+			background: darken($primary, 5%);
 		}
 	}
 
