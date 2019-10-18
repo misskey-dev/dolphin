@@ -21,7 +21,7 @@ export default Vue.extend({
 		white-space: pre;
 	}
 
-	>>> .quote {
+	/deep/ .quote {
 		display: block;
 		margin: 8px;
 		padding: 6px 0 6px 12px;

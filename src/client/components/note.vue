@@ -135,6 +135,7 @@ export default Vue.extend({
 @import '../theme';
 
 .note {
+	position: relative;
 	overflow: hidden;
 	font-size: 16px;
 	background: #fff;
