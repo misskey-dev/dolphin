@@ -169,13 +169,13 @@ export default Vue.extend({
 		position: relative;
 		display: block;
 		font-size: 14px;
-		border: solid var(--lineWidth) var(--urlPreviewBorder);
+		border: solid 1px rgba(0, 0, 0, 0.1);
 		border-radius: 4px;
 		overflow: hidden;
 
 		&:hover {
 			text-decoration: none;
-			border-color: var(--urlPreviewBorderHover);
+			border-color: rgba(0, 0, 0, 0.2);
 
 			> article > header > h1 {
 				text-decoration: underline;
@@ -210,6 +210,7 @@ export default Vue.extend({
 
 		> article {
 			position: relative;
+			box-sizing: border-box;
 			padding: 16px;
 
 			> header {
@@ -218,13 +219,11 @@ export default Vue.extend({
 				> h1 {
 					margin: 0;
 					font-size: 1em;
-					color: var(--urlPreviewTitle);
 				}
 			}
 
 			> p {
 				margin: 0;
-				color: var(--urlPreviewText);
 				font-size: 0.8em;
 			}
 
