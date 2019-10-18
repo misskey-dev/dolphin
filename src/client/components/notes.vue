@@ -7,10 +7,7 @@
 	<transition-group name="dp-notes" class="transition" tag="div">
 		<template v-for="(note, i) in _notes">
 			<x-note :note="note" :key="note.id"/>
-			<p class="date" :key="note.id + '_date'" v-if="i != items.length - 1 && note._date != _notes[i + 1]._date">
-				<span><fa icon="angle-up"/>{{ note._datetext }}</span>
-				<span><fa icon="angle-down"/>{{ _notes[i + 1]._datetext }}</span>
-			</p>
+			<x-date-separator class="date" :key="note.id + '_date'" v-if="i != items.length - 1 && note._date != _notes[i + 1]._date" :newer="note.createdAt" :older="_notes[i + 1].createdAt"/>
 		</template>
 	</transition-group>
 
@@ -28,12 +25,13 @@ import Vue from 'vue';
 import i18n from '../i18n';
 import paging from '../scripts/paging';
 import XNote from './note.vue';
+import XDateSeparator from './date-separator.vue';
 
 export default Vue.extend({
 	i18n: i18n(),
 
 	components: {
-		XNote
+		XNote, XDateSeparator
 	},
 
 	mixins: [
@@ -73,7 +71,6 @@ export default Vue.extend({
 				const date = new Date(item.createdAt).getDate();
 				const month = new Date(item.createdAt).getMonth() + 1;
 				item._date = date;
-				item._datetext = this.$t('monthAndDay').replace('{month}', month.toString()).replace('{day}', date.toString());
 				return item;
 			});
 		}
@@ -101,25 +98,6 @@ export default Vue.extend({
 
 		> *:not(.date) {
 			margin: 16px 0;
-		}
-
-		> .date {
-			display: block;
-			margin: 0;
-			line-height: 32px;
-			text-align: center;
-			font-size: 0.9em;
-			color: var(--dateDividerFg);
-			background: var(--dateDividerBg);
-			border-bottom: solid var(--lineWidth) var(--faceDivider);
-
-			span {
-				margin: 0 16px;
-			}
-
-			[data-icon] {
-				margin-right: 8px;
-			}
 		}
 	}
 
