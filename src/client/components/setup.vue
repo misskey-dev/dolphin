@@ -68,29 +68,34 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-setup
+.dp-setup {
 	max-width: 500px;
 	background: #fff;
 	border-radius: 6px;
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
 
-	> h1
+	> h1 {
 		margin: 0;
 		font-size: 1.5em;
 		text-align: center;
 		padding: 32px;
 		background: #5da1c1;
 		color: #fff;
+	}
 
-	> div
+	> div {
 		padding: 32px;
 
-		> p
+		> p {
 			margin-top: 0;
+		}
 
-		> footer
-			> *
-				margin 0 auto
-
+		> footer {
+			> * {
+				margin: 0 auto;
+			}
+		}
+	}
+}
 </style>

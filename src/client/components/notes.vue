@@ -82,63 +82,73 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-notes
-	> .empty
-		padding 16px
-		text-align center
+.dp-notes {
+	> .empty {
+		padding: 16px;
+		text-align: center;
+	}
 
-	.transition
-		.dp-notes-enter
-		.dp-notes-leave-to
-			opacity 0
-			transform translateY(-30px)
+	.transition {
+		.dp-notes-enter,
+		.dp-notes-leave-to {
+			opacity: 0;
+			transform: translateY(-30px);
+		}
 
-		> *
-			transition transform .3s ease, opacity .3s ease
+		> * {
+			transition: transform .3s ease, opacity .3s ease;
+		}
 
-		> *:not(.date)
-			margin 16px 0
+		> *:not(.date) {
+			margin: 16px 0;
+		}
 
-		> .date
-			display block
-			margin 0
-			line-height 32px
-			text-align center
-			font-size 0.9em
-			color var(--dateDividerFg)
-			background var(--dateDividerBg)
-			border-bottom solid var(--lineWidth) var(--faceDivider)
+		> .date {
+			display: block;
+			margin: 0;
+			line-height: 32px;
+			text-align: center;
+			font-size: 0.9em;
+			color: var(--dateDividerFg);
+			background: var(--dateDividerBg);
+			border-bottom: solid var(--lineWidth) var(--faceDivider);
 
-			span
-				margin 0 16px
+			span {
+				margin: 0 16px;
+			}
 
-			[data-icon]
-				margin-right 8px
+			[data-icon] {
+				margin-right: 8px;
+			}
+		}
+	}
 
-	> .empty
-		margin 0 auto
-		padding 32px
-		max-width 400px
-		text-align center
-		color var(--text)
+	> .empty {
+		margin: 0 auto;
+		padding: 32px;
+		max-width: 400px;
+		text-align: center;
+		color: var(--text);
+	}
 
-	> footer
-		text-align center
-		border-top solid var(--lineWidth) var(--faceDivider)
+	> footer {
+		text-align: center;
+		border-top: solid var(--lineWidth) var(--faceDivider);
 
-		&:empty
-			display none
+		&:empty {
+			display: none;
+		}
 
-		> button
-			margin 0
-			padding 16px
-			width 100%
-			color var(--text)
+		> button {
+			margin: 0;
+			padding: 16px;
+			width: 100%;
+			color: var(--text);
 
-			@media (min-width 500px)
-				padding 20px
-
-			&:disabled
-				opacity 0.7
-
+			&:disabled {
+				opacity: 0.7;
+			}
+		}
+	}
+}
 </style>

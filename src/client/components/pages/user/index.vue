@@ -100,148 +100,172 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-user-page
-	padding 32px
+.dp-user-page {
+	padding: 32px;
 
-	> .profile
+	> .profile {
 		position: relative;
 		background: #fff;
 		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 		border-radius: 6px;
 
-		> .banner-container
+		> .banner-container {
 			position: relative;
-			height 250px
-			overflow hidden
-			background-size cover
-			background-position center
+			height: 250px;
+			overflow: hidden;
+			background-size: cover;
+			background-position: center;
 
-			> .banner
-				height 100%
-				background-color #383838
-				background-size cover
-				background-position center
-				box-shadow 0 0 128px rgba(0, 0, 0, 0.5) inset
+			> .banner {
+				height: 100%;
+				background-color: #383838;
+				background-size: cover;
+				background-position: center;
+				box-shadow: 0 0 128px rgba(0, 0, 0, 0.5) inset;
+			}
 
-			> .fade
-				position absolute
-				bottom 0
-				left 0
-				width 100%
-				height 78px
-				background linear-gradient(transparent, rgba(#000, 0.7))
+			> .fade {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 78px;
+				background: linear-gradient(transparent, rgba(#000, 0.7));
 				backdrop-filter: blur(4px);
+			}
 
-			> .followed
-				position absolute
-				top 12px
-				left 12px
-				padding 4px 6px
-				color #fff
-				background rgba(0, 0, 0, 0.7)
-				font-size 12px
+			> .followed {
+				position: absolute;
+				top: 12px;
+				left: 12px;
+				padding: 4px 6px;
+				color: #fff;
+				background: rgba(0, 0, 0, 0.7);
+				font-size: 12px;
+			}
 
-			> .actions
-				position absolute
-				top 12px
-				right 12px
+			> .actions {
+				position: absolute;
+				top: 12px;
+				right: 12px;
 
-				> .menu
-					height 100%
-					padding 0 14px
-					color #fff
-					text-shadow 0 0 8px #000
-					font-size 16px
+				> .menu {
+					height: 100%;
+					padding: 0 14px;
+					color: #fff;
+					text-shadow: 0 0 8px #000;
+					font-size: 16px;
+				}
+			}
 
-			> .title
-				position absolute
-				bottom 0
-				left 0
-				width 100%
-				padding 0 0 8px 154px
-				color #fff
+			> .title {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				padding: 0 0 8px 154px;
+				color: #fff;
 
-				> .name
-					display block
-					margin 0
-					line-height 32px
-					font-weight bold
-					font-size 1.8em
-					text-shadow 0 0 8px #000
+				> .name {
+					display: block;
+					margin: 0;
+					line-height: 32px;
+					font-weight: bold;
+					font-size: 1.8em;
+					text-shadow: 0 0 8px #000;
+				}
 
-				> div
-					> *
-						display inline-block
-						margin-right 16px
-						line-height 20px
-						opacity 0.8
+				> div {
+					> * {
+						display: inline-block;
+						margin-right: 16px;
+						line-height: 20px;
+						opacity: 0.8;
 
-						&.username
-							font-weight bold
+						&.username {
+							font-weight: bold;
+						}
+					}
+				}
+			}
+		}
 
-		> .avatar
-			display block
-			position absolute
-			top 170px
-			left 16px
-			z-index 2
-			width 120px
-			height 120px
-			box-shadow 1px 1px 3px rgba(#000, 0.2)
+		> .avatar {
+			display: block;
+			position: absolute;
+			top: 170px;
+			left: 16px;
+			z-index: 2;
+			width: 120px;
+			height: 120px;
+			box-shadow: 1px 1px 3px rgba(#000, 0.2);
+		}
 
-		> .body
-			padding 16px 16px 16px 154px
-			color var(--text)
+		> .body {
+			padding: 16px 16px 16px 154px;
+			color: var(--text);
 
-			> .description
-				font-size 15px
+			> .description {
+				font-size: 15px;
 
-				> .empty
-					margin 0
-					opacity 0.5
+				> .empty {
+					margin: 0;
+					opacity: 0.5;
+				}
+			}
 
-			> .fields
-				margin-top 16px
+			> .fields {
+				margin-top: 16px;
 
-				> .field
-					display flex
-					padding 0
-					margin 0
-					align-items center
+				> .field {
+					display: flex;
+					padding: 0;
+					margin: 0;
+					align-items: center;
 
-					> .name
-						border-right solid 1px var(--faceDivider)
-						padding 4px
-						margin 4px
-						width 30%
-						overflow hidden
-						white-space nowrap
-						text-overflow ellipsis
-						font-weight bold
-						text-align center
+					> .name {
+						border-right: solid 1px var(--faceDivider);
+						padding: 4px;
+						margin: 4px;
+						width: 30%;
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+						font-weight: bold;
+						text-align: center;
+					}
 
-					> .value
-						padding 4px
-						margin 4px
-						width 70%
-						overflow hidden
-						white-space nowrap
-						text-overflow ellipsis
+					> .value {
+						padding: 4px;
+						margin: 4px;
+						width: 70%;
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+					}
+				}
+			}
 
-			> .info
-				margin-top 16px
-				padding-top 16px
-				border-top solid 1px var(--faceDivider)
-				font-size 15px
+			> .info {
+				margin-top: 16px;
+				padding-top: 16px;
+				border-top: solid 1px var(--faceDivider);
+				font-size: 15px;
 
-				&:empty
-					display none
+				&:empty {
+					display: none;
+				}
 
-				> *
-					margin-right 16px
+				> * {
+					margin-right: 16px;
+				}
+			}
+		}
+	}
 
-	> *
-		max-width 600px
-		margin 0 auto
-
+	> * {
+		max-width: 600px;
+		margin: 0 auto;
+	}
+}
 </style>

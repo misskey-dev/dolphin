@@ -1,5 +1,5 @@
 <template>
-<div class="onchrpzrvnoruiaenfcqvccjfuupzzwv" :class="{ isMobile: $root.isMobile }">
+<div class="onchrpzrvnoruiaenfcqvccjfuupzzwv">
 	<div class="backdrop" ref="backdrop" @click="close"></div>
 	<div class="popover" :class="{ bubble }" ref="popover">
 		<template v-for="item, i in items">
@@ -118,79 +118,59 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.onchrpzrvnoruiaenfcqvccjfuupzzwv
-	$bg-color = var(--popupBg)
+.onchrpzrvnoruiaenfcqvccjfuupzzwv {
+	$bg-color: var(--popupBg);
+	position: initial;
 
-	position initial
+	> .backdrop {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 10000;
+		width: 100%;
+		height: 100%;
+		background: var(--modalBackdrop);
+		opacity: 0;
+	}
 
-	&.isMobile
-		> .popover
-			> button
-				font-size 15px
+	> .popover {
+		position: absolute;
+		z-index: 10001;
+		padding: 8px 0;
+		background: $bg-color;
+		border-radius: 4px;
+		box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+		transform: scale(0.5);
+		opacity: 0;
 
-	> .backdrop
-		position fixed
-		top 0
-		left 0
-		z-index 10000
-		width 100%
-		height 100%
-		background var(--modalBackdrop)
-		opacity 0
+		> button {
+			display: block;
+			padding: 8px 16px;
+			width: 100%;
+			color: var(--popupFg);
+			white-space: nowrap;
 
-	> .popover
-		position absolute
-		z-index 10001
-		padding 8px 0
-		background $bg-color
-		border-radius 4px
-		box-shadow 0 3px 12px rgba(27, 31, 35, 0.15)
-		transform scale(0.5)
-		opacity 0
+			&:hover {
+				color: var(--primaryForeground);
+				background: #5da1c1;
+				text-decoration: none;
+			}
 
-		$balloon-size = 16px
+			&:active {
+				color: var(--primaryForeground);
+				background: var(--primaryDarken10);
+			}
 
-		&.bubble
-			margin-top $balloon-size
-			transform-origin center -($balloon-size)
+			> [data-icon] {
+				margin-right: 4px;
+			}
+		}
 
-			&:before
-			&:after
-				content ""
-				display block
-				position absolute
-				pointer-events none
-
-			&:before
-				top -($balloon-size * 2)
-				left s('calc(50% - %s)', $balloon-size)
-				border-top solid $balloon-size transparent
-				border-left solid $balloon-size transparent
-				border-right solid $balloon-size transparent
-				border-bottom solid $balloon-size $bg-color
-
-		> button
-			display block
-			padding 8px 16px
-			width 100%
-			color var(--popupFg)
-			white-space nowrap
-
-			&:hover
-				color var(--primaryForeground)
-				background #5da1c1
-				text-decoration none
-
-			&:active
-				color var(--primaryForeground)
-				background var(--primaryDarken10)
-
-			> [data-icon]
-				margin-right 4px
-
-		> div
-			margin 8px 0
-			height var(--lineWidth)
-			background var(--faceDivider)
-
+		> div {
+			margin: 8px 0;
+			height: var(--lineWidth);
+			background: var(--faceDivider);
+		}
+	}
+}
 </style>

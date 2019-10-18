@@ -1,5 +1,5 @@
 <template>
-<div class="ukygtjoj" :class="{ naked, inNakedDeckColumn, hideHeader: !showHeader, shadow: $store.state.device.useShadow, round: $store.state.device.roundedCorners }">
+<div class="ukygtjoj" :class="{ naked, inNakedDeckColumn, hideHeader: !showHeader }">
 	<header v-if="showHeader" @click="() => showBody = !showBody">
 		<div class="title"><slot name="header"></slot></div>
 		<slot name="func"></slot>
@@ -55,73 +55,54 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.ukygtjoj
-	overflow hidden
+.ukygtjoj {
+	overflow: hidden;
+	background: var(--face);
+	border-radius: 8px;
+	box-shadow: 0 4px 16px rgba(#000, 0.1);
 
-	&:not(.inNakedDeckColumn)
-		background var(--face)
+	& + .ukygtjoj {
+		margin-top: 16px;
+	}
 
-		&.round
-			border-radius 8px
+	&.naked {
+		background: transparent !important;
+		box-shadow: none !important;
+	}
 
-		&.shadow
-			box-shadow 0 4px 16px rgba(#000, 0.1)
+	> header {
+		> .title {
+			margin: 0;
+			padding: 8px 10px;
+			font-size: 15px;
+			font-weight: normal;
+			color: var(--faceHeaderText);
+			background: var(--faceHeader);
 
-		& + .ukygtjoj
-			margin-top 16px
+			> [data-icon] {
+				margin-right: 6px;
+			}
 
-			@media (max-width 500px)
-				margin-top 8px
+			&:empty {
+				display: none;
+			}
+		}
 
-		&.naked
-			background transparent !important
-			box-shadow none !important
+		> button {
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			right: 0;
+			padding: 0;
+			width: 42px;
+			height: 100%;
+			font-size: 15px;
+			color: var(--faceTextButton);
+		}
+	}
 
-		> header
-			> .title
-				margin 0
-				padding 8px 10px
-				font-size 15px
-				font-weight normal
-				color var(--faceHeaderText)
-				background var(--faceHeader)
-
-				> [data-icon]
-					margin-right 6px
-
-				&:empty
-					display none
-
-			> button
-				position absolute
-				z-index 2
-				top 0
-				right 0
-				padding 0
-				width 42px
-				height 100%
-				font-size 15px
-				color var(--faceTextButton)
-
-		> div
-			color var(--text)
-
-	&.inNakedDeckColumn
-		background var(--face)
-
-		> header
-			margin 0
-			padding 8px 16px
-			font-size 12px
-			color var(--text)
-			background var(--deckColumnBg)
-
-			> button
-				position absolute
-				top 0
-				right 8px
-				padding 8px 6px
-				font-size 14px
-				color var(--text)
-
+	> div {
+		color: var(--text);
+	}
+}
 </style>

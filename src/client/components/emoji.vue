@@ -97,23 +97,27 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.fvgwvorwhxigeolkkrcderjzcawqrscl
-	height 1.25em
-	vertical-align -0.25em
+.fvgwvorwhxigeolkkrcderjzcawqrscl {
+	height: 1.25em;
+	vertical-align: -0.25em;
 
-	&.custom
-		height 2.5em
-		vertical-align middle
-		transition transform 0.2s ease
+	&.custom {
+		height: 2.5em;
+		vertical-align: middle;
+		transition: transform 0.2s ease;
 
-		&:hover
-			transform scale(1.2)
+		&:hover {
+			transform: scale(1.2);
+		}
 
-		&.normal
-			height 1.25em
-			vertical-align -0.25em
+		&.normal {
+			height: 1.25em;
+			vertical-align: -0.25em;
 
-			&:hover
-				transform none
-
+			&:hover {
+				transform: none;
+			}
+		}
+	}
+}
 </style>

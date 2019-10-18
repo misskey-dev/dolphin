@@ -1,8 +1,7 @@
 <template>
 <div class="rdfaahpb" v-hotkey.global="keymap">
 	<div class="backdrop" ref="backdrop" @click="close"></div>
-	<div class="popover" :class="{ isMobile: $root.isMobile }" ref="popover">
-		<p v-if="!$root.isMobile">{{ title }}</p>
+	<div class="popover" ref="popover">
 		<div class="buttons" ref="buttons" :class="{ showFocus }">
 			<button v-for="(reaction, i) in $store.state.settings.reactions" :key="reaction" @click="react(reaction)" @mouseover="onMouseover" @mouseout="onMouseout" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction"><dp-reaction-icon :reaction="reaction"/></button>
 		</div>
@@ -210,125 +209,114 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.rdfaahpb
-	position initial
+.rdfaahpb {
+	position: initial;
 
-	> .backdrop
-		position fixed
-		top 0
-		left 0
-		z-index 10000
-		width 100%
-		height 100%
-		background var(--modalBackdrop)
-		opacity 0
+	> .backdrop {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 10000;
+		width: 100%;
+		height: 100%;
+		background: var(--modalBackdrop);
+		opacity: 0;
+	}
 
-	> .popover
-		$bgcolor = var(--popupBg)
-		position absolute
-		z-index 10001
-		background $bgcolor
-		border-radius 4px
-		box-shadow 0 3px 12px rgba(27, 31, 35, 0.15)
-		transform scale(0.5)
-		opacity 0
+	> .popover {
+		$bgcolor: var(--popupBg);
+		position: absolute;
+		z-index: 10001;
+		background: $bgcolor;
+		border-radius: 4px;
+		box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+		transform: scale(0.5);
+		opacity: 0;
 
-		&.isMobile
-			> div
-				width 280px
+		> div {
+			width: 280px;
 
-				> button
-					width 50px
-					height 50px
-					font-size 28px
-					border-radius 4px
+			> button {
+				width: 50px;
+				height: 50px;
+				font-size: 28px;
+				border-radius: 4px;
+			}
+		}
 
-		&:not(.isMobile)
-			$arrow-size = 16px
+		> .buttons {
+			padding: 4px 4px 8px 4px;
+			width: 216px;
+			text-align: center;
 
-			margin-top $arrow-size
-			transform-origin center -($arrow-size)
+			&.showFocus {
+				> button:focus {
+					z-index: 1;
 
-			&:before
-				content ""
-				display block
-				position absolute
-				top -($arrow-size * 2)
-				left s('calc(50% - %s)', $arrow-size)
-				border-top solid $arrow-size transparent
-				border-left solid $arrow-size transparent
-				border-right solid $arrow-size transparent
-				border-bottom solid $arrow-size $bgcolor
+					&:after {
+						content: "";
+						pointer-events: none;
+						position: absolute;
+						top: 0;
+						right: 0;
+						bottom: 0;
+						left: 0;
+						border: 2px solid var(--primaryAlpha03);
+						border-radius: 4px;
+					}
+				}
+			}
 
-		> p
-			display block
-			margin 0
-			padding 8px 10px
-			font-size 14px
-			color var(--popupFg)
-			border-bottom solid var(--lineWidth) var(--faceDivider)
-			line-height 20px
+			> button {
+				padding: 0;
+				width: 40px;
+				height: 40px;
+				font-size: 24px;
+				border-radius: 2px;
 
-		> .buttons
-			padding 4px 4px 8px 4px
-			width 216px
-			text-align center
+				> * {
+					height: 1em;
+				}
 
-			&.showFocus
-				> button:focus
-					z-index 1
+				&:hover {
+					background: var(--reactionPickerButtonHoverBg);
+				}
 
-					&:after
-						content ""
-						pointer-events none
-						position absolute
-						top 0
-						right 0
-						bottom 0
-						left 0
-						border 2px solid var(--primaryAlpha03)
-						border-radius 4px
+				&:active {
+					background: #5da1c1;
+					box-shadow: inset 0 0.15em 0.3em rgba(27, 31, 35, 0.15);
+				}
+			}
+		}
 
-			> button
-				padding 0
-				width 40px
-				height 40px
-				font-size 24px
-				border-radius 2px
+		> .text {
+			width: 216px;
+			padding: 0 8px 8px 8px;
 
-				> *
-					height 1em
+			> input {
+				width: 100%;
+				padding: 10px;
+				margin: 0;
+				text-align: center;
+				font-size: 16px;
+				color: var(--desktopPostFormTextareaFg);
+				background: var(--desktopPostFormTextareaBg);
+				outline: none;
+				border: solid 1px var(--primaryAlpha01);
+				border-radius: 4px;
+				transition: border-color .2s ease;
 
-				&:hover
-					background var(--reactionPickerButtonHoverBg)
+				&:hover {
+					border-color: var(--primaryAlpha02);
+					transition: border-color .1s ease;
+				}
 
-				&:active
-					background #5da1c1
-					box-shadow inset 0 0.15em 0.3em rgba(27, 31, 35, 0.15)
-
-		> .text
-			width 216px
-			padding 0 8px 8px 8px
-
-			> input
-				width 100%
-				padding 10px
-				margin 0
-				text-align center
-				font-size 16px
-				color var(--desktopPostFormTextareaFg)
-				background var(--desktopPostFormTextareaBg)
-				outline none
-				border solid 1px var(--primaryAlpha01)
-				border-radius 4px
-				transition border-color .2s ease
-
-				&:hover
-					border-color var(--primaryAlpha02)
-					transition border-color .1s ease
-
-				&:focus
-					border-color var(--primaryAlpha05)
-					transition border-color 0s ease
-
+				&:focus {
+					border-color: var(--primaryAlpha05);
+					transition: border-color 0s ease;
+				}
+			}
+		}
+	}
+}
 </style>

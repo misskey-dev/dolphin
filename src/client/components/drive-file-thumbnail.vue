@@ -137,48 +137,58 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.zdjebgpv
-	display flex
+.zdjebgpv {
+	display: flex;
 
 	> img,
-	> .icon
-		pointer-events none
+	> .icon {
+		pointer-events: none;
+	}
 
-	> .icon-sub
-		position absolute
-		width 30%
-		height auto
-		margin 0
-		right 4%
-		bottom 4%
+	> .icon-sub {
+		position: absolute;
+		width: 30%;
+		height: auto;
+		margin: 0;
+		right: 4%;
+		bottom: 4%;
+	}
 
-	> *
-		margin auto
+	> * {
+		margin: auto;
+	}
 
-	&:not(.detail)
-		> img
-			height 100%
-			width 100%
-			object-fit cover
+	&:not(.detail) {
+		> img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+		}
 
-		> .icon
-			height 65%
-			width 65%
+		> .icon {
+			height: 65%;
+			width: 65%;
+		}
 
 		> video,
-		> audio
-			width 100%
+		> audio {
+			width: 100%;
+		}
+	}
 
-	&.detail
-		> .icon
-			height 100px
-			width 100px
-			margin 16px
+	&.detail {
+		> .icon {
+			height: 100px;
+			width: 100px;
+			margin: 16px;
+		}
 
-		> *:not(.icon)
-			max-height 300px
-			max-width 100%
-			height 100%
-			object-fit contain
-
+		> *:not(.icon) {
+			max-height: 300px;
+			max-width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+	}
+}
 </style>

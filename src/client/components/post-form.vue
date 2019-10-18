@@ -541,162 +541,177 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.gafaadew
-	position relative
-	max-width 500px
-	width calc(100% - 16px)
-	margin 8px auto
+.gafaadew {
+	position: relative;
+	max-width: 500px;
+	width: calc(100% - 16px);
+	margin: 8px auto;
 
-	@media (min-width 500px)
-		margin 16px auto
-		width calc(100% - 32px)
+	> .form {
+		background: var(--face);
+		border-radius: 8px;
+		box-shadow: 0 0 2px rgba(#000, 0.1);
 
-		> .form
-			box-shadow 0 8px 32px rgba(#000, 0.1)
+		> header {
+			z-index: 1000;
+			height: 50px;
+			box-shadow: 0 1px 0 0 var(--mobilePostFormDivider);
 
-	@media (min-width 600px)
-		margin 32px auto
+			> .cancel {
+				padding: 0;
+				width: 50px;
+				line-height: 50px;
+				font-size: 24px;
+				color: var(--text);
+			}
 
-	> .form
-		background var(--face)
-		border-radius 8px
-		box-shadow 0 0 2px rgba(#000, 0.1)
+			> div {
+				position: absolute;
+				top: 0;
+				right: 0;
+				color: var(--text);
 
-		> header
-			z-index 1000
-			height 50px
-			box-shadow 0 1px 0 0 var(--mobilePostFormDivider)
+				> .text-count {
+					line-height: 50px;
+				}
 
-			> .cancel
-				padding 0
-				width 50px
-				line-height 50px
-				font-size 24px
-				color var(--text)
+				> .submit {
+					margin: 8px;
+					padding: 0 16px;
+					line-height: 34px;
+					vertical-align: bottom;
+					color: var(--primaryForeground);
+					background: #5da1c1;
+					border-radius: 4px;
 
-			> div
-				position absolute
-				top 0
-				right 0
-				color var(--text)
+					&:disabled {
+						opacity: 0.7;
+					}
+				}
+			}
+		}
 
-				> .text-count
-					line-height 50px
+		> .form {
+			max-width: 500px;
+			margin: 0 auto;
 
-				> .submit
-					margin 8px
-					padding 0 16px
-					line-height 34px
-					vertical-align bottom
-					color var(--primaryForeground)
-					background #5da1c1
-					border-radius 4px
+			> .preview {
+				padding: 16px;
+			}
 
-					&:disabled
-						opacity 0.7
+			> .with-quote {
+				margin: 0 0 8px 0;
+				color: #5da1c1;
 
-		> .form
-			max-width 500px
-			margin 0 auto
+				> button {
+					padding: 4px 8px;
+					color: var(--primaryAlpha04);
 
-			> .preview
-				padding 16px
+					&:hover {
+						color: var(--primaryAlpha06);
+					}
 
-			> .with-quote
-				margin 0 0 8px 0
-				color #5da1c1
+					&:active {
+						color: var(--primaryDarken30);
+					}
+				}
+			}
 
-				> button
-					padding 4px 8px
-					color var(--primaryAlpha04)
+			> .to-specified {
+				margin: 0 0 8px 0;
+				color: #5da1c1;
 
-					&:hover
-						color var(--primaryAlpha06)
+				> .visibleUsers {
+					display: inline;
+					top: -1px;
+					font-size: 14px;
 
-					&:active
-						color var(--primaryDarken30)
+					> span {
+						margin-left: 14px;
 
-			> .to-specified
-				margin 0 0 8px 0
-				color #5da1c1
+						> button {
+							padding: 4px 8px;
+							color: var(--primaryAlpha04);
 
-				> .visibleUsers
-					display inline
-					top -1px
-					font-size 14px
+							&:hover {
+								color: var(--primaryAlpha06);
+							}
 
-					> span
-						margin-left 14px
+							&:active {
+								color: var(--primaryDarken30);
+							}
+						}
+					}
+				}
+			}
 
-						> button
-							padding 4px 8px
-							color var(--primaryAlpha04)
+			> input {
+				z-index: 1;
+			}
 
-							&:hover
-								color var(--primaryAlpha06)
+			> input,
+			> textarea {
+				display: block;
+				padding: 12px;
+				margin: 0;
+				width: 100%;
+				font-size: 16px;
+				color: var(--inputText);
+				background: var(--mobilePostFormTextareaBg);
+				border: none;
+				border-radius: 0;
+				box-shadow: 0 1px 0 0 var(--mobilePostFormDivider);
 
-							&:active
-								color var(--primaryDarken30)
+				&:disabled {
+					opacity: 0.5;
+				}
+			}
 
-			> .local-only
-				margin 0 0 8px 0
-				color #5da1c1
+			> textarea {
+				max-width: 100%;
+				min-width: 100%;
+				min-height: 80px;
+			}
 
-			> input
-				z-index 1
+			> .dp-uploader {
+				margin: 8px 0 0 0;
+				padding: 8px;
+			}
 
-			> input
-			> textarea
-				display block
-				padding 12px
-				margin 0
-				width 100%
-				font-size 16px
-				color var(--inputText)
-				background var(--mobilePostFormTextareaBg)
-				border none
-				border-radius 0
-				box-shadow 0 1px 0 0 var(--mobilePostFormDivider)
+			> .file {
+				display: none;
+			}
 
-				&:disabled
-					opacity 0.5
+			> footer {
+				white-space: nowrap;
+				overflow: auto;
+				-webkit-overflow-scrolling: touch;
+				overflow-scrolling: touch;
 
-			> textarea
-				max-width 100%
-				min-width 100%
-				min-height 80px
+				> * {
+					display: inline-block;
+					padding: 0;
+					margin: 0;
+					width: 48px;
+					height: 48px;
+					font-size: 20px;
+					color: var(--mobilePostFormButton);
+					background: transparent;
+					outline: none;
+					border: none;
+					border-radius: 0;
+					box-shadow: none;
+				}
+			}
+		}
+	}
 
-			> .dp-uploader
-				margin 8px 0 0 0
-				padding 8px
+	> .hashtags {
+		margin: 8px;
 
-			> .file
-				display none
-
-			> footer
-				white-space nowrap
-				overflow auto
-				-webkit-overflow-scrolling touch
-				overflow-scrolling touch
-
-				> *
-					display inline-block
-					padding 0
-					margin 0
-					width 48px
-					height 48px
-					font-size 20px
-					color var(--mobilePostFormButton)
-					background transparent
-					outline none
-					border none
-					border-radius 0
-					box-shadow none
-
-	> .hashtags
-		margin 8px
-
-		> *
-			margin-right 8px
-
+		> * {
+			margin-right: 8px;
+		}
+	}
+}
 </style>

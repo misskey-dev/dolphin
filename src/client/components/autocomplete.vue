@@ -329,95 +329,116 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-autocomplete
-	position fixed
-	z-index 65535
-	max-width 100%
-	margin-top calc(1em + 8px)
-	overflow hidden
-	background var(--faceHeader)
-	border solid 1px rgba(#000, 0.1)
-	border-radius 4px
-	transition top 0.1s ease, left 0.1s ease
+.dp-autocomplete {
+	position: fixed;
+	z-index: 65535;
+	max-width: 100%;
+	margin-top: calc(1em + 8px);
+	overflow: hidden;
+	background: var(--faceHeader);
+	border: solid 1px rgba(#000, 0.1);
+	border-radius: 4px;
+	transition: top 0.1s ease, left 0.1s ease;
 
-	> ol
-		display block
-		margin 0
-		padding 4px 0
-		max-height 190px
-		max-width 500px
-		overflow auto
-		list-style none
+	> ol {
+		display: block;
+		margin: 0;
+		padding: 4px 0;
+		max-height: 190px;
+		max-width: 500px;
+		overflow: auto;
+		list-style: none;
 
-		> li
-			display flex
-			align-items center
-			padding 4px 12px
-			white-space nowrap
-			overflow hidden
-			font-size 0.9em
-			color rgba(#000, 0.8)
-			cursor default
+		> li {
+			display: flex;
+			align-items: center;
+			padding: 4px 12px;
+			white-space: nowrap;
+			overflow: hidden;
+			font-size: 0.9em;
+			color: rgba(#000, 0.8);
+			cursor: default;
 
-			&, *
-				user-select none
+			&, * {
+				user-select: none;
+			}
 
-			*
-				overflow hidden
-				text-overflow ellipsis
+			* {
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 
-			&:hover
-				background var(--autocompleteItemHoverBg)
+			&:hover {
+				background: var(--autocompleteItemHoverBg);
+			}
 
-			&[data-selected='true']
-				background #5da1c1
+			&[data-selected='true'] {
+				background: #5da1c1;
 
-				&, *
-					color #fff !important
+				&, * {
+					color: #fff !important;
+				}
+			}
 
-			&:active
-				background var(--primaryDarken10)
+			&:active {
+				background: var(--primaryDarken10);
 
-				&, *
-					color #fff !important
+				&, * {
+					color: #fff !important;
+				}
+			}
+		}
+	}
 
-	> .users > li
+	> .users > li {
 
-		.avatar
-			min-width 28px
-			min-height 28px
-			max-width 28px
-			max-height 28px
-			margin 0 8px 0 0
-			border-radius 100%
+		.avatar {
+			min-width: 28px;
+			min-height: 28px;
+			max-width: 28px;
+			max-height: 28px;
+			margin: 0 8px 0 0;
+			border-radius: 100%;
+		}
 
-		.name
-			margin 0 8px 0 0
-			color var(--autocompleteItemText)
+		.name {
+			margin: 0 8px 0 0;
+			color: var(--autocompleteItemText);
+		}
 
-		.username
-			color var(--autocompleteItemTextSub)
+		.username {
+			color: var(--autocompleteItemTextSub);
+		}
+	}
 
-	> .hashtags > li
+	> .hashtags > li {
 
-		.name
-			color var(--autocompleteItemText)
+		.name {
+			color: var(--autocompleteItemText);
+		}
+	}
 
-	> .emojis > li
+	> .emojis > li {
 
-		.emoji
-			display inline-block
-			margin 0 4px 0 0
-			width 24px
+		.emoji {
+			display: inline-block;
+			margin: 0 4px 0 0;
+			width: 24px;
 
-			> img
-				width 24px
-				vertical-align bottom
+			> img {
+				width: 24px;
+				vertical-align: bottom;
+			}
+		}
 
-		.name
-			color var(--autocompleteItemText)
+		.name {
+			color: var(--autocompleteItemText);
+		}
 
-		.alias
-			margin 0 0 0 8px
-			color var(--autocompleteItemTextSub)
+		.alias {
+			margin: 0 0 0 8px;
+			color: var(--autocompleteItemTextSub);
+		}
+	}
+}
 </style>

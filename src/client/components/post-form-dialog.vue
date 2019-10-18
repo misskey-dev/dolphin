@@ -112,33 +112,36 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.ulveipglmagnxfgvitaxyszerjwiqmwl
-	> .bg
-		display block
-		position fixed
-		z-index 10000
-		top 0
-		left 0
-		width 100%
-		height 100%
-		background rgba(#000, 0.7)
-		opacity 0
-		pointer-events none
+.ulveipglmagnxfgvitaxyszerjwiqmwl {
+	> .bg {
+		display: block;
+		position: fixed;
+		z-index: 10000;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(#000, 0.7);
+		opacity: 0;
+		pointer-events: none;
+	}
 
-	> .main
-		display block
-		position fixed
-		z-index 10000
-		top 0
-		left 0
-		right 0
-		height 100%
-		overflow auto
-		margin 0 auto 0 auto
-		opacity 0
-		transform translateY(-16px)
+	> .main {
+		display: block;
+		position: fixed;
+		z-index: 10000;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 100%;
+		overflow: auto;
+		margin: 0 auto 0 auto;
+		opacity: 0;
+		transform: translateY(-16px);
 
-		> *
-			background #fff
-
+		> * {
+			background: #fff;
+		}
+	}
+}
 </style>

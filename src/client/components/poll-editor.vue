@@ -4,7 +4,7 @@
 		<fa icon="exclamation-triangle"/>{{ $t('no-only-one-choice') }}
 	</p>
 	<ul ref="choices">
-		<li v-for="(choice, i) in choices">
+		<li v-for="(choice, i) in choices" :key="i">
 			<input :value="choice" @input="onInput(i, $event)" :placeholder="$t('choice-n').replace('{}', i + 1)">
 			<button @click="remove(i)" :title="$t('remove')">
 				<fa icon="times"/>
@@ -240,7 +240,7 @@ export default Vue.extend({
 
 				> section {
 					align-items: center;
-					display: flex
+					display: flex;
 					margin: -32px 0 0;
 
 					> &:first-child {
