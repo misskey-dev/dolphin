@@ -118,7 +118,22 @@ export default (opts: Opts = {}) => ({
 			});
 		},
 
-		renote(viaKeyboard = false) {
+		renote() {
+			pleaseLogin(this.$root);
+			this.$root.dialog({
+				type: 'question',
+				text: this.$t('renoteConfirm'),
+				showCancelButton: true
+			}).then(({ canceled }) => {
+				if (canceled) return;
+
+				(this as any).$root.api('notes/create', {
+					renoteId: this.appearNote.id
+				});
+			});
+		},
+
+		quote(viaKeyboard = false) {
 			pleaseLogin(this.$root);
 			this.$root.post({
 				renote: this.appearNote,
@@ -130,7 +145,7 @@ export default (opts: Opts = {}) => ({
 		},
 
 		renoteDirectly() {
-			(this as any).api('notes/create', {
+			(this as any).$root.api('notes/create', {
 				renoteId: this.appearNote.id
 			});
 		},

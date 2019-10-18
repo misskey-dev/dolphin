@@ -10,7 +10,23 @@
 	<div class="reply-to" v-if="appearNote.reply">
 		<x-sub :note="appearNote.reply"/>
 	</div>
-	<dp-renote class="renote" v-if="isRenote" :note="note"/>
+	<div class="renote" v-if="isRenote">
+		<dp-avatar class="avatar" :user="note.user"/>
+		<fa icon="retweet"/>
+		<i18n path="renotedBy" tag="span">
+			<router-link class="name" :to="note.user | userPage" v-user-preview="note.userId" place="user">
+				<dp-user-name :user="note.user"/>
+			</router-link>
+		</i18n>
+		<div class="info">
+			<dp-time :time="note.createdAt"/>
+			<span class="visibility" v-if="note.visibility != 'public'">
+				<fa v-if="note.visibility == 'home'" icon="home"/>
+				<fa v-if="note.visibility == 'followers'" icon="unlock"/>
+				<fa v-if="note.visibility == 'specified'" icon="envelope"/>
+			</span>
+		</div>
+	</div>
 	<article class="article">
 		<dp-avatar class="avatar" :user="appearNote.user"/>
 		<div class="main">
@@ -141,6 +157,64 @@ export default Vue.extend({
 	background: #fff;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 	border-radius: 6px;
+
+	> .renote {
+		display: flex;
+		align-items: center;
+		padding: 8px 16px;
+		line-height: 28px;
+		white-space: pre;
+		color: #229e82;
+
+		@media (min-width: 500px) {
+			padding: 8px 16px;
+		}
+
+		@media (min-width: 600px) {
+			padding: 16px 32px 8px 32px;
+		}
+
+		> .avatar {
+			flex-shrink: 0;
+			display: inline-block;
+			width: 28px;
+			height: 28px;
+			margin: 0 8px 0 0;
+			border-radius: 6px;
+		}
+
+		> [data-icon] {
+			margin-right: 4px;
+		}
+
+		> span {
+			overflow: hidden;
+			flex-shrink: 1;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+
+			> .name {
+				font-weight: bold;
+			}
+		}
+
+		> .info {
+			margin-left: auto;
+			font-size: 0.9em;
+
+			> .dp-time {
+				flex-shrink: 0;
+			}
+
+			> .visibility {
+				margin-left: 8px;
+
+				[data-icon] {
+					margin-right: 0;
+				}
+			}
+		}
+	}
 
 	> .renote + .article {
 		padding-top: 8px;

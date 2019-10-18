@@ -33,15 +33,14 @@
 			<x-poll-editor v-if="poll" ref="poll" @destroyed="poll = false" @updated="onPollUpdate()"/>
 			<x-uploader ref="uploader" @uploaded="attachMedia" @change="onChangeUploadings"/>
 			<footer>
-				<button class="upload" @click="chooseFile"><fa icon="upload"/></button>
-				<button class="drive" @click="chooseFileFromDrive"><fa icon="cloud"/></button>
-				<button class="poll" @click="poll = true"><fa icon="chart-pie"/></button>
-				<button class="poll" @click="useCw = !useCw"><fa :icon="['far', 'eye-slash']"/></button>
+				<button class="upload" @click="chooseFile"><fa :icon="faUpload"/></button>
+				<button class="poll" @click="poll = true"><fa :icon="faChartPie"/></button>
+				<button class="poll" @click="useCw = !useCw"><fa :icon="faEyeSlash"/></button>
 				<button class="visibility" @click="setVisibility" ref="visibilityButton">
-					<span v-if="visibility === 'public'"><fa icon="globe"/></span>
-					<span v-if="visibility === 'home'"><fa icon="home"/></span>
-					<span v-if="visibility === 'followers'"><fa icon="unlock"/></span>
-					<span v-if="visibility === 'specified'"><fa icon="envelope"/></span>
+					<span v-if="visibility === 'public'"><fa :icon="faGlobe"/></span>
+					<span v-if="visibility === 'home'"><fa :icon="faHome"/></span>
+					<span v-if="visibility === 'followers'"><fa :icon="faUnlock"/></span>
+					<span v-if="visibility === 'specified'"><fa :icon="faEnvelope"/></span>
 				</button>
 			</footer>
 			<input ref="file" class="file" type="file" multiple="multiple" @change="onChangeFile"/>
@@ -55,7 +54,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faUpload, faChartPie, faGlobe, faHome, faUnlock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import insertTextAtCursor from 'insert-text-at-cursor';
 import { length } from 'stringz';
 import { toASCII } from 'punycode';
@@ -123,7 +123,7 @@ export default Vue.extend({
 			draghover: false,
 			quoteId: null,
 			recentHashtags: JSON.parse(localStorage.getItem('hashtags') || '[]'),
-			faTimes
+			faTimes, faUpload, faChartPie, faGlobe, faHome, faUnlock, faEnvelope, faEyeSlash
 		};
 	},
 
