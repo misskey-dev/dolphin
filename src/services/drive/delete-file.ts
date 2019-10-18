@@ -3,7 +3,6 @@ import { InternalStorage } from './internal-storage';
 import { DriveFiles, Instances, Notes } from '../../models';
 import { driveChart, perUserDriveChart, instanceChart } from '../chart';
 import { createDeleteObjectStorageFileJob } from '../../queue';
-import { fetchMeta } from '../../misc/fetch-meta';
 import { getS3 } from './s3';
 import config from '../../config';
 
@@ -75,9 +74,7 @@ function postProcess(file: DriveFile, isExpired = false) {
 }
 
 export async function deleteObjectStorageFile(key: string) {
-	const meta = await fetchMeta();
-
-	const s3 = getS3(meta);
+	const s3 = getS3();
 
 	await s3.deleteObject({
 		Bucket: config.drive.bucket!,

@@ -154,8 +154,6 @@ export async function generateThumbnail(path: string, type: string) {
 async function upload(key: string, stream: fs.ReadStream | Buffer, type: string, filename?: string) {
 	if (type === 'image/apng') type = 'image/png';
 
-	const meta = await fetchMeta();
-
 	const params = {
 		Bucket: config.drive.bucket,
 		Key: key,
@@ -166,7 +164,7 @@ async function upload(key: string, stream: fs.ReadStream | Buffer, type: string,
 
 	if (filename) params.ContentDisposition = contentDisposition('inline', filename);
 
-	const s3 = getS3(meta);
+	const s3 = getS3();
 
 	const upload = s3.upload(params);
 
