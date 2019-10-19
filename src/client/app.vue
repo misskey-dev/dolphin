@@ -129,7 +129,7 @@ export default Vue.extend({
 	}
 
 	> nav {
-		position: absolute;
+		position: fixed;
 		bottom: 96px + 16px;
 		left: 32px;
 		z-index: 10001;
@@ -179,7 +179,7 @@ export default Vue.extend({
 	}
 
 	> .notifications {
-		position: absolute;
+		position: fixed;
 		bottom: 96px + 16px;
 		left: 32px;
 		z-index: 10001;
