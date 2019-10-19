@@ -24,6 +24,7 @@ import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHom
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
+import DpToast from './components/toast.vue';
 
 export default Vue.extend({
 	i18n: i18n(),
@@ -32,6 +33,7 @@ export default Vue.extend({
 		return {
 			searching: false,
 			navOpen: false,
+			connection: null,
 			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome
 		};
 	},
@@ -42,6 +44,13 @@ export default Vue.extend({
 				'p|n': this.post,
 				's': this.search,
 			};
+		}
+	},
+
+	created() {
+		if (this.$store.getters.isSignedIn) {
+			this.connection = this.$root.stream.useSharedConnection('main');
+			this.connection.on('notification', this.onNotification);
 		}
 	},
 
@@ -65,6 +74,17 @@ export default Vue.extend({
 				});
 			});
 		},
+
+		onNotification(notification) {
+			// TODO: ユーザーが画面を見てないと思われるとき(ブラウザやタブがアクティブじゃないなど)は送信しない
+			this.$root.stream.send('readNotification', {
+				id: notification.id
+			});
+
+			this.$root.new(DpToast, {
+				notification
+			});
+		},
 	}
 });
 </script>
@@ -78,6 +98,14 @@ export default Vue.extend({
 		margin: 0 auto;
 		padding: 32px;
 		box-sizing: border-box;
+
+		@media (max-width: 700px) {
+			padding: 16px;
+		}
+
+		@media (max-width: 500px) {
+			padding: 8px;
+		}
 	}
 
 	> nav {
@@ -157,6 +185,18 @@ export default Vue.extend({
 
 		&.post {
 			right: 32px;
+		}
+
+		@media (max-width: 500px) {
+			bottom: 16px;
+
+			&.nav {
+				left: 16px;
+			}
+
+			&.post {
+				right: 16px;
+			}
 		}
 	}
 }

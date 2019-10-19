@@ -22,7 +22,7 @@
 		<dp-avatar class="avatar" :user="user" :disable-preview="true"/>
 		<div class="description">
 			<mfm v-if="user.description" :text="user.description" :is-note="false" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
-			<p v-else class="empty">{{ $t('no-description') }}</p>
+			<p v-else class="empty">{{ $t('noAccountDescription') }}</p>
 		</div>
 		<div class="fields" v-if="user.fields.length > 0">
 			<dl class="field" v-for="(field, i) in user.fields" :key="i">
@@ -118,7 +118,7 @@ export default Vue.extend({
 
 			> .banner {
 				height: 100%;
-				background-color: #383838;
+				background-color: #4c5e6d;
 				background-size: cover;
 				background-position: center;
 				box-shadow: 0 0 128px rgba(0, 0, 0, 0.5) inset;
