@@ -17,7 +17,7 @@ import MiOS from './mios';
 import { version, lang } from './config';
 import PostFormDialog from './components/post-form-dialog.vue';
 import Dialog from './components/dialog.vue';
-import DpIndex from './components/index.vue';
+import DpIndex from './pages/index.vue';
 import i18n from './i18n';
 import SequentialEntrance from './components/sequential-entrance';
 
@@ -81,11 +81,12 @@ const router = new VueRouter({
 	mode: 'history',
 	routes: [
 		{ path: '/', name: 'index', component: DpIndex },
-		{ path: '/@:user', name: 'user', component: () => import('./components/pages/user/index.vue').then(m => m.default), children: [
-			{ path: 'following', component: () => import('./components/pages/user/following.vue').then(m => m.default) },
-			{ path: 'followers', component: () => import('./components/pages/user/followers.vue').then(m => m.default) },
-		]},/*
-		{ path: '/notes/:note', component: DpNote },
+		{ path: '/@:user', name: 'user', component: () => import('./pages/user/index.vue').then(m => m.default), children: [
+			{ path: 'following', component: () => import('./pages/user/following.vue').then(m => m.default) },
+			{ path: 'followers', component: () => import('./pages/user/followers.vue').then(m => m.default) },
+		]},
+		//{ path: '/notifications', component: () => import('./pages/notifications.vue').then(m => m.default) },
+		{ path: '/notes/:note', component: () => import('./pages/note.vue').then(m => m.default) },/*
 		{ path: '/authorize-follow', component: DpFollow },
 		{ path: '*', component: DpNotFound }*/
 	]

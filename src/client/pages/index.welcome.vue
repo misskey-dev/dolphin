@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import XSetup from './setup.vue';
-import XSignin from './signin.vue';
+import XSetup from './index.welcome.setup.vue';
+import XSignin from './index.welcome.signin.vue';
 
 export default Vue.extend({
 	components: {

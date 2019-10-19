@@ -4,8 +4,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Home from './home.vue';
-import Welcome from './welcome.vue';
+import Home from './index.home.vue';
+import Welcome from './index.welcome.vue';
 
 export default Vue.extend({
 	components: {

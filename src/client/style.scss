@@ -134,6 +134,7 @@ a {
 	background: none;
 	border: none;
 	cursor: pointer;
+	font-size: 1em;
 
 	&:focus {
 		outline: none;
@@ -146,6 +147,7 @@ a {
 	cursor: pointer;
 	color: #fff;
 	background: $primary;
+	font-size: 1em;
 
 	&:not(:disabled):hover {
 		background: lighten($primary, 5%);

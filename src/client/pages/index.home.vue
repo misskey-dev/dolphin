@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import XHomeTimeline from './home-timeline.vue';
+import XHomeTimeline from './index.home.timeline.vue';
 
 export default Vue.extend({
 	components: {

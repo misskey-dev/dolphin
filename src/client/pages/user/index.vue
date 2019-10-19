@@ -42,10 +42,10 @@
 <script lang="ts">
 import Vue from 'vue';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
-import XUserTimeline from '../../user-timeline.vue';
-import XUserMenu from '../../user-menu.vue';
-import Progress from '../../../scripts/loading';
-import parseAcct from '../../../../misc/acct/parse';
+import XUserTimeline from './index.timeline.vue';
+import XUserMenu from '../../components/user-menu.vue';
+import Progress from '../../scripts/loading';
+import parseAcct from '../../../misc/acct/parse';
 
 export default Vue.extend({
 	components: {

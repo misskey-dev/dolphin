@@ -5,21 +5,22 @@
 	</main>
 	<transition name="zoom-in-bottom">
 		<nav v-if="navOpen">
-			<router-link to="/i"><fa :icon="faUser" fixed-width/>{{ $t('profile') }}</router-link>
+			<router-link to="/"><fa :icon="faHome" fixed-width/>{{ $t('timeline') }}</router-link>
+			<router-link :to="`/@${ $store.state.i.username }`"><fa :icon="faUser" fixed-width/>{{ $t('profile') }}</router-link>
 			<router-link to="/notifications"><fa :icon="faBell" fixed-width/>{{ $t('notifications') }}</router-link>
 			<button @click="search()" class="_buttonPlain"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
 			<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
 			<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
 		</nav>
 	</transition>
-	<button v-if="$store.getters.isSignedIn" class="button nav" @click="navOpen = !navOpen"><fa :icon="navOpen ? faTimes : faBars"/></button>
-	<button v-if="$store.getters.isSignedIn" class="button post" @click="post()"><fa :icon="faPencilAlt"/></button>
+	<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="navOpen = !navOpen"><fa :icon="navOpen ? faTimes : faBars"/></button>
+	<button v-if="$store.getters.isSignedIn" class="button post _buttonPrimary" @click="post()"><fa :icon="faPencilAlt"/></button>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
@@ -31,7 +32,7 @@ export default Vue.extend({
 		return {
 			searching: false,
 			navOpen: false,
-			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser
+			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome
 		};
 	},
 
@@ -84,12 +85,13 @@ export default Vue.extend({
 
 		> * {
 			display: block;
-			padding: 8px 16px;
+			padding: 8px 22px 8px 16px;
 			width: 100%;
 			box-sizing: border-box;
 			white-space: nowrap;
 			color: $text;
 			text-align: left;
+			font-size: 14px;
 
 			&:hover {
 				color: #fff;
@@ -116,12 +118,15 @@ export default Vue.extend({
 		padding: 0;
 		width: 64px;
 		height: 64px;
-		border: none;
 		border-radius: 100%;
 		box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 
 		> * {
 			font-size: 24px;
+		}
+
+		&:focus {
+			outline: none;
 		}
 
 		&.nav {
@@ -141,8 +146,6 @@ export default Vue.extend({
 
 		&.post {
 			right: 32px;
-			background: $primary;
-			color: #fff;
 		}
 	}
 }
