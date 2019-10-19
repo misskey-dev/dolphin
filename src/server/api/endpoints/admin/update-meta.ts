@@ -14,48 +14,6 @@ export const meta = {
 	requireModerator: true,
 
 	params: {
-		announcements: {
-			validator: $.optional.nullable.arr($.obj()),
-			desc: {
-				'ja-JP': 'お知らせ'
-			}
-		},
-
-		disableRegistration: {
-			validator: $.optional.nullable.bool,
-			desc: {
-				'ja-JP': '招待制か否か'
-			}
-		},
-
-		disableLocalTimeline: {
-			validator: $.optional.nullable.bool,
-			desc: {
-				'ja-JP': 'ローカルタイムライン(とソーシャルタイムライン)を無効にするか否か'
-			}
-		},
-
-		disableGlobalTimeline: {
-			validator: $.optional.nullable.bool,
-			desc: {
-				'ja-JP': 'グローバルタイムラインを無効にするか否か'
-			}
-		},
-
-		enableEmojiReaction: {
-			validator: $.optional.nullable.bool,
-			desc: {
-				'ja-JP': '絵文字リアクションを有効にするか否か'
-			}
-		},
-
-		useStarForReactionFallback: {
-			validator: $.optional.nullable.bool,
-			desc: {
-				'ja-JP': '不明なリアクションのフォールバックに star リアクションを使うか'
-			}
-		},
-
 		pinnedUsers: {
 			validator: $.optional.nullable.arr($.str),
 			desc: {
@@ -176,13 +134,6 @@ export const meta = {
 			}
 		},
 
-		langs: {
-			validator: $.optional.arr($.str),
-			desc: {
-				'ja-JP': 'インスタンスの対象言語'
-			}
-		},
-
 		summalyProxy: {
 			validator: $.optional.nullable.str,
 			desc: {
@@ -215,10 +166,6 @@ export const meta = {
 
 export default define(meta, async (ps, me) => {
 	const set = {} as Partial<Meta>;
-
-	if (typeof ps.useStarForReactionFallback === 'boolean') {
-		set.useStarForReactionFallback = ps.useStarForReactionFallback;
-	}
 
 	if (Array.isArray(ps.blockedHosts)) {
 		set.blockedHosts = ps.blockedHosts.filter(Boolean);

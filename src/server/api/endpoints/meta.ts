@@ -47,47 +47,6 @@ export const meta = {
 				optional: false as const, nullable: false as const,
 				description: 'The description of this instance.',
 			},
-			announcements: {
-				type: 'array' as const,
-				optional: false as const, nullable: false as const,
-				items: {
-					type: 'object' as const,
-					optional: false as const, nullable: false as const,
-					properties: {
-						title: {
-							type: 'string' as const,
-							optional: false as const, nullable: false as const,
-							description: 'The title of the announcement.',
-						},
-						text: {
-							type: 'string' as const,
-							optional: false as const, nullable: false as const,
-							description: 'The text of the announcement. (can be HTML)',
-						},
-					}
-				},
-				description: 'The announcements of this instance.',
-			},
-			disableRegistration: {
-				type: 'boolean' as const,
-				optional: false as const, nullable: false as const,
-				description: 'Whether disabled open registration.',
-			},
-			disableLocalTimeline: {
-				type: 'boolean' as const,
-				optional: false as const, nullable: false as const,
-				description: 'Whether disabled LTL and STL.',
-			},
-			disableGlobalTimeline: {
-				type: 'boolean' as const,
-				optional: false as const, nullable: false as const,
-				description: 'Whether disabled GTL.',
-			},
-			enableEmojiReaction: {
-				type: 'boolean' as const,
-				optional: false as const, nullable: false as const,
-				description: 'Whether enabled emoji reaction.',
-			},
 		}
 	}
 };
@@ -144,7 +103,7 @@ export default define(meta, async (ps, me) => {
 	}
 
 	if (me) {
-		response.useStarForReactionFallback = instance.useStarForReactionFallback;
+		response.useStarForReactionFallback = 'like';
 		response.blockedHosts = instance.blockedHosts;
 		response.recaptchaSecretKey = instance.recaptchaSecretKey;
 		response.proxyAccount = instance.proxyAccount;

@@ -34,11 +34,6 @@ export class Meta {
 	})
 	public maintainerEmail: string | null;
 
-	@Column('boolean', {
-		default: false,
-	})
-	public useStarForReactionFallback: boolean;
-
 	@Column('varchar', {
 		length: 256, array: true, default: '{}'
 	})

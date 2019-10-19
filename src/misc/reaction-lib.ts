@@ -1,5 +1,4 @@
 import { emojiRegex } from './emoji-regex';
-import { fetchMeta } from './fetch-meta';
 import { Emojis } from '../models';
 
 const basic10: Record<string, string> = {
@@ -16,8 +15,7 @@ const basic10: Record<string, string> = {
 };
 
 export async function getFallbackReaction(): Promise<string> {
-	const meta = await fetchMeta();
-	return  meta.useStarForReactionFallback ? 'star' : 'like';
+	return 'like';
 }
 
 export async function toDbReaction(reaction?: string | null): Promise<string> {
