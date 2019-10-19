@@ -89,6 +89,7 @@ module.exports = {
 				loader: 'ts-loader',
 				options: {
 					happyPackMode: true,
+					transpileOnly: true,
 					configFile: __dirname + '/src/client/tsconfig.json',
 					appendTsSuffixTo: [/\.vue$/]
 				}
