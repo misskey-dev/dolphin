@@ -213,7 +213,7 @@ export default Vue.extend({
 	}
 
 	> span {
-		font-size: 1.1em;
+		font-size: 0.9em;
 		line-height: 32px;
 	}
 }
