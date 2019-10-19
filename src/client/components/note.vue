@@ -61,6 +61,9 @@
 				<button v-if="['public', 'home'].includes(appearNote.visibility)" @click="renote()" title="Renote" class="button">
 					<fa :icon="faRetweet"/><p class="count" v-if="appearNote.renoteCount > 0">{{ appearNote.renoteCount }}</p>
 				</button>
+				<button v-if="['public', 'home'].includes(appearNote.visibility)" @click="quote()" title="Quote" class="button">
+					<fa :icon="faQuoteRight"/>
+				</button>
 				<button v-else class="button">
 					<fa :icon="faBan"/>
 				</button>
@@ -84,7 +87,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../i18n';
-import { faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight } from '@fortawesome/free-solid-svg-icons';
 
 import XSub from './note.sub.vue';
 import XNoteHeader from './note-header.vue';
@@ -124,7 +127,7 @@ export default Vue.extend({
 		return {
 			conversation: [],
 			replies: [],
-			faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH
+			faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight
 		};
 	},
 
