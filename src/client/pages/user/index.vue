@@ -154,11 +154,16 @@ export default Vue.extend({
 		
 				> .menu {
 					vertical-align: bottom;
-					height: 32px;
-					padding: 0 14px;
+					height: 31px;
+					width: 31px;
 					color: #fff;
 					text-shadow: 0 0 8px #000;
 					font-size: 16px;
+				}
+
+				> .follow {
+					margin-left: 4px;
+					vertical-align: bottom;
 				}
 			}
 

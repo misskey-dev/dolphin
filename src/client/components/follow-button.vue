@@ -116,11 +116,10 @@ export default Vue.extend({
 	outline: none;
 	border: solid 1px $primary;
 	padding: 0;
-	width: 32px;
-	height: 32px;
+	width: 31px;
+	height: 31px;
 	font-size: 16px;
 	border-radius: 100%;
-	line-height: 32px;
 	background: #fff;
 
 	&:focus {
@@ -146,17 +145,17 @@ export default Vue.extend({
 	}
 
 	&.active {
-		color: var(--primaryForeground);
+		color: #fff;
 		background: $primary;
 
 		&:hover {
-			background: var(--primaryLighten10);
-			border-color: var(--primaryLighten10);
+			background: lighten($primary, 10%);
+			border-color: lighten($primary, 10%);
 		}
 
 		&:active {
-			background: var(--primaryDarken10);
-			border-color: var(--primaryDarken10);
+			background: darken($primary, 10%);
+			border-color: darken($primary, 10%);
 		}
 	}
 

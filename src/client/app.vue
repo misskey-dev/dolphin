@@ -141,6 +141,10 @@ export default Vue.extend({
 			background: #fff;
 			color: $text;
 
+			&:hover {
+				background: #eee;
+			}
+
 			> i {
 				position: absolute;
 				top: 0;
