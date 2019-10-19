@@ -5,17 +5,22 @@
 	</main>
 	<transition name="zoom-in-bottom">
 		<nav v-if="navOpen">
-			<router-link to="/settings">{{ $t('settings') }}</router-link>
+			<router-link to="/i"><fa :icon="faUser" fixed-width/>{{ $t('profile') }}</router-link>
+			<router-link to="/notifications"><fa :icon="faBell" fixed-width/>{{ $t('notifications') }}</router-link>
+			<button @click="search()" class="_buttonPlain"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
+			<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
+			<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
 		</nav>
 	</transition>
-	<button v-if="$store.getters.isSignedIn" class="button nav" @click="navOpen = !navOpen"><fa :icon="faBars"/></button>
+	<button v-if="$store.getters.isSignedIn" class="button nav" @click="navOpen = !navOpen"><fa :icon="navOpen ? faTimes : faBars"/></button>
 	<button v-if="$store.getters.isSignedIn" class="button post" @click="post()"><fa :icon="faPencilAlt"/></button>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPencilAlt, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
 
@@ -26,7 +31,7 @@ export default Vue.extend({
 		return {
 			searching: false,
 			navOpen: false,
-			faPencilAlt, faBars
+			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser
 		};
 	},
 
@@ -84,6 +89,7 @@ export default Vue.extend({
 			box-sizing: border-box;
 			white-space: nowrap;
 			color: $text;
+			text-align: left;
 
 			&:hover {
 				color: #fff;
@@ -98,6 +104,7 @@ export default Vue.extend({
 
 			> [data-icon] {
 				margin-right: 4px;
+				width: 20px;
 			}
 		}
 	}
