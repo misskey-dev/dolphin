@@ -7,10 +7,11 @@
 		<nav v-if="navOpen">
 			<router-link to="/"><fa :icon="faHome" fixed-width/>{{ $t('timeline') }}</router-link>
 			<router-link :to="`/@${ $store.state.i.username }`"><fa :icon="faUser" fixed-width/>{{ $t('profile') }}</router-link>
-			<button class="_buttonPlain" @click="() => { notificationsOpen = true; navOpen = false; }"><fa :icon="faBell" fixed-width/>{{ $t('notifications') }}</button>
-			<button class="_buttonPlain" @click="search()"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
 			<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
 			<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
+			<div></div>
+			<button class="_buttonPlain" @click="() => { notificationsOpen = true; navOpen = false; }"><fa :icon="faBell" fixed-width/>{{ $t('notifications') }}</button>
+			<button class="_buttonPlain" @click="search()"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
 		</nav>
 	</transition>
 	<transition name="zoom-in-bottom">
@@ -142,7 +143,14 @@ export default Vue.extend({
 			left: 16px;
 		}
 
-		> * {
+		> div {
+			height: 1px;
+			width: 100%;
+			margin: 8px 0;
+			background: rgba(0, 0, 0, 0.1);
+		}
+
+		> *:not(div) {
 			display: block;
 			padding: 8px 22px 8px 16px;
 			width: 100%;
