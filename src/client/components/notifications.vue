@@ -111,6 +111,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .dp-notifications {
 	background: rgba(255, 255, 255, 0.5);
+	-webkit-backdrop-filter: blur(12px);
 	backdrop-filter: blur(12px);
 	border-radius: 6px;
 	box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);

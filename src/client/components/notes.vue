@@ -86,6 +86,7 @@ export default Vue.extend({
 		text-align: center;
 		background: rgba(0, 0, 0, 0.3);
 		color: #fff;
+		-webkit-backdrop-filter: blur(16px);
 		backdrop-filter: blur(16px);
 		border-radius: 6px;
 	}

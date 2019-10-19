@@ -12,7 +12,7 @@
 			<template #prefix><fa :icon="faLock"/></template>
 		</ui-input>
 		<footer>
-			<ui-button primary type="submit" :disabled="signing">{{ signing ? $t('signing-in') : $t('@.signin') }}</ui-button>
+			<ui-button primary type="submit" :disabled="signing">{{ signing ? $t('loginWaiting') : $t('login') }}</ui-button>
 		</footer>
 	</div>
 </form>
@@ -26,7 +26,7 @@ import { apiUrl, host } from '../config';
 import { toUnicode } from 'punycode';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/signin.vue'),
+	i18n: i18n(),
 
 	props: {
 		withAvatar: {

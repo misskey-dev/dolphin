@@ -147,6 +147,7 @@ export default Vue.extend({
 				position: absolute;
 				top: 12px;
 				right: 12px;
+				-webkit-backdrop-filter: blur(8px);
 				backdrop-filter: blur(8px);
 				background: rgba(0, 0, 0, 0.2);
 				padding: 8px;
@@ -226,6 +227,7 @@ export default Vue.extend({
 			padding: 24px;
 			background: rgba(0, 0, 0, 0.3);
 			color: #fff;
+			-webkit-backdrop-filter: blur(16px);
 			backdrop-filter: blur(16px);
 			font-size: 14px;
 		
