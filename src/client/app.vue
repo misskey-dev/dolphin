@@ -73,6 +73,13 @@ export default Vue.extend({
 @import './theme';
 
 .dp-app {
+	> main {
+		max-width: 650px;
+		margin: 0 auto;
+		padding: 32px;
+		box-sizing: border-box;
+	}
+
 	> nav {
 		position: absolute;
 		bottom: 96px + 16px;

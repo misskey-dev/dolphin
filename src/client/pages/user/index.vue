@@ -102,8 +102,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .dp-user-page {
-	padding: 32px;
-
 	> .profile {
 		position: relative;
 		margin-bottom: 16px;

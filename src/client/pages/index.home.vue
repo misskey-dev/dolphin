@@ -14,14 +14,3 @@ export default Vue.extend({
 	}
 });
 </script>
-
-<style lang="scss" scoped>
-.dp-home {
-	padding: 32px;
-
-	> * {
-		max-width: 600px;
-		margin: 0 auto;
-	}
-}
-</style>

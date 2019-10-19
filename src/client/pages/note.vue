@@ -1,6 +1,6 @@
 <template>
 <div class="dp-note-page">
-	<x-note :note="note" :key="note.id"/>
+	<x-note :note="note" :key="note.id" :detail="true"/>
 </div>
 </template>
 
