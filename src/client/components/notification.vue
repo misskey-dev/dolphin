@@ -49,6 +49,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .dp-notification {
+	position: relative;
 	height: 64px;
 	box-sizing: border-box;
 	padding: 14px;

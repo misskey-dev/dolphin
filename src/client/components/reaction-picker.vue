@@ -3,7 +3,7 @@
 	<div class="backdrop" ref="backdrop" @click="close"></div>
 	<div class="popover" ref="popover">
 		<div class="buttons" ref="buttons" :class="{ showFocus }">
-			<button v-for="(reaction, i) in $store.state.settings.reactions" :key="reaction" @click="react(reaction)" @mouseover="onMouseover" @mouseout="onMouseout" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction"><dp-reaction-icon :reaction="reaction"/></button>
+			<button class="_buttonPlain" v-for="(reaction, i) in $store.state.settings.reactions" :key="reaction" @click="react(reaction)" @mouseover="onMouseover" @mouseout="onMouseout" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction"><x-reaction-icon :reaction="reaction"/></button>
 		</div>
 		<div class="text">
 			<input v-model="text" :placeholder="$t('input-reaction-placeholder')" @keyup.enter="reactText" @input="tryReactText" v-autocomplete="{ model: 'text' }">
@@ -17,9 +17,13 @@ import Vue from 'vue';
 import i18n from '../i18n';
 import anime from 'animejs';
 import { emojiRegex } from '../../misc/emoji-regex';
+import XReactionIcon from './reaction-icon.vue';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/reaction-picker.vue'),
+	components: {
+		XReactionIcon
+	},
 	props: {
 		note: {
 			type: Object,
@@ -216,12 +220,12 @@ export default Vue.extend({
 		z-index: 10000;
 		width: 100%;
 		height: 100%;
-		background: var(--modalBackdrop);
+		background: rgba(0, 0, 0, 0.3);
 		opacity: 0;
 	}
 
 	> .popover {
-		$bgcolor: var(--popupBg);
+		$bgcolor: #fff;
 		position: absolute;
 		z-index: 10001;
 		background: $bgcolor;
@@ -244,6 +248,7 @@ export default Vue.extend({
 		> .buttons {
 			padding: 4px 4px 8px 4px;
 			width: 216px;
+			box-sizing: border-box;
 			text-align: center;
 
 			&.showFocus {
@@ -258,7 +263,7 @@ export default Vue.extend({
 						right: 0;
 						bottom: 0;
 						left: 0;
-						border: 2px solid var(--primaryAlpha03);
+						border: 2px solid rgba($primary, 0.3);
 						border-radius: 4px;
 					}
 				}
@@ -276,7 +281,7 @@ export default Vue.extend({
 				}
 
 				&:hover {
-					background: var(--reactionPickerButtonHoverBg);
+					background: rgba(0, 0, 0, 0.05);
 				}
 
 				&:active {
@@ -289,6 +294,7 @@ export default Vue.extend({
 		> .text {
 			width: 216px;
 			padding: 0 8px 8px 8px;
+			box-sizing: border-box;
 
 			> input {
 				width: 100%;
