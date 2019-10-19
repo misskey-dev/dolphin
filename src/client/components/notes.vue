@@ -4,9 +4,9 @@
 
 	<dp-error v-if="error" @retry="init()"/>
 
-	<sequential-entrance animation="entranceFromTop" delay="25" class="notes">
+	<sequential-entrance class="notes">
 		<template v-for="(note, i) in _notes">
-			<x-note :note="note" :key="note.id"/>
+			<x-note :note="note" :key="note.id" :data-index="i"/>
 			<x-date-separator class="date" :key="note.id + '_date'" v-if="i != items.length - 1 && note._date != _notes[i + 1]._date" :newer="note.createdAt" :older="_notes[i + 1].createdAt"/>
 		</template>
 	</sequential-entrance>

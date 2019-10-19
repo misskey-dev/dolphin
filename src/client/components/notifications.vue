@@ -1,9 +1,9 @@
 <template>
 <div class="dp-notifications">
 	<div class="contents">
-		<sequential-entrance animation="entranceFromTop" delay="25" class="notifications">
+		<sequential-entrance class="notifications">
 			<template v-for="(notification, i) in _notifications">
-				<x-notification :notification="notification" :key="notification.id" :with-time="true" class="notification"/>
+				<x-notification :notification="notification" :key="notification.id" :with-time="true" class="notification" :data-index="i"/>
 				<x-date-separator class="date" :key="notification.id + '_date'" v-if="i != items.length - 1 && notification._date != _notifications[i + 1]._date" :newer="notification.createdAt" :older="_notifications[i + 1].createdAt"/>
 			</template>
 		</sequential-entrance>

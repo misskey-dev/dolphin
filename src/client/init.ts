@@ -19,7 +19,6 @@ import PostFormDialog from './components/post-form-dialog.vue';
 import Dialog from './components/dialog.vue';
 import DpIndex from './pages/index.vue';
 import i18n from './i18n';
-import SequentialEntrance from './components/sequential-entrance';
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
@@ -28,7 +27,6 @@ Vue.use(VModal);
 Vue.use(VueHotkey);
 Vue.use(VueSize);
 Vue.use(VueI18n);
-Vue.component('sequential-entrance', SequentialEntrance);
 Vue.component('fa', FontAwesomeIcon);
 
 // Register global directives

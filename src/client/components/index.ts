@@ -13,6 +13,7 @@ import urlPreview from './url-preview.vue';
 import uiContainer from './ui-container.vue';
 import uiInput from './ui/input.vue';
 import uiButton from './ui/button.vue';
+import SequentialEntrance from './sequential-entrance.vue';
 
 Vue.component('mfm', mfm);
 Vue.component('dp-acct', acct);
@@ -27,3 +28,4 @@ Vue.component('dp-url-preview', urlPreview);
 Vue.component('ui-container', uiContainer);
 Vue.component('ui-input', uiInput);
 Vue.component('ui-button', uiButton);
+Vue.component('sequential-entrance', SequentialEntrance);
