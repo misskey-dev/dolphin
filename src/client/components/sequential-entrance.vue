@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
-const delay = 50;
+const delay = 40;
 
 export default Vue.extend({
 	methods: {
@@ -23,18 +23,18 @@ export default Vue.extend({
 			el.style.transform = 'translateY(-64px)';
 		},
 		enter(el, done) {
-			el.style.transition = 'transform 1s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1)';
+			el.style.transition = 'transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1)';
 			setTimeout(() => {
 				el.style.opacity = 1;
 				el.style.transform = 'translateY(0px)';
-				setTimeout(done, 1000);
+				setTimeout(done, 700);
 			}, delay * el.dataset.index)
 		},
 		leave(el, done) {
 			setTimeout(() => {
 				el.style.opacity = 0;
 				el.style.transform = 'translateY(64px)';
-				setTimeout(done, 1000);
+				setTimeout(done, 700);
 			}, delay * el.dataset.index)
 		}
 	}
@@ -43,6 +43,6 @@ export default Vue.extend({
 
 <style lang="scss">
 .staggered-fade-move {
-	transition: transform 1s;
+	transition: transform 0.7s;
 }
 </style>
