@@ -200,22 +200,21 @@ export default Vue.extend({
 		background: $primary;
 
 		> span {
-			color: var(--primaryForeground);
+			color: #fff;
 		}
 	}
 
 	&:not(.reacted) {
-		background: var(--reactionViewerButtonBg);
+		background: rgba(0, 0, 0, 0.05);
 
 		&:hover {
-			background: var(--reactionViewerButtonHoverBg);
+			background: rgba(0, 0, 0, 0.1);
 		}
 	}
 
 	> span {
 		font-size: 1.1em;
 		line-height: 32px;
-		color: var(--text);
 	}
 }
 </style>

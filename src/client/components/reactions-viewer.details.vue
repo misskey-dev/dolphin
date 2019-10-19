@@ -87,11 +87,10 @@ export default Vue.extend({
 	max-width: 240px;
 	font-size: 0.8em;
 	padding: 6px 8px;
-	background: var(--popupBg);
+	background: #fff;
 	text-align: center;
-	color: var(--text);
 	border-radius: 4px;
-	box-shadow: 0 var(--lineWidth) 4px rgba(0,0,0,0.25);
+	box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 	pointer-events: none;
 	transform-origin: center -16px;
 
@@ -117,7 +116,7 @@ export default Vue.extend({
 		left: 12px;
 		border-top: solid 14px transparent;
 		border-right: solid 14px transparent;
-		border-bottom: solid 14px var(--popupBg);
+		border-bottom: solid 14px #fff;
 		border-left: solid 14px transparent;
 	}
 }

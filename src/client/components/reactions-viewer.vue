@@ -42,10 +42,6 @@ export default Vue.extend({
 	&.isMe {
 		> span {
 			cursor: default !important;
-
-			&:hover {
-				background: var(--reactionViewerButtonBg) !important;
-			}
 		}
 	}
 }
