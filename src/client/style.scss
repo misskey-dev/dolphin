@@ -135,6 +135,7 @@ a {
 	background: none;
 	border: none;
 	cursor: pointer;
+	touch-action: manipulation;
 	font-size: 1em;
 
 	&:focus {
@@ -147,6 +148,7 @@ a {
 	padding: 0;
 	border: none;
 	cursor: pointer;
+	touch-action: manipulation;
 	color: #fff;
 	background: $primary;
 	font-size: 1em;
