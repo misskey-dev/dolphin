@@ -5,7 +5,7 @@
 		<x-signin v-else/>
 		<div class="powerd-by">
 			<span>Powerd by</span>
-			<img svg-inline src="../../../assets/dolphin-transparent.svg" alt="Dolphin" class="logo">
+			<x-logo class="logo"/>
 		</div>
 	</div>
 </div>
@@ -15,11 +15,13 @@
 import Vue from 'vue';
 import XSetup from './index.welcome.setup.vue';
 import XSignin from './index.welcome.signin.vue';
+import XLogo from '../components/logo.vue';
 
 export default Vue.extend({
 	components: {
 		XSetup,
-		XSignin
+		XSignin,
+		XLogo,
 	},
 
 	data() {

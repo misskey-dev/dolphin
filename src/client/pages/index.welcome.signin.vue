@@ -1,5 +1,5 @@
 <template>
-<form class="dp-signin" :class="{ signing, totpLogin }" @submit.prevent="onSubmit">
+<form class="dp-signin" :class="{ signing }" @submit.prevent="onSubmit">
 	<div class="avatar" :style="{ backgroundImage: user ? `url('${ user.avatarUrl }')` : null }" v-show="withAvatar"></div>
 	<div>
 		<ui-input v-model="username" type="text" pattern="^[a-zA-Z0-9_]+$" spellcheck="false" autofocus required @input="onUsernameChange">
