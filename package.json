@@ -30,7 +30,6 @@
 		"lodash": "^4.17.13"
 	},
 	"dependencies": {
-		"@elastic/elasticsearch": "7.4.0",
 		"@fortawesome/fontawesome-svg-core": "1.2.25",
 		"@fortawesome/free-brands-svg-icons": "5.11.2",
 		"@fortawesome/free-regular-svg-icons": "5.11.2",

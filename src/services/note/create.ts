@@ -1,4 +1,3 @@
-import es from '../../db/elasticsearch';
 import { publishMainStream, publishNotesStream } from '../stream';
 import { deliver } from '../../queue';
 import renderNote from '../../remote/activitypub/renderer/note';
@@ -244,9 +243,6 @@ export default async (user: User, data: Option, silent = false) => new Promise<N
 
 		publish(user, note, data.reply, data.renote, noteActivity);
 	}
-
-	// Register to search database
-	index(note);
 });
 
 async function renderNoteOrRenoteActivity(data: Option, note: Note) {
@@ -366,20 +362,6 @@ async function insertNote(user: User, data: Option, tags: string[], emojis: stri
 
 		throw new Error('something happened');
 	}
-}
-
-function index(note: Note) {
-	if (note.text == null || config.elasticsearch == null) return;
-
-	es!.index({
-		index: config.elasticsearch.index || 'dolphin_note',
-		id: note.id.toString(),
-		body: {
-			text: note.text.toLowerCase(),
-			userId: note.userId,
-			userHost: note.userHost
-		}
-	});
 }
 
 async function publishToFollowers(note: Note, user: User, noteActivity: any) {

@@ -24,12 +24,6 @@ export type Source = {
 		db?: number;
 		prefix?: string;
 	};
-	elasticsearch: {
-		host: string;
-		port: number;
-		pass: string;
-		index?: string;
-	};
 	drive: {
 		storage: string;
 		bucket?: string;

@@ -29,8 +29,6 @@ adduser --disabled-password --disabled-login dolphin
 ##### オプション
 * [Yarn](https://yarnpkg.com/)
 	* セキュリティの観点から推奨されます。 yarn をインストールしない方針の場合は、文章中の `yarn` を適宜 `npx yarn` と読み替えてください。
-* [Elasticsearch](https://www.elastic.co/)
-	* 検索機能を有効にするためにはインストールが必要です。
 * [FFmpeg](https://www.ffmpeg.org/)
 
 *3.* Dolphinのインストール

@@ -28,7 +28,6 @@ Please install and setup these softwares:
 
 ##### Optional
 * [Yarn](https://yarnpkg.com/) *Optional but recommended for security reason. If you won't install it, use `npx yarn` instead of `yarn`.*
-* [Elasticsearch](https://www.elastic.co/) - required to enable the search feature
 * [FFmpeg](https://www.ffmpeg.org/)
 
 *3.* Install Dolphin

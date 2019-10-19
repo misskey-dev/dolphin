@@ -3,13 +3,19 @@
 	<main>
 		<router-view v-hotkey.global="keymap"></router-view>
 	</main>
+	<transition name="zoom-in-bottom">
+		<nav v-if="navOpen">
+			<router-link to="/settings">{{ $t('settings') }}</router-link>
+		</nav>
+	</transition>
+	<button v-if="$store.getters.isSignedIn" class="button nav" @click="navOpen = !navOpen"><fa :icon="faBars"/></button>
 	<button v-if="$store.getters.isSignedIn" class="button post" @click="post()"><fa :icon="faPencilAlt"/></button>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faBars } from '@fortawesome/free-solid-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
 
@@ -19,7 +25,8 @@ export default Vue.extend({
 	data() {
 		return {
 			searching: false,
-			faPencilAlt
+			navOpen: false,
+			faPencilAlt, faBars
 		};
 	},
 
@@ -60,10 +67,45 @@ export default Vue.extend({
 @import './theme';
 
 .dp-app {
+	> nav {
+		position: absolute;
+		bottom: 96px + 16px;
+		left: 32px;
+		z-index: 10001;
+		padding: 8px 0;
+		background: #fff;
+		border-radius: 4px;
+		box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+
+		> * {
+			display: block;
+			padding: 8px 16px;
+			width: 100%;
+			box-sizing: border-box;
+			white-space: nowrap;
+			color: $text;
+
+			&:hover {
+				color: #fff;
+				background: $primary;
+				text-decoration: none;
+			}
+
+			&:active {
+				color: #fff;
+				background: darken($primary, 10);
+			}
+
+			> [data-icon] {
+				margin-right: 4px;
+			}
+		}
+	}
+
 	> .button {
 		position: fixed;
 		z-index: 1000;
-		bottom: 28px;
+		bottom: 32px;
 		padding: 0;
 		width: 64px;
 		height: 64px;
@@ -76,9 +118,9 @@ export default Vue.extend({
 		}
 
 		&.nav {
-			left: 28px;
-			background: var(--secondary);
-			color: var(--text);
+			left: 32px;
+			background: #fff;
+			color: $text;
 
 			> i {
 				position: absolute;
@@ -91,7 +133,7 @@ export default Vue.extend({
 		}
 
 		&.post {
-			right: 28px;
+			right: 32px;
 			background: $primary;
 			color: #fff;
 		}

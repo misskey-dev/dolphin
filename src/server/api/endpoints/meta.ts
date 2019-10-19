@@ -136,7 +136,7 @@ export default define(meta, async (ps, me) => {
 
 	if (ps.detail) {
 		response.features = {
-			elasticsearch: config.elasticsearch ? true : false,
+			elasticsearch: false,
 			recaptcha: instance.enableRecaptcha,
 			objectStorage: config.drive.storage !== 'fs',
 			serviceWorker: instance.enableServiceWorker,

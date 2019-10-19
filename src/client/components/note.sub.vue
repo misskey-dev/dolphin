@@ -56,7 +56,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .zlrxdaqttccpwhpaagdmkawtzklsccam {
 	display: flex;
-	padding: 16px;
+	padding: 16px 32px;
 	font-size: 0.9em;
 	background: rgba(0, 0, 0, 0.03);
 
