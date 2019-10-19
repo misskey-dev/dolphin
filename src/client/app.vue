@@ -115,6 +115,7 @@ export default Vue.extend({
 .dp-app {
 	> main {
 		max-width: 650px;
+		min-height: 100vh;
 		margin: 0 auto;
 		padding: 32px;
 		box-sizing: border-box;

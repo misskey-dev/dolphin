@@ -23,7 +23,6 @@ const defaultDeviceSettings = {
 	lang: null,
 	loadRawImages: false,
 	alwaysShowNsfw: false,
-	mobileNotificationPosition: 'top',
 	useOsDefaultEmojis: false,
 };
 
