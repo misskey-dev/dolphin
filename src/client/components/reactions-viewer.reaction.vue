@@ -8,7 +8,7 @@
 	@mouseleave="onMouseleave"
 	ref="reaction"
 >
-	<dp-reaction-icon :reaction="reaction" ref="icon"/>
+	<x-reaction-icon :reaction="reaction" ref="icon"/>
 	<span>{{ count }}</span>
 </span>
 </template>
@@ -18,8 +18,12 @@ import Vue from 'vue';
 import Icon from './reaction-icon.vue';
 import anime from 'animejs';
 import XDetails from './reactions-viewer.details.vue';
+import XReactionIcon from './reaction-icon.vue';
 
 export default Vue.extend({
+	components: {
+		XReactionIcon
+	},
 	props: {
 		reaction: {
 			type: String,

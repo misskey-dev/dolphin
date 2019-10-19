@@ -57,16 +57,16 @@ export default Vue.extend({
 	margin: 0 auto;
 	padding: 8px 8px 16px 8px;
 	pointer-events: none;
-	font-size: 80%;
 	bottom: -($height);
 
 	> .notification {
 		height: 100%;
-		-webkit-backdrop-filter: blur(8px);
-		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(12px);
+		backdrop-filter: blur(12px);
 		background-color: rgba(255, 255, 255, 0.5);
 		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 		border-radius: 8px;
+		color: #0c0c0c;
 		overflow: hidden;
 	}
 }

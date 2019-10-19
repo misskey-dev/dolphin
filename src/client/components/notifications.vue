@@ -1,30 +1,22 @@
 <template>
 <div class="dp-notifications">
-	<div class="placeholder" v-if="fetching">
-		<template v-for="i in 10">
-			<dp-note-skeleton :key="i"/>
-		</template>
+	<div class="contents">
+		<sequential-entrance animation="entranceFromTop" delay="25" class="notifications">
+			<template v-for="(notification, i) in _notifications">
+				<x-notification :notification="notification" :key="notification.id" :with-time="true" class="notification"/>
+				<x-date-separator class="date" :key="notification.id + '_date'" v-if="i != items.length - 1 && notification._date != _notifications[i + 1]._date" :newer="notification.createdAt" :older="_notifications[i + 1].createdAt"/>
+			</template>
+		</sequential-entrance>
+
+		<button class="more" v-if="more" @click="fetchMore" :disabled="moreFetching">
+			<template v-if="moreFetching"><fa icon="spinner" pulse fixed-width/></template>
+			{{ moreFetching ? $t('@.loading') : $t('@.load-more') }}
+		</button>
+
+		<p class="empty" v-if="empty">{{ $t('empty') }}</p>
+
+		<dp-error v-if="error" @retry="init()"/>
 	</div>
-
-	<!-- トランジションを有効にするとなぜかメモリリークする -->
-	<component :is="!$store.state.device.reduceMotion ? 'transition-group' : 'div'" name="dp-notifications" class="transition notifications" tag="div">
-		<template v-for="(notification, i) in _notifications">
-			<dp-notification :notification="notification" :key="notification.id" :class="{ wide: wide }"/>
-			<p class="date" :key="notification.id + '_date'" v-if="i != items.length - 1 && notification._date != _notifications[i + 1]._date">
-				<span><fa icon="angle-up"/>{{ notification._datetext }}</span>
-				<span><fa icon="angle-down"/>{{ _notifications[i + 1]._datetext }}</span>
-			</p>
-		</template>
-	</component>
-
-	<button class="more" v-if="more" @click="fetchMore" :disabled="moreFetching">
-		<template v-if="moreFetching"><fa icon="spinner" pulse fixed-width/></template>
-		{{ moreFetching ? $t('@.loading') : $t('@.load-more') }}
-	</button>
-
-	<p class="empty" v-if="empty">{{ $t('empty') }}</p>
-
-	<dp-error v-if="error" @retry="init()"/>
 </div>
 </template>
 
@@ -32,9 +24,14 @@
 import Vue from 'vue';
 import i18n from '../i18n';
 import paging from '../scripts/paging';
+import XNotification from './notification.vue';
 
 export default Vue.extend({
 	i18n: i18n('mobile/views/components/notifications.vue'),
+
+	components: {
+		XNotification
+	},
 
 	mixins: [
 		paging({
@@ -78,7 +75,6 @@ export default Vue.extend({
 				const date = new Date(notification.createdAt).getDate();
 				const month = new Date(notification.createdAt).getMonth() + 1;
 				notification._date = date;
-				notification._datetext = this.$t('@.month-and-day').replace('{month}', month.toString()).replace('{day}', date.toString());
 				return notification;
 			});
 		}
@@ -113,55 +109,49 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-notifications
-	.transition
-		.dp-notifications-enter
-		.dp-notifications-leave-to
-			opacity 0
-			transform translateY(-30px)
+.dp-notifications {
+	background: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(12px);
+	border-radius: 6px;
+	box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+	overflow: hidden;
 
-		> *
-			transition transform .3s ease, opacity .3s ease
+	> .contents {
+		overflow: auto;
+		height: 100%;
 
-	> .notifications
+		> .notifications {
+			> .notification {
+				margin: 8px;
+				background: #fff;
+				border-radius: 6px;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+			}
+		}
 
-		> .dp-notification:not(:last-child)
-			border-bottom solid var(--lineWidth) var(--faceDivider)
+		> .more {
+			display: block;
+			width: 100%;
+			padding: 16px;
+			color: var(--text);
+			border-top: solid var(--lineWidth) rgba(#000, 0.05);
 
-		> .date
-			display block
-			margin 0
-			line-height 32px
-			text-align center
-			font-size 0.8em
-			color var(--dateDividerFg)
-			background var(--dateDividerBg)
-			border-bottom solid var(--lineWidth) var(--faceDivider)
+			> [data-icon] {
+				margin-right: 4px;
+			}
+		}
 
-			span
-				margin 0 16px
+		> .empty {
+			margin: 0;
+			padding: 16px;
+			text-align: center;
+			color: var(--text);
+		}
 
-			[data-icon]
-				margin-right 8px
-
-	> .more
-		display block
-		width 100%
-		padding 16px
-		color var(--text)
-		border-top solid var(--lineWidth) rgba(#000, 0.05)
-
-		> [data-icon]
-			margin-right 4px
-
-	> .empty
-		margin 0
-		padding 16px
-		text-align center
-		color var(--text)
-
-	> .placeholder
-		padding 32px
-		opacity 0.3
-
+		> .placeholder {
+			padding: 32px;
+			opacity: 0.3;
+		}
+	}
+}
 </style>

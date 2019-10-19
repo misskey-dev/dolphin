@@ -7,13 +7,16 @@
 		<nav v-if="navOpen">
 			<router-link to="/"><fa :icon="faHome" fixed-width/>{{ $t('timeline') }}</router-link>
 			<router-link :to="`/@${ $store.state.i.username }`"><fa :icon="faUser" fixed-width/>{{ $t('profile') }}</router-link>
-			<router-link to="/notifications"><fa :icon="faBell" fixed-width/>{{ $t('notifications') }}</router-link>
-			<button @click="search()" class="_buttonPlain"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
+			<button class="_buttonPlain" @click="() => { notificationsOpen = true; navOpen = false; }"><fa :icon="faBell" fixed-width/>{{ $t('notifications') }}</button>
+			<button class="_buttonPlain" @click="search()"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
 			<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
 			<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
 		</nav>
 	</transition>
-	<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="navOpen = !navOpen"><fa :icon="navOpen ? faTimes : faBars"/></button>
+	<transition name="zoom-in-bottom">
+		<x-notifications v-if="notificationsOpen" class="notifications"/>
+	</transition>
+	<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="navClick()"><fa :icon="navOpen || notificationsOpen ? faTimes : faBars"/></button>
 	<button v-if="$store.getters.isSignedIn" class="button post _buttonPrimary" @click="post()"><fa :icon="faPencilAlt"/></button>
 </div>
 </template>
@@ -25,14 +28,20 @@ import { faBell } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
 import DpToast from './components/toast.vue';
+import XNotifications from './components/notifications.vue';
 
 export default Vue.extend({
 	i18n: i18n(),
+
+	components: {
+		XNotifications
+	},
 
 	data() {
 		return {
 			searching: false,
 			navOpen: false,
+			notificationsOpen: false,
 			connection: null,
 			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome
 		};
@@ -85,6 +94,16 @@ export default Vue.extend({
 				notification
 			});
 		},
+
+		navClick() {
+			if (this.notificationsOpen) {
+				this.notificationsOpen = false;
+			} else if (this.navOpen) {
+				this.navOpen = false;
+			} else {
+				this.navOpen = true;
+			}
+		}
 	}
 });
 </script>
@@ -118,6 +137,11 @@ export default Vue.extend({
 		border-radius: 4px;
 		box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
 
+		@media (max-width: 500px) {
+			bottom: 92px;
+			left: 16px;
+		}
+
 		> * {
 			display: block;
 			padding: 8px 22px 8px 16px;
@@ -143,6 +167,20 @@ export default Vue.extend({
 				margin-right: 4px;
 				width: 20px;
 			}
+		}
+	}
+
+	> .notifications {
+		position: absolute;
+		bottom: 96px + 16px;
+		left: 32px;
+		z-index: 10001;
+		width: 280px;
+		height: 300px;
+
+		@media (max-width: 500px) {
+			bottom: 92px;
+			left: 16px;
 		}
 	}
 
