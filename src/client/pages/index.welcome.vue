@@ -46,6 +46,13 @@ export default Vue.extend({
 		margin: 0 auto;
 		transform: translateY(-50%);
 		text-align: center;
+		max-width: calc(100% - 16px);
+
+		@media (max-height: 500px) {
+			position: relative;
+			transform: none;
+			max-width: 100%;
+		}
 
 		> *:first-child {
 			display: inline-block;
