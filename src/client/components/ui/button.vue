@@ -121,11 +121,11 @@ export default Vue.extend({
 	cursor: pointer;
 
 	&:not(:disabled):hover {
-		background: var(--buttonHoverBg);
+		background: lighten(#e0e9ec, 3%);
 	}
 
 	&:not(:disabled):active {
-		background: var(--buttonActiveBg);
+		background: lighten(#e0e9ec, 3%);
 	}
 
 	&.primary {
@@ -137,7 +137,7 @@ export default Vue.extend({
 		}
 
 		&:not(:disabled):active {
-			background: darken($primary, 5%);
+			background: lighten($primary, 5%);
 		}
 	}
 
@@ -196,7 +196,7 @@ export default Vue.extend({
 			background: rgba(0, 0, 0, 0.1);
 			opacity: 1;
 			transform: scale(1);
-			transition: all 0.5s cubic-bezier(0, .5, .5, 1);
+			transition: all 0.5s cubic-bezier(0,.5,0,1);
 		}
 	}
 
