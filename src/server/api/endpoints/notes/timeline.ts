@@ -1,11 +1,12 @@
 import $ from 'cafy';
+import { Brackets } from 'typeorm';
 import { ID } from '../../../../misc/cafy-id';
 import define from '../../define';
 import { makePaginationQuery } from '../../common/make-pagination-query';
 import { Notes, Followings } from '../../../../models';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query';
 import { activeUsersChart } from '../../../../services/chart';
-import { Brackets } from 'typeorm';
+import { generateMuteQuery } from '../../common/generate-mute-query';
 
 export const meta = {
 	desc: {
@@ -113,6 +114,7 @@ export default define(meta, async (ps, user) => {
 		.setParameters(followingQuery.getParameters());
 
 	generateVisibilityQuery(query, user);
+	generateMuteQuery(query, user);
 
 	if (ps.includeMyRenotes === false) {
 		query.andWhere(new Brackets(qb => {

@@ -1,8 +1,8 @@
 import { publishMainStream } from '../../../services/stream';
 import { User } from '../../../models/entities/user';
 import { Notification } from '../../../models/entities/notification';
-import { Notifications } from '../../../models';
-import { In } from 'typeorm';
+import { Notifications, Mutings } from '../../../models';
+import { In, Not } from 'typeorm';
 
 /**
  * Mark notifications as read
@@ -11,6 +11,11 @@ export async function readNotification(
 	userId: User['id'],
 	notificationIds: Notification['id'][]
 ) {
+	const mute = await Mutings.find({
+		muterId: userId
+	});
+	const mutedUserIds = mute.map(m => m.muteeId);
+
 	// Update documents
 	await Notifications.update({
 		id: In(notificationIds),
@@ -22,6 +27,7 @@ export async function readNotification(
 	// Calc count of my unread notifications
 	const count = await Notifications.count({
 		notifieeId: userId,
+		...(mutedUserIds.length > 0 ? { notifierId: Not(In(mutedUserIds)) } : {}),
 		isRead: false
 	});
 

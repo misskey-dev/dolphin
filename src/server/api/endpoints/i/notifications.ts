@@ -3,7 +3,7 @@ import { ID } from '../../../../misc/cafy-id';
 import { readNotification } from '../../common/read-notification';
 import define from '../../define';
 import { makePaginationQuery } from '../../common/make-pagination-query';
-import { Notifications, Followings } from '../../../../models';
+import { Notifications, Followings, Mutings } from '../../../../models';
 
 export const meta = {
 	desc: {
@@ -68,9 +68,16 @@ export default define(meta, async (ps, user) => {
 		.select('following.followeeId')
 		.where('following.followerId = :followerId', { followerId: user.id });
 
+	const mutingQuery = Mutings.createQueryBuilder('muting')
+		.select('muting.muteeId')
+		.where('muting.muterId = :muterId', { muterId: user.id });
+
 	const query = makePaginationQuery(Notifications.createQueryBuilder('notification'), ps.sinceId, ps.untilId)
 		.andWhere(`notification.notifieeId = :meId`, { meId: user.id })
 		.leftJoinAndSelect('notification.notifier', 'notifier');
+
+	query.andWhere(`notification.notifierId NOT IN (${ mutingQuery.getQuery() })`);
+	query.setParameters(mutingQuery.getParameters());
 
 	if (ps.following) {
 		query.andWhere(`((notification.notifierId IN (${ followingQuery.getQuery() })) OR (notification.notifierId = :meId))`, { meId: user.id });

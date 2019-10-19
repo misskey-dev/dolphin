@@ -1,7 +1,7 @@
 <template>
 <div v-if="meta" class="dp-instance-page">
 	<header>{{ $t('instance') }}</header>
-	<section>
+	<section class="_section">
 		<div class="title">{{ $t('users') }}</div>
 		<div class="content">
 			<ui-button @click="addUser()">{{ $t('addUser') }}</ui-button>
@@ -71,24 +71,6 @@ export default Vue.extend({
 		-webkit-backdrop-filter: blur(16px);
 		backdrop-filter: blur(16px);
 		border-radius: 6px;
-	}
-
-	> section {
-		overflow: hidden;
-		background: #fff;
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-		border-radius: 6px;
-
-		> .title {
-			margin: 0;
-			padding: 16px;
-			font-size: 1.2em;
-			border-bottom: solid 1px rgba(0, 0, 0, 0.1);
-		}
-
-		> .content {
-			padding: 16px;
-		}
 	}
 }
 </style>

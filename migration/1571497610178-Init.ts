@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class Init1571464718465 implements MigrationInterface {
+export class Init1571497610178 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query(`CREATE TYPE "log_level_enum" AS ENUM('error', 'warning', 'info', 'success', 'debug')`, undefined);
@@ -79,6 +79,11 @@ export class Init1571464718465 implements MigrationInterface {
         await queryRunner.query(`CREATE INDEX "IDX_2cd4a2743a99671308f5417759" ON "blocking" ("blockeeId") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_0627125f1a8a42c9a1929edb55" ON "blocking" ("blockerId") `, undefined);
         await queryRunner.query(`CREATE UNIQUE INDEX "IDX_98a1bc5cb30dfd159de056549f" ON "blocking" ("blockerId", "blockeeId") `, undefined);
+        await queryRunner.query(`CREATE TABLE "muting" ("id" character varying(32) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "muteeId" character varying(32) NOT NULL, "muterId" character varying(32) NOT NULL, CONSTRAINT "PK_2e92d06c8b5c602eeb27ca9ba48" PRIMARY KEY ("id"))`, undefined);
+        await queryRunner.query(`CREATE INDEX "IDX_f86d57fbca33c7a4e6897490cc" ON "muting" ("createdAt") `, undefined);
+        await queryRunner.query(`CREATE INDEX "IDX_ec96b4fed9dae517e0dbbe0675" ON "muting" ("muteeId") `, undefined);
+        await queryRunner.query(`CREATE INDEX "IDX_93060675b4a79a577f31d260c6" ON "muting" ("muterId") `, undefined);
+        await queryRunner.query(`CREATE UNIQUE INDEX "IDX_1eb9d9824a630321a29fd3b290" ON "muting" ("muterId", "muteeId") `, undefined);
         await queryRunner.query(`CREATE TABLE "user_list" ("id" character varying(32) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "userId" character varying(32) NOT NULL, "name" character varying(128) NOT NULL, CONSTRAINT "PK_87bab75775fd9b1ff822b656402" PRIMARY KEY ("id"))`, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_b7fcefbdd1c18dce86687531f9" ON "user_list" ("userId") `, undefined);
         await queryRunner.query(`CREATE TABLE "user_list_joining" ("id" character varying(32) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "userId" character varying(32) NOT NULL, "userListId" character varying(32) NOT NULL, CONSTRAINT "PK_11abb3768da1c5f8de101c9df45" PRIMARY KEY ("id"))`, undefined);
@@ -260,6 +265,8 @@ export class Init1571464718465 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "sw_subscription" ADD CONSTRAINT "FK_97754ca6f2baff9b4abb7f853dd" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE "blocking" ADD CONSTRAINT "FK_2cd4a2743a99671308f5417759e" FOREIGN KEY ("blockeeId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE "blocking" ADD CONSTRAINT "FK_0627125f1a8a42c9a1929edb552" FOREIGN KEY ("blockerId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE NO ACTION`, undefined);
+        await queryRunner.query(`ALTER TABLE "muting" ADD CONSTRAINT "FK_ec96b4fed9dae517e0dbbe0675c" FOREIGN KEY ("muteeId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE NO ACTION`, undefined);
+        await queryRunner.query(`ALTER TABLE "muting" ADD CONSTRAINT "FK_93060675b4a79a577f31d260c67" FOREIGN KEY ("muterId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE "user_list" ADD CONSTRAINT "FK_b7fcefbdd1c18dce86687531f99" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE "user_list_joining" ADD CONSTRAINT "FK_d844bfc6f3f523a05189076efaa" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE NO ACTION`, undefined);
         await queryRunner.query(`ALTER TABLE "user_list_joining" ADD CONSTRAINT "FK_605472305f26818cc93d1baaa74" FOREIGN KEY ("userListId") REFERENCES "user_list"("id") ON DELETE CASCADE ON UPDATE NO ACTION`, undefined);
@@ -289,6 +296,8 @@ export class Init1571464718465 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "user_list_joining" DROP CONSTRAINT "FK_605472305f26818cc93d1baaa74"`, undefined);
         await queryRunner.query(`ALTER TABLE "user_list_joining" DROP CONSTRAINT "FK_d844bfc6f3f523a05189076efaa"`, undefined);
         await queryRunner.query(`ALTER TABLE "user_list" DROP CONSTRAINT "FK_b7fcefbdd1c18dce86687531f99"`, undefined);
+        await queryRunner.query(`ALTER TABLE "muting" DROP CONSTRAINT "FK_93060675b4a79a577f31d260c67"`, undefined);
+        await queryRunner.query(`ALTER TABLE "muting" DROP CONSTRAINT "FK_ec96b4fed9dae517e0dbbe0675c"`, undefined);
         await queryRunner.query(`ALTER TABLE "blocking" DROP CONSTRAINT "FK_0627125f1a8a42c9a1929edb552"`, undefined);
         await queryRunner.query(`ALTER TABLE "blocking" DROP CONSTRAINT "FK_2cd4a2743a99671308f5417759e"`, undefined);
         await queryRunner.query(`ALTER TABLE "sw_subscription" DROP CONSTRAINT "FK_97754ca6f2baff9b4abb7f853dd"`, undefined);
@@ -470,6 +479,11 @@ export class Init1571464718465 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE "user_list_joining"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_b7fcefbdd1c18dce86687531f9"`, undefined);
         await queryRunner.query(`DROP TABLE "user_list"`, undefined);
+        await queryRunner.query(`DROP INDEX "IDX_1eb9d9824a630321a29fd3b290"`, undefined);
+        await queryRunner.query(`DROP INDEX "IDX_93060675b4a79a577f31d260c6"`, undefined);
+        await queryRunner.query(`DROP INDEX "IDX_ec96b4fed9dae517e0dbbe0675"`, undefined);
+        await queryRunner.query(`DROP INDEX "IDX_f86d57fbca33c7a4e6897490cc"`, undefined);
+        await queryRunner.query(`DROP TABLE "muting"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_98a1bc5cb30dfd159de056549f"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_0627125f1a8a42c9a1929edb55"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_2cd4a2743a99671308f5417759"`, undefined);

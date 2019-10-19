@@ -1,12 +1,13 @@
 import $ from 'cafy';
+import { Brackets } from 'typeorm';
 import { ID } from '../../../../misc/cafy-id';
 import define from '../../define';
 import { ApiError } from '../../error';
 import { getUser } from '../../common/getters';
 import { makePaginationQuery } from '../../common/make-pagination-query';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query';
+import { generateMuteQuery } from '../../common/generate-mute-query';
 import { Notes } from '../../../../models';
-import { Brackets } from 'typeorm';
 
 export const meta = {
 	desc: {
@@ -133,6 +134,7 @@ export default define(meta, async (ps, me) => {
 		.leftJoinAndSelect('note.user', 'user');
 
 	if (me) generateVisibilityQuery(query, me);
+	if (me) generateMuteQuery(query, me, user);
 
 	if (ps.withFiles) {
 		query.andWhere('note.fileIds != \'{}\'');

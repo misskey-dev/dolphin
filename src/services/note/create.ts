@@ -15,7 +15,7 @@ import extractMentions from '../../misc/extract-mentions';
 import extractEmojis from '../../misc/extract-emojis';
 import extractHashtags from '../../misc/extract-hashtags';
 import { Note } from '../../models/entities/note';
-import { Users, Followings, Notes, Instances } from '../../models';
+import { Users, Followings, Notes, Instances, Mutings } from '../../models';
 import { DriveFile } from '../../models/entities/drive-file';
 import { getConnection } from 'typeorm';
 import { User, ILocalUser, IRemoteUser } from '../../models/entities/user';
@@ -63,11 +63,22 @@ class NotificationManager {
 
 	public async deliver() {
 		for (const x of this.queue) {
-			createNotification(x.target, this.notifier.id, x.reason, {
-				noteId: this.note.id
+			// ミュート情報を取得
+			const mentioneeMutes = await Mutings.find({
+				muterId: x.target
 			});
+
+			const mentioneesMutedUserIds = mentioneeMutes.map(m => m.muteeId);
+
+			// 通知される側のユーザーが通知する側のユーザーをミュートしていない限りは通知する
+			if (!mentioneesMutedUserIds.includes(this.notifier.id)) {
+				createNotification(x.target, this.notifier.id, x.reason, {
+					noteId: this.note.id
+				});
+			}
 		}
 	}
+
 }
 
 type Option = {

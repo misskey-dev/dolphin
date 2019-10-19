@@ -1,6 +1,6 @@
 import { publishMainStream } from './stream';
 import pushSw from './push-notification';
-import { Notifications } from '../models';
+import { Notifications, Mutings } from '../models';
 import { genId } from '../misc/gen-id';
 import { User } from '../models/entities/user';
 import { Note } from '../models/entities/note';
@@ -48,6 +48,15 @@ export async function createNotification(
 		const fresh = await Notifications.findOne(notification.id);
 		if (fresh == null) return; // 既に削除されているかもしれない
 		if (!fresh.isRead) {
+			//#region ただしミュートしているユーザーからの通知なら無視
+			const mutings = await Mutings.find({
+				muterId: notifieeId
+			});
+			if (mutings.map(m => m.muteeId).includes(notifierId)) {
+				return;
+			}
+			//#endregion
+	
 			publishMainStream(notifieeId, 'unreadNotification', packed);
 
 			pushSw(notifieeId, 'notification', packed);

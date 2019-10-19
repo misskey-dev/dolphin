@@ -3,6 +3,7 @@ import Channel from '../channel';
 import { Notes, UserListJoinings } from '../../../../models';
 import { User } from '../../../../models/entities/user';
 import { PackedNote } from '../../../../models/repositories/note';
+import shouldMuteThisNote from '../../../../misc/should-mute-this-note';
 
 export default class extends Channel {
 	public readonly chName = 'userList';
@@ -63,6 +64,9 @@ export default class extends Channel {
 				});
 			}
 		}
+
+		// 流れてきたNoteがミュートしているユーザーが関わるものだったら無視する
+		if (shouldMuteThisNote(note, this.muting)) return;
 
 		this.send('note', note);
 	}

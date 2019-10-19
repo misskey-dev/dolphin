@@ -6,7 +6,7 @@ import Channel from './channel';
 import channels from './channels';
 import { EventEmitter } from 'events';
 import { User } from '../../../models/entities/user';
-import { Followings } from '../../../models';
+import { Followings, Mutings } from '../../../models';
 
 /**
  * Main stream connection
@@ -36,6 +36,9 @@ export default class Connection {
 		if (this.user) {
 			this.updateFollowing();
 			this.followingClock = setInterval(this.updateFollowing, 5000);
+
+			this.updateMuting();
+			this.mutingClock = setInterval(this.updateMuting, 5000);
 		}
 	}
 
@@ -202,6 +205,18 @@ export default class Connection {
 		});
 
 		this.following = followings.map(x => x.followeeId);
+	}
+
+	@autobind
+	private async updateMuting() {
+		const mutings = await Mutings.find({
+			where: {
+				muterId: this.user!.id
+			},
+			select: ['muteeId']
+		});
+
+		this.muting = mutings.map(x => x.muteeId);
 	}
 
 	/**

@@ -4,6 +4,7 @@ import define from '../../define';
 import { Notes } from '../../../../models';
 import { makePaginationQuery } from '../../common/make-pagination-query';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query';
+import { generateMuteQuery } from '../../common/generate-mute-query';
 
 export const meta = {
 	desc: {
@@ -61,6 +62,7 @@ export default define(meta, async (ps, user) => {
 		.leftJoinAndSelect('note.user', 'user');
 
 	if (user) generateVisibilityQuery(query, user);
+	if (user) generateMuteQuery(query, user);
 
 	const timeline = await query.take(ps.limit!).getMany();
 

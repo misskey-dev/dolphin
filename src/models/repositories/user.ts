@@ -1,7 +1,7 @@
 import $ from 'cafy';
 import { EntityRepository, Repository, In } from 'typeorm';
 import { User, ILocalUser, IRemoteUser } from '../entities/user';
-import { Emojis, Notes, NoteUnreads, FollowRequests, Notifications, UserNotePinings, Followings, Blockings, UserProfiles } from '..';
+import { Emojis, Notes, NoteUnreads, FollowRequests, Notifications, UserNotePinings, Followings, Blockings, Mutings, UserProfiles } from '..';
 import { ensure } from '../../prelude/ensure';
 import config from '../../config';
 import { SchemaType } from '../../misc/schema';
@@ -12,7 +12,7 @@ export type PackedUser = SchemaType<typeof packedUserSchema>;
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
 	public async getRelation(me: User['id'], target: User['id']) {
-		const [following1, following2, followReq1, followReq2, toBlocking, fromBlocked] = await Promise.all([
+		const [following1, following2, followReq1, followReq2, toBlocking, fromBlocked, mute] = await Promise.all([
 			Followings.findOne({
 				followerId: me,
 				followeeId: target
@@ -37,6 +37,10 @@ export class UserRepository extends Repository<User> {
 				blockerId: target,
 				blockeeId: me
 			}),
+			Mutings.findOne({
+				muterId: me,
+				muteeId: target
+			})
 		]);
 
 		return {
@@ -47,6 +51,7 @@ export class UserRepository extends Repository<User> {
 			isFollowed: following2 != null,
 			isBlocking: toBlocking != null,
 			isBlocked: fromBlocked != null,
+			isMuted: mute != null
 		};
 	}
 
@@ -150,6 +155,7 @@ export class UserRepository extends Repository<User> {
 				hasPendingFollowRequestToYou: relation.hasPendingFollowRequestToYou,
 				isBlocking: relation.isBlocking,
 				isBlocked: relation.isBlocked,
+				isMuted: relation.isMuted,
 			} : {})
 		};
 

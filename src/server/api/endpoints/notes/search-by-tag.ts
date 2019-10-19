@@ -1,10 +1,11 @@
 import $ from 'cafy';
+import { Brackets } from 'typeorm';
 import { ID } from '../../../../misc/cafy-id';
 import define from '../../define';
 import { makePaginationQuery } from '../../common/make-pagination-query';
 import { Notes } from '../../../../models';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query';
-import { Brackets } from 'typeorm';
+import { generateMuteQuery } from '../../common/generate-mute-query';
 
 export const meta = {
 	desc: {
@@ -95,6 +96,7 @@ export default define(meta, async (ps, me) => {
 		.leftJoinAndSelect('note.user', 'user');
 
 	if (me) generateVisibilityQuery(query, me);
+	if (user) generateMuteQuery(query, user);
 
 	if (ps.tag) {
 		query.andWhere(':tag = ANY(note.tags)', { tag: ps.tag.toLowerCase() });

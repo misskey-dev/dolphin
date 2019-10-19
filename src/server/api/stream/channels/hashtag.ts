@@ -2,6 +2,7 @@ import autobind from 'autobind-decorator';
 import Channel from '../channel';
 import { Notes } from '../../../../models';
 import { PackedNote } from '../../../../models/repositories/note';
+import shouldMuteThisNote from '../../../../misc/should-mute-this-note';
 
 export default class extends Channel {
 	public readonly chName = 'hashtag';
@@ -31,6 +32,9 @@ export default class extends Channel {
 				detail: true
 			});
 		}
+
+		// 流れてきたNoteがミュートしているユーザーが関わるものだったら無視する
+		if (shouldMuteThisNote(note, this.muting)) return;
 
 		this.send('note', note);
 	}

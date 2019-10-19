@@ -18,6 +18,7 @@ import { Following } from '../models/entities/following';
 import { Instance } from '../models/entities/instance';
 import { SwSubscription } from '../models/entities/sw-subscription';
 import { Blocking } from '../models/entities/blocking';
+import { Muting } from '../models/entities/muting';
 import { UserList } from '../models/entities/user-list';
 import { UserListJoining } from '../models/entities/user-list-joining';
 import { Hashtag } from '../models/entities/hashtag';
@@ -79,6 +80,7 @@ export const entities = [
 	Following,
 	FollowRequest,
 	Blocking,
+	Muting,
 	Note,
 	NoteFavorite,
 	NoteReaction,

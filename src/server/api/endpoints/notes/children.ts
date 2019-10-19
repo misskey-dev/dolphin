@@ -3,6 +3,7 @@ import { ID } from '../../../../misc/cafy-id';
 import define from '../../define';
 import { makePaginationQuery } from '../../common/make-pagination-query';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query';
+import { generateMuteQuery } from '../../common/generate-mute-query';
 import { Brackets } from 'typeorm';
 import { Notes } from '../../../../models';
 
@@ -66,6 +67,7 @@ export default define(meta, async (ps, user) => {
 		.leftJoinAndSelect('note.user', 'user');
 
 	if (user) generateVisibilityQuery(query, user);
+	if (user) generateMuteQuery(query, user);
 
 	const notes = await query.take(ps.limit!).getMany();
 
