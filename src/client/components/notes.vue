@@ -1,6 +1,6 @@
 <template>
 <div class="dp-notes">
-	<div class="empty" v-if="empty">{{ $t('@.no-notes') }}</div>
+	<div class="empty" v-if="empty">{{ $t('noNotes') }}</div>
 
 	<dp-error v-if="error" @retry="init()"/>
 
@@ -83,8 +83,11 @@ export default Vue.extend({
 	> .empty {
 		margin: 0 auto;
 		padding: 32px;
-		max-width: 400px;
 		text-align: center;
+		background: rgba(0, 0, 0, 0.3);
+		color: #fff;
+		backdrop-filter: blur(16px);
+		border-radius: 6px;
 	}
 
 	> .notes {
