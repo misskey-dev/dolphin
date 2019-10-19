@@ -77,6 +77,8 @@ export default Vue.extend({
 		height: 20px;
 		box-sizing: border-box;
 		border-radius: 100%;
+		background: #fff;
+		box-shadow: 0 0 0 2px #fff;
 
 		> * {
 			color: #fff;
@@ -120,6 +122,8 @@ export default Vue.extend({
 		left: 58px;
 		width: calc(100% - 74px);
 		line-height: 16px;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 }
 </style>
