@@ -6,7 +6,6 @@ import * as fs from 'fs';
 import * as gulp from 'gulp';
 import * as gutil from 'gulp-util';
 import * as ts from 'gulp-typescript';
-const sourcemaps = require('gulp-sourcemaps');
 import tslint from 'gulp-tslint';
 const cssnano = require('gulp-cssnano');
 import * as uglifyComposer from 'gulp-uglify/composer';
@@ -37,10 +36,8 @@ gulp.task('build:ts', () => {
 
 	return tsProject
 		.src()
-		.pipe(sourcemaps.init())
 		.pipe(tsProject())
 		.on('error', () => {})
-		.pipe(sourcemaps.write('.', { includeContent: false, sourceRoot: '../built' }))
 		.pipe(gulp.dest('./built/'));
 });
 
@@ -51,8 +48,9 @@ gulp.task('build:copy:views', () =>
 gulp.task('build:copy:locales', cb => {
 	fs.mkdirSync('./built/client/assets/locales', { recursive: true });
 
-	for (const [lang, locale] of Object.entries(locales))
+	for (const [lang, locale] of Object.entries(locales)) {
 		fs.writeFileSync(`./built/client/assets/locales/${lang}.json`, JSON.stringify(locale), 'utf-8');
+	}
 
 	cb();
 });
