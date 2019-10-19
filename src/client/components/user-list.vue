@@ -34,7 +34,7 @@ import i18n from '../i18n';
 import paging from '../scripts/paging';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/user-list.vue'),
+	i18n,
 
 	mixins: [
 		paging({}),

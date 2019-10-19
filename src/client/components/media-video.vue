@@ -21,7 +21,7 @@ import Vue from 'vue';
 import i18n from '../i18n';
 
 export default Vue.extend({
-	i18n: i18n('mobile/views/components/media-video.vue'),
+	i18n,
 	props: {
 		video: {
 			type: Object,

@@ -22,7 +22,7 @@ import ImageViewer from './image-viewer.vue';
 import { getStaticImageUrl } from '../scripts/get-static-image-url';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/media-image.vue'),
+	i18n,
 	props: {
 		image: {
 			type: Object,

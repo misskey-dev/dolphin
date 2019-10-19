@@ -69,7 +69,7 @@ import extractMentions from '../../misc/extract-mentions';
 import { formatTimeString } from '../../misc/format-time-string';
 
 export default Vue.extend({
-	i18n: i18n(),
+	i18n,
 
 	components: {
 		XNotePreview,

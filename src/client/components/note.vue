@@ -96,7 +96,7 @@ import noteMixin from '../scripts/note-mixin';
 import noteSubscriber from '../scripts/note-subscriber';
 
 export default Vue.extend({
-	i18n: i18n('mobile/views/components/note.vue'),
+	i18n,
 	
 	components: {
 		XSub,

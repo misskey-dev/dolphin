@@ -58,7 +58,7 @@ import { addTimespan } from '../../prelude/time';
 import { formatDateTimeString } from '../../misc/format-time-string';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/poll-editor.vue'),
+	i18n,
 	data() {
 		return {
 			choices: ['', ''],

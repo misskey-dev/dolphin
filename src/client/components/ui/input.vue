@@ -249,7 +249,6 @@ export default Vue.extend({
 		width: 24px;
 		text-align: center;
 		line-height: 32px;
-		color: var(--inputLabel);
 
 		&:not(:empty) + .input {
 			margin-left: 28px;

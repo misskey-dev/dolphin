@@ -42,7 +42,7 @@ import { faAsterisk, faLeaf, faUtensils, faFutbol, faCity, faDice } from '@forta
 import { faHeart, faFlag } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/emoji-picker.vue'),
+	i18n,
 
 	data() {
 		return {

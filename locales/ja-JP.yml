@@ -33,3 +33,17 @@ enterNewUserPassword: "作成するユーザーのパスワードを決めてく
 noAccountDescription: "自己紹介はありません"
 login: "ログイン"
 loginWaiting: "ログイン中"
+uploading: "アップロード中"
+save: "保存"
+saved: "保存しました"
+
+_profile:
+  name: "名前"
+  username: "ユーザー名"
+  description: "自己紹介"
+  youCanIncludeHashtags: "ハッシュタグを含めることができます。"
+  avatar: "アイコン"
+  banner: "バナー"
+  metadata: "補足情報"
+  metadataLabel: "ラベル"
+  metadataContent: "内容"

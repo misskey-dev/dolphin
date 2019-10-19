@@ -11,7 +11,7 @@ import Progress from '../scripts/loading';
 import XNote from '../components/note.vue';
 
 export default Vue.extend({
-	i18n: i18n(),
+	i18n,
 	components: {
 		XNote
 	},

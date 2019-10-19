@@ -1,49 +1,49 @@
 <template>
 <div class="dp-settings-page-profile">
 	<ui-input v-model="name" :max="30">
-		<span>{{ $t('name') }}</span>
+		<span>{{ $t('_profile.name') }}</span>
 	</ui-input>
 
-	<ui-input v-model="username" readonly>
-		<span>{{ $t('account') }}</span>
+	<ui-input :value="$store.state.i.username" readonly>
+		<span>{{ $t('_profile.username') }}</span>
 		<template #prefix>@</template>
 		<template #suffix>@{{ host }}</template>
 	</ui-input>
 
 	<ui-textarea v-model="description" :max="500">
-		<span>{{ $t('description') }}</span>
-		<template #desc>{{ $t('you-can-include-hashtags') }}</template>
+		<span>{{ $t('_profile.description') }}</span>
+		<template #desc>{{ $t('_profile.youCanIncludeHashtags') }}</template>
 	</ui-textarea>
 
 	<ui-input type="file" @change="onAvatarChange">
-		<span>{{ $t('avatar') }}</span>
+		<span>{{ $t('_profile.avatar') }}</span>
 		<template #icon><fa icon="image"/></template>
 		<template #desc v-if="avatarUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
 	</ui-input>
 
 	<ui-input type="file" @change="onBannerChange">
-		<span>{{ $t('banner') }}</span>
+		<span>{{ $t('_profile.banner') }}</span>
 		<template #icon><fa icon="image"/></template>
 		<template #desc v-if="bannerUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
 	</ui-input>
 
 	<div class="fields">
-		<header>{{ $t('profile-metadata') }}</header>
+		<header>{{ $t('_profile.metadata') }}</header>
 		<div class="row">
-			<ui-input v-model="fieldName0">{{ $t('metadata-label') }}</ui-input>
-			<ui-input v-model="fieldValue0">{{ $t('metadata-content') }}</ui-input>
+			<ui-input v-model="fieldName0">{{ $t('_profile.metadataLabel') }}</ui-input>
+			<ui-input v-model="fieldValue0">{{ $t('_profile.metadataContent') }}</ui-input>
 		</div>
 		<div class="row">
-			<ui-input v-model="fieldName1">{{ $t('metadata-label') }}</ui-input>
-			<ui-input v-model="fieldValue1">{{ $t('metadata-content') }}</ui-input>
+			<ui-input v-model="fieldName1">{{ $t('_profile.metadataLabel') }}</ui-input>
+			<ui-input v-model="fieldValue1">{{ $t('_profile.metadataContent') }}</ui-input>
 		</div>
 		<div class="row">
-			<ui-input v-model="fieldName2">{{ $t('metadata-label') }}</ui-input>
-			<ui-input v-model="fieldValue2">{{ $t('metadata-content') }}</ui-input>
+			<ui-input v-model="fieldName2">{{ $t('_profile.metadataLabel') }}</ui-input>
+			<ui-input v-model="fieldValue2">{{ $t('_profile.metadataContent') }}</ui-input>
 		</div>
 		<div class="row">
-			<ui-input v-model="fieldName3">{{ $t('metadata-label') }}</ui-input>
-			<ui-input v-model="fieldValue3">{{ $t('metadata-content') }}</ui-input>
+			<ui-input v-model="fieldName3">{{ $t('_profile.metadataLabel') }}</ui-input>
+			<ui-input v-model="fieldValue3">{{ $t('_profile.metadataContent') }}</ui-input>
 		</div>
 	</div>
 
@@ -55,11 +55,14 @@
 import Vue from 'vue';
 import { faDownload, faUpload, faUnlockAlt, faBoxes, faCogs } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-regular-svg-icons';
-import { apiUrl } from '../config';
+import i18n from '../i18n';
+import { apiUrl, host } from '../config';
 
 export default Vue.extend({
+	i18n,
 	data() {
 		return {
+			host,
 			name: null,
 			description: null,
 			fieldName0: null,
@@ -181,27 +184,10 @@ export default Vue.extend({
 				}
 			}).catch(err => {
 				this.saving = false;
-				switch(err.id) {
-					case 'f419f9f8-2f4d-46b1-9fb4-49d3a2fd7191':
-						this.$root.dialog({
-							type: 'error',
-							title: this.$t('unable-to-process'),
-							text: this.$t('avatar-not-an-image')
-						});
-						break;
-					case '75aedb19-2afd-4e6d-87fc-67941256fa60':
-						this.$root.dialog({
-							type: 'error',
-							title: this.$t('unable-to-process'),
-							text: this.$t('banner-not-an-image')
-						});
-						break;
-					default:
-						this.$root.dialog({
-							type: 'error',
-							text: this.$t('unable-to-process')
-						});
-				}
+				this.$root.dialog({
+					type: 'error',
+					text: err.id
+				});
 			});
 		},
 
@@ -250,6 +236,10 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .dp-settings-page-profile {
+	> *:first-child {
+		margin-top: 0;
+	}
+
 	> .fields {
 		> .row {
 			> * {

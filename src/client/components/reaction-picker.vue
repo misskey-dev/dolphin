@@ -20,7 +20,7 @@ import { emojiRegex } from '../../misc/emoji-regex';
 import XReactionIcon from './reaction-icon.vue';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/reaction-picker.vue'),
+	i18n,
 	components: {
 		XReactionIcon
 	},

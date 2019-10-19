@@ -26,7 +26,7 @@ import Vue from 'vue';
 import i18n from '../i18n';
 import { sum } from '../../../../../prelude/array';
 export default Vue.extend({
-	i18n: i18n('common/views/components/poll.vue'),
+	i18n,
 	props: ['note'],
 	data() {
 		return {

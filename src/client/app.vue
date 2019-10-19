@@ -32,7 +32,7 @@ import DpToast from './components/toast.vue';
 import XNotifications from './components/notifications.vue';
 
 export default Vue.extend({
-	i18n: i18n(),
+	i18n,
 
 	components: {
 		XNotifications

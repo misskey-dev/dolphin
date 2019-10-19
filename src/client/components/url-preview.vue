@@ -33,7 +33,7 @@ import i18n from '../i18n';
 import { url as local, lang } from '../config';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/url-preview.vue'),
+	i18n,
 
 	props: {
 		url: {

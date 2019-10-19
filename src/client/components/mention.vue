@@ -21,7 +21,7 @@ import { toUnicode } from 'punycode';
 import { host as localHost } from '../config';
 
 export default Vue.extend({
-	i18n: i18n(),
+	i18n,
 	props: {
 		username: {
 			type: String,

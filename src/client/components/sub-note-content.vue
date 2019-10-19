@@ -22,7 +22,7 @@
 import Vue from 'vue';
 import i18n from '../i18n';
 export default Vue.extend({
-	i18n: i18n('mobile/views/components/sub-note-content.vue'),
+	i18n,
 	props: ['note']
 });
 </script>

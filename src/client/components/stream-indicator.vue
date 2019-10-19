@@ -21,7 +21,7 @@ import i18n from '../i18n';
 import anime from 'animejs';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/stream-indicator.vue'),
+	i18n,
 	computed: {
 		stream() {
 			return this.$root.stream;

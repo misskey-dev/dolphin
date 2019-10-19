@@ -13,7 +13,7 @@ import copyToClipboard from '../scripts/copy-to-clipboard';
 import XMenu from './menu.vue';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/note-menu.vue'),
+	i18n,
 	components: {
 		XMenu
 	},

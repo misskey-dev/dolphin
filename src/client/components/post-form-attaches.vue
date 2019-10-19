@@ -23,7 +23,7 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import XFileThumbnail from './drive-file-thumbnail.vue'
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/post-form-attaches.vue'),
+	i18n,
 
 	components: {
 		XDraggable,

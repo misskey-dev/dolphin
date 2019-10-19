@@ -58,7 +58,7 @@ import i18n from '../i18n';
 import anime from 'animejs';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/visibility-chooser.vue'),
+	i18n,
 	props: {
 		source: {
 			required: true

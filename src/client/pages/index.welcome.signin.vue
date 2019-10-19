@@ -26,7 +26,7 @@ import { apiUrl, host } from '../config';
 import { toUnicode } from 'punycode';
 
 export default Vue.extend({
-	i18n: i18n(),
+	i18n,
 
 	props: {
 		withAvatar: {

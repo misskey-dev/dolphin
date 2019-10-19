@@ -72,123 +72,134 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-root(fill)
-	margin 42px 0 32px 0
+@import '../../theme';
 
-	&:last-child
-		margin-bottom 0
+.ui-textarea {
+	margin: 42px 0 32px 0;
+	position: relative;
 
-	> .input
-		padding 12px
+	&:last-child {
+		margin-bottom: 0;
+	}
 
-		if fill
-			background rgba(#000, 0.035)
-			border-radius 6px
-		else
-			&:before
-				content ''
-				display block
-				position absolute
-				top 0
-				bottom 0
-				left 0
-				right 0
-				background none
-				border solid 1px var(--inputBorder)
-				border-radius 3px
-				pointer-events none
+	> .input {
+		padding: 12px;
+		position: relative;
+	
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: none;
+			border: solid 1px #dae0e4;
+			border-radius: 3px;
+			pointer-events: none;
+		}
 
-			&:after
-				content ''
-				display block
-				position absolute
-				top 0
-				bottom 0
-				left 0
-				right 0
-				background none
-				border solid 2px $primary
-				border-radius 3px
-				opacity 0
-				transition opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)
-				pointer-events none
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: none;
+			border: solid 2px $primary;
+			border-radius: 3px;
+			opacity: 0;
+			transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			pointer-events: none;
+		}
 
-		> .label
-			position absolute
-			top 6px
-			left 12px
-			pointer-events none
-			transition 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)
-			transition-duration 0.3s
-			font-size 16px
-			line-height 32px
-			color var(--inputLabel)
-			pointer-events none
+		> .label {
+			position: absolute;
+			top: 6px;
+			left: 12px;
+			pointer-events: none;
+			transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+			transition-duration: 0.3s;
+			font-size: 16px;
+			line-height: 32px;
+			pointer-events: none;
 			//will-change transform
-			transform-origin top left
-			transform scale(1)
+			transform-origin: top left;
+			transform: scale(1);
+		}
 
-		> textarea
-			display block
-			width 100%
-			min-width 100%
-			max-width 100%
-			min-height 100px
-			padding 0
-			font inherit
-			font-weight fill ? bold : normal
-			font-size 16px
-			color var(--inputText)
-			background transparent
-			border none
-			border-radius 0
-			outline none
-			box-shadow none
+		> textarea {
+			display: block;
+			width: 100%;
+			min-width: 100%;
+			max-width: 100%;
+			min-height: 100px;
+			padding: 0;
+			font: inherit;
+			font-weight: normal;
+			font-size: 16px;
+			background: transparent;
+			border: none;
+			border-radius: 0;
+			outline: none;
+			box-shadow: none;
+		}
+	}
 
-	> .desc
-		margin 6px 0
-		font-size 13px
-		opacity 0.7
+	> .desc {
+		margin: 6px 0;
+		font-size: 13px;
+		opacity: 0.7;
 
-		&:empty
-			display none
+		&:empty {
+			display: none;
+		}
 
-		*
-			margin 0
+		* {
+			margin: 0;
+		}
+	}
 
-	&.focused
-		> .input
-			if fill
-				background rgba(#000, 0.05)
-			else
-				&:after
-					opacity 1
+	&.focused {
+		> .input {
+			&:after {
+				opacity: 1;
+			}
 
-			> .label
-				color $primary
+			> .label {
+				color: $primary;
+			}
+		}
+	}
 
-	&.focused
-	&.filled
-		> .input
-			> .label
-				top -24px
-				left 0 !important
-				transform scale(0.75)
+	&.focused,
+	&.filled {
+		> .input {
+			> .label {
+				top: -24px;
+				left: 0 !important;
+				transform: scale(0.75);
+			}
+		}
+	}
 
-	&.tall
-		> .input
-			> textarea
-				min-height 200px
+	&.tall {
+		> .input {
+			> textarea {
+				min-height: 200px;
+			}
+		}
+	}
 
-	&.pre
-		> .input
-			> textarea
-				white-space pre
-
-.ui-textarea.fill
-	root(true)
-
-.ui-textarea:not(.fill)
-	root(false)
-
+	&.pre {
+		> .input {
+			> textarea {
+				white-space: pre;
+			}
+		}
+	}
+}
 </style>

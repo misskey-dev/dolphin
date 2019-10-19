@@ -28,7 +28,7 @@ import XNote from './note.vue';
 import XDateSeparator from './date-separator.vue';
 
 export default Vue.extend({
-	i18n: i18n(),
+	i18n,
 
 	components: {
 		XNote, XDateSeparator

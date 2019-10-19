@@ -27,7 +27,7 @@ import paging from '../scripts/paging';
 import XNotification from './notification.vue';
 
 export default Vue.extend({
-	i18n: i18n('mobile/views/components/notifications.vue'),
+	i18n,
 
 	components: {
 		XNotification

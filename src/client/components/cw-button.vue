@@ -12,7 +12,7 @@ import { length } from 'stringz';
 import { concat } from '../../../../../prelude/array';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/cw-button.vue'),
+	i18n,
 
 	props: {
 		value: {

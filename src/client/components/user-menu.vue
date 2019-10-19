@@ -12,7 +12,7 @@ import i18n from '../i18n';
 import XMenu from './menu.vue';
 
 export default Vue.extend({
-	i18n: i18n('common/views/components/user-menu.vue'),
+	i18n,
 
 	components: {
 		XMenu

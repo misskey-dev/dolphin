@@ -108,7 +108,7 @@ os.init(() => {
 	}, { passive: true });
 
 	const app = new Vue({
-		i18n: i18n(),
+		i18n,
 		store: os.store,
 		data() {
 			return {

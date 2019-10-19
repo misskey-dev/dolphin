@@ -12,6 +12,7 @@ import url from './url.vue';
 import urlPreview from './url-preview.vue';
 import uiContainer from './ui-container.vue';
 import uiInput from './ui/input.vue';
+import uiTextarea from './ui/textarea.vue';
 import uiButton from './ui/button.vue';
 import SequentialEntrance from './sequential-entrance.vue';
 
@@ -27,5 +28,6 @@ Vue.component('dp-url', url);
 Vue.component('dp-url-preview', urlPreview);
 Vue.component('ui-container', uiContainer);
 Vue.component('ui-input', uiInput);
+Vue.component('ui-textarea', uiTextarea);
 Vue.component('ui-button', uiButton);
 Vue.component('sequential-entrance', SequentialEntrance);

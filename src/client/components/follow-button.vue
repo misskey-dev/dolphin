@@ -21,7 +21,7 @@ import i18n from '../i18n';
 import { faSpinner, faPlus, faMinus, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
-	i18n: i18n(),
+	i18n,
 
 	props: {
 		user: {

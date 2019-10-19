@@ -21,7 +21,7 @@ type Opts = {
 };
 
 export default (opts: Opts = {}) => ({
-	i18n: i18n(),
+	i18n,
 
 	data() {
 		return {
