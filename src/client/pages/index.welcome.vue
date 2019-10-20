@@ -3,10 +3,6 @@
 	<div>
 		<x-setup v-if="meta.requireSetup"/>
 		<x-signin v-else/>
-		<div class="powerd-by">
-			<span>Powerd by</span>
-			<x-logo class="logo"/>
-		</div>
 	</div>
 </div>
 </template>
@@ -15,13 +11,11 @@
 import Vue from 'vue';
 import XSetup from './index.welcome.setup.vue';
 import XSignin from './index.welcome.signin.vue';
-import XLogo from '../components/logo.vue';
 
 export default Vue.extend({
 	components: {
 		XSetup,
 		XSignin,
-		XLogo,
 	},
 
 	data() {
@@ -40,6 +34,8 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .dp-welcome {
+	min-height: 80vh;
+
 	> div {
 		position: absolute;
 		top: 50%;
@@ -58,19 +54,6 @@ export default Vue.extend({
 
 		> *:first-child {
 			display: inline-block;
-		}
-
-		> .powerd-by {
-			margin-top: 16px;
-			color: #fff;
-			font-size: 14px;
-			opacity: 0.7;
-
-			> .logo {
-				display: block;
-				width: 50px;
-				margin: 8px auto;
-			}
 		}
 	}
 }

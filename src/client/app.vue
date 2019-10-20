@@ -1,7 +1,11 @@
 <template>
-<div class="dp-app">
+<div class="dp-app transitioning">
 	<main>
 		<router-view v-hotkey.global="keymap"></router-view>
+		<div class="powerd-by">
+			<span>Powerd by</span>
+			<x-logo class="logo"/>
+		</div>
 	</main>
 	<transition name="zoom-in-bottom">
 		<nav v-if="navOpen">
@@ -35,7 +39,8 @@ export default Vue.extend({
 	i18n,
 
 	components: {
-		XNotifications
+		XNotifications,
+		XLogo: () => import('./components/logo.vue').then(m => m.default),
 	},
 
 	data() {
@@ -57,7 +62,21 @@ export default Vue.extend({
 		}
 	},
 
+	watch: {
+		'$route'(to, from) {
+			this.$el.classList.add('transitioning');
+
+			setTimeout(() => {
+				this.$el.classList.remove('transitioning');
+			}, 1000);
+		}
+	}
+
 	created() {
+		setTimeout(() => {
+			this.$el.classList.remove('transitioning');
+		}, 1000);
+
 		if (this.$store.getters.isSignedIn) {
 			this.connection = this.$root.stream.useSharedConnection('main');
 			this.connection.on('notification', this.onNotification);
@@ -113,9 +132,13 @@ export default Vue.extend({
 @import './theme';
 
 .dp-app {
+	&.transitioning > main > .powerd-by {
+		opacity: 0;
+		transition: none;
+	}
+
 	> main {
 		max-width: 650px;
-		min-height: 100vh;
 		margin: 0 auto;
 		padding: 32px;
 		box-sizing: border-box;
@@ -126,6 +149,25 @@ export default Vue.extend({
 
 		@media (max-width: 500px) {
 			padding: 8px;
+		}
+
+		> .powerd-by {
+			color: #fff;
+			font-size: 14px;
+			text-align: center;
+			opacity: 0.7;
+			margin-top: 16px;
+			transition: opacity 1s ease;
+
+			@media (max-width: 500px) {
+				margin-top: 8px;
+			}
+
+			> .logo {
+				display: block;
+				width: 50px;
+				margin: 8px auto 0 auto;
+			}
 		}
 	}
 

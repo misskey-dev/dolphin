@@ -1,12 +1,7 @@
 <template>
 <div class="dp-settings-page">
 	<header>{{ $t('settings') }}</header>
-	<section class="_section">
-		<div class="title">{{ $t('profile') }}</div>
-		<div class="content">
-			<x-profile-setting/>
-		</div>
-	</section>
+	<x-profile-setting/>
 </div>
 </template>
 

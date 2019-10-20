@@ -1,54 +1,58 @@
 <template>
-<div class="dp-settings-page-profile">
-	<ui-input v-model="name" :max="30">
-		<span>{{ $t('_profile.name') }}</span>
-	</ui-input>
+<section class="dp-settings-page-profile _section">
+	<div class="title">{{ $t('profile') }}</div>
+	<div class="content">
+		<ui-input v-model="name" :max="30">
+			<span>{{ $t('_profile.name') }}</span>
+		</ui-input>
 
-	<ui-input :value="$store.state.i.username" readonly>
-		<span>{{ $t('_profile.username') }}</span>
-		<template #prefix>@</template>
-		<template #suffix>@{{ host }}</template>
-	</ui-input>
+		<ui-input :value="$store.state.i.username" readonly>
+			<span>{{ $t('_profile.username') }}</span>
+			<template #prefix>@</template>
+			<template #suffix>@{{ host }}</template>
+		</ui-input>
 
-	<ui-textarea v-model="description" :max="500">
-		<span>{{ $t('_profile.description') }}</span>
-		<template #desc>{{ $t('_profile.youCanIncludeHashtags') }}</template>
-	</ui-textarea>
+		<ui-textarea v-model="description" :max="500">
+			<span>{{ $t('_profile.description') }}</span>
+			<template #desc>{{ $t('_profile.youCanIncludeHashtags') }}</template>
+		</ui-textarea>
 
-	<ui-input type="file" @change="onAvatarChange">
-		<span>{{ $t('_profile.avatar') }}</span>
-		<template #icon><fa icon="image"/></template>
-		<template #desc v-if="avatarUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
-	</ui-input>
+		<ui-input type="file" @change="onAvatarChange">
+			<span>{{ $t('_profile.avatar') }}</span>
+			<template #icon><fa icon="image"/></template>
+			<template #desc v-if="avatarUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
+		</ui-input>
 
-	<ui-input type="file" @change="onBannerChange">
-		<span>{{ $t('_profile.banner') }}</span>
-		<template #icon><fa icon="image"/></template>
-		<template #desc v-if="bannerUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
-	</ui-input>
+		<ui-input type="file" @change="onBannerChange">
+			<span>{{ $t('_profile.banner') }}</span>
+			<template #icon><fa icon="image"/></template>
+			<template #desc v-if="bannerUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
+		</ui-input>
 
-	<div class="fields">
-		<header>{{ $t('_profile.metadata') }}</header>
-		<div class="row">
-			<ui-input v-model="fieldName0">{{ $t('_profile.metadataLabel') }}</ui-input>
-			<ui-input v-model="fieldValue0">{{ $t('_profile.metadataContent') }}</ui-input>
-		</div>
-		<div class="row">
-			<ui-input v-model="fieldName1">{{ $t('_profile.metadataLabel') }}</ui-input>
-			<ui-input v-model="fieldValue1">{{ $t('_profile.metadataContent') }}</ui-input>
-		</div>
-		<div class="row">
-			<ui-input v-model="fieldName2">{{ $t('_profile.metadataLabel') }}</ui-input>
-			<ui-input v-model="fieldValue2">{{ $t('_profile.metadataContent') }}</ui-input>
-		</div>
-		<div class="row">
-			<ui-input v-model="fieldName3">{{ $t('_profile.metadataLabel') }}</ui-input>
-			<ui-input v-model="fieldValue3">{{ $t('_profile.metadataContent') }}</ui-input>
+		<div class="fields">
+			<header>{{ $t('_profile.metadata') }}</header>
+			<div class="row">
+				<ui-input v-model="fieldName0">{{ $t('_profile.metadataLabel') }}</ui-input>
+				<ui-input v-model="fieldValue0">{{ $t('_profile.metadataContent') }}</ui-input>
+			</div>
+			<div class="row">
+				<ui-input v-model="fieldName1">{{ $t('_profile.metadataLabel') }}</ui-input>
+				<ui-input v-model="fieldValue1">{{ $t('_profile.metadataContent') }}</ui-input>
+			</div>
+			<div class="row">
+				<ui-input v-model="fieldName2">{{ $t('_profile.metadataLabel') }}</ui-input>
+				<ui-input v-model="fieldValue2">{{ $t('_profile.metadataContent') }}</ui-input>
+			</div>
+			<div class="row">
+				<ui-input v-model="fieldName3">{{ $t('_profile.metadataLabel') }}</ui-input>
+				<ui-input v-model="fieldValue3">{{ $t('_profile.metadataContent') }}</ui-input>
+			</div>
 		</div>
 	</div>
-
-	<ui-button @click="save(true)" primary><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
-</div>
+	<div class="footer">
+		<ui-button @click="save(true)" primary><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+	</div>
+</section>
 </template>
 
 <script lang="ts">
@@ -236,16 +240,18 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .dp-settings-page-profile {
-	> *:first-child {
-		margin-top: 0;
-	}
+	> .content {
+		> *:first-child {
+			margin-top: 0;
+		}
 
-	> .fields {
-		> .row {
-			> * {
-				display: inline-block;
-				width: 50%;
-				margin-bottom: 0;
+		> .fields {
+			> .row {
+				> * {
+					display: inline-block;
+					width: 50%;
+					margin-bottom: 0;
+				}
 			}
 		}
 	}

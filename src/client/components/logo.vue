@@ -1,5 +1,5 @@
 <template>
-<a class="dp-logo" href="https://github.com/syuilo/dolphin" target="_blank">
+<a class="dp-logo" href="https://github.com/syuilo/dolphin" target="_blank" title="Dolphin">
 	<img svg-inline src="../../../assets/dolphin-logo-square.svg" alt="Dolphin" class="logo">
 </a>
 </template>
