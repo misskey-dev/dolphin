@@ -229,12 +229,21 @@ export default Vue.extend({
 		display: flex;
 		padding: 28px 32px 18px;
 
+		@media (max-width: 450px) {
+			padding: 14px 16px 9px;
+		}
+
 		> .avatar {
 			flex-shrink: 0;
 			display: block;
 			margin: 0 10px 8px 0;
 			width: 58px;
 			height: 58px;
+
+			@media (max-width: 450px) {
+				width: 50px;
+				height: 50px;
+			}
 		}
 
 		> .main {

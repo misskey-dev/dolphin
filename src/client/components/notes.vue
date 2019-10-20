@@ -94,6 +94,10 @@ export default Vue.extend({
 	> .notes {
 		> div {
 			margin-bottom: 16px;
+
+			@media (max-width: 500px) {
+				margin-bottom: 8px;
+			}
 		}
 	}
 
