@@ -20,6 +20,13 @@
 			</div>
 		</div>
 		<dp-avatar class="avatar" :user="user" :disable-preview="true"/>
+		<div class="title">
+			<dp-user-name :user="user" :nowrap="false" class="name"/>
+			<div>
+				<span class="username"><dp-acct :user="user" :detail="true" /></span>
+				<span v-if="user.isBot" :title="$t('is-bot')"><fa icon="robot"/></span>
+			</div>
+		</div>
 		<div class="description">
 			<mfm v-if="user.description" :text="user.description" :is-note="false" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
 			<p v-else class="empty">{{ $t('noAccountDescription') }}</p>
@@ -109,12 +116,20 @@ export default Vue.extend({
 		border-radius: 6px;
 		overflow: hidden;
 
+		@media (max-width: 500px) {
+			margin-bottom: 8px;
+		}
+
 		> .banner-container {
 			position: relative;
 			height: 250px;
 			overflow: hidden;
 			background-size: cover;
 			background-position: center;
+
+			@media (max-width: 500px) {
+				height: 140px;
+			}
 
 			> .banner {
 				height: 100%;
@@ -131,6 +146,10 @@ export default Vue.extend({
 				width: 100%;
 				height: 78px;
 				background: linear-gradient(transparent, rgba(#000, 0.7));
+
+				@media (max-width: 500px) {
+					display: none;
+				}
 			}
 
 			> .followed {
@@ -176,6 +195,10 @@ export default Vue.extend({
 				padding: 0 0 8px 154px;
 				color: #fff;
 
+				@media (max-width: 500px) {
+					display: none;
+				}
+
 				> .name {
 					display: block;
 					margin: 0;
@@ -200,6 +223,19 @@ export default Vue.extend({
 			}
 		}
 
+		> .title {
+			display: none;
+			background: #fff;
+			text-align: center;
+			padding: 50px 0 16px 0;
+			font-weight: bold;
+			border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+
+			@media (max-width: 500px) {
+				display: block;
+			}
+		}
+
 		> .avatar {
 			display: block;
 			position: absolute;
@@ -209,13 +245,26 @@ export default Vue.extend({
 			width: 120px;
 			height: 120px;
 			box-shadow: 1px 1px 3px rgba(#000, 0.2);
+
+			@media (max-width: 500px) {
+				top: 90px;
+				left: 0;
+				right: 0;
+				width: 92px;
+				height: 92px;
+				margin: auto;
+			}
 		}
 
 		> .description {
 			padding: 24px 24px 24px 154px;
-			color: var(--text);
 			font-size: 15px;
 			background: #fff;
+
+			@media (max-width: 500px) {
+				padding: 16px;
+				text-align: center;
+			}
 
 			> .empty {
 				margin: 0;
@@ -230,6 +279,10 @@ export default Vue.extend({
 			-webkit-backdrop-filter: blur(16px);
 			backdrop-filter: blur(16px);
 			font-size: 14px;
+
+			@media (max-width: 500px) {
+				padding: 16px;
+			}
 		
 			> .field {
 				display: flex;
