@@ -56,43 +56,52 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.dp-media-banner
-	width 100%
-	border-radius 4px
-	margin-top 4px
-	overflow hidden
+.dp-media-banner {
+	width: 100%;
+	border-radius: 4px;
+	margin-top: 4px;
+	overflow: hidden;
 
 	> .download,
-	> .sensitive
-		display flex
-		align-items center
-		font-size 12px
-		padding 8px 12px
-		white-space nowrap
+	> .sensitive {
+		display: flex;
+		align-items: center;
+		font-size: 12px;
+		padding: 8px 12px;
+		white-space: nowrap;
 
-		> *
-			display block
+		> * {
+			display: block;
+		}
 
-		> b
-			overflow hidden
-			text-overflow ellipsis
+		> b {
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 
-		> *:not(:last-child)
-			margin-right .2em
+		> *:not(:last-child) {
+			margin-right: .2em;
+		}
 
-		> .icon
-			font-size 1.6em
+		> .icon {
+			font-size: 1.6em;
+		}
+	}
 
-	> .download
-		background var(--noteAttachedFile)
+	> .download {
+		background: var(--noteAttachedFile);
+	}
 
-	> .sensitive
-		background #111
-		color #fff
+	> .sensitive {
+		background: #111;
+		color: #fff;
+	}
 
-	> .audio
-		.audio
-			display block
-			width 100%
-
+	> .audio {
+		.audio {
+			display: block;
+			width: 100%;
+		}
+	}
+}
 </style>

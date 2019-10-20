@@ -44,31 +44,34 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.kkjnbbplepmiyuadieoenjgutgcmtsvu
-	display flex
-	justify-content center
-	align-items center
+.kkjnbbplepmiyuadieoenjgutgcmtsvu {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-	font-size 3.5em
-	overflow hidden
-	background-position center
-	background-size cover
-	width 100%
-	height 100%
+	font-size: 3.5em;
+	overflow: hidden;
+	background-position: center;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+}
 
-.icozogqfvdetwohsdglrbswgrejoxbdj
-	display flex
-	justify-content center
-	align-items center
-	background #111
-	color #fff
+.icozogqfvdetwohsdglrbswgrejoxbdj {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #111;
+	color: #fff;
 
-	> div
-		display table-cell
-		text-align center
-		font-size 12px
+	> div {
+		display: table-cell;
+		text-align: center;
+		font-size: 12px;
 
-		> b
-			display block
-
+		> b {
+			display: block;
+		}
+	}
+}
 </style>

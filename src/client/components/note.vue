@@ -44,7 +44,7 @@
 						<a class="rp" v-if="appearNote.renote != null">RN:</a>
 					</div>
 					<div class="files" v-if="appearNote.files.length > 0">
-						<dp-media-list :media-list="appearNote.files"/>
+						<x-media-list :media-list="appearNote.files"/>
 					</div>
 					<dp-poll v-if="appearNote.poll" :note="appearNote" ref="pollViewer"/>
 					<dp-url-preview v-for="url in urls" :url="url" :key="url" :compact="true"/>
@@ -92,6 +92,7 @@ import { faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRi
 import XSub from './note.sub.vue';
 import XNoteHeader from './note-header.vue';
 import XReactionsViewer from './reactions-viewer.vue';
+import XMediaList from './media-list.vue';
 import noteMixin from '../scripts/note-mixin';
 import noteSubscriber from '../scripts/note-subscriber';
 
@@ -102,6 +103,7 @@ export default Vue.extend({
 		XSub,
 		XNoteHeader,
 		XReactionsViewer,
+		XMediaList,
 	},
 
 	mixins: [
