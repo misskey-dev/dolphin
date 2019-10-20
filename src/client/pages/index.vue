@@ -5,12 +5,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import Home from './index.home.vue';
-import Welcome from './index.welcome.vue';
 
 export default Vue.extend({
 	components: {
 		Home,
-		Welcome
+		Welcome: () => import('./index.welcome.vue').then(m => m.default),
 	}
 });
 </script>

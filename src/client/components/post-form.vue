@@ -73,6 +73,7 @@ export default Vue.extend({
 
 	components: {
 		XNotePreview,
+		XUploader: () => import('./uploader.vue').then(m => m.default),
 		XPostFormAttaches: () => import('./post-form-attaches.vue').then(m => m.default),
 		XPollEditor: () => import('./poll-editor.vue').then(m => m.default)
 	},

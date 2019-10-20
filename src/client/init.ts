@@ -1,5 +1,5 @@
 /**
- * App initializer
+ * App entry point
  */
 
 import Vue from 'vue';
@@ -7,18 +7,17 @@ import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import VAnimateCss from 'v-animate-css';
 import VModal from 'vue-js-modal';
-import VueI18n from 'vue-i18n';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
+import i18n from './i18n';
 import VueHotkey from './scripts/hotkey';
 import VueSize from './scripts/size';
 import App from './app.vue';
 import MiOS from './mios';
-import { version, lang } from './config';
+import { version, langs } from './config';
 import PostFormDialog from './components/post-form-dialog.vue';
 import Dialog from './components/dialog.vue';
 import DpIndex from './pages/index.vue';
-import i18n from './i18n';
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
@@ -26,7 +25,6 @@ Vue.use(VAnimateCss);
 Vue.use(VModal);
 Vue.use(VueHotkey);
 Vue.use(VueSize);
-Vue.use(VueI18n);
 Vue.component('fa', FontAwesomeIcon);
 
 // Register global directives
@@ -50,11 +48,52 @@ Vue.mixin({
 	}
 });
 
-/**
- * APP ENTRY POINT!
- */
-
 console.info(`Dolphin v${version}`);
+
+//#region Detect the user language
+let lang = null;
+
+if (langs.map(x => x[0]).includes(navigator.language)) {
+	lang = navigator.language;
+} else {
+	lang = langs.map(x => x[0]).find(x => x.split('-')[0] == navigator.language);
+
+	if (lang == null) {
+		// Fallback
+		lang = 'en-US';
+	}
+}
+
+localStorage.setItem('lang', lang);
+//#endregion
+
+// Detect the user agent
+const ua = navigator.userAgent.toLowerCase();
+let isMobile = /mobile|iphone|ipad|android/.test(ua) || window.innerWidth < 576;
+
+// Get the <head> element
+const head = document.getElementsByTagName('head')[0];
+
+// If mobile, insert the viewport meta tag
+if (isMobile) {
+	const viewport = document.getElementsByName("viewport").item(0);
+	viewport.setAttribute('content',
+		`${viewport.getAttribute('content')},minimum-scale=1,maximum-scale=1,user-scalable=no`);
+	head.appendChild(viewport);
+}
+
+//#region Fetch locale data
+const cachedLocale = localStorage.getItem('locale');
+
+if (cachedLocale == null) {
+	fetch(`/assets/locales/${lang}.json`)
+		.then(response => response.json()).then(locale => {
+			localStorage.setItem('locale', JSON.stringify(locale));
+			i18n.locale = lang;
+			i18n.setLocaleMessage(lang, locale);
+		});
+}
+//#endregion
 
 //#region Set lang attr
 const html = document.documentElement;
@@ -94,7 +133,7 @@ const router = new VueRouter({
 
 const os = new MiOS();
 
-os.init(() => {
+os.init(async () => {
 	document.addEventListener('visibilitychange', () => {
 		if (!document.hidden) {
 			os.store.commit('clearBehindNotes');
@@ -108,7 +147,6 @@ os.init(() => {
 	}, { passive: true });
 
 	const app = new Vue({
-		i18n,
 		store: os.store,
 		data() {
 			return {

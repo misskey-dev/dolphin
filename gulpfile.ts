@@ -8,19 +8,14 @@ import * as gutil from 'gulp-util';
 import * as ts from 'gulp-typescript';
 import tslint from 'gulp-tslint';
 const cssnano = require('gulp-cssnano');
-import * as uglifyComposer from 'gulp-uglify/composer';
 import * as rimraf from 'rimraf';
 import chalk from 'chalk';
 const imagemin = require('gulp-imagemin');
 import * as rename from 'gulp-rename';
 import * as mocha from 'gulp-mocha';
-import * as replace from 'gulp-replace';
-const uglifyes = require('uglify-es');
 const sass = require('gulp-sass');
 
 const locales = require('./locales');
-
-const uglify = uglifyComposer(uglifyes, console);
 
 const env = process.env.NODE_ENV || 'development';
 const isProduction = env === 'production';
@@ -99,16 +94,6 @@ gulp.task('cleanall', gulp.parallel('clean', cb =>
 	rimraf('./node_modules', cb)
 ));
 
-gulp.task('build:client:script', () => {
-	return gulp.src(['./src/client/boot.js'])
-		.pipe(replace('ENV', JSON.stringify(env)))
-		.pipe(replace('LANGS', JSON.stringify(Object.keys(locales))))
-		.pipe(isProduction ? uglify({
-			toplevel: true
-		} as any) : gutil.noop())
-		.pipe(gulp.dest('./built/client/assets/'));
-});
-
 gulp.task('build:client:styles', () =>
 	gulp.src('./src/client/style.scss')
 		.pipe(sass())
@@ -131,7 +116,6 @@ gulp.task('copy:client', () =>
 );
 
 gulp.task('build:client', gulp.parallel(
-	'build:client:script',
 	'build:client:styles',
 	'copy:client'
 ));
