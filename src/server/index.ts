@@ -12,7 +12,6 @@ import * as Router from '@koa/router';
 import * as mount from 'koa-mount';
 import * as compress from 'koa-compress';
 import * as koaLogger from 'koa-logger';
-import * as requestStats from 'request-stats';
 import * as slow from 'koa-slow';
 
 import activityPub from './activitypub';
@@ -20,10 +19,8 @@ import nodeinfo from './nodeinfo';
 import wellKnown from './well-known';
 import config from '../config';
 import apiServer from './api';
-import { sum } from '../prelude/array';
 import Logger from '../services/logger';
 import { program } from '../argv';
-import { networkChart } from '../services/chart';
 import { genAvatar } from '../misc/gen-avatar';
 import { createTemp } from '../misc/create-temp';
 
@@ -119,27 +116,4 @@ export default () => new Promise(resolve => {
 
 	// Listen
 	server.listen(config.port, resolve);
-
-	//#region Network stats
-	let queue: any[] = [];
-
-	requestStats(server, (stats: any) => {
-		if (stats.ok) {
-			queue.push(stats);
-		}
-	});
-
-	// Bulk write
-	setInterval(() => {
-		if (queue.length == 0) return;
-
-		const requests = queue.length;
-		const time = sum(queue.map(x => x.time));
-		const incomingBytes = sum(queue.map(x => x.req.byets));
-		const outgoingBytes = sum(queue.map(x => x.res.byets));
-		queue = [];
-
-		networkChart.update(requests, time, incomingBytes, outgoingBytes);
-	}, 5000);
-	//#endregion
 });

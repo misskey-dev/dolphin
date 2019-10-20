@@ -8,7 +8,6 @@ import * as gutil from 'gulp-util';
 import * as ts from 'gulp-typescript';
 const cssnano = require('gulp-cssnano');
 import * as rimraf from 'rimraf';
-const imagemin = require('gulp-imagemin');
 import * as rename from 'gulp-rename';
 const sass = require('gulp-sass');
 
@@ -72,7 +71,6 @@ gulp.task('copy:client', () =>
 			'./assets/**/*',
 			'./src/client/assets/**/*',
 		])
-			.pipe(isProduction ? (imagemin as any)() : gutil.noop())
 			.pipe(rename(path => {
 				path.dirname = path.dirname!.replace('assets', '.');
 			}))
