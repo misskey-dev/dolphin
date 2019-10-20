@@ -92,6 +92,14 @@ if (cachedLocale == null) {
 			i18n.locale = lang;
 			i18n.setLocaleMessage(lang, locale);
 		});
+} else {
+	// TODO: 古い時だけ更新
+	setTimeout(() => {
+		fetch(`/assets/locales/${lang}.json`)
+			.then(response => response.json()).then(locale => {
+				localStorage.setItem('locale', JSON.stringify(locale));
+			});
+	}, 1000 * 5);
 }
 //#endregion
 
