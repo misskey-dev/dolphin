@@ -60,6 +60,10 @@ export default Vue.extend({
 	font-size: 0.9em;
 	background: rgba(0, 0, 0, 0.03);
 
+	@media (max-width: 450px) {
+		padding: 14px 16px;
+	}
+
 	> .avatar {
 		flex-shrink: 0;
 		display: block;
