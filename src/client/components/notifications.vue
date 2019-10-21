@@ -8,12 +8,12 @@
 			</template>
 		</sequential-entrance>
 
-		<button class="more" v-if="more" @click="fetchMore" :disabled="moreFetching">
-			<template v-if="moreFetching"><fa icon="spinner" pulse fixed-width/></template>
-			{{ moreFetching ? $t('@.loading') : $t('@.load-more') }}
+		<button class="more _buttonPrimary" v-if="more" @click="fetchMore" :disabled="moreFetching">
+			<template v-if="!moreFetching">{{ $t('loadMore') }}</template>
+			<template v-if="moreFetching"><fa :icon="faSpinner" pulse fixed-width/></template>
 		</button>
 
-		<p class="empty" v-if="empty">{{ $t('empty') }}</p>
+		<p class="empty" v-if="empty">{{ $t('noNotifications') }}</p>
 
 		<dp-error v-if="error" @retry="init()"/>
 	</div>
@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import i18n from '../i18n';
 import paging from '../scripts/paging';
 import XNotification from './notification.vue';
@@ -65,7 +66,8 @@ export default Vue.extend({
 				params: () => ({
 					includeTypes: this.type ? [this.type] : undefined
 				})
-			}
+			},
+			faSpinner
 		};
 	},
 

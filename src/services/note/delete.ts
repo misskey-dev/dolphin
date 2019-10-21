@@ -27,7 +27,6 @@ export default async function(user: User, note: Note, quiet = false) {
 
 	if (note.renoteId) {
 		Notes.decrement({ id: note.renoteId }, 'renoteCount', 1);
-		Notes.decrement({ id: note.renoteId }, 'score', 1);
 	}
 
 	if (!quiet) {

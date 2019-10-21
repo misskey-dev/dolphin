@@ -263,7 +263,6 @@ async function renderNoteOrRenoteActivity(data: Option, note: Note) {
 
 function incRenoteCount(renote: Note) {
 	Notes.increment({ id: renote.id }, 'renoteCount', 1);
-	Notes.increment({ id: renote.id }, 'score', 1);
 }
 
 async function publish(user: User, note: Note, reply: Note | null | undefined, renote: Note | null | undefined, noteActivity: any) {

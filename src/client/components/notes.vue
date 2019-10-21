@@ -12,9 +12,9 @@
 	</sequential-entrance>
 
 	<footer v-if="more">
-		<button @click="fetchMore()" :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }">
-			<template v-if="!moreFetching">{{ $t('@.load-more') }}</template>
-			<template v-if="moreFetching"><fa icon="spinner" pulse fixed-width/></template>
+		<button @click="fetchMore()" :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }" class="_buttonPrimary">
+			<template v-if="!moreFetching">{{ $t('loadMore') }}</template>
+			<template v-if="moreFetching"><fa :icon="faSpinner" pulse fixed-width/></template>
 		</button>
 	</footer>
 </div>
@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import i18n from '../i18n';
 import paging from '../scripts/paging';
 import XNote from './note.vue';
@@ -73,6 +74,12 @@ export default Vue.extend({
 		extract: {
 			required: false
 		}
+	},
+
+	data() {
+		return {
+			faSpinner
+		};
 	},
 
 	computed: {

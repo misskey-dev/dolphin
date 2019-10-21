@@ -11,7 +11,7 @@
 		<fa v-else-if="!isFollowing && user.isLocked" :icon="faPlus"/>
 		<fa v-else-if="!isFollowing && !user.isLocked" :icon="faPlus"/>
 	</template>
-	<template v-else><fa icon="spinner" pulse fixed-width/></template>
+	<template v-else><fa :icon="faSpinner" pulse fixed-width/></template>
 </button>
 </template>
 

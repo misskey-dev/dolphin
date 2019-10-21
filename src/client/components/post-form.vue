@@ -139,7 +139,7 @@ export default Vue.extend({
 
 		placeholder(): string {
 			return this.renote
-				? opts.mobile ? this.$t('@.post-form.option-quote-placeholder') : this.$t('@.post-form.quote-placeholder')
+				? this.$t('@.post-form.quote-placeholder')
 				: this.reply
 					? this.$t('_postForm.replyPlaceholder')
 					: this.$t('_postForm.placeholder');
@@ -506,9 +506,7 @@ export default Vue.extend({
 				this.clear();
 				this.deleteDraft();
 				this.$emit('posted');
-				if (opts.onSuccess) opts.onSuccess(this);
 			}).catch(err => {
-				if (opts.onSuccess) opts.onFailure(this);
 			}).then(() => {
 				this.posting = false;
 			});

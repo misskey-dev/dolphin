@@ -46,8 +46,6 @@ export default async (user: User, note: Note, reaction?: string) => {
 		.where('id = :id', { id: note.id })
 		.execute();
 
-	Notes.increment({ id: note.id }, 'score', 1);
-
 	perUserReactionsChart.update(user, note);
 
 	publishNoteStream(note.id, 'reacted', {
