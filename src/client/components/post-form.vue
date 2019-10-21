@@ -141,16 +141,16 @@ export default Vue.extend({
 			return this.renote
 				? opts.mobile ? this.$t('@.post-form.option-quote-placeholder') : this.$t('@.post-form.quote-placeholder')
 				: this.reply
-					? this.$t('@.post-form.reply-placeholder')
-					: this.$t('@.post-form.placeholder');
+					? this.$t('_postForm.replyPlaceholder')
+					: this.$t('_postForm.placeholder');
 		},
 
 		submitText(): string {
 			return this.renote
 				? this.$t('@.post-form.renote')
 				: this.reply
-					? this.$t('@.post-form.reply')
-					: this.$t('@.post-form.submit');
+					? this.$t('reply')
+					: this.$t('_postForm.post');
 		},
 
 		canPost(): boolean {

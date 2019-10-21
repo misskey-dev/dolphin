@@ -46,6 +46,7 @@ delete: "削除"
 addToList: "リストに追加"
 sendMessage: "メッセージを送信"
 copyUsername: "ユーザー名をコピー"
+reply: "返信"
 
 _visibility:
   public: "パブリック"
@@ -57,6 +58,7 @@ _visibility:
 
 _postForm:
   placeholder: "いまどうしてる？"
+  replyPlaceholder: "この投稿に返信..."
   post: "投稿"
 
 _profile:

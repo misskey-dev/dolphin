@@ -2,33 +2,35 @@
 <div class="gqyayizv">
 	<div class="backdrop" ref="backdrop" @click="close"></div>
 	<div class="popover" ref="popover">
-		<div @click="choose('public')" :class="{ active: v == 'public' }">
-			<div><fa icon="globe"/></div>
+		<button class="_buttonPlain" @click="choose('public')" :class="{ active: v == 'public' }">
+			<div><fa :icon="faGlobe"/></div>
 			<div>
 				<span>{{ $t('_visibility.public') }}</span>
 				<span>{{ $t('_visibility.publicDescription') }}</span>
 			</div>
-		</div>
-		<div @click="choose('followers')" :class="{ active: v == 'followers' }">
-			<div><fa icon="unlock"/></div>
+		</button>
+		<button class="_buttonPlain" @click="choose('followers')" :class="{ active: v == 'followers' }">
+			<div><fa :icon="faUnlock"/></div>
 			<div>
 				<span>{{ $t('_visibility.followers') }}</span>
 				<span>{{ $t('_visibility.followersDescription') }}</span>
 			</div>
-		</div>
-		<div @click="choose('specified')" :class="{ active: v == 'specified' }">
-			<div><fa icon="envelope"/></div>
+		</button>
+		<button class="_buttonPlain" @click="choose('specified')" :class="{ active: v == 'specified' }">
+			<div><fa :icon="faEnvelope"/></div>
 			<div>
 				<span>{{ $t('_visibility.specified') }}</span>
 				<span>{{ $t('_visibility.specifiedDescription') }}</span>
 			</div>
-		</div>
+		</button>
 	</div>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import { faGlobe, faUnlock } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import i18n from '../i18n';
 import anime from 'animejs';
 
@@ -45,7 +47,8 @@ export default Vue.extend({
 	},
 	data() {
 		return {
-			v: this.$store.state.settings.rememberNoteVisibility ? (this.$store.state.device.visibility || this.$store.state.settings.defaultNoteVisibility) : (this.currentVisibility || this.$store.state.settings.defaultNoteVisibility)
+			v: this.$store.state.settings.rememberNoteVisibility ? (this.$store.state.device.visibility || this.$store.state.settings.defaultNoteVisibility) : (this.currentVisibility || this.$store.state.settings.defaultNoteVisibility),
+			faGlobe, faUnlock, faEnvelope
 		}
 	},
 	mounted() {
@@ -137,7 +140,7 @@ export default Vue.extend({
 		z-index: 10000;
 		width: 100%;
 		height: 100%;
-		background: #fff;
+		background: rgba(0, 0, 0, 0.3);
 		opacity: 0;
 	}
 
@@ -153,28 +156,25 @@ export default Vue.extend({
 		transform: scale(0.5);
 		opacity: 0;
 
-		> div {
+		> button {
 			display: flex;
 			padding: 8px 14px;
 			font-size: 12px;
-			cursor: pointer;
+			text-align: left;
+			width: 100%;
+			box-sizing: border-box;
 
 			&:hover {
-				background: var(--faceClearButtonHover);
+				background: rgba(0, 0, 0, 0.05);
 			}
 
 			&:active {
-				background: var(--faceClearButtonActive);
+				background: rgba(0, 0, 0, 0.1);
 			}
 
 			&.active {
-				color: var(--primaryForeground);
+				color: #fff;
 				background: $primary;
-			}
-
-			> * {
-				user-select: none;
-				pointer-events: none;
 			}
 
 			> *:first-child {
@@ -183,6 +183,10 @@ export default Vue.extend({
 				align-items: center;
 				margin-right: 10px;
 				width: 16px;
+				top: 0;
+				bottom: 0;
+				margin-top: auto;
+				margin-bottom: auto;
 			}
 
 			> *:last-child {
