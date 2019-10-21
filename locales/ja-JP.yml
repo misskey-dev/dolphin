@@ -36,6 +36,13 @@ save: "保存"
 saved: "保存しました"
 users: "ユーザー"
 addUser: "ユーザーを追加"
+favorite: "お気に入り"
+favorites: "お気に入り"
+unfavorite: "お気に入り解除"
+pin: "ピン留め"
+copyContent: "内容をコピー"
+copyLink: "リンクをコピー"
+delete: "削除"
 
 _profile:
   name: "名前"

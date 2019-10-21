@@ -11,6 +11,7 @@
 		<nav v-if="navOpen">
 			<router-link to="/"><fa :icon="faHome" fixed-width/>{{ $t('timeline') }}</router-link>
 			<router-link :to="`/@${ $store.state.i.username }`"><fa :icon="faUser" fixed-width/>{{ $t('profile') }}</router-link>
+			<router-link to="/favorites"><fa :icon="faStar" fixed-width/>{{ $t('favorites') }}</router-link>
 			<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
 			<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
 			<div></div>
@@ -28,7 +29,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
@@ -49,7 +50,7 @@ export default Vue.extend({
 			navOpen: false,
 			notificationsOpen: false,
 			connection: null,
-			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome
+			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar
 		};
 	},
 

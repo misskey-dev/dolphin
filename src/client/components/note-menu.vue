@@ -6,7 +6,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faCopy, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { faStar, faLink, faThumbtack, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCopy, faEye, faEyeSlash, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import i18n from '../i18n';
 import { url } from '../config';
 import copyToClipboard from '../scripts/copy-to-clipboard';
@@ -37,14 +38,14 @@ export default Vue.extend({
 					action: this.detail
 				}, {
 					icon: faCopy,
-					text: this.$t('copy-content'),
+					text: this.$t('copyContent'),
 					action: this.copyContent
 				}, {
-					icon: 'link',
-					text: this.$t('copy-link'),
+					icon: faLink,
+					text: this.$t('copyLink'),
 					action: this.copyLink
 				}, this.note.uri ? {
-					icon: 'external-link-square-alt',
+					icon: faExternalLinkSquareAlt,
 					text: this.$t('remote'),
 					action: () => {
 						window.open(this.note.uri, '_blank');
@@ -52,29 +53,20 @@ export default Vue.extend({
 				} : undefined,
 				null,
 				this.isFavorited ? {
-					icon: 'star',
+					icon: faStar,
 					text: this.$t('unfavorite'),
 					action: () => this.toggleFavorite(false)
 				} : {
-					icon: 'star',
+					icon: faStar,
 					text: this.$t('favorite'),
 					action: () => this.toggleFavorite(true)
 				},
-				this.note.userId != this.$store.state.i.id ? this.isWatching ? {
-					icon: faEyeSlash,
-					text: this.$t('unwatch'),
-					action: () => this.toggleWatch(false)
-				} : {
-					icon: faEye,
-					text: this.$t('watch'),
-					action: () => this.toggleWatch(true)
-				} : undefined,
 				this.note.userId == this.$store.state.i.id ? (this.$store.state.i.pinnedNoteIds || []).includes(this.note.id) ? {
-					icon: 'thumbtack',
+					icon: faThumbtack,
 					text: this.$t('unpin'),
 					action: () => this.togglePin(false)
 				} : {
-					icon: 'thumbtack',
+					icon: faThumbtack,
 					text: this.$t('pin'),
 					action: () => this.togglePin(true)
 				} : undefined,
@@ -86,7 +78,7 @@ export default Vue.extend({
 						action: this.deleteAndEdit
 					} : undefined,
 					{
-						icon: ['far', 'trash-alt'],
+						icon: faTrashAlt,
 						text: this.$t('delete'),
 						action: this.del
 					}]
@@ -100,14 +92,14 @@ export default Vue.extend({
 					action: this.detail
 				}, {
 					icon: faCopy,
-					text: this.$t('copy-content'),
+					text: this.$t('copyContent'),
 					action: this.copyContent
 				}, {
-					icon: 'link',
-					text: this.$t('copy-link'),
+					icon: faLink,
+					text: this.$t('copyLink'),
 					action: this.copyLink
 				}, this.note.uri ? {
-					icon: 'external-link-square-alt',
+					icon: faExternalLinkSquareAlt,
 					text: this.$t('remote'),
 					action: () => {
 						window.open(this.note.uri, '_blank');
