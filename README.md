@@ -2,11 +2,17 @@
 
 <div>
 <h1 align="center">Dolphin</h1>
-<p align="center">Dolphin is a fork of Misskey, but optimized for single user (or few users) use.</p>
+<p align="center">Dolphin is a lightweight ActivityPub server optimized for single user  (or few users) use.</p>
 <p align="center"><strong>UNDER DEVELOPMENT</strong></p>
 </div>
 
-## Install
+## 🍀 Why Dolphin
+Dolphin is a fork of [Misskey](https://github.com/syuilo/misskey) and a sister project of it.
+While inheriting features such as reaction and high performance, it has been optimized for single-user use. As a result, it is easier to use and lighter.
+
+Looking for a lightweight, high-performance ActivityPub server? Want to use Misskey, but is it heavy to use alone? Try Dolphin.
+
+## 📦 Install
 ### Install dependencies
 Please install and setup these softwares:
 
@@ -70,7 +76,7 @@ NODE_ENV=production npm start
 
 Enjoy!
 
-## How to update your Dolphin
+## 🆕 How to update your Dolphin
 1. `git pull`
 2. `npm i`
 3. `NODE_ENV=production npm run build`
