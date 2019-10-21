@@ -8,8 +8,8 @@
 				<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i">
 					<dp-avatar :user="user" class="avatar"/>
 					<div class="body">
-						<dp-user-name :user="user"/>
-						<dp-acct :user="user"/>
+						<dp-user-name :user="user" class="name"/>
+						<dp-acct :user="user" class="acct"/>
 					</div>
 				</div>
 			</ui-pagination>
@@ -94,6 +94,7 @@ export default Vue.extend({
 			> .users {
 				> .user {
 					display: flex;
+					align-items: center;
 
 					> .avatar {
 						width: 50px;
@@ -102,6 +103,15 @@ export default Vue.extend({
 
 					> .body {
 						padding: 8px;
+
+						> .name {
+							display: block;
+							font-weight: bold;
+						}
+
+						> .acct {
+							opacity: 0.5;
+						}
 					}
 				}
 			}
