@@ -12,9 +12,6 @@ const sass = require('gulp-sass');
 
 const locales = require('./locales');
 
-const env = process.env.NODE_ENV || 'development';
-const isProduction = env === 'production';
-
 gulp.task('build:ts', () => {
 	const tsProject = ts.createProject('./tsconfig.json');
 

@@ -96,7 +96,7 @@ module.exports = {
 	plugins: [
 		//new HardSourceWebpackPlugin(),
 		new ProgressBarPlugin({
-			format: chalk`  {cyan.bold yes we can} {bold [}:bar{bold ]} {green.bold :percent} {gray (:current/:total)} :elapseds`,
+			format: chalk`  {cyan.bold Yes we can} {bold [}:bar{bold ]} {green.bold :percent} {gray :elapseds}`,
 			clear: false
 		}),
 		new webpack.DefinePlugin({
@@ -108,7 +108,6 @@ module.exports = {
 			'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development')
 		}),
 		new VueLoaderPlugin(),
-		new webpack.optimize.ModuleConcatenationPlugin()
 	],
 	output: {
 		path: __dirname + '/built/client/assets',
