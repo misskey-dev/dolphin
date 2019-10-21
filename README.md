@@ -6,6 +6,8 @@
 <p align="center"><strong>UNDER DEVELOPMENT</strong></p>
 </div>
 
+<p align="center"><a href="https://www.patreon.com/syuilo"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron!" width="160" /></a></p>
+
 ## 🍀 Why Dolphin
 Dolphin is a fork of [Misskey](https://github.com/syuilo/misskey) and a sister project of it.
 While inheriting features such as reaction and high performance, it has been optimized for single-user use. As a result, it is easier to use and lighter.
@@ -82,4 +84,3 @@ Enjoy!
 3. `NODE_ENV=production npm run build`
 4. `npm run migrate`
 5. Restart your Dolphin process to apply changes
-6. Enjoy
