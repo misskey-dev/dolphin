@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class Init1571624254665 implements MigrationInterface {
+export class Init1571624493222 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query(`CREATE TYPE "log_level_enum" AS ENUM('error', 'warning', 'info', 'success', 'debug')`, undefined);
@@ -24,7 +24,7 @@ export class Init1571624254665 implements MigrationInterface {
         await queryRunner.query(`CREATE INDEX "IDX_e5848eac4940934e23dbc17581" ON "drive_file" ("uri") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_bb90d1956dafc4068c28aa7560" ON "drive_file" ("folderId") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_315c779174fe8247ab324f036e" ON "drive_file" ("isLink") `, undefined);
-        await queryRunner.query(`CREATE TABLE "user" ("id" character varying(32) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE, "lastFetchedAt" TIMESTAMP WITH TIME ZONE, "username" character varying(128) NOT NULL, "usernameLower" character varying(128) NOT NULL, "name" character varying(128), "followersCount" integer NOT NULL DEFAULT 0, "followingCount" integer NOT NULL DEFAULT 0, "notesCount" integer NOT NULL DEFAULT 0, "avatarId" character varying(32), "bannerId" character varying(32), "tags" character varying(128) array NOT NULL DEFAULT '{}'::varchar[], "avatarUrl" character varying(512), "bannerUrl" character varying(512), "isSuspended" boolean NOT NULL DEFAULT false, "isLocked" boolean NOT NULL DEFAULT false, "isBot" boolean NOT NULL DEFAULT false, "emojis" character varying(128) array NOT NULL DEFAULT '{}'::varchar[], "host" character varying(128), "inbox" character varying(512), "sharedInbox" character varying(512), "featured" character varying(512), "uri" character varying(512), "token" character(16), CONSTRAINT "UQ_a854e557b1b14814750c7c7b0c9" UNIQUE ("token"), CONSTRAINT "REL_58f5c71eaab331645112cf8cfa" UNIQUE ("avatarId"), CONSTRAINT "REL_afc64b53f8db3707ceb34eb28e" UNIQUE ("bannerId"), CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id"))`, undefined);
+        await queryRunner.query(`CREATE TABLE "user" ("id" character varying(32) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE, "lastFetchedAt" TIMESTAMP WITH TIME ZONE, "username" character varying(128) NOT NULL, "usernameLower" character varying(128) NOT NULL, "name" character varying(128), "followersCount" integer NOT NULL DEFAULT 0, "followingCount" integer NOT NULL DEFAULT 0, "notesCount" integer NOT NULL DEFAULT 0, "avatarId" character varying(32), "bannerId" character varying(32), "tags" character varying(128) array NOT NULL DEFAULT '{}'::varchar[], "avatarUrl" character varying(512), "bannerUrl" character varying(512), "isSuspended" boolean NOT NULL DEFAULT false, "isLocked" boolean NOT NULL DEFAULT false, "isBot" boolean NOT NULL DEFAULT false, "isAdmin" boolean NOT NULL DEFAULT false, "emojis" character varying(128) array NOT NULL DEFAULT '{}'::varchar[], "host" character varying(128), "inbox" character varying(512), "sharedInbox" character varying(512), "featured" character varying(512), "uri" character varying(512), "token" character(16), CONSTRAINT "UQ_a854e557b1b14814750c7c7b0c9" UNIQUE ("token"), CONSTRAINT "REL_58f5c71eaab331645112cf8cfa" UNIQUE ("avatarId"), CONSTRAINT "REL_afc64b53f8db3707ceb34eb28e" UNIQUE ("bannerId"), CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id"))`, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_e11e649824a45d8ed01d597fd9" ON "user" ("createdAt") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_80ca6e6ef65fb9ef34ea8c90f4" ON "user" ("updatedAt") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_a27b942a0d6dcff90e3ee9b5e8" ON "user" ("usernameLower") `, undefined);
@@ -122,14 +122,6 @@ export class Init1571624254665 implements MigrationInterface {
         await queryRunner.query(`CREATE TABLE "user_profile" ("userId" character varying(32) NOT NULL, "description" character varying(2048), "fields" jsonb NOT NULL DEFAULT '[]', "url" character varying(512), "password" character varying(128), "clientData" jsonb NOT NULL DEFAULT '{}', "autoAcceptFollowed" boolean NOT NULL DEFAULT false, "alwaysMarkNsfw" boolean NOT NULL DEFAULT false, "userHost" character varying(128), CONSTRAINT "REL_51cb79b5555effaf7d69ba1cff" UNIQUE ("userId"), CONSTRAINT "PK_51cb79b5555effaf7d69ba1cff9" PRIMARY KEY ("userId"))`, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_dce530b98e454793dac5ec2f5a" ON "user_profile" ("userHost") `, undefined);
         await queryRunner.query(`CREATE TABLE "used_username" ("username" character varying(128) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, CONSTRAINT "PK_78fd79d2d24c6ac2f4cc9a31a5d" PRIMARY KEY ("username"))`, undefined);
-        await queryRunner.query(`CREATE TYPE "__chart__active_users_span_enum" AS ENUM('hour', 'day')`, undefined);
-        await queryRunner.query(`CREATE TABLE "__chart__active_users" ("id" SERIAL NOT NULL, "date" integer NOT NULL, "group" character varying(128), "span" "__chart__active_users_span_enum" NOT NULL, "unique" jsonb NOT NULL DEFAULT '{}', "___local_count" bigint NOT NULL, "___remote_count" bigint NOT NULL, CONSTRAINT "PK_317237a9f733b970604a11e314f" PRIMARY KEY ("id"))`, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_0ad37b7ef50f4ddc84363d7ccc" ON "__chart__active_users" ("date") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_15e91a03aeeac9dbccdf43fc06" ON "__chart__active_users" ("span") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_00ed5f86db1f7efafb1978bf21" ON "__chart__active_users" ("group") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_20f57cc8f142c131340ee16742" ON "__chart__active_users" ("span", "date") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_9a3ed15a30ab7e3a37702e6e08" ON "__chart__active_users" ("date", "group") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_c26e2c1cbb6e911e0554b27416" ON "__chart__active_users" ("span", "date", "group") `, undefined);
         await queryRunner.query(`CREATE TYPE "__chart__drive_span_enum" AS ENUM('hour', 'day')`, undefined);
         await queryRunner.query(`CREATE TABLE "__chart__drive" ("id" SERIAL NOT NULL, "date" integer NOT NULL, "group" character varying(128), "span" "__chart__drive_span_enum" NOT NULL, "unique" jsonb NOT NULL DEFAULT '{}', "___local_totalCount" bigint NOT NULL, "___local_totalSize" bigint NOT NULL, "___local_incCount" bigint NOT NULL, "___local_incSize" bigint NOT NULL, "___local_decCount" bigint NOT NULL, "___local_decSize" bigint NOT NULL, "___remote_totalCount" bigint NOT NULL, "___remote_totalSize" bigint NOT NULL, "___remote_incCount" bigint NOT NULL, "___remote_incSize" bigint NOT NULL, "___remote_decCount" bigint NOT NULL, "___remote_decSize" bigint NOT NULL, CONSTRAINT "PK_f96bc548a765cd4b3b354221ce7" PRIMARY KEY ("id"))`, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_13565815f618a1ff53886c5b28" ON "__chart__drive" ("date") `, undefined);
@@ -417,14 +409,6 @@ export class Init1571624254665 implements MigrationInterface {
         await queryRunner.query(`DROP INDEX "IDX_13565815f618a1ff53886c5b28"`, undefined);
         await queryRunner.query(`DROP TABLE "__chart__drive"`, undefined);
         await queryRunner.query(`DROP TYPE "__chart__drive_span_enum"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_c26e2c1cbb6e911e0554b27416"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_9a3ed15a30ab7e3a37702e6e08"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_20f57cc8f142c131340ee16742"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_00ed5f86db1f7efafb1978bf21"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_15e91a03aeeac9dbccdf43fc06"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_0ad37b7ef50f4ddc84363d7ccc"`, undefined);
-        await queryRunner.query(`DROP TABLE "__chart__active_users"`, undefined);
-        await queryRunner.query(`DROP TYPE "__chart__active_users_span_enum"`, undefined);
         await queryRunner.query(`DROP TABLE "used_username"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_dce530b98e454793dac5ec2f5a"`, undefined);
         await queryRunner.query(`DROP TABLE "user_profile"`, undefined);
