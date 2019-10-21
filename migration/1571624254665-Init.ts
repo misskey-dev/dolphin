@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class Init1571497610178 implements MigrationInterface {
+export class Init1571624254665 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query(`CREATE TYPE "log_level_enum" AS ENUM('error', 'warning', 'info', 'success', 'debug')`, undefined);
@@ -162,14 +162,6 @@ export class Init1571497610178 implements MigrationInterface {
         await queryRunner.query(`CREATE INDEX "IDX_d0a4f79af5a97b08f37b547197" ON "__chart__instance" ("span", "date") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_39ee857ab2f23493037c6b6631" ON "__chart__instance" ("date", "group") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_f5448d9633cff74208d850aabe" ON "__chart__instance" ("span", "date", "group") `, undefined);
-        await queryRunner.query(`CREATE TYPE "__chart__network_span_enum" AS ENUM('hour', 'day')`, undefined);
-        await queryRunner.query(`CREATE TABLE "__chart__network" ("id" SERIAL NOT NULL, "date" integer NOT NULL, "group" character varying(128), "span" "__chart__network_span_enum" NOT NULL, "unique" jsonb NOT NULL DEFAULT '{}', "___incomingRequests" bigint NOT NULL, "___outgoingRequests" bigint NOT NULL, "___totalTime" bigint NOT NULL, "___incomingBytes" bigint NOT NULL, "___outgoingBytes" bigint NOT NULL, CONSTRAINT "PK_bc4290c2e27fad14ef0c1ca93f3" PRIMARY KEY ("id"))`, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_a1efd3e0048a5f2793a47360dc" ON "__chart__network" ("date") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_f8dd01baeded2ffa833e0a610a" ON "__chart__network" ("span") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_7b5da130992ec9df96712d4290" ON "__chart__network" ("group") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_08fac0eb3b11f04c200c0b40dd" ON "__chart__network" ("span", "date") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_0a905b992fecd2b5c3fb98759e" ON "__chart__network" ("date", "group") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_9ff6944f01acb756fdc92d7563" ON "__chart__network" ("span", "date", "group") `, undefined);
         await queryRunner.query(`CREATE TYPE "__chart__notes_span_enum" AS ENUM('hour', 'day')`, undefined);
         await queryRunner.query(`CREATE TABLE "__chart__notes" ("id" SERIAL NOT NULL, "date" integer NOT NULL, "group" character varying(128), "span" "__chart__notes_span_enum" NOT NULL, "unique" jsonb NOT NULL DEFAULT '{}', "___local_total" bigint NOT NULL, "___local_inc" bigint NOT NULL, "___local_dec" bigint NOT NULL, "___local_diffs_normal" bigint NOT NULL, "___local_diffs_reply" bigint NOT NULL, "___local_diffs_renote" bigint NOT NULL, "___remote_total" bigint NOT NULL, "___remote_inc" bigint NOT NULL, "___remote_dec" bigint NOT NULL, "___remote_diffs_normal" bigint NOT NULL, "___remote_diffs_reply" bigint NOT NULL, "___remote_diffs_renote" bigint NOT NULL, CONSTRAINT "PK_0aec823fa85c7f901bdb3863b14" PRIMARY KEY ("id"))`, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_42eb716a37d381cdf566192b2b" ON "__chart__notes" ("date") `, undefined);
@@ -393,14 +385,6 @@ export class Init1571497610178 implements MigrationInterface {
         await queryRunner.query(`DROP INDEX "IDX_42eb716a37d381cdf566192b2b"`, undefined);
         await queryRunner.query(`DROP TABLE "__chart__notes"`, undefined);
         await queryRunner.query(`DROP TYPE "__chart__notes_span_enum"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_9ff6944f01acb756fdc92d7563"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_0a905b992fecd2b5c3fb98759e"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_08fac0eb3b11f04c200c0b40dd"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_7b5da130992ec9df96712d4290"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_f8dd01baeded2ffa833e0a610a"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_a1efd3e0048a5f2793a47360dc"`, undefined);
-        await queryRunner.query(`DROP TABLE "__chart__network"`, undefined);
-        await queryRunner.query(`DROP TYPE "__chart__network_span_enum"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_f5448d9633cff74208d850aabe"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_39ee857ab2f23493037c6b6631"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_d0a4f79af5a97b08f37b547197"`, undefined);
