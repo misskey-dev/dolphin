@@ -35,9 +35,6 @@ export const meta = {
 				'all',
 				'available',
 				'admin',
-				'moderator',
-				'adminOrModerator',
-				'silenced',
 				'suspended',
 			]),
 			default: 'all'

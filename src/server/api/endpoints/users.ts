@@ -34,8 +34,6 @@ export const meta = {
 			validator: $.optional.str.or([
 				'all',
 				'admin',
-				'moderator',
-				'adminOrModerator',
 				'alive'
 			]),
 			default: 'all'

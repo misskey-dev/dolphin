@@ -34,6 +34,8 @@ loginWaiting: "ログイン中"
 uploading: "アップロード中"
 save: "保存"
 saved: "保存しました"
+users: "ユーザー"
+addUser: "ユーザーを追加"
 
 _profile:
   name: "名前"
