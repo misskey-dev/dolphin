@@ -3,7 +3,7 @@
 	<main>
 		<router-view v-hotkey.global="keymap"></router-view>
 		<div class="powerd-by">
-			<span>Powerd by</span>
+			<span>Powered by</span>
 			<x-logo class="logo"/>
 		</div>
 	</main>

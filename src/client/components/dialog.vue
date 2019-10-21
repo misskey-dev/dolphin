@@ -211,6 +211,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .dp-dialog {
 	display: flex;
 	align-items: center;
@@ -257,7 +259,7 @@ export default Vue.extend({
 			font-size: 32px;
 
 			&.success {
-				color: #85da5a;
+				color: $primary;
 			}
 
 			&.error {

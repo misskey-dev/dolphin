@@ -59,20 +59,10 @@ export default Vue.extend({
 			const width = popover.offsetWidth;
 			const height = popover.offsetHeight;
 
-			let left;
-			let top;
-
-			if (this.$root.isMobile) {
-				const x = rect.left + window.pageXOffset + (this.source.offsetWidth / 2);
-				const y = rect.top + window.pageYOffset + (this.source.offsetHeight / 2);
-				left = (x - (width / 2));
-				top = (y - (height / 2));
-			} else {
-				const x = rect.left + window.pageXOffset + (this.source.offsetWidth / 2);
-				const y = rect.top + window.pageYOffset + this.source.offsetHeight;
-				left = (x - (width / 2));
-				top = y;
-			}
+			const x = rect.left + window.pageXOffset + (this.source.offsetWidth / 2);
+			const y = rect.top + window.pageYOffset + this.source.offsetHeight;
+			const left = (x - (width / 2));
+			const top = y;
 
 			if (left + width > window.innerWidth) {
 				left = window.innerWidth - width;
@@ -92,7 +82,7 @@ export default Vue.extend({
 				targets: this.$refs.popover,
 				opacity: 1,
 				scale: [0.5, 1],
-				duration: 500
+				duration: 500,
 			});
 		});
 	},

@@ -6,7 +6,7 @@
 
 	<sequential-entrance class="notes">
 		<template v-for="(note, i) in _notes">
-			<x-note :note="note" :key="note.id" :data-index="i"/>
+			<x-note :note="note" :key="note.id" :data-index="i" :detail="detail"/>
 			<x-date-separator :key="note.id + '_date'" :data-index="i" v-if="i != items.length - 1 && note._date != _notes[i + 1]._date" :newer="note.createdAt" :older="_notes[i + 1].createdAt"/>
 		</template>
 	</sequential-entrance>
@@ -63,13 +63,26 @@ export default Vue.extend({
 		pagination: {
 			required: true
 		},
+
+		detail: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+
+		extract: {
+			required: false
+		}
 	},
 
 	computed: {
+		notes(): any[] {
+			return this.extract ? this.extract(this.items) : this.items;
+		},
+
 		_notes(): any[] {
-			return (this.items as any).map(item => {
+			return (this.notes as any).map(item => {
 				const date = new Date(item.createdAt).getDate();
-				const month = new Date(item.createdAt).getMonth() + 1;
 				item._date = date;
 				return item;
 			});
