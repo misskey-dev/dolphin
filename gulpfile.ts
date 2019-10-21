@@ -4,7 +4,6 @@
 
 import * as fs from 'fs';
 import * as gulp from 'gulp';
-import * as gutil from 'gulp-util';
 import * as ts from 'gulp-typescript';
 const cssnano = require('gulp-cssnano');
 import * as rimraf from 'rimraf';
@@ -60,9 +59,7 @@ gulp.task('cleanall', gulp.parallel('clean', cb =>
 gulp.task('build:client:styles', () =>
 	gulp.src('./src/client/style.scss')
 		.pipe(sass())
-		.pipe(isProduction
-			? (cssnano as any)()
-			: gutil.noop())
+		.pipe((cssnano as any)())
 		.pipe(gulp.dest('./built/client/assets/'))
 );
 
