@@ -47,6 +47,18 @@ addToList: "リストに追加"
 sendMessage: "メッセージを送信"
 copyUsername: "ユーザー名をコピー"
 
+_visibility:
+  public: "パブリック"
+  publicDescription: "全てのユーザーに公開"
+  followers: "フォロワー"
+  followersDescription: "自分のフォロワーのみに公開"
+  specified: "ダイレクト"
+  specifiedDescription: "指定したユーザーのみに公開"
+
+_postForm:
+  placeholder: "いまどうしてる？"
+  post: "投稿"
+
 _profile:
   name: "名前"
   username: "ユーザー名"

@@ -5,47 +5,22 @@
 		<div @click="choose('public')" :class="{ active: v == 'public' }">
 			<div><fa icon="globe"/></div>
 			<div>
-				<span>{{ $t('public') }}</span>
-			</div>
-		</div>
-		<div @click="choose('home')" :class="{ active: v == 'home' }">
-			<div><fa icon="home"/></div>
-			<div>
-				<span>{{ $t('home') }}</span>
-				<span>{{ $t('home-desc') }}</span>
+				<span>{{ $t('_visibility.public') }}</span>
+				<span>{{ $t('_visibility.publicDescription') }}</span>
 			</div>
 		</div>
 		<div @click="choose('followers')" :class="{ active: v == 'followers' }">
 			<div><fa icon="unlock"/></div>
 			<div>
-				<span>{{ $t('followers') }}</span>
-				<span>{{ $t('followers-desc') }}</span>
+				<span>{{ $t('_visibility.followers') }}</span>
+				<span>{{ $t('_visibility.followersDescription') }}</span>
 			</div>
 		</div>
 		<div @click="choose('specified')" :class="{ active: v == 'specified' }">
 			<div><fa icon="envelope"/></div>
 			<div>
-				<span>{{ $t('specified') }}</span>
-				<span>{{ $t('specified-desc') }}</span>
-			</div>
-		</div>
-		<div @click="choose('local-public')" :class="{ active: v == 'local-public' }">
-			<div><fa icon="globe"/></div>
-			<div>
-				<span>{{ $t('local-public') }}</span>
-				<span>{{ $t('local-public-desc') }}</span>
-			</div>
-		</div>
-		<div @click="choose('local-home')" :class="{ active: v == 'local-home' }">
-			<div><fa icon="home"/></div>
-			<div>
-				<span>{{ $t('local-home') }}</span>
-			</div>
-		</div>
-		<div @click="choose('local-followers')" :class="{ active: v == 'local-followers' }">
-			<div><fa icon="unlock"/></div>
-			<div>
-				<span>{{ $t('local-followers') }}</span>
+				<span>{{ $t('_visibility.specified') }}</span>
+				<span>{{ $t('_visibility.specifiedDescription') }}</span>
 			</div>
 		</div>
 	</div>
@@ -162,12 +137,12 @@ export default Vue.extend({
 		z-index: 10000;
 		width: 100%;
 		height: 100%;
-		background: var(--modalBackdrop);
+		background: #fff;
 		opacity: 0;
 	}
 
 	> .popover {
-		$bgcolor: var(--popupBg);
+		$bgcolor: #fff;
 		position: absolute;
 		z-index: 10001;
 		width: 240px;
@@ -182,7 +157,6 @@ export default Vue.extend({
 			display: flex;
 			padding: 8px 14px;
 			font-size: 12px;
-			color: var(--popupFg);
 			cursor: pointer;
 
 			&:hover {
