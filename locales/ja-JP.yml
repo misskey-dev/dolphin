@@ -50,6 +50,7 @@ copyUsername: "ユーザー名をコピー"
 reply: "返信"
 loadMore: "もっと見る"
 youGotNewFollower: "フォローされました"
+receiveFollowRequest: "フォローリクエストされました"
 
 _visibility:
   public: "パブリック"

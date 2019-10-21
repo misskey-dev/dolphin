@@ -35,13 +35,12 @@ import i18n from './i18n';
 import { search } from './scripts/search';
 import contains from './scripts/contains';
 import DpToast from './components/toast.vue';
-import XNotifications from './components/notifications.vue';
 
 export default Vue.extend({
 	i18n,
 
 	components: {
-		XNotifications,
+		XNotifications: () => import('./components/notifications.vue').then(m => m.default),
 		XLogo: () => import('./components/logo.vue').then(m => m.default),
 	},
 
