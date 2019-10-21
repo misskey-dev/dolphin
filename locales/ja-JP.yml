@@ -43,6 +43,9 @@ pin: "ピン留め"
 copyContent: "内容をコピー"
 copyLink: "リンクをコピー"
 delete: "削除"
+addToList: "リストに追加"
+sendMessage: "メッセージを送信"
+copyUsername: "ユーザー名をコピー"
 
 _profile:
   name: "名前"

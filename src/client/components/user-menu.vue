@@ -6,8 +6,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faExclamationCircle, faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
-import { faSnowflake } from '@fortawesome/free-regular-svg-icons';
+import { faExclamationCircle, faMicrophoneSlash, faAt, faListUl } from '@fortawesome/free-solid-svg-icons';
+import { faSnowflake, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import i18n from '../i18n';
 import XMenu from './menu.vue';
 
@@ -22,14 +22,20 @@ export default Vue.extend({
 
 	data() {
 		let menu = [{
-			icon: ['fas', 'at'],
-			text: this.$t('mention'),
+			icon: faAt,
+			text: this.$t('copyUsername'),
+			action: () => {
+				
+			}
+		}, {
+			icon: faEnvelope,
+			text: this.$t('sendMessage'),
 			action: () => {
 				this.$post({ mention: this.user });
 			}
 		}, null, {
-			icon: ['fas', 'list'],
-			text: this.$t('push-to-list'),
+			icon: faListUl,
+			text: this.$t('addToList'),
 			action: this.pushList
 		}] as any;
 
@@ -45,7 +51,7 @@ export default Vue.extend({
 			}]);
 		}
 
-		if (this.$store.getters.isSignedIn && (this.$store.state.i.isAdmin || this.$store.state.i.isModerator)) {
+		if (this.$store.getters.isSignedIn && this.$store.state.i.isAdmin) {
 			menu = menu.concat([null, {
 				icon: faMicrophoneSlash,
 				text: this.user.isSilenced ? this.$t('unsilence') : this.$t('silence'),

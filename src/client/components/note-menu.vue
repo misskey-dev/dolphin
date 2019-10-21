@@ -70,7 +70,7 @@ export default Vue.extend({
 					text: this.$t('pin'),
 					action: () => this.togglePin(true)
 				} : undefined,
-				...(this.note.userId == this.$store.state.i.id || this.$store.state.i.isAdmin || this.$store.state.i.isModerator ? [
+				...(this.note.userId == this.$store.state.i.id || this.$store.state.i.isAdmin ? [
 					null,
 					this.note.userId == this.$store.state.i.id ? {
 						icon: 'undo-alt',
