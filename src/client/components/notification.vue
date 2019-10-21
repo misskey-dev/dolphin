@@ -170,6 +170,7 @@ export default Vue.extend({
 		left: 58px;
 		width: calc(100% - 74px);
 		line-height: 16px;
+		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}

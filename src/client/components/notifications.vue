@@ -8,7 +8,7 @@
 			</template>
 		</sequential-entrance>
 
-		<button class="more _buttonPrimary" v-if="more" @click="fetchMore" :disabled="moreFetching">
+		<button class="more _buttonPlain" v-if="more" @click="fetchMore" :disabled="moreFetching">
 			<template v-if="!moreFetching">{{ $t('loadMore') }}</template>
 			<template v-if="moreFetching"><fa :icon="faSpinner" pulse fixed-width/></template>
 		</button>
@@ -136,8 +136,6 @@ export default Vue.extend({
 			display: block;
 			width: 100%;
 			padding: 16px;
-			color: var(--text);
-			border-top: solid var(--lineWidth) rgba(#000, 0.05);
 
 			> [data-icon] {
 				margin-right: 4px;
