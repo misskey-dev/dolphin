@@ -107,7 +107,7 @@ export default (opts) => ({
 			if (params && params.then) params = await params;
 			await this.$root.api(this.pagination.endpoint, {
 				limit: (this.pagination.limit || 10) + 1,
-				...(this.pagination.endpoint === 'notes/search' ? {
+				...(this.pagination.offsetMode ? {
 					offset: this.offset,
 				} : {
 					untilId: this.items[this.items.length - 1].id,

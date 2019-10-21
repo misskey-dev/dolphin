@@ -105,7 +105,7 @@ export default Vue.extend({
 	display: block;
 	min-width: 100px;
 	margin: 0;
-	padding: 8px 10px;
+	padding: 8px 12px;
 	text-align: center;
 	font-weight: normal;
 	font-size: 14px;

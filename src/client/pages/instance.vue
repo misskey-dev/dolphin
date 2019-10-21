@@ -4,16 +4,18 @@
 	<section class="_section users">
 		<div class="title">{{ $t('users') }}</div>
 		<div class="content">
-			<div class="users">
-				<div class="user" v-for="user in users" :key="user.id">
+			<ui-pagination :pagination="usersPagination" #default="{items}" class="users">
+				<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i">
 					<dp-avatar :user="user" class="avatar"/>
 					<div class="body">
 						<dp-user-name :user="user"/>
 						<dp-acct :user="user"/>
 					</div>
 				</div>
-			</div>
-			<ui-button @click="addUser()">{{ $t('addUser') }}</ui-button>
+			</ui-pagination>
+		</div>
+		<div class="footer">
+			<ui-button primary @click="addUser()">{{ $t('addUser') }}</ui-button>
 		</div>
 	</section>
 </div>
@@ -26,18 +28,17 @@ export default Vue.extend({
 	data() {
 		return {
 			meta: null,
-			users: []
+			usersPagination: {
+				endpoint: 'admin/show-users',
+				limit: 10,
+				offsetMode: true
+			},
 		}
 	},
 
 	created() {
 		this.$root.getMeta().then(meta => {
 			this.meta = meta;
-		});
-
-		this.$root.api('admin/show-users', {
-		}).then(users => {
-			this.users = users;
 		});
 	},
 
@@ -93,7 +94,6 @@ export default Vue.extend({
 			> .users {
 				> .user {
 					display: flex;
-					margin-bottom: 16px;
 
 					> .avatar {
 						width: 50px;
