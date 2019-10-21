@@ -123,6 +123,12 @@ export class User {
 	})
 	public isBot: boolean;
 
+	@Column('boolean', {
+		default: false,
+		comment: 'Whether the User is the admin.'
+	})
+	public isAdmin: boolean;
+
 	@Column('varchar', {
 		length: 128, array: true, default: '{}'
 	})

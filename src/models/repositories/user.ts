@@ -87,6 +87,7 @@ export class UserRepository extends Repository<User> {
 			username: user.username,
 			host: user.host,
 			avatarUrl: user.avatarUrl ? user.avatarUrl : config.url + '/avatar/' + user.id,
+			isAdmin: user.isAdmin || falsy,
 			isBot: user.isBot || falsy,
 
 			// カスタム絵文字添付
@@ -226,17 +227,9 @@ export const packedUserSchema = {
 			format: 'url',
 			nullable: true as const, optional: false as const,
 		},
-		avatarColor: {
-			type: 'any' as const,
-			nullable: true as const, optional: false as const,
-		},
 		bannerUrl: {
 			type: 'string' as const,
 			format: 'url',
-			nullable: true as const, optional: true as const,
-		},
-		bannerColor: {
-			type: 'any' as const,
 			nullable: true as const, optional: true as const,
 		},
 		emojis: {
@@ -254,11 +247,6 @@ export const packedUserSchema = {
 			description: 'The user-defined UTF-8 string describing their account.',
 			example: 'Hi masters, I am Ai!'
 		},
-		birthday: {
-			type: 'string' as const,
-			nullable: true as const, optional: true as const,
-			example: '2018-03-12'
-		},
 		createdAt: {
 			type: 'string' as const,
 			nullable: false as const, optional: true as const,
@@ -269,10 +257,6 @@ export const packedUserSchema = {
 			type: 'string' as const,
 			nullable: true as const, optional: true as const,
 			format: 'date-time',
-		},
-		location: {
-			type: 'string' as const,
-			nullable: true as const, optional: true as const,
 		},
 		followersCount: {
 			type: 'number' as const,
@@ -293,6 +277,11 @@ export const packedUserSchema = {
 			type: 'boolean' as const,
 			nullable: false as const, optional: true as const,
 			description: 'Whether this account is a bot.'
+		},
+		isAdmin: {
+			type: 'boolean' as const,
+			nullable: false as const, optional: true as const,
+			description: 'Whether this account is the admin.'
 		},
 		pinnedNoteIds: {
 			type: 'array' as const,

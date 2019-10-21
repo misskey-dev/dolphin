@@ -12,7 +12,6 @@ import * as Router from '@koa/router';
 import * as mount from 'koa-mount';
 import * as compress from 'koa-compress';
 import * as koaLogger from 'koa-logger';
-import * as slow from 'koa-slow';
 
 import activityPub from './activitypub';
 import nodeinfo from './nodeinfo';
@@ -20,7 +19,6 @@ import wellKnown from './well-known';
 import config from '../config';
 import apiServer from './api';
 import Logger from '../services/logger';
-import { program } from '../argv';
 import { genAvatar } from '../misc/gen-avatar';
 import { createTemp } from '../misc/create-temp';
 
@@ -35,13 +33,6 @@ if (!['production', 'test'].includes(process.env.NODE_ENV || '')) {
 	app.use(koaLogger(str => {
 		serverLogger.info(str);
 	}));
-
-	// Delay
-	if (program.slow) {
-		app.use(slow({
-			delay: 3000
-		}));
-	}
 }
 
 // Compress response

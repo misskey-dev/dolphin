@@ -35,6 +35,10 @@ export default async (endpoint: string, user: User | null | undefined, data: any
 		throw new ApiError(accessDenied, { reason: 'Your account has been suspended.' });
 	}
 
+	if (ep.meta.requireAdmin && !user!.isAdmin) {
+		throw new ApiError(accessDenied, { reason: 'You are not the admin.' });
+	}
+
 	// API invoking
 	const before = performance.now();
 	return await ep.exec(data, user, file).catch((e: Error) => {

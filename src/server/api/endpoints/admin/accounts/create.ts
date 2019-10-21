@@ -26,7 +26,8 @@ export const meta = {
 };
 
 export default define(meta, async (ps, me) => {
-	if ((await Users.count({})) > 0 && me == null) throw new Error('access denied');
+	const noUsers = (await Users.count({})) === 0;
+	if (!noUsers && me == null) throw new Error('access denied');
 
 	// Generate hash of password
 	const salt = await bcrypt.genSalt(8);
@@ -80,6 +81,7 @@ export default define(meta, async (ps, me) => {
 			usernameLower: ps.username.toLowerCase(),
 			host: null,
 			token: secret,
+			isAdmin: noUsers
 		}));
 
 		await transactionalEntityManager.save(new UserKeypair({
