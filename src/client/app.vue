@@ -22,14 +22,14 @@
 	<transition name="zoom-in-bottom">
 		<x-notifications v-if="notificationsOpen" class="notifications"/>
 	</transition>
-	<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="navClick()" ref="navButton"><fa :icon="navOpen || notificationsOpen ? faTimes : faBars"/></button>
+	<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="navClick()" ref="navButton"><fa :icon="navOpen || notificationsOpen ? faTimes : faBars"/><i v-if="hasUnreadNotification"><fa :icon="faCircle"/></i></button>
 	<button v-if="$store.getters.isSignedIn" class="button post _buttonPrimary" @click="post()"><fa :icon="faPencilAlt"/></button>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
@@ -50,7 +50,7 @@ export default Vue.extend({
 			navOpen: false,
 			notificationsOpen: false,
 			connection: null,
-			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar
+			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle
 		};
 	},
 
@@ -60,7 +60,11 @@ export default Vue.extend({
 				'p|n': this.post,
 				's': this.search,
 			};
-		}
+		},
+
+		hasUnreadNotification(): boolean {
+			return this.$store.getters.isSignedIn && this.$store.state.i.hasUnreadNotification;
+		},
 	},
 
 	watch: {
