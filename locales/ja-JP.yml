@@ -49,6 +49,7 @@ sendMessage: "メッセージを送信"
 copyUsername: "ユーザー名をコピー"
 reply: "返信"
 loadMore: "もっと見る"
+youGotNewFollower: "フォローされました"
 
 _visibility:
   public: "パブリック"

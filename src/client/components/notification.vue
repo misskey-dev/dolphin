@@ -10,16 +10,17 @@
 		<dp-time :time="notification.createdAt" v-if="withTime"/>
 	</header>
 	<router-link v-if="notification.type === 'reaction'" class="text" :to="notification.note | notePage" :title="getNoteSummary(notification.note)">
-		<fa icon="quote-left"/>
-			<mfm :text="getNoteSummary(notification.note)" :plain="true" :nowrap="true" :custom-emojis="notification.note.emojis"/>
-		<fa icon="quote-right"/>
+		<fa :icon="faQuoteLeft"/>
+		<mfm :text="getNoteSummary(notification.note)" :plain="true" :nowrap="true" :custom-emojis="notification.note.emojis"/>
+		<fa :icon="faQuoteRight"/>
 	</router-link>
+	<span v-if="notification.type === 'follow'" class="text" style="opacity: 0.6;">{{ $t('youGotNewFollower') }}</span>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faQuoteLeft, faQuoteRight } from '@fortawesome/free-solid-svg-icons';
 import getNoteSummary from '../../misc/get-note-summary';
 import XReactionIcon from './reaction-icon.vue';
 
@@ -41,7 +42,7 @@ export default Vue.extend({
 	data() {
 		return {
 			getNoteSummary,
-			faPlus
+			faPlus, faQuoteLeft, faQuoteRight
 		};
 	},
 });
@@ -52,7 +53,7 @@ export default Vue.extend({
 	position: relative;
 	height: 64px;
 	box-sizing: border-box;
-	padding: 14px;
+	padding: 12px;
 	font-size: 12px;
 	overflow-wrap: break-word;
 
@@ -64,16 +65,16 @@ export default Vue.extend({
 
 	> .avatar {
 		display: block;
-		width: 36px;
-		height: 36px;
+		width: 40px;
+		height: 40px;
 		border-radius: 6px;
 	}
 
 	> .icon {
 		position: absolute;
 		z-index: 1;
-		top: 30px;
-		left: 30px;
+		top: 34px;
+		left: 34px;
 		width: 20px;
 		height: 20px;
 		box-sizing: border-box;

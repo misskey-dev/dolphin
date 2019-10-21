@@ -8,7 +8,7 @@
 		</div>
 	</main>
 	<transition name="zoom-in-bottom">
-		<nav v-if="navOpen">
+		<nav v-if="navOpen" ref="nav">
 			<router-link to="/"><fa :icon="faHome" fixed-width/>{{ $t('timeline') }}</router-link>
 			<router-link :to="`/@${ $store.state.i.username }`"><fa :icon="faUser" fixed-width/>{{ $t('profile') }}</router-link>
 			<router-link to="/favorites"><fa :icon="faStar" fixed-width/>{{ $t('favorites') }}</router-link>
@@ -22,7 +22,7 @@
 	<transition name="zoom-in-bottom">
 		<x-notifications v-if="notificationsOpen" class="notifications"/>
 	</transition>
-	<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="navClick()"><fa :icon="navOpen || notificationsOpen ? faTimes : faBars"/></button>
+	<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="navClick()" ref="navButton"><fa :icon="navOpen || notificationsOpen ? faTimes : faBars"/></button>
 	<button v-if="$store.getters.isSignedIn" class="button post _buttonPrimary" @click="post()"><fa :icon="faPencilAlt"/></button>
 </div>
 </template>
@@ -33,6 +33,7 @@ import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHom
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
+import contains from './scripts/contains';
 import DpToast from './components/toast.vue';
 import XNotifications from './components/notifications.vue';
 
@@ -66,12 +67,34 @@ export default Vue.extend({
 	watch: {
 		'$route'(to, from) {
 			this.$el.classList.add('transitioning');
+			this.navOpen = false;
+			this.notificationsOpen = false;
 
 			setTimeout(() => {
 				this.$el.classList.remove('transitioning');
 			}, 1000);
-		}
-	}
+		},
+
+		navOpen(opened) {
+			const onMousedown = e => {
+				e.preventDefault();
+				if (
+					!contains(this.$refs.nav, e.target) && (this.$refs.nav != e.target) &&
+					!contains(this.$refs.navButton, e.target) && (this.$refs.navButton != e.target)
+				) this.navOpen = false;
+				return false;
+			};
+			if (opened) {
+				for (const el of Array.from(document.querySelectorAll('body *'))) {
+					el.addEventListener('mousedown', onMousedown);
+				}
+			} else {
+				for (const el of Array.from(document.querySelectorAll('body *'))) {
+					el.removeEventListener('mousedown', onMousedown);
+				}
+			}
+		},
+	},
 
 	created() {
 		setTimeout(() => {
@@ -90,6 +113,7 @@ export default Vue.extend({
 		},
 
 		search() {
+			this.navOpen = false;
 			if (this.searching) return;
 
 			this.$root.dialog({
