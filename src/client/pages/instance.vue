@@ -29,13 +29,13 @@ export default Vue.extend({
 	methods: {
 		async addUser() {
 			const { canceled: canceled1, result: username } = await this.$root.dialog({
-				title: this.$t('enterNewUserUsername'),
+				title: this.$t('username'),
 				input: true
 			});
 			if (canceled1) return;
 
 			const { canceled: canceled2, result: password } = await this.$root.dialog({
-				title: this.$t('enterNewUserPassword'),
+				title: this.$t('password'),
 				input: { type: 'password' }
 			});
 			if (canceled2) return;
