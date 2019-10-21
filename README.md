@@ -14,6 +14,78 @@ While inheriting features such as reaction and high performance, it has been opt
 
 Looking for a lightweight, high-performance ActivityPub server? Want to use Misskey, but is it heavy to use alone? Try Dolphin.
 
+## 📊 Comparison
+<table>
+	<thead>
+		<tr>
+			<th></th>
+			<th>Misskey</th>
+			<th>Dolphin</th>
+			<th>Mastodon</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>Reactions</th>
+			<td>✔️</td>
+			<td>✔️</td>
+			<td>❌</td>
+		</tr>
+		<tr>
+			<th>LTL</th>
+			<td>✔️</td>
+			<td>❌</td>
+			<td>✔️</td>
+		</tr>
+		<tr>
+			<th>STL</th>
+			<td>✔️</td>
+			<td>❌</td>
+			<td>❌</td>
+		</tr>
+		<tr>
+			<th>GTL</th>
+			<td>✔️</td>
+			<td>❌</td>
+			<td>✔️</td>
+		</tr>
+		<tr>
+			<th>Messaging</th>
+			<td>✔️</td>
+			<td>❌</td>
+			<td>❌</td>
+		</tr>
+		<tr>
+			<th>Games</th>
+			<td>✔️</td>
+			<td>❌</td>
+			<td>❌</td>
+		</tr>
+		<tr>
+			<th>Pages</th>
+			<td>✔️</td>
+			<td>❌</td>
+			<td>❌</td>
+		</tr>
+		<tr>
+			<th>List</th>
+			<td>✔️</td>
+			<td>✔️</td>
+			<td>✔️</td>
+		</tr>
+		<tr>
+			<th>Group</th>
+			<td>✔️</td>
+			<td>❌</td>
+			<td>❌</td>
+		</tr>
+	</tbody>
+</table>
+
+### Build time
+X axis represents seconds. Lower is better.
+<img src="http://drive.google.com/uc?export=view&id=1EoVg4R_npLYqmQz5xoxxWb_AQkM4zTF4" alt="">
+
 ## 📦 Install
 ### Install dependencies
 Please install and setup these softwares:
