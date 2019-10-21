@@ -5,7 +5,6 @@ import define from '../../define';
 import { makePaginationQuery } from '../../common/make-pagination-query';
 import { Notes, Followings } from '../../../../models';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query';
-import { activeUsersChart } from '../../../../services/chart';
 import { generateMuteQuery } from '../../common/generate-mute-query';
 
 export const meta = {
@@ -152,12 +151,6 @@ export default define(meta, async (ps, user) => {
 	//#endregion
 
 	const timeline = await query.take(ps.limit!).getMany();
-
-	process.nextTick(() => {
-		if (user) {
-			activeUsersChart.update(user);
-		}
-	});
 
 	return await Notes.packMany(timeline, user);
 });

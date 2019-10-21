@@ -20,7 +20,7 @@ import { DriveFile } from '../../models/entities/drive-file';
 import { getConnection } from 'typeorm';
 import { User, ILocalUser, IRemoteUser } from '../../models/entities/user';
 import { genId } from '../../misc/gen-id';
-import { notesChart, perUserNotesChart, activeUsersChart, instanceChart } from '../chart';
+import { notesChart, perUserNotesChart, instanceChart } from '../chart';
 import { Poll, IPoll } from '../../models/entities/poll';
 import { createNotification } from '../create-notification';
 import { isDuplicateKeyValueError } from '../../misc/is-duplicate-key-value-error';
@@ -193,9 +193,6 @@ export default async (user: User, data: Option, silent = false) => new Promise<N
 	}
 
 	if (!silent) {
-		// ローカルユーザーのチャートはタイムライン取得時に更新しているのでリモートユーザーの場合だけでよい
-		if (Users.isRemoteUser(user)) activeUsersChart.update(user);
-
 		// 未読通知を作成
 		if (data.visibility == 'specified') {
 			if (data.visibleUsers == null) throw new Error('invalid param');

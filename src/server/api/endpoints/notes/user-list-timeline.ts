@@ -5,7 +5,6 @@ import { ApiError } from '../../error';
 import { UserLists, UserListJoinings, Notes } from '../../../../models';
 import { makePaginationQuery } from '../../common/make-pagination-query';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query';
-import { activeUsersChart } from '../../../../services/chart';
 import { Brackets } from 'typeorm';
 
 export const meta = {
@@ -171,8 +170,6 @@ export default define(meta, async (ps, user) => {
 	//#endregion
 
 	const timeline = await query.take(ps.limit!).getMany();
-
-	activeUsersChart.update(user);
 
 	return await Notes.packMany(timeline, user);
 });

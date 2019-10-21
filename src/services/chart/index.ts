@@ -1,7 +1,6 @@
 import FederationChart from './charts/classes/federation';
 import NotesChart from './charts/classes/notes';
 import UsersChart from './charts/classes/users';
-import ActiveUsersChart from './charts/classes/active-users';
 import InstanceChart from './charts/classes/instance';
 import PerUserNotesChart from './charts/classes/per-user-notes';
 import DriveChart from './charts/classes/drive';
@@ -13,7 +12,6 @@ import PerUserDriveChart from './charts/classes/per-user-drive';
 export const federationChart = new FederationChart();
 export const notesChart = new NotesChart();
 export const usersChart = new UsersChart();
-export const activeUsersChart = new ActiveUsersChart();
 export const instanceChart = new InstanceChart();
 export const perUserNotesChart = new PerUserNotesChart();
 export const driveChart = new DriveChart();
