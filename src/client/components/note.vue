@@ -21,9 +21,9 @@
 		<div class="info">
 			<dp-time :time="note.createdAt"/>
 			<span class="visibility" v-if="note.visibility != 'public'">
-				<fa v-if="note.visibility == 'home'" icon="home"/>
-				<fa v-if="note.visibility == 'followers'" icon="unlock"/>
-				<fa v-if="note.visibility == 'specified'" icon="envelope"/>
+				<fa v-if="note.visibility == 'home'" :icon="faHome"/>
+				<fa v-if="note.visibility == 'followers'" :icon="faUnlock"/>
+				<fa v-if="note.visibility == 'specified'" :icon="faEnvelope"/>
 			</span>
 		</div>
 	</div>
@@ -84,7 +84,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../i18n';
-import { faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight, faHome, faUnlock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 import XSub from './note.sub.vue';
 import XNoteHeader from './note-header.vue';
@@ -126,7 +126,7 @@ export default Vue.extend({
 		return {
 			conversation: [],
 			replies: [],
-			faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight
+			faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight, faHome, faUnlock, faEnvelope
 		};
 	},
 
