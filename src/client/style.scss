@@ -208,6 +208,14 @@ a {
 	border-radius: 6px;
 	@include shadow();
 
+	& + ._section {
+		margin-top: 16px;
+
+		@media (max-width: 500px) {
+			margin-top: 8px;
+		}
+	}
+
 	> .title {
 		margin: 0;
 		padding: 16px 32px;

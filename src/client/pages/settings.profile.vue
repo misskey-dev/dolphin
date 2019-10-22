@@ -57,7 +57,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faDownload, faUpload, faUnlockAlt, faBoxes, faCogs } from '@fortawesome/free-solid-svg-icons';
+import { faUnlockAlt, faCogs } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-regular-svg-icons';
 import i18n from '../i18n';
 import { apiUrl, host } from '../config';
@@ -85,8 +85,7 @@ export default Vue.extend({
 			saving: false,
 			avatarUploading: false,
 			bannerUploading: false,
-			exportTarget: 'notes',
-			faSave, faDownload, faUpload, faUnlockAlt, faBoxes, faCogs
+			faSave, faUnlockAlt, faCogs
 		}
 	},
 
@@ -191,46 +190,6 @@ export default Vue.extend({
 				this.$root.dialog({
 					type: 'error',
 					text: err.id
-				});
-			});
-		},
-
-		doExport() {
-			this.$root.api(
-				this.exportTarget == 'notes' ? 'i/export-notes' :
-				this.exportTarget == 'following' ? 'i/export-following' :
-				this.exportTarget == 'blocking' ? 'i/export-blocking' :
-				this.exportTarget == 'user-lists' ? 'i/export-user-lists' :
-				null, {}).then(() => {
-					this.$root.dialog({
-						type: 'info',
-						text: this.$t('export-requested')
-					});
-				}).catch((e: any) => {
-					this.$root.dialog({
-						type: 'error',
-						text: e.message
-					});
-				});
-		},
-
-		doImport() {
-			this.$chooseDriveFile().then(file => {
-				this.$root.api(
-					this.exportTarget == 'following' ? 'i/import-following' :
-					this.exportTarget == 'user-lists' ? 'i/import-user-lists' :
-					null, {
-						fileId: file.id
-				}).then(() => {
-					this.$root.dialog({
-						type: 'info',
-						text: this.$t('import-requested')
-					});
-				}).catch((e: any) => {
-					this.$root.dialog({
-						type: 'error',
-						text: e.message
-					});
 				});
 			});
 		},

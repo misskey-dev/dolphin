@@ -53,6 +53,10 @@ youGotNewFollower: "フォローされました"
 receiveFollowRequest: "フォローリクエストされました"
 mentions: "あなた宛て"
 messages: "メッセージ"
+importAndExport: "インポートとエクスポート"
+import: "インポート"
+export: "エクスポート"
+uploadedFiles: "アップロードしたファイル"
 
 _visibility:
   public: "パブリック"

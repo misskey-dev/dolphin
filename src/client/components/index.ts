@@ -14,6 +14,7 @@ import uiContainer from './ui-container.vue';
 import uiInput from './ui/input.vue';
 import uiTextarea from './ui/textarea.vue';
 import uiButton from './ui/button.vue';
+import uiSelect from './ui/select.vue';
 import uiPagination from './ui/pagination.vue';
 import SequentialEntrance from './sequential-entrance.vue';
 
@@ -30,6 +31,7 @@ Vue.component('dp-url-preview', urlPreview);
 Vue.component('ui-container', uiContainer);
 Vue.component('ui-input', uiInput);
 Vue.component('ui-textarea', uiTextarea);
+Vue.component('ui-select', uiSelect);
 Vue.component('ui-button', uiButton);
 Vue.component('ui-pagination', uiPagination);
 Vue.component('sequential-entrance', SequentialEntrance);

@@ -2,25 +2,23 @@
 <div class="dp-settings-page">
 	<header>{{ $t('settings') }}</header>
 	<x-profile-setting/>
+	<x-import-export/>
+	<x-drive/>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import XProfileSetting from './settings.profile.vue';
+import XImportExport from './settings.import-export.vue';
+import XDrive from './settings.drive.vue';
 
 export default Vue.extend({
 	components: {
-		XProfileSetting
+		XProfileSetting,
+		XImportExport,
+		XDrive,
 	},
-
-	data() {
-		return {
-		}
-	},
-
-	methods: {
-	}
 });
 </script>
 
