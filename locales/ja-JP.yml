@@ -84,3 +84,10 @@ _profile:
   metadata: "補足情報"
   metadataLabel: "ラベル"
   metadataContent: "内容"
+
+_exportOrImport:
+  allNotes: "全ての投稿"
+  followingList: "フォロー"
+  muteList: "ミュート"
+  blockingList: "ブロック"
+  userLists: "リスト"

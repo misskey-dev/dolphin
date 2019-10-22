@@ -3,11 +3,11 @@
 	<div class="title"><fa :icon="faBoxes"/> {{ $t('importAndExport') }}</div>
 	<div class="content">
 		<x-select v-model="exportTarget">
-			<option value="notes">{{ $t('_exportTargets.all-notes') }}</option>
-			<option value="following">{{ $t('_exportTargets.following-list') }}</option>
-			<option value="mute">{{ $t('_exportTargets.mute-list') }}</option>
-			<option value="blocking">{{ $t('_exportTargets.blocking-list') }}</option>
-			<option value="user-lists">{{ $t('_exportTargets.user-lists') }}</option>
+			<option value="notes">{{ $t('_exportOrImport.allNotes') }}</option>
+			<option value="following">{{ $t('_exportOrImport.followingList') }}</option>
+			<option value="user-lists">{{ $t('_exportOrImport.userLists') }}</option>
+			<option value="mute">{{ $t('_exportOrImport.muteList') }}</option>
+			<option value="blocking">{{ $t('_exportOrImport.blockingList') }}</option>
 		</x-select>
 		<x-button inline @click="doExport()"><fa :icon="faDownload"/> {{ $t('export') }}</x-button>
 		<x-button inline @click="doImport()" :disabled="!['following', 'user-lists'].includes(exportTarget)"><fa :icon="faUpload"/> {{ $t('import') }}</x-button>
