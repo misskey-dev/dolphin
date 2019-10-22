@@ -47,7 +47,7 @@ export default async function(user: User) {
 
 		feed.addItem({
 			title: `New note by ${author.name}`,
-			link: `${config.url}/notes/${note.id}`,
+			link: `${config.url}/note/${note.id}`,
 			date: note.createdAt,
 			description: note.cw || undefined,
 			content: note.text || undefined,

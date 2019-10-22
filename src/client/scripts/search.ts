@@ -50,7 +50,7 @@ export async function search(v: any, q: string) {
 			if (res.type == 'User') {
 				v.$router.push(`/@${res.object.username}@${res.object.host}`);
 			} else if (res.type == 'Note') {
-				v.$router.push(`/notes/${res.object.id}`);
+				v.$router.push(`/note/${res.object.id}`);
 			}
 		} catch (e) {
 			dialog.close();

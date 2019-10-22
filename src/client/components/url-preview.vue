@@ -61,7 +61,7 @@ export default Vue.extend({
 		const hasRoute =
 			(this.url.substr(local.length) === '/') ||
 			this.url.substr(local.length).startsWith('/@') ||
-			this.url.substr(local.length).startsWith('/notes/') ||
+			this.url.substr(local.length).startsWith('/note/') ||
 			this.url.substr(local.length).startsWith('/tags/');
 		return {
 			local,

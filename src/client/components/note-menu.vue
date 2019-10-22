@@ -125,7 +125,7 @@ export default Vue.extend({
 		},
 
 		detail() {
-			this.$router.push(`/notes/${this.note.id}`);
+			this.$router.push(`/note/${this.note.id}`);
 		},
 
 		copyContent() {
@@ -137,7 +137,7 @@ export default Vue.extend({
 		},
 
 		copyLink() {
-			copyToClipboard(`${url}/notes/${this.note.id}`);
+			copyToClipboard(`${url}/note/${this.note.id}`);
 			this.$root.dialog({
 				type: 'success',
 				splash: true

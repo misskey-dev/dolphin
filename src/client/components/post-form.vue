@@ -392,7 +392,7 @@ export default Vue.extend({
 
 			const paste = e.clipboardData.getData('text');
 
-			if (!this.renote && !this.quoteId && paste.startsWith(url + '/notes/')) {
+			if (!this.renote && !this.quoteId && paste.startsWith(url + '/note/')) {
 				e.preventDefault();
 
 				this.$root.dialog({

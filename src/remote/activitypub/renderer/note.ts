@@ -33,7 +33,7 @@ export default async function renderNote(note: Note, dive = true): Promise<any> 
 					if (dive) {
 						inReplyTo = await renderNote(inReplyToNote, false);
 					} else {
-						inReplyTo = `${config.url}/notes/${inReplyToNote.id}`;
+						inReplyTo = `${config.url}/note/${inReplyToNote.id}`;
 					}
 				}
 			}
@@ -48,7 +48,7 @@ export default async function renderNote(note: Note, dive = true): Promise<any> 
 		const renote = await Notes.findOne(note.renoteId);
 
 		if (renote) {
-			quote = renote.uri ? renote.uri : `${config.url}/notes/${renote.id}`;
+			quote = renote.uri ? renote.uri : `${config.url}/note/${renote.id}`;
 		}
 	}
 
@@ -92,7 +92,7 @@ export default async function renderNote(note: Note, dive = true): Promise<any> 
 
 	if (poll) {
 		if (text == null) text = '';
-		const url = `${config.url}/notes/${note.id}`;
+		const url = `${config.url}/note/${note.id}`;
 		// TODO: i18n
 		text += `\n[リモートで結果を表示](${url})`;
 	}
@@ -146,7 +146,7 @@ export default async function renderNote(note: Note, dive = true): Promise<any> 
 	} : {};
 
 	return {
-		id: `${config.url}/notes/${note.id}`,
+		id: `${config.url}/note/${note.id}`,
 		type: 'Note',
 		attributedTo,
 		summary,

@@ -5,6 +5,6 @@ import { Note } from '../../../models/entities/note';
 export default (user: ILocalUser, note: Note, reaction: string) => ({
 	type: 'Like',
 	actor: `${config.url}/users/${user.id}`,
-	object: note.uri ? note.uri : `${config.url}/notes/${note.id}`,
+	object: note.uri ? note.uri : `${config.url}/note/${note.id}`,
 	_misskey_reaction: reaction
 });
