@@ -62,7 +62,7 @@ export default Vue.extend({
 			connection: null,
 			pagination: {
 				endpoint: 'i/notifications',
-				limit: 15,
+				limit: 10,
 				params: () => ({
 					includeTypes: this.type ? [this.type] : undefined
 				})

@@ -75,7 +75,7 @@ export default Vue.extend({
 	height: 64px;
 	box-sizing: border-box;
 	padding: 12px;
-	font-size: 12px;
+	font-size: 13px;
 	overflow-wrap: break-word;
 
 	&:after {
@@ -166,13 +166,27 @@ export default Vue.extend({
 
 	> .text {
 		position: absolute;
-		top: 32px;
+		top: 33px;
 		left: 60px;
 		width: calc(100% - 74px);
 		line-height: 16px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+
+		> [data-icon] {
+			vertical-align: super;
+			font-size: 50%;
+			opacity: 0.5;
+		}
+
+		> [data-icon]:first-child {
+			margin-right: 4px;
+		}
+
+		> [data-icon]:last-child {
+			margin-left: 4px;
+		}
 	}
 }
 </style>
