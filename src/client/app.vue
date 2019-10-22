@@ -22,7 +22,7 @@
 	<transition name="zoom-in-bottom">
 		<x-notifications v-if="notificationsOpen" class="notifications"/>
 	</transition>
-	<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="navOpen = !navOpen" ref="navButton"><fa :icon="navOpen ? faTimes : faBars"/><i v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa :icon="faCircle"/></i></button>
+	<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="() => { navOpen = !navOpen; notificationsOpen = false; }" ref="navButton"><fa :icon="navOpen ? faTimes : faBars"/><i v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa :icon="faCircle"/></i></button>
 	<button v-if="$store.getters.isSignedIn" class="button notifications _buttonPlain" @click="notificationsOpen = !notificationsOpen" ref="notificationsButton"><fa :icon="notificationsOpen ? faTimes : faBell"/><i v-if="$store.state.i.hasUnreadNotification"><fa :icon="faCircle"/></i></button>
 	<button v-if="$store.getters.isSignedIn" class="button post _buttonPrimary" @click="post()"><fa :icon="faPencilAlt"/></button>
 </div>
