@@ -1,6 +1,8 @@
 <template>
 <div class="dp-note-page">
-	<x-note :note="note" :key="note.id" :detail="true"/>
+	<transition name="zoom" mode="out-in">
+		<x-note v-if="note" :note="note" :key="note.id" :detail="true"/>
+	</transition>
 </div>
 </template>
 

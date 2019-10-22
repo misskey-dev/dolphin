@@ -218,6 +218,14 @@ a {
 	}
 }
 
+.zoom-enter-active, .zoom-leave-active {
+	transition: opacity 0.5s, transform 0.5s;
+}
+.zoom-enter, .zoom-leave-to {
+	opacity: 0;
+	transform: scale(0.8);
+}
+
 .zoom-in-top-enter-active,
 .zoom-in-top-leave-active {
 	opacity: 1;

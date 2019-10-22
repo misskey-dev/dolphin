@@ -1,47 +1,49 @@
 <template>
 <div class="dp-user-page" v-if="user">
-	<div class="profile">
-		<div class="banner-container" :style="style">
-			<div class="banner" ref="banner" :style="style"></div>
-			<div class="fade"></div>
+	<transition name="zoom" mode="out-in" appear>
+		<div class="profile">
+			<div class="banner-container" :style="style">
+				<div class="banner" ref="banner" :style="style"></div>
+				<div class="fade"></div>
+				<div class="title">
+					<p class="name">
+						<dp-user-name :user="user" :nowrap="false"/>
+					</p>
+					<div>
+						<span class="username"><dp-acct :user="user" :detail="true" /></span>
+						<span v-if="user.isBot" :title="$t('is-bot')"><fa icon="robot"/></span>
+					</div>
+				</div>
+				<span class="followed" v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed">{{ $t('follows-you') }}</span>
+				<div class="actions" v-if="$store.getters.isSignedIn">
+					<button @click="menu" class="menu _buttonPlain" ref="menu"><fa :icon="faEllipsisH"/></button>
+					<dp-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
+				</div>
+			</div>
+			<dp-avatar class="avatar" :user="user" :disable-preview="true"/>
 			<div class="title">
-				<p class="name">
-					<dp-user-name :user="user" :nowrap="false"/>
-				</p>
+				<dp-user-name :user="user" :nowrap="false" class="name"/>
 				<div>
 					<span class="username"><dp-acct :user="user" :detail="true" /></span>
 					<span v-if="user.isBot" :title="$t('is-bot')"><fa icon="robot"/></span>
 				</div>
 			</div>
-			<span class="followed" v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed">{{ $t('follows-you') }}</span>
-			<div class="actions" v-if="$store.getters.isSignedIn">
-				<button @click="menu" class="menu _buttonPlain" ref="menu"><fa :icon="faEllipsisH"/></button>
-				<dp-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
+			<div class="description">
+				<mfm v-if="user.description" :text="user.description" :is-note="false" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
+				<p v-else class="empty">{{ $t('noAccountDescription') }}</p>
+			</div>
+			<div class="fields" v-if="user.fields.length > 0">
+				<dl class="field" v-for="(field, i) in user.fields" :key="i">
+					<dt class="name">
+						<mfm :text="field.name" :plain="true" :custom-emojis="user.emojis"/>
+					</dt>
+					<dd class="value">
+						<mfm :text="field.value" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
+					</dd>
+				</dl>
 			</div>
 		</div>
-		<dp-avatar class="avatar" :user="user" :disable-preview="true"/>
-		<div class="title">
-			<dp-user-name :user="user" :nowrap="false" class="name"/>
-			<div>
-				<span class="username"><dp-acct :user="user" :detail="true" /></span>
-				<span v-if="user.isBot" :title="$t('is-bot')"><fa icon="robot"/></span>
-			</div>
-		</div>
-		<div class="description">
-			<mfm v-if="user.description" :text="user.description" :is-note="false" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
-			<p v-else class="empty">{{ $t('noAccountDescription') }}</p>
-		</div>
-		<div class="fields" v-if="user.fields.length > 0">
-			<dl class="field" v-for="(field, i) in user.fields" :key="i">
-				<dt class="name">
-					<mfm :text="field.name" :plain="true" :custom-emojis="user.emojis"/>
-				</dt>
-				<dd class="value">
-					<mfm :text="field.value" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
-				</dd>
-			</dl>
-		</div>
-	</div>
+	</transition>
 	<x-user-timeline :user="user"/>
 </div>
 </template>

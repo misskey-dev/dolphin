@@ -39,7 +39,6 @@
 				<div class="content" v-show="appearNote.cw == null || showContent">
 					<div class="text">
 						<span v-if="appearNote.isHidden" style="opacity: 0.5">({{ $t('private') }})</span>
-						<a class="reply" v-if="appearNote.reply"><fa icon="reply"/></a>
 						<mfm v-if="appearNote.text" :text="appearNote.text" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis"/>
 						<a class="rp" v-if="appearNote.renote != null">RN:</a>
 					</div>
@@ -264,10 +263,6 @@ export default Vue.extend({
 						padding: 0;
 						overflow-wrap: break-word;
 						font-size: 1em;
-
-						> .reply {
-							margin-right: 8px;
-						}
 
 						> .rp {
 							margin-left: 4px;
