@@ -2,7 +2,7 @@
 <section class="dp-settings-page-drive _section">
 	<div class="title"><fa :icon="faCloud"/> {{ $t('uploadedFiles') }}</div>
 	<div class="content">
-		<ui-pagination :pagination="drivePagination" #default="{items}" class="drive">
+		<x-pagination :pagination="drivePagination" #default="{items}" class="drive">
 			<div class="file" v-for="(file, i) in items" :key="file.id" :data-index="i">
 				<x-file-thumbnail class="thumbnail" :file="file" fit="cover"/>
 				<div class="body">
@@ -15,7 +15,7 @@
 						<span class="separator"></span>
 						<span class="data-size">{{ file.size | bytes }}</span>
 						<span class="separator"></span>
-						<span class="created-at"><fa :icon="['far', 'clock']"/><dp-time :time="file.createdAt"/></span>
+						<span class="created-at"><fa :icon="faClock"/><dp-time :time="file.createdAt"/></span>
 						<template v-if="file.isSensitive">
 							<span class="separator"></span>
 							<span class="nsfw"><fa :icon="['far', 'eye-slash']"/> {{ $t('nsfw') }}</span>
@@ -23,7 +23,7 @@
 					</footer>
 				</div>
 			</div>
-		</ui-pagination>
+		</x-pagination>
 	</div>
 </section>
 </template>
@@ -31,8 +31,10 @@
 <script lang="ts">
 import Vue from 'vue';
 import { faCloud } from '@fortawesome/free-solid-svg-icons';
+import { faClock } from '@fortawesome/free-regular-svg-icons';
 import XFileTypeIcon from '../components/file-type-icon.vue';
 import XFileThumbnail from '../components/drive-file-thumbnail.vue';
+import XPagination from '../components/ui/pagination.vue';
 import i18n from '../i18n';
 
 export default Vue.extend({
@@ -41,6 +43,7 @@ export default Vue.extend({
 	components: {
 		XFileTypeIcon,
 		XFileThumbnail,
+		XPagination,
 	},
 
 	data() {
@@ -49,7 +52,7 @@ export default Vue.extend({
 				endpoint: 'drive/files',
 				limit: 10,
 			},
-			faCloud
+			faCloud, faClock
 		}
 	},
 
@@ -73,21 +76,15 @@ export default Vue.extend({
 					margin-bottom: 16px;
 				}
 
-				&:after {
-					content: "";
-					display: block;
-					clear: both;
-				}
-
 				> .thumbnail {
 					width: 64px;
 					height: 64px;
-					color: var(--driveFileIcon);
 				}
 
 				> .body {
 					display: block;
 					word-break: break-all;
+					padding-top: 4px;
 
 					> .name {
 						display: block;
@@ -95,7 +92,6 @@ export default Vue.extend({
 						padding: 0;
 						font-size: 0.9em;
 						font-weight: bold;
-						color: var(--text);
 						word-break: break-word;
 
 						> .ext {
@@ -122,7 +118,6 @@ export default Vue.extend({
 						display: block;
 						margin: 4px 0 0 0;
 						font-size: 0.7em;
-						color: var(--text);
 
 						> .separator {
 							padding: 0 4px;

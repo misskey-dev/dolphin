@@ -3,17 +3,17 @@
 	<h1>Welcome to Dolphin!</h1>
 	<div>
 		<p>Dolphinのインストールが完了しました。あなたのアカウントを作成してください。</p>
-		<ui-input v-model="username" pattern="^[a-zA-Z0-9_]{1,20}$" spellcheck="false" required>
+		<x-input v-model="username" pattern="^[a-zA-Z0-9_]{1,20}$" spellcheck="false" required>
 			<span>ユーザー名</span>
 			<template #prefix>@</template>
 			<template #suffix>@{{ host }}</template>
-		</ui-input>
-		<ui-input v-model="password" type="password">
+		</x-input>
+		<x-input v-model="password" type="password">
 			<span>パスワード</span>
 			<template #prefix><fa :icon="faLock"/></template>
-		</ui-input>
+		</x-input>
 		<footer>
-			<ui-button primary type="submit" :disabled="submitting">{{ submitting ? '処理中' : '完了' }}<dp-ellipsis v-if="submitting"/></ui-button>
+			<x-button primary type="submit" :disabled="submitting">{{ submitting ? '処理中' : '完了' }}<dp-ellipsis v-if="submitting"/></x-button>
 		</footer>
 	</div>
 </form>
@@ -22,10 +22,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
+import XButton from '../components/ui/button.vue';
+import XInput from '../components/ui/input.vue';
 import { host } from '../config';
 
 export default Vue.extend({
 	components: {
+		XButton,
+		XInput,
 	},
 
 	data() {

@@ -4,7 +4,7 @@
 	<section class="_section users">
 		<div class="title">{{ $t('users') }}</div>
 		<div class="content">
-			<ui-pagination :pagination="usersPagination" #default="{items}" class="users">
+			<x-pagination :pagination="usersPagination" #default="{items}" class="users">
 				<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i">
 					<dp-avatar :user="user" class="avatar"/>
 					<div class="body">
@@ -12,10 +12,10 @@
 						<dp-acct :user="user" class="acct"/>
 					</div>
 				</div>
-			</ui-pagination>
+			</x-pagination>
 		</div>
 		<div class="footer">
-			<ui-button primary @click="addUser()">{{ $t('addUser') }}</ui-button>
+			<x-button primary @click="addUser()">{{ $t('addUser') }}</x-button>
 		</div>
 	</section>
 </div>
@@ -23,8 +23,15 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import XButton from '../components/ui/button.vue';
+import XPagination from '../components/ui/pagination.vue';
 
 export default Vue.extend({
+	components: {
+		XButton,
+		XPagination,
+	},
+
 	data() {
 		return {
 			meta: null,

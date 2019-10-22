@@ -2,17 +2,17 @@
 <form class="dp-signin" :class="{ signing }" @submit.prevent="onSubmit">
 	<div class="avatar" :style="{ backgroundImage: user ? `url('${ user.avatarUrl }')` : null }" v-show="withAvatar"></div>
 	<div>
-		<ui-input v-model="username" type="text" pattern="^[a-zA-Z0-9_]+$" spellcheck="false" autofocus required @input="onUsernameChange">
+		<x-input v-model="username" type="text" pattern="^[a-zA-Z0-9_]+$" spellcheck="false" autofocus required @input="onUsernameChange">
 			<span>{{ $t('username') }}</span>
 			<template #prefix>@</template>
 			<template #suffix>@{{ host }}</template>
-		</ui-input>
-		<ui-input v-model="password" type="password" v-if="!user || user && !user.usePasswordLessLogin" required>
+		</x-input>
+		<x-input v-model="password" type="password" v-if="!user || user && !user.usePasswordLessLogin" required>
 			<span>{{ $t('password') }}</span>
 			<template #prefix><fa :icon="faLock"/></template>
-		</ui-input>
+		</x-input>
 		<footer>
-			<ui-button primary type="submit" :disabled="signing">{{ signing ? $t('loginWaiting') : $t('login') }}</ui-button>
+			<x-button primary type="submit" :disabled="signing">{{ signing ? $t('loginWaiting') : $t('login') }}</x-button>
 		</footer>
 	</div>
 </form>
@@ -20,13 +20,20 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { toUnicode } from 'punycode';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
+import XButton from '../components/ui/button.vue';
+import XInput from '../components/ui/input.vue';
 import i18n from '../i18n';
 import { apiUrl, host } from '../config';
-import { toUnicode } from 'punycode';
 
 export default Vue.extend({
 	i18n,
+
+	components: {
+		XButton,
+		XInput,
+	},
 
 	props: {
 		withAvatar: {

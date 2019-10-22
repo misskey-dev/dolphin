@@ -2,55 +2,55 @@
 <section class="dp-settings-page-profile _section">
 	<div class="title">{{ $t('profile') }}</div>
 	<div class="content">
-		<ui-input v-model="name" :max="30">
+		<x-input v-model="name" :max="30">
 			<span>{{ $t('_profile.name') }}</span>
-		</ui-input>
+		</x-input>
 
-		<ui-input :value="$store.state.i.username" readonly>
+		<x-input :value="$store.state.i.username" readonly>
 			<span>{{ $t('_profile.username') }}</span>
 			<template #prefix>@</template>
 			<template #suffix>@{{ host }}</template>
-		</ui-input>
+		</x-input>
 
-		<ui-textarea v-model="description" :max="500">
+		<x-textarea v-model="description" :max="500">
 			<span>{{ $t('_profile.description') }}</span>
 			<template #desc>{{ $t('_profile.youCanIncludeHashtags') }}</template>
-		</ui-textarea>
+		</x-textarea>
 
-		<ui-input type="file" @change="onAvatarChange">
+		<x-input type="file" @change="onAvatarChange">
 			<span>{{ $t('_profile.avatar') }}</span>
 			<template #icon><fa icon="image"/></template>
 			<template #desc v-if="avatarUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
-		</ui-input>
+		</x-input>
 
-		<ui-input type="file" @change="onBannerChange">
+		<x-input type="file" @change="onBannerChange">
 			<span>{{ $t('_profile.banner') }}</span>
 			<template #icon><fa icon="image"/></template>
 			<template #desc v-if="bannerUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
-		</ui-input>
+		</x-input>
 
 		<div class="fields">
 			<header>{{ $t('_profile.metadata') }}</header>
 			<div class="row">
-				<ui-input v-model="fieldName0">{{ $t('_profile.metadataLabel') }}</ui-input>
-				<ui-input v-model="fieldValue0">{{ $t('_profile.metadataContent') }}</ui-input>
+				<x-input v-model="fieldName0">{{ $t('_profile.metadataLabel') }}</x-input>
+				<x-input v-model="fieldValue0">{{ $t('_profile.metadataContent') }}</x-input>
 			</div>
 			<div class="row">
-				<ui-input v-model="fieldName1">{{ $t('_profile.metadataLabel') }}</ui-input>
-				<ui-input v-model="fieldValue1">{{ $t('_profile.metadataContent') }}</ui-input>
+				<x-input v-model="fieldName1">{{ $t('_profile.metadataLabel') }}</x-input>
+				<x-input v-model="fieldValue1">{{ $t('_profile.metadataContent') }}</x-input>
 			</div>
 			<div class="row">
-				<ui-input v-model="fieldName2">{{ $t('_profile.metadataLabel') }}</ui-input>
-				<ui-input v-model="fieldValue2">{{ $t('_profile.metadataContent') }}</ui-input>
+				<x-input v-model="fieldName2">{{ $t('_profile.metadataLabel') }}</x-input>
+				<x-input v-model="fieldValue2">{{ $t('_profile.metadataContent') }}</x-input>
 			</div>
 			<div class="row">
-				<ui-input v-model="fieldName3">{{ $t('_profile.metadataLabel') }}</ui-input>
-				<ui-input v-model="fieldValue3">{{ $t('_profile.metadataContent') }}</ui-input>
+				<x-input v-model="fieldName3">{{ $t('_profile.metadataLabel') }}</x-input>
+				<x-input v-model="fieldValue3">{{ $t('_profile.metadataContent') }}</x-input>
 			</div>
 		</div>
 	</div>
 	<div class="footer">
-		<ui-button @click="save(true)" primary><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+		<x-button @click="save(true)" primary><fa :icon="faSave"/> {{ $t('save') }}</x-button>
 	</div>
 </section>
 </template>
@@ -59,11 +59,21 @@
 import Vue from 'vue';
 import { faUnlockAlt, faCogs } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-regular-svg-icons';
+import XButton from '../components/ui/button.vue';
+import XInput from '../components/ui/input.vue';
+import XTextarea from '../components/ui/textarea.vue';
 import i18n from '../i18n';
 import { apiUrl, host } from '../config';
 
 export default Vue.extend({
 	i18n,
+
+	components: {
+		XButton,
+		XInput,
+		XTextarea,
+	},
+	
 	data() {
 		return {
 			host,

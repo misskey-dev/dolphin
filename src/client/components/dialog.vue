@@ -20,9 +20,9 @@
 			<header v-if="title" v-html="title"></header>
 			<header v-if="title == null && user">{{ $t('enterUsername') }}</header>
 			<div class="body" v-if="text" v-html="text"></div>
-			<ui-input v-if="input" v-model="inputValue" autofocus :type="input.type || 'text'" :placeholder="input.placeholder" @keydown="onInputKeydown"></ui-input>
-			<ui-input v-if="user" v-model="userInputValue" autofocus @keydown="onInputKeydown"><template #prefix>@</template></ui-input>
-			<ui-select v-if="select" v-model="selectedValue" autofocus>
+			<x-input v-if="input" v-model="inputValue" autofocus :type="input.type || 'text'" :placeholder="input.placeholder" @keydown="onInputKeydown"></x-input>
+			<x-input v-if="user" v-model="userInputValue" autofocus @keydown="onInputKeydown"><template #prefix>@</template></x-input>
+			<x-select v-if="select" v-model="selectedValue" autofocus>
 				<template v-if="select.items">
 					<option v-for="item in select.items" :value="item.value">{{ item.text }}</option>
 				</template>
@@ -31,10 +31,10 @@
 						<option v-for="item in groupedItem.items" :value="item.value">{{ item.text }}</option>
 					</optgroup>
 				</template>
-			</ui-select>
+			</x-select>
 			<div class="buttons" v-if="!splash && (showOkButton || showCancelButton)">
-				<ui-button inline @click="ok" v-if="showOkButton" primary :autofocus="!input && !select && !user" :disabled="!canOk">{{ (showCancelButton || input || select || user) ? $t('ok') : $t('gotIt') }}</ui-button>
-				<ui-button inline @click="cancel" v-if="showCancelButton || input || select || user">{{ $t('cancel') }}</ui-button>
+				<x-button inline @click="ok" v-if="showOkButton" primary :autofocus="!input && !select && !user" :disabled="!canOk">{{ (showCancelButton || input || select || user) ? $t('ok') : $t('gotIt') }}</x-button>
+				<x-button inline @click="cancel" v-if="showCancelButton || input || select || user">{{ $t('cancel') }}</x-button>
 			</div>
 		</template>
 	</div>
@@ -46,11 +46,20 @@ import Vue from 'vue';
 import anime from 'animejs';
 import { faSpinner, faInfoCircle, faExclamationTriangle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+import XButton from './ui/button.vue';
+import XInput from './ui/input.vue';
+import XSelect from './ui/select.vue';
 import parseAcct from '../../misc/acct/parse';
 import i18n from '../i18n';
 
 export default Vue.extend({
 	i18n,
+
+	components: {
+		XButton,
+		XInput,
+		XSelect,
+	},
 
 	props: {
 		type: {

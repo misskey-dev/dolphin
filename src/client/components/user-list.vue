@@ -1,5 +1,5 @@
 <template>
-<ui-container :body-togglable="true" :expanded="expanded">
+<x-container :body-togglable="true" :expanded="expanded">
 	<template #header><slot></slot></template>
 
 	<dp-error v-if="error" @retry="init()"/>
@@ -25,7 +25,7 @@
 			<template v-if="moreFetching"><fa icon="spinner" pulse fixed-width/></template>{{ moreFetching ? $t('@.loading') : $t('@.load-more') }}
 		</button>
 	</div>
-</ui-container>
+</x-container>
 </template>
 
 <script lang="ts">

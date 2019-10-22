@@ -17,33 +17,33 @@
 		<fa icon="times"/>
 	</button>
 	<section>
-		<ui-switch v-model="multiple">{{ $t('multiple') }}</ui-switch>
+		<x-switch v-model="multiple">{{ $t('multiple') }}</x-switch>
 		<div>
-			<ui-select v-model="expiration">
+			<x-select v-model="expiration">
 				<template #label>{{ $t('expiration') }}</template>
 				<option value="infinite">{{ $t('infinite') }}</option>
 				<option value="at">{{ $t('at') }}</option>
 				<option value="after">{{ $t('after') }}</option>
-			</ui-select>
+			</x-select>
 			<section v-if="expiration === 'at'">
-				<ui-input v-model="atDate" type="date">
+				<x-input v-model="atDate" type="date">
 					<template #title>{{ $t('deadline-date') }}</template>
-				</ui-input>
-				<ui-input v-model="atTime" type="time">
+				</x-input>
+				<x-input v-model="atTime" type="time">
 					<template #title>{{ $t('deadline-time') }}</template>
-				</ui-input>
+				</x-input>
 			</section>
 			<section v-if="expiration === 'after'">
-				<ui-input v-model="after" type="number">
+				<x-input v-model="after" type="number">
 					<template #title>{{ $t('interval') }}</template>
-				</ui-input>
-				<ui-select v-model="unit">
+				</x-input>
+				<x-select v-model="unit">
 					<template #title>{{ $t('unit') }}</template>
 					<option value="second">{{ $t('second') }}</option>
 					<option value="minute">{{ $t('minute') }}</option>
 					<option value="hour">{{ $t('hour') }}</option>
 					<option value="day">{{ $t('day') }}</option>
-				</ui-select>
+				</x-select>
 			</section>
 		</div>
 	</section>
@@ -56,9 +56,15 @@ import i18n from '../i18n';
 import { erase } from '../../prelude/array';
 import { addTimespan } from '../../prelude/time';
 import { formatDateTimeString } from '../../misc/format-time-string';
+import XInput from './ui/input.vue';
+import XSelect from './ui/select.vue';
 
 export default Vue.extend({
 	i18n,
+	components: {
+		XInput,
+		XSelect,
+	},
 	data() {
 		return {
 			choices: ['', ''],
