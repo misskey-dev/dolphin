@@ -88,7 +88,6 @@ export default Vue.extend({
 				margin: 0;
 				padding: 0;
 				overflow-wrap: break-word;
-				color: var(--noteText);
 
 				> .text {
 					margin-right: 8px;
@@ -99,7 +98,6 @@ export default Vue.extend({
 				> .text {
 					margin: 0;
 					padding: 0;
-					color: var(--subNoteText);
 				}
 			}
 		}

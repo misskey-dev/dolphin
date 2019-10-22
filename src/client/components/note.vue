@@ -156,6 +156,10 @@ export default Vue.extend({
 	border-radius: 6px;
 	@include shadow();
 
+	@media (max-width: 500px) {
+		font-size: 14px;
+	}
+
 	> *:first-child {
 		border-radius: 6px 6px 0 0;
 	}
