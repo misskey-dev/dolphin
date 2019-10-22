@@ -62,6 +62,7 @@ fileDeleteConfirm: "ファイル「{name}」を削除しますか？このファ
 unfollowConfirm: "{name}のフォローを解除しますか？"
 exportRequested: "エクスポートをリクエストしました。これには時間がかかる場合があります。エクスポートが終わると、「アップロードしたファイル」に追加されます。"
 importRequested: "インポートをリクエストしました。これには時間がかかる場合があります。"
+lists: "リスト"
 
 _visibility:
   public: "パブリック"

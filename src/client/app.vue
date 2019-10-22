@@ -9,10 +9,13 @@
 	</main>
 	<transition name="zoom-in-bottom">
 		<nav v-if="navOpen" ref="nav">
+			<router-link :to="`/@${ $store.state.i.username }`"><dp-avatar :user="$store.state.i" class="avatar"/><dp-user-name :user="$store.state.i"/></router-link>
+			<div></div>
 			<router-link to="/"><fa :icon="faHome" fixed-width/>{{ $t('timeline') }}</router-link>
-			<router-link :to="`/@${ $store.state.i.username }`"><fa :icon="faUser" fixed-width/>{{ $t('profile') }}</router-link>
+			<button class="_buttonPlain" @click="list()"><fa :icon="faListUl" fixed-width/>{{ $t('lists') }}</button>
 			<router-link to="/messages"><fa :icon="faEnvelope" fixed-width/>{{ $t('messages') }}<i v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa :icon="faCircle"/></i></router-link>
 			<router-link to="/favorites"><fa :icon="faStar" fixed-width/>{{ $t('favorites') }}</router-link>
+			<div></div>
 			<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
 			<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
 			<div></div>
@@ -30,7 +33,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faListUl } from '@fortawesome/free-solid-svg-icons';
 import { faBell, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
@@ -51,7 +54,7 @@ export default Vue.extend({
 			navOpen: false,
 			notificationsOpen: false,
 			connection: null,
-			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faEnvelope
+			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faEnvelope, faListUl
 		};
 	},
 
@@ -210,6 +213,7 @@ export default Vue.extend({
 			color: var(--fg);
 			text-align: left;
 			font-size: 14px;
+			line-height: 20px;
 
 			&:hover {
 				color: #fff;
@@ -220,6 +224,12 @@ export default Vue.extend({
 			&:active {
 				color: #fff;
 				background: darken($primary, 10);
+			}
+
+			> .avatar {
+				margin-right: 4px;
+				width: 20px;
+				height: 20px;
 			}
 
 			> [data-icon] {
