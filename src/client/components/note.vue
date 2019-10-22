@@ -12,7 +12,7 @@
 	</div>
 	<div class="renote" v-if="isRenote">
 		<dp-avatar class="avatar" :user="note.user"/>
-		<fa icon="retweet"/>
+		<fa :icon="faRetweet"/>
 		<i18n path="renotedBy" tag="span">
 			<router-link class="name" :to="note.user | userPage" v-user-preview="note.userId" place="user">
 				<dp-user-name :user="note.user"/>
@@ -163,17 +163,13 @@ export default Vue.extend({
 	> .renote {
 		display: flex;
 		align-items: center;
-		padding: 8px 16px;
+		padding: 16px 32px 8px 32px;
 		line-height: 28px;
 		white-space: pre;
 		color: #229e82;
 
-		@media (min-width: 500px) {
-			padding: 8px 16px;
-		}
-
-		@media (min-width: 600px) {
-			padding: 16px 32px 8px 32px;
+		@media (max-width: 450px) {
+			padding: 8px 16px 0 16px;
 		}
 
 		> .avatar {
