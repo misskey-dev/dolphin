@@ -77,6 +77,11 @@ export default Vue.extend({
 		border-radius: 8px;
 		color: #0c0c0c;
 		overflow: hidden;
+
+		@media (prefers-color-scheme: dark) {
+			background: rgba(0, 0, 0, 0.5);
+			color: #c7d1d8;
+		}
 	}
 }
 </style>
