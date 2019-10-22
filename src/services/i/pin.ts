@@ -88,7 +88,7 @@ export async function deliverPinnedChange(userId: User['id'], noteId: Note['id']
 
 	const target = `${config.url}/users/${user.id}/collections/featured`;
 
-	const item = `${config.url}/note/${noteId}`;
+	const item = `${config.url}/notes/${noteId}`;
 	const content = renderActivity(isAddition ? renderAdd(user, target, item) : renderRemove(user, target, item));
 	for (const inbox of queue) {
 		deliver(user, content, inbox);

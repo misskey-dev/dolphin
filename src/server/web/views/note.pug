@@ -3,7 +3,7 @@ extends ./base
 block vars
 	- const user = note.user;
 	- const title = user.name ? `${user.name} (@${user.username})` : `@${user.username}`;
-	- const url = `${config.url}/note/${note.id}`;
+	- const url = `${config.url}/notes/${note.id}`;
 
 block title
 	= `${title} | ${instanceName}`
@@ -30,9 +30,9 @@ block meta
 		meta(name='robots' content='noindex')
 
 	if note.prev
-		link(rel='prev' href=`${config.url}/note/${note.prev}`)
+		link(rel='prev' href=`${config.url}/notes/${note.prev}`)
 	if note.next
-		link(rel='next' href=`${config.url}/note/${note.next}`)
+		link(rel='next' href=`${config.url}/notes/${note.next}`)
 
 	if !user.host
 		link(rel='alternate' href=url type='application/activity+json')

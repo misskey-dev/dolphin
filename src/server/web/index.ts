@@ -176,7 +176,7 @@ router.get('/users/:user', async ctx => {
 });
 
 // Note
-router.get('/note/:note', async ctx => {
+router.get('/notes/:note', async ctx => {
 	const note = await Notes.findOne(ctx.params.note);
 
 	if (note) {

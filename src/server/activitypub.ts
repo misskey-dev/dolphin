@@ -63,7 +63,7 @@ router.post('/inbox', json(), inbox);
 router.post('/users/:user/inbox', json(), inbox);
 
 // note
-router.get('/note/:note', async (ctx, next) => {
+router.get('/notes/:note', async (ctx, next) => {
 	if (!isActivityPubReq(ctx)) return await next();
 
 	const note = await Notes.findOne({
@@ -92,7 +92,7 @@ router.get('/note/:note', async (ctx, next) => {
 });
 
 // note activity
-router.get('/note/:note/activity', async ctx => {
+router.get('/notes/:note/activity', async ctx => {
 	const note = await Notes.findOne({
 		id: ctx.params.note,
 		userHost: null,

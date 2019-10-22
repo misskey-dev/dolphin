@@ -132,8 +132,8 @@ const router = new VueRouter({
 		{ path: '/messages', component: () => import('./pages/messages.vue').then(m => m.default) },
 		{ path: '/settings', component: () => import('./pages/settings.vue').then(m => m.default) },
 		{ path: '/instance', component: () => import('./pages/instance.vue').then(m => m.default) },
-		{ path: '/list/:list', component: () => import('./pages/list.vue').then(m => m.default) },
-		{ path: '/note/:note', component: () => import('./pages/note.vue').then(m => m.default) },/*
+		//{ path: '/notifications', component: () => import('./pages/notifications.vue').then(m => m.default) },
+		{ path: '/notes/:note', component: () => import('./pages/note.vue').then(m => m.default) },/*
 		{ path: '/authorize-follow', component: DpFollow },
 		{ path: '*', component: DpNotFound }*/
 	]

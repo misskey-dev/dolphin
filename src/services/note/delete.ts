@@ -45,8 +45,8 @@ export default async function(user: User, note: Note, quiet = false) {
 			}
 
 			const content = renderActivity(renote
-				? renderUndo(renderAnnounce(renote.uri || `${config.url}/note/${renote.id}`, note), user)
-				: renderDelete(renderTombstone(`${config.url}/note/${note.id}`), user));
+				? renderUndo(renderAnnounce(renote.uri || `${config.url}/notes/${renote.id}`, note), user)
+				: renderDelete(renderTombstone(`${config.url}/notes/${note.id}`), user));
 
 			const queue: string[] = [];
 

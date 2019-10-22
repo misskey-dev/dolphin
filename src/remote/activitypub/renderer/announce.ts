@@ -18,7 +18,7 @@ export default (object: any, note: Note) => {
 	}
 
 	return {
-		id: `${config.url}/note/${note.id}/activity`,
+		id: `${config.url}/notes/${note.id}/activity`,
 		actor: `${config.url}/users/${note.userId}`,
 		type: 'Announce',
 		published: note.createdAt.toISOString(),

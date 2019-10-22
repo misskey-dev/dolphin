@@ -255,7 +255,7 @@ export default async (user: User, data: Option, silent = false) => new Promise<N
 
 async function renderNoteOrRenoteActivity(data: Option, note: Note) {
 	const content = data.renote && data.text == null && data.poll == null && (data.files == null || data.files.length == 0)
-		? renderAnnounce(data.renote.uri ? data.renote.uri : `${config.url}/note/${data.renote.id}`, note)
+		? renderAnnounce(data.renote.uri ? data.renote.uri : `${config.url}/notes/${data.renote.id}`, note)
 		: renderCreate(await renderNote(note, false), note);
 
 	return renderActivity(content);
