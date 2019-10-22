@@ -245,7 +245,7 @@ export default Vue.extend({
 		right: 0;
 		margin: 0 auto;
 		z-index: 10001;
-		width: 280px;
+		width: 290px;
 		height: 300px;
 
 		@media (max-width: 500px) {

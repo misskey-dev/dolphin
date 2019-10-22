@@ -72,7 +72,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .dp-notification {
 	position: relative;
-	height: 64px;
+	height: 66px;
 	box-sizing: border-box;
 	padding: 12px;
 	font-size: 13px;
@@ -86,16 +86,16 @@ export default Vue.extend({
 
 	> .avatar {
 		display: block;
-		width: 40px;
-		height: 40px;
+		width: 42px;
+		height: 42px;
 		border-radius: 6px;
 	}
 
 	> .icon {
 		position: absolute;
 		z-index: 1;
-		top: 34px;
-		left: 34px;
+		top: 36px;
+		left: 36px;
 		width: 20px;
 		height: 20px;
 		box-sizing: border-box;
@@ -143,11 +143,11 @@ export default Vue.extend({
 	> header {
 		position: absolute;
 		top: 14px;
-		left: 60px;
+		left: 62px;
 		display: flex;
 		align-items: baseline;
 		white-space: nowrap;
-		width: calc(100% - 74px);
+		width: calc(100% - 76px);
 		line-height: 16px;
 
 		> .name {
@@ -159,7 +159,6 @@ export default Vue.extend({
 
 		> .dp-time {
 			margin-left: auto;
-			color: var(--noteHeaderInfo);
 			font-size: 0.9em;
 		}
 	}
@@ -167,8 +166,8 @@ export default Vue.extend({
 	> .text {
 		position: absolute;
 		top: 33px;
-		left: 60px;
-		width: calc(100% - 74px);
+		left: 62px;
+		width: calc(100% - 76px);
 		line-height: 16px;
 		white-space: nowrap;
 		overflow: hidden;

@@ -46,13 +46,12 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .dp-toast {
-	$width: 240px;
+	$width: 250px;
 
 	position: fixed;
 	z-index: 10000;
 	left: -($width);
 	width: $width;
-	height: 64px;
 	top: 32px;
 	padding: 0 32px;
 	pointer-events: none;
