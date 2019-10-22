@@ -33,7 +33,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .dp-reactions-viewer {
-	margin: 4px -2px;
+	margin: 4px -2px 0 -2px;
 
 	&:empty {
 		display: none;
