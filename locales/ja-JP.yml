@@ -60,6 +60,8 @@ uploadedFiles: "アップロードしたファイル"
 download: "ダウンロード"
 fileDeleteConfirm: "ファイル「{name}」を削除しますか？このファイルを添付した投稿も消えます。"
 unfollowConfirm: "{name}のフォローを解除しますか？"
+exportRequested: "エクスポートをリクエストしました。これには時間がかかる場合があります。エクスポートが終わると、「アップロードしたファイル」に追加されます。"
+importRequested: "インポートをリクエストしました。これには時間がかかる場合があります。"
 
 _visibility:
   public: "パブリック"

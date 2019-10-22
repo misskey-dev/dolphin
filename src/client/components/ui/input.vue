@@ -256,6 +256,8 @@ export default Vue.extend({
 	}
 
 	> .input {
+		position: relative;
+		
 		&:before {
 			content: '';
 			display: block;

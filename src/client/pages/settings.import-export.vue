@@ -48,7 +48,7 @@ export default Vue.extend({
 			.then(() => {
 				this.$root.dialog({
 					type: 'info',
-					text: this.$t('export-requested')
+					text: this.$t('exportRequested')
 				});
 			}).catch((e: any) => {
 				this.$root.dialog({
@@ -68,7 +68,7 @@ export default Vue.extend({
 				}).then(() => {
 					this.$root.dialog({
 						type: 'info',
-						text: this.$t('import-requested')
+						text: this.$t('importRequested')
 					});
 				}).catch((e: any) => {
 					this.$root.dialog({

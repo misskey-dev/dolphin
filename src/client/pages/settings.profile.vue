@@ -19,13 +19,13 @@
 
 		<x-input type="file" @change="onAvatarChange">
 			<span>{{ $t('_profile.avatar') }}</span>
-			<template #icon><fa icon="image"/></template>
+			<template #icon><fa :icon="faImage"/></template>
 			<template #desc v-if="avatarUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
 		</x-input>
 
 		<x-input type="file" @change="onBannerChange">
 			<span>{{ $t('_profile.banner') }}</span>
-			<template #icon><fa icon="image"/></template>
+			<template #icon><fa :icon="faImage"/></template>
 			<template #desc v-if="bannerUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
 		</x-input>
 
@@ -57,7 +57,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faUnlockAlt, faCogs } from '@fortawesome/free-solid-svg-icons';
+import { faUnlockAlt, faCogs, faImage } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-regular-svg-icons';
 import XButton from '../components/ui/button.vue';
 import XInput from '../components/ui/input.vue';
@@ -95,7 +95,7 @@ export default Vue.extend({
 			saving: false,
 			avatarUploading: false,
 			bannerUploading: false,
-			faSave, faUnlockAlt, faCogs
+			faSave, faUnlockAlt, faCogs, faImage
 		}
 	},
 
