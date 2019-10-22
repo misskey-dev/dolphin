@@ -1,5 +1,5 @@
 <template>
-<component class="dmtdnykelhudezerjlfpbhgovrgnqqgr"
+<component class="ui-button"
 	:is="link ? 'a' : 'button'"
 	:class="{ inline, primary }"
 	:type="type"
@@ -100,11 +100,10 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import '../../theme';
 
-.dmtdnykelhudezerjlfpbhgovrgnqqgr {
+.ui-button {
 	position: relative;
 	display: block;
 	min-width: 100px;
-	margin: 0;
 	padding: 8px 12px;
 	text-align: center;
 	font-weight: normal;
@@ -177,7 +176,11 @@ export default Vue.extend({
 		}
 	}
 
-	&:not(.inline) + .dmtdnykelhudezerjlfpbhgovrgnqqgr {
+	&.inline + .ui-button {
+		margin-left: 8px;
+	}
+
+	&:not(.inline) + .ui-button {
 		margin-top: 16px;
 	}
 

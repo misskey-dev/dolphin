@@ -153,6 +153,11 @@ export default (opts) => ({
 			this.items.push(item);
 		},
 
+		remove(find) {
+			this.items = this.items.filter(x => !find(x));
+			this.queue = this.queue.filter(x => !find(x));
+		},
+
 		releaseQueue() {
 			for (const n of this.queue) {
 				this.prepend(n, true);

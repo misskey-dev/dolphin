@@ -66,7 +66,7 @@ export default Vue.extend({
 				if (this.isFollowing) {
 					const { canceled } = await this.$root.dialog({
 						type: 'warning',
-						text: this.$t('@.unfollow-confirm', { name: this.user.name || this.user.username }),
+						text: this.$t('unfollowConfirm', { name: this.user.name || this.user.username }),
 						showCancelButton: true
 					});
 

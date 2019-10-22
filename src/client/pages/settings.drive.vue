@@ -2,8 +2,8 @@
 <section class="dp-settings-page-drive _section">
 	<div class="title"><fa :icon="faCloud"/> {{ $t('uploadedFiles') }}</div>
 	<div class="content">
-		<x-pagination :pagination="drivePagination" #default="{items}" class="drive">
-			<div class="file" v-for="(file, i) in items" :key="file.id" :data-index="i">
+		<x-pagination :pagination="drivePagination" #default="{items}" class="drive" ref="drive">
+			<div class="file" v-for="(file, i) in items" :key="file.id" :data-index="i" @click="selected = file" :class="{ selected: selected && (selected.id === file.id) }">
 				<x-file-thumbnail class="thumbnail" :file="file" fit="cover"/>
 				<div class="body">
 					<p class="name">
@@ -18,22 +18,27 @@
 						<span class="created-at"><fa :icon="faClock"/><dp-time :time="file.createdAt"/></span>
 						<template v-if="file.isSensitive">
 							<span class="separator"></span>
-							<span class="nsfw"><fa :icon="['far', 'eye-slash']"/> {{ $t('nsfw') }}</span>
+							<span class="nsfw"><fa :icon="faEyeSlash"/> {{ $t('nsfw') }}</span>
 						</template>
 					</footer>
 				</div>
 			</div>
 		</x-pagination>
 	</div>
+	<div class="footer">
+		<x-button primary inline :disabled="selected == null" @click="download()"><fa :icon="faDownload"/> {{ $t('download') }}</x-button>
+		<x-button inline :disabled="selected == null" @click="del()"><fa :icon="faTrashAlt"/> {{ $t('delete') }}</x-button>
+	</div>
 </section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { faCloud } from '@fortawesome/free-solid-svg-icons';
-import { faClock } from '@fortawesome/free-regular-svg-icons';
+import { faCloud, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faEyeSlash, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import XFileTypeIcon from '../components/file-type-icon.vue';
 import XFileThumbnail from '../components/drive-file-thumbnail.vue';
+import XButton from '../components/ui/button.vue';
 import XPagination from '../components/ui/pagination.vue';
 import i18n from '../i18n';
 
@@ -44,33 +49,86 @@ export default Vue.extend({
 		XFileTypeIcon,
 		XFileThumbnail,
 		XPagination,
+		XButton,
 	},
 
 	data() {
 		return {
+			selected: null,
+			connection: null,
 			drivePagination: {
 				endpoint: 'drive/files',
 				limit: 10,
 			},
-			faCloud, faClock
+			faCloud, faClock, faEyeSlash, faDownload, faTrashAlt
 		}
 	},
 
-	methods: {
+	created() {
+		this.connection = this.$root.stream.useSharedConnection('drive');
 
+		this.connection.on('fileCreated', this.onStreamDriveFileCreated);
+		this.connection.on('fileUpdated', this.onStreamDriveFileUpdated);
+		this.connection.on('fileDeleted', this.onStreamDriveFileDeleted);
+	},
+
+	beforeDestroy() {
+		this.connection.dispose();
+	},
+
+	methods: {
+		onStreamDriveFileCreated(file) {
+			this.$refs.drive.prepend(file);
+		},
+
+		onStreamDriveFileUpdated(file) {
+			// TODO
+		},
+
+		onStreamDriveFileDeleted(fileId) {
+			this.$refs.drive.remove(x => x.id === fileId);
+		},
+
+		download() {
+			window.open(this.selected.url, '_blank');
+		},
+
+		async del() {
+			const { canceled } = await this.$root.dialog({
+				type: 'warning',
+				text: this.$t('fileDeleteConfirm', { name: this.selected.name }),
+				showCancelButton: true
+			});
+			if (canceled) return;
+
+			this.$root.api('drive/files/delete', {
+				fileId: this.selected.id
+			});
+		}
 	}
 });
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .dp-settings-page-drive {
 	> .content {
+		max-height: 400px;
+		overflow: auto;
+		
 		> .drive {
 			> .file {
 				display: grid;
 				margin: 0 auto;
 				grid-template-columns: 64px 1fr;
 				grid-column-gap: 10px;
+
+				&.selected {
+					background: $primary;
+					box-shadow: 0 0 0 8px $primary;
+					color: #fff;
+				}
 
 				&:not(:last-child) {
 					margin-bottom: 16px;

@@ -57,6 +57,9 @@ importAndExport: "インポートとエクスポート"
 import: "インポート"
 export: "エクスポート"
 uploadedFiles: "アップロードしたファイル"
+download: "ダウンロード"
+fileDeleteConfirm: "ファイル「{name}」を削除しますか？このファイルを添付した投稿も消えます。"
+unfollowConfirm: "{name}のフォローを解除しますか？"
 
 _visibility:
   public: "パブリック"
