@@ -155,9 +155,15 @@ export default Vue.extend({
 	background: var(--bg);
 	border-radius: 6px;
 	@include shadow();
+	transition: box-shadow 0.1s ease;
 
 	@media (max-width: 500px) {
 		font-size: 14px;
+	}
+
+	&:focus {
+		outline: none;
+		box-shadow: 0 0 0 3px rgba($primary, 0.3);
 	}
 
 	> *:first-child {

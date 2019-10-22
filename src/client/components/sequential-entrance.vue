@@ -23,7 +23,7 @@ export default Vue.extend({
 			el.style.transform = 'translateY(-64px)';
 		},
 		enter(el, done) {
-			el.style.transition = 'transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1)';
+			el.style.transition = [getComputedStyle(el).transition, 'transform 0.7s cubic-bezier(0.23, 1, 0.32, 1)', 'opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1)'].join(',');
 			setTimeout(() => {
 				el.style.opacity = 1;
 				el.style.transform = 'translateY(0px)';
@@ -43,6 +43,6 @@ export default Vue.extend({
 
 <style lang="scss">
 .staggered-fade-move {
-	transition: transform 0.7s;
+	transition: transform 0.7s !important;
 }
 </style>

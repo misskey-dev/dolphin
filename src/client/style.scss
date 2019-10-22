@@ -247,7 +247,7 @@ a {
 }
 
 .zoom-enter-active, .zoom-leave-active {
-	transition: opacity 0.5s, transform 0.5s;
+	transition: opacity 0.5s, transform 0.5s !important;
 }
 .zoom-enter, .zoom-leave-to {
 	opacity: 0;
