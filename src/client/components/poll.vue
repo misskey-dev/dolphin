@@ -138,7 +138,7 @@ export default Vue.extend({
 	}
 
 	> p {
-		color: var(--text);
+		color: var(--fg);
 
 		a {
 			color: inherit;

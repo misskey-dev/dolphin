@@ -88,7 +88,7 @@ export default Vue.extend({
 
 	> .no-users
 		text-align center
-		color var(--text)
+		color var(--fg)
 
 	> .user
 		display flex
@@ -117,19 +117,19 @@ export default Vue.extend({
 					margin 0
 					font-size 16px
 					line-height 24px
-					color var(--text)
+					color var(--fg)
 
 				> .username
 					display block
 					margin 0
 					font-size 15px
 					line-height 16px
-					color var(--text)
+					color var(--fg)
 					opacity 0.7
 
 			> .description
 				width 55%
-				color var(--text)
+				color var(--fg)
 				line-height 42px
 				white-space nowrap
 				overflow hidden
@@ -147,7 +147,7 @@ export default Vue.extend({
 		display block
 		width 100%
 		padding 16px
-		color var(--text)
+		color var(--fg)
 		border-top solid var(--lineWidth) rgba(#000, 0.05)
 
 		&:hover

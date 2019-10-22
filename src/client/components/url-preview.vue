@@ -148,7 +148,7 @@ export default Vue.extend({
 		height: 1.5em;
 		padding: 0;
 		margin: 0;
-		color: var(--text);
+		color: var(--fg);
 		background: rgba(128, 128, 128, 0.2);
 		opacity: 0.7;
 

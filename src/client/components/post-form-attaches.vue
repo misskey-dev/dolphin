@@ -104,7 +104,7 @@ export default Vue.extend({
 				width: 100%;
 				height: 100%;
 				z-index: 1;
-				color: var(--text);
+				color: var(--fg);
 			}
 
 			> .remove {

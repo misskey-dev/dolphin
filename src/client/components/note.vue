@@ -152,7 +152,7 @@ export default Vue.extend({
 .note {
 	position: relative;
 	font-size: 16px;
-	background: #fff;
+	background: var(--bg);
 	border-radius: 6px;
 	@include shadow();
 

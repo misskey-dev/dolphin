@@ -229,7 +229,7 @@ export default Vue.extend({
 
 		> .title {
 			display: none;
-			background: #fff;
+			background: var(--bg);
 			text-align: center;
 			padding: 50px 0 16px 0;
 			font-weight: bold;
@@ -263,7 +263,7 @@ export default Vue.extend({
 		> .description {
 			padding: 24px 24px 24px 154px;
 			font-size: 15px;
-			background: #fff;
+			background: var(--bg);
 
 			@media (max-width: 500px) {
 				padding: 16px;

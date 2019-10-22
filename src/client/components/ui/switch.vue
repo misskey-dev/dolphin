@@ -120,7 +120,7 @@ export default Vue.extend({
 		font-size 16px
 		cursor pointer
 		transition inherit
-		color var(--text)
+		color var(--fg)
 
 		> span
 			display block

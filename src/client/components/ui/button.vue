@@ -115,17 +115,30 @@ export default Vue.extend({
 	box-shadow: none;
 	text-decoration: none;
 	user-select: none;
-	background: #e0e9ec;
+	background: rgba(0, 0, 0, 0.05);
 	border-radius: 6px;
 	overflow: hidden;
 	cursor: pointer;
+	color: var(--fg);
 
 	&:not(:disabled):hover {
-		background: lighten(#e0e9ec, 3%);
+		background: rgba(0, 0, 0, 0.1);
 	}
 
 	&:not(:disabled):active {
-		background: lighten(#e0e9ec, 3%);
+		background: rgba(0, 0, 0, 0.1);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		background: rgba(255, 255, 255, 0.05);
+
+		&:not(:disabled):hover {
+			background: rgba(255, 255, 255, 0.1);
+		}
+
+		&:not(:disabled):active {
+			background: rgba(255, 255, 255, 0.1);
+		}
 	}
 
 	&.primary {

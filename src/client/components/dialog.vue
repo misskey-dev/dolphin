@@ -251,7 +251,7 @@ export default Vue.extend({
 		box-sizing: border-box;
 		width: calc(100% - 32px);
 		text-align: center;
-		background: #fff;
+		background: var(--bg);
 		opacity: 0;
 		border-radius: 8px;
 

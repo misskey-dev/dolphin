@@ -12,31 +12,50 @@ html {
 	background-attachment: fixed;
 	background-size: cover;
 	background-position: center;
-	color: #5c6a73;
+	color: var(--fg);
 	overflow: auto;
 	overflow-y: scroll;
+
+	&, * {
+		scrollbar-color: var(--scrollbarHandle) var(--bg);
+
+		&:hover {
+			scrollbar-color: var(--scrollbarHandleHover) var(--bg);
+		}
+
+		&:active {
+			scrollbar-color: $primary var(--bg);
+		}
+
+		&::-webkit-scrollbar {
+			width: 6px;
+			height: 6px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: var(--bg);
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: var(--scrollbarHandle);
+
+			&:hover {
+				background: var(--scrollbarHandleHover);
+			}
+
+			&:active {
+				background: $primary;
+			}
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		background-color: #0b0c0c;
+	}
 }
 
 body {
 	overflow-wrap: break-word;
-
-	> noscript {
-		position: fixed;
-		z-index: 2;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		text-align: center;
-		background: #fff;
-
-		> p {
-			display: block;
-			margin: 32px;
-			font-size: 2em;
-			color: #555;
-		}
-	}
 }
 
 #ini {
@@ -139,7 +158,7 @@ a {
 	background: none;
 	border: none;
 	cursor: pointer;
-	color: $text;
+	color: var(--fg);
 	touch-action: manipulation;
 	font-size: 1em;
 	user-select: none;
@@ -185,7 +204,7 @@ a {
 
 ._section {
 	overflow: hidden;
-	background: #fff;
+	background: var(--bg);
 	border-radius: 6px;
 	@include shadow();
 

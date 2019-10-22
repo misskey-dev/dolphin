@@ -76,7 +76,7 @@ export default Vue.extend({
 	background-repeat: no-repeat;
 
 	> div {
-		background-color: var(--text);
+		background-color: var(--fg);
 		border-radius: 6px;
 		color: var(--secondary);
 		display: inline-block;

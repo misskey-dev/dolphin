@@ -102,7 +102,7 @@ export default Vue.extend({
 	}
 
 	> div {
-		color: var(--text);
+		color: var(--fg);
 	}
 }
 </style>

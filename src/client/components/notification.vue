@@ -100,8 +100,9 @@ export default Vue.extend({
 		height: 20px;
 		box-sizing: border-box;
 		border-radius: 100%;
-		background: #fff;
-		box-shadow: 0 0 0 2px #fff;
+		background: var(--bg);
+		box-shadow: 0 0 0 2px var(--bg);
+		font-size: 12px;
 
 		> * {
 			color: #fff;

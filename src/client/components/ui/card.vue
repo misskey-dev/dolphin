@@ -64,6 +64,6 @@ export default Vue.extend({
 
 			> header
 				font-weight bold
-				color var(--text)
+				color var(--fg)
 
 </style>

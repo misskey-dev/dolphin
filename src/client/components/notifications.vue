@@ -119,6 +119,10 @@ export default Vue.extend({
 	box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
 	overflow: hidden;
 
+	@media (prefers-color-scheme: dark) {
+		background: rgba(0, 0, 0, 0.5);
+	}
+
 	> .contents {
 		overflow: auto;
 		height: 100%;
@@ -126,7 +130,7 @@ export default Vue.extend({
 		> .notifications {
 			> .notification {
 				margin: 8px;
-				background: #fff;
+				background: var(--bg);
 				border-radius: 6px;
 				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 			}
@@ -146,7 +150,7 @@ export default Vue.extend({
 			margin: 0;
 			padding: 16px;
 			text-align: center;
-			color: var(--text);
+			color: var(--fg);
 		}
 
 		> .placeholder {

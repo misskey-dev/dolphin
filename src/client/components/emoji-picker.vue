@@ -126,7 +126,7 @@ export default Vue.extend({
 			flex 1
 			padding 10px 0
 			font-size 16px
-			color var(--text)
+			color var(--fg)
 			transition color 0.2s ease
 
 			&:hover
@@ -149,7 +149,7 @@ export default Vue.extend({
 			z-index 1
 			padding 8px
 			background var(--faceHeader)
-			color var(--text)
+			color var(--fg)
 			font-size 12px
 
 		> div

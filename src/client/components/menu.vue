@@ -174,7 +174,7 @@ export default Vue.extend({
 			padding: 8px 16px;
 			width: 100%;
 			white-space: nowrap;
-			color: $text;
+			color: var(--fg);
 
 			&:hover {
 				color: #fff;

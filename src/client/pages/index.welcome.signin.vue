@@ -92,7 +92,7 @@ export default Vue.extend({
 .dp-signin {
 	max-width: 420px;
 	box-sizing: border-box;
-	background: #fff;
+	background: var(--bg);
 	border-radius: 6px;
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 	overflow: hidden;

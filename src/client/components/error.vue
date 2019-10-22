@@ -20,7 +20,7 @@ export default Vue.extend({
 	margin 0 auto
 	padding 32px
 	text-align center
-	color var(--text)
+	color var(--fg)
 
 	> p
 		margin 0 0 8px 0

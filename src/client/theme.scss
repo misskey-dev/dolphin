@@ -1,5 +1,18 @@
 $primary: #5da1c1;
-$text: #5c6a73;
+
+:root {
+	--bg: #fff;
+	--fg: #5c6a73;
+	--scrollbarHandle: rgba(0, 0, 0, 0.2);
+	--scrollbarHandleHover: rgba(0, 0, 0, 0.4);
+
+	@media (prefers-color-scheme: dark) {
+		--bg: #111213;
+		--fg: #c7d1d8;
+		--scrollbarHandle: rgba(255, 255, 255, 0.2);
+		--scrollbarHandleHover: rgba(255, 255, 255, 0.4);	
+	}
+}
 
 @mixin shadow() {
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);

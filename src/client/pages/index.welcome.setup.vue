@@ -84,7 +84,7 @@ export default Vue.extend({
 
 	> div {
 		padding: 32px;
-		background: #fff;
+		background: var(--bg);
 
 		> p {
 			margin-top: 0;

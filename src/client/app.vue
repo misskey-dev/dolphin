@@ -184,7 +184,7 @@ export default Vue.extend({
 		left: 32px;
 		z-index: 10001;
 		padding: 8px 0;
-		background: #fff;
+		background: var(--bg);
 		border-radius: 4px;
 		box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
 
@@ -207,7 +207,7 @@ export default Vue.extend({
 			width: 100%;
 			box-sizing: border-box;
 			white-space: nowrap;
-			color: $text;
+			color: var(--fg);
 			text-align: left;
 			font-size: 14px;
 
@@ -272,11 +272,15 @@ export default Vue.extend({
 		}
 
 		&.nav, &.notifications {
-			background: #fff;
-			color: $text;
+			background: var(--bg);
+			color: var(--fg);
 
 			&:hover {
 				background: #eee;
+
+				@media (prefers-color-scheme: dark) {
+					background: #1c1e1f;
+				}
 			}
 
 			> i {
