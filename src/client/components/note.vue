@@ -241,7 +241,7 @@ export default Vue.extend({
 			width: 58px;
 			height: 58px;
 			position: sticky;
-			top: 8px;
+			top: 16px;
 			left: 0;
 
 			@media (max-width: 450px) {
