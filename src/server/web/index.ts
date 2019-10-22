@@ -52,7 +52,7 @@ const router = new Router();
 router.get('/assets/*', async ctx => {
 	await send(ctx as any, ctx.path, {
 		root: client,
-		maxage: ms('7 days'),
+		maxage: ms('1 days'),
 	});
 });
 
