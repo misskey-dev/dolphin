@@ -129,6 +129,7 @@ const router = new VueRouter({
 			{ path: 'followers', component: () => import('./pages/user/followers.vue').then(m => m.default) },
 		]},
 		{ path: '/favorites', component: () => import('./pages/favorites.vue').then(m => m.default) },
+		{ path: '/messages', component: () => import('./pages/messages.vue').then(m => m.default) },
 		{ path: '/settings', component: () => import('./pages/settings.vue').then(m => m.default) },
 		{ path: '/instance', component: () => import('./pages/instance.vue').then(m => m.default) },
 		//{ path: '/notifications', component: () => import('./pages/notifications.vue').then(m => m.default) },

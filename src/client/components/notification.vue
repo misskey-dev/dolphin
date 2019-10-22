@@ -143,7 +143,7 @@ export default Vue.extend({
 	> header {
 		position: absolute;
 		top: 14px;
-		left: 58px;
+		left: 60px;
 		display: flex;
 		align-items: baseline;
 		white-space: nowrap;
@@ -167,7 +167,7 @@ export default Vue.extend({
 	> .text {
 		position: absolute;
 		top: 32px;
-		left: 58px;
+		left: 60px;
 		width: calc(100% - 74px);
 		line-height: 16px;
 		white-space: nowrap;

@@ -23,17 +23,19 @@ export default Vue.extend({
 		this.$nextTick(() => {
 			anime({
 				targets: this.$el,
-				bottom: '0px',
+				left: '0px',
+				opacity: 1,
 				duration: 500,
-				easing: 'easeOutQuad'
+				easing: 'easeOutQuint'
 			});
 
 			setTimeout(() => {
 				anime({
 					targets: this.$el,
-					bottom: `-${this.$el.offsetHeight}px`,
+					left: `-${this.$el.offsetWidth}px`,
+					opacity: 0,
 					duration: 500,
-					easing: 'easeOutQuad',
+					easing: 'easeOutQuint',
 					complete: () => this.destroyDom()
 				});
 			}, 6000);
@@ -44,20 +46,28 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .dp-toast {
-	$height: 88px;
+	$width: 240px;
 
 	position: fixed;
 	z-index: 10000;
-	left: 0;
-	right: 0;
-	width: calc(100% - 144px - 16px);
-	max-width: 300px;
-	box-sizing: border-box;
-	height: $height;
-	margin: 0 auto;
-	padding: 8px 8px 16px 8px;
+	left: -($width);
+	width: $width;
+	height: 64px;
+	top: 32px;
+	padding: 0 32px;
 	pointer-events: none;
-	bottom: -($height);
+	opacity: 0;
+
+	@media (max-width: 700px) {
+		top: initial;
+		bottom: 112px;
+		padding: 0 16px;
+	}
+
+	@media (max-width: 500px) {
+		bottom: 92px;
+		padding: 0 8px;
+	}
 
 	> .notification {
 		height: 100%;

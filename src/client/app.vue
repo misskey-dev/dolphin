@@ -1,8 +1,8 @@
 <template>
-<div class="dp-app transitioning">
+<div class="dp-app">
 	<main>
 		<router-view v-hotkey.global="keymap"></router-view>
-		<div class="powerd-by">
+		<div class="powerd-by" :style="{ visibility: $store.getters.isSignedIn ? 'hidden' : 'visible' }">
 			<span>Powered by</span>
 			<x-logo class="logo"/>
 		</div>
@@ -11,26 +11,27 @@
 		<nav v-if="navOpen" ref="nav">
 			<router-link to="/"><fa :icon="faHome" fixed-width/>{{ $t('timeline') }}</router-link>
 			<router-link :to="`/@${ $store.state.i.username }`"><fa :icon="faUser" fixed-width/>{{ $t('profile') }}</router-link>
+			<router-link to="/messages"><fa :icon="faEnvelope" fixed-width/>{{ $t('messages') }}<i v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa :icon="faCircle"/></i></router-link>
 			<router-link to="/favorites"><fa :icon="faStar" fixed-width/>{{ $t('favorites') }}</router-link>
 			<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
 			<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
 			<div></div>
-			<button class="_buttonPlain" @click="() => { notificationsOpen = true; navOpen = false; }"><fa :icon="faBell" fixed-width/>{{ $t('notifications') }}</button>
 			<button class="_buttonPlain" @click="search()"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
 		</nav>
 	</transition>
 	<transition name="zoom-in-bottom">
 		<x-notifications v-if="notificationsOpen" class="notifications"/>
 	</transition>
-	<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="navClick()" ref="navButton"><fa :icon="navOpen || notificationsOpen ? faTimes : faBars"/><i v-if="hasUnreadNotification"><fa :icon="faCircle"/></i></button>
+	<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="navOpen = !navOpen" ref="navButton"><fa :icon="navOpen ? faTimes : faBars"/><i v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa :icon="faCircle"/></i></button>
+	<button v-if="$store.getters.isSignedIn" class="button notifications _buttonPlain" @click="notificationsOpen = !notificationsOpen" ref="notificationsButton"><fa :icon="notificationsOpen ? faTimes : faBell"/><i v-if="$store.state.i.hasUnreadNotification"><fa :icon="faCircle"/></i></button>
 	<button v-if="$store.getters.isSignedIn" class="button post _buttonPrimary" @click="post()"><fa :icon="faPencilAlt"/></button>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle } from '@fortawesome/free-solid-svg-icons';
-import { faBell } from '@fortawesome/free-regular-svg-icons';
+import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
 import contains from './scripts/contains';
@@ -50,7 +51,7 @@ export default Vue.extend({
 			navOpen: false,
 			notificationsOpen: false,
 			connection: null,
-			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle
+			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faEnvelope
 		};
 	},
 
@@ -61,21 +62,12 @@ export default Vue.extend({
 				's': this.search,
 			};
 		},
-
-		hasUnreadNotification(): boolean {
-			return this.$store.getters.isSignedIn && this.$store.state.i.hasUnreadNotification;
-		},
 	},
 
 	watch: {
 		'$route'(to, from) {
-			this.$el.classList.add('transitioning');
 			this.navOpen = false;
 			this.notificationsOpen = false;
-
-			setTimeout(() => {
-				this.$el.classList.remove('transitioning');
-			}, 1000);
 		},
 
 		navOpen(opened) {
@@ -100,10 +92,6 @@ export default Vue.extend({
 	},
 
 	created() {
-		setTimeout(() => {
-			this.$el.classList.remove('transitioning');
-		}, 1000);
-
 		if (this.$store.getters.isSignedIn) {
 			this.connection = this.$root.stream.useSharedConnection('main');
 			this.connection.on('notification', this.onNotification);
@@ -142,16 +130,6 @@ export default Vue.extend({
 				notification
 			});
 		},
-
-		navClick() {
-			if (this.notificationsOpen) {
-				this.notificationsOpen = false;
-			} else if (this.navOpen) {
-				this.navOpen = false;
-			} else {
-				this.navOpen = true;
-			}
-		}
 	}
 });
 </script>
@@ -159,12 +137,13 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import './theme';
 
-.dp-app {
-	&.transitioning > main > .powerd-by {
-		opacity: 0;
-		transition: none;
-	}
+@keyframes blink {
+	0% { opacity: 1; }
+	30% { opacity: 1; }
+	90% { opacity: 0; }
+}
 
+.dp-app {
 	> main {
 		max-width: 650px;
 		margin: 0 auto;
@@ -223,6 +202,7 @@ export default Vue.extend({
 
 		> *:not(div) {
 			display: block;
+			position: relative;
 			padding: 8px 22px 8px 16px;
 			width: 100%;
 			box-sizing: border-box;
@@ -246,20 +226,30 @@ export default Vue.extend({
 				margin-right: 4px;
 				width: 20px;
 			}
+
+			> i {
+				position: absolute;
+				top: 5px;
+				left: 13px;
+				color: $primary;
+				font-size: 12px;
+				animation: blink 1s infinite;
+			}
 		}
 	}
 
 	> .notifications {
 		position: fixed;
 		bottom: 96px + 16px;
-		left: 32px;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
 		z-index: 10001;
 		width: 280px;
 		height: 300px;
 
 		@media (max-width: 500px) {
 			bottom: 92px;
-			left: 16px;
 		}
 	}
 
@@ -281,8 +271,7 @@ export default Vue.extend({
 			outline: none;
 		}
 
-		&.nav {
-			left: 32px;
+		&.nav, &.notifications {
 			background: #fff;
 			color: $text;
 
@@ -294,10 +283,20 @@ export default Vue.extend({
 				position: absolute;
 				top: 0;
 				left: 0;
-				color: var(--notificationIndicator);
+				color: $primary;
 				font-size: 16px;
 				animation: blink 1s infinite;
 			}
+		}
+
+		&.nav {
+			left: 32px;
+		}
+
+		&.notifications {
+			left: 0;
+			right: 0;
+			margin: 0 auto;
 		}
 
 		&.post {

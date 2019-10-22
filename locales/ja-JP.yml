@@ -51,6 +51,7 @@ reply: "返信"
 loadMore: "もっと見る"
 youGotNewFollower: "フォローされました"
 receiveFollowRequest: "フォローリクエストされました"
+mentions: "あなた宛て"
 
 _visibility:
   public: "パブリック"
