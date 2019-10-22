@@ -123,6 +123,17 @@ export default Vue.extend({
 				margin: 0 auto;
 				grid-template-columns: 64px 1fr;
 				grid-column-gap: 10px;
+				cursor: pointer;
+
+				&:hover {
+					background: rgba(0, 0, 0, 0.05);
+					box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.05);
+
+					@media (prefers-color-scheme: dark) {
+						background: rgba(255, 255, 255, 0.05);
+						box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05);
+					}
+				}
 
 				&.selected {
 					background: $primary;
