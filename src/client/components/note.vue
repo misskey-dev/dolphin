@@ -7,9 +7,7 @@
 	v-hotkey="keymap"
 >
 	<x-sub v-for="note in conversation" :key="note.id" :note="note"/>
-	<div class="reply-to" v-if="appearNote.reply">
-		<x-sub :note="appearNote.reply"/>
-	</div>
+	<x-sub :note="appearNote.reply" class="reply-to" v-if="appearNote.reply"/>
 	<div class="renote" v-if="isRenote">
 		<dp-avatar class="avatar" :user="note.user"/>
 		<fa :icon="faRetweet"/>
@@ -153,11 +151,18 @@ export default Vue.extend({
 
 .note {
 	position: relative;
-	overflow: hidden;
 	font-size: 16px;
 	background: #fff;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 	border-radius: 6px;
+	@include shadow();
+
+	> *:first-child {
+		border-radius: 6px 6px 0 0;
+	}
+
+	> *:last-child {
+		border-radius: 0 0 6px 6px;
+	}
 
 	> .renote {
 		display: flex;
@@ -231,6 +236,9 @@ export default Vue.extend({
 			margin: 0 10px 8px 0;
 			width: 58px;
 			height: 58px;
+			position: sticky;
+			top: 8px;
+			left: 0;
 
 			@media (max-width: 450px) {
 				width: 50px;

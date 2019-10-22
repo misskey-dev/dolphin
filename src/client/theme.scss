@@ -1,2 +1,14 @@
 $primary: #5da1c1;
 $text: #5c6a73;
+
+@mixin shadow() {
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+	@media (max-width: 700px) {
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+	}
+
+	@media (max-width: 500px) {
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+}

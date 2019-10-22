@@ -9,21 +9,23 @@
 	</blockquote>
 </div>
 <div v-else class="dp-url-preview">
-	<component :is="hasRoute ? 'router-link' : 'a'" :class="{ compact }" :[attr]="hasRoute ? url.substr(local.length) : url" rel="nofollow noopener" :target="target" :title="url" v-if="!fetching">
-		<div class="thumbnail" v-if="thumbnail" :style="`background-image: url('${thumbnail}')`">
-			<button v-if="!playerEnabled && player.url" @click.prevent="playerEnabled = true" :title="$t('enable-player')"><fa :icon="['far', 'play-circle']"/></button>
-		</div>
-		<article>
-			<header>
-				<h1 :title="title">{{ title }}</h1>
-			</header>
-			<p v-if="description" :title="description">{{ description.length > 85 ? description.slice(0, 85) + '…' : description }}</p>
-			<footer>
-				<img class="icon" v-if="icon" :src="icon"/>
-				<p :title="sitename">{{ sitename }}</p>
-			</footer>
-		</article>
-	</component>
+	<transition name="zoom" mode="out-in">
+		<component :is="hasRoute ? 'router-link' : 'a'" :class="{ compact }" :[attr]="hasRoute ? url.substr(local.length) : url" rel="nofollow noopener" :target="target" :title="url" v-if="!fetching">
+			<div class="thumbnail" v-if="thumbnail" :style="`background-image: url('${thumbnail}')`">
+				<button v-if="!playerEnabled && player.url" @click.prevent="playerEnabled = true" :title="$t('enable-player')"><fa :icon="['far', 'play-circle']"/></button>
+			</div>
+			<article>
+				<header>
+					<h1 :title="title">{{ title }}</h1>
+				</header>
+				<p v-if="description" :title="description">{{ description.length > 85 ? description.slice(0, 85) + '…' : description }}</p>
+				<footer>
+					<img class="icon" v-if="icon" :src="icon"/>
+					<p :title="sitename">{{ sitename }}</p>
+				</footer>
+			</article>
+		</component>
+	</transition>
 </div>
 </template>
 

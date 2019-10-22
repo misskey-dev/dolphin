@@ -186,8 +186,8 @@ a {
 ._section {
 	overflow: hidden;
 	background: #fff;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 	border-radius: 6px;
+	@include shadow();
 
 	> .title {
 		margin: 0;
@@ -223,7 +223,7 @@ a {
 }
 .zoom-enter, .zoom-leave-to {
 	opacity: 0;
-	transform: scale(0.8);
+	transform: scale(0.9);
 }
 
 .zoom-in-top-enter-active,

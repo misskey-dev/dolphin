@@ -110,13 +110,15 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../../theme';
+
 .dp-user-page {
 	> .profile {
 		position: relative;
 		margin-bottom: 16px;
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 		border-radius: 6px;
 		overflow: hidden;
+		@include shadow();
 
 		@media (max-width: 500px) {
 			margin-bottom: 8px;
