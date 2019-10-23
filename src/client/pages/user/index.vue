@@ -59,6 +59,9 @@
 		</div>
 	</transition>
 	<router-view :user="user"></router-view>
+	<sequential-entrance class="pins">
+		<x-note v-for="(note, i) in user.pinnedNotes" :note="note" :key="note.id" :data-index="i" :detail="true" :pinned="true"/>
+	</sequential-entrance>
 	<x-user-timeline v-if="$route.name == 'user'" :user="user"/>
 </div>
 <div v-else-if="error">
@@ -71,12 +74,14 @@ import Vue from 'vue';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import XUserTimeline from './index.timeline.vue';
 import XUserMenu from '../../components/user-menu.vue';
+import XNote from '../../components/note.vue';
 import Progress from '../../scripts/loading';
 import parseAcct from '../../../misc/acct/parse';
 
 export default Vue.extend({
 	components: {
-		XUserTimeline
+		XUserTimeline,
+		XNote,
 	},
 
 	data() {
@@ -372,6 +377,14 @@ export default Vue.extend({
 					font-size: 80%;
 				}
 			}
+		}
+	}
+
+	> .pins {
+		margin-bottom: 16px;
+
+		@media (max-width: 500px) {
+			margin-bottom: 8px;
 		}
 	}
 

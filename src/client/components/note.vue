@@ -8,6 +8,7 @@
 >
 	<x-sub v-for="note in conversation" :key="note.id" :note="note"/>
 	<x-sub :note="appearNote.reply" class="reply-to" v-if="appearNote.reply"/>
+	<div class="pinned" v-if="pinned"><fa :icon="faThumbtack"/> {{ $t('pinnedNote') }}</div>
 	<div class="renote" v-if="isRenote">
 		<dp-avatar class="avatar" :user="note.user"/>
 		<fa :icon="faRetweet"/>
@@ -81,7 +82,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../i18n';
-import { faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight, faHome, faUnlock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight, faHome, faUnlock, faEnvelope, faThumbtack } from '@fortawesome/free-solid-svg-icons';
 
 import XSub from './note.sub.vue';
 import XNoteHeader from './note-header.vue';
@@ -119,13 +120,18 @@ export default Vue.extend({
 			required: false,
 			default: false
 		},
+		pinned: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
 	},
 
 	data() {
 		return {
 			conversation: [],
 			replies: [],
-			faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight, faHome, faUnlock, faEnvelope
+			faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight, faHome, faUnlock, faEnvelope, faThumbtack
 		};
 	},
 
@@ -178,6 +184,25 @@ export default Vue.extend({
 
 	> *:last-child {
 		border-radius: 0 0 6px 6px;
+	}
+
+	> .pinned {
+		padding: 16px 32px 8px 32px;
+		line-height: 28px;
+		white-space: pre;
+		color: #d28a3f;
+
+		@media (max-width: 450px) {
+			padding: 8px 16px 0 16px;
+		}
+
+		> [data-icon] {
+			margin-right: 4px;
+		}
+	}
+
+	> .pinned + .article {
+		padding-top: 8px;
 	}
 
 	> .renote {
