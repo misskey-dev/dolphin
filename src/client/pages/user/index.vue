@@ -1,7 +1,7 @@
 <template>
 <div class="dp-user-page" v-if="user">
 	<transition name="zoom" mode="out-in" appear>
-		<div class="profile">
+		<div class="profile" :key="user.id">
 			<div class="banner-container" :style="style">
 				<div class="banner" ref="banner" :style="style"></div>
 				<div class="fade"></div>
@@ -43,15 +43,15 @@
 				</dl>
 			</div>
 			<div class="status">
-				<router-link :to="user | userPage()">
+				<router-link :to="user | userPage()" :class="{ active: $route.name === 'user' }">
 					<b>{{ user.notesCount | number }}</b>
 					<span>{{ $t('notes') }}</span>
 				</router-link>
-				<router-link :to="user | userPage('following')">
+				<router-link :to="user | userPage('following')" :class="{ active: $route.name === 'userFollowing' }">
 					<b>{{ user.followingCount | number }}</b>
 					<span>{{ $t('following') }}</span>
 				</router-link>
-				<router-link :to="user | userPage('followers')">
+				<router-link :to="user | userPage('followers')" :class="{ active: $route.name === 'userFollowers' }">
 					<b>{{ user.followersCount | number }}</b>
 					<span>{{ $t('followers') }}</span>
 				</router-link>
@@ -353,7 +353,7 @@ export default Vue.extend({
 				flex: 1;
 				text-align: center;
 
-				&.router-link-active {
+				&.active {
 					color: $primary;
 				}
 
@@ -366,7 +366,7 @@ export default Vue.extend({
 				}
 
 				> span {
-					font-size: 90%;
+					font-size: 80%;
 				}
 			}
 		}

@@ -23,6 +23,12 @@ export default Vue.extend({
 		}
 	},
 
+	watch: {
+		user() {
+			this.$refs.timeline.reload();
+		}
+	},
+
 	data() {
 		return {
 			date: null,

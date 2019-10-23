@@ -1,0 +1,130 @@
+<template>
+<x-pagination :pagination="pagination" #default="{items}" class="dp-following-or-followers" ref="list">
+	<div class="user" v-for="(user, i) in items.map(x => type === 'following' ? x.followee : x.follower)" :key="user.id" :data-index="i">
+		<dp-avatar class="avatar" :user="user"/>
+		<div class="body">
+			<div class="name">
+				<router-link class="name" :to="user | userPage" v-user-preview="user.id"><dp-user-name :user="user"/></router-link>
+				<p class="acct">@{{ user | acct }}</p>
+			</div>
+			<div class="description" v-if="user.description" :title="user.description">
+				<mfm :text="user.description" :is-note="false" :author="user" :i="$store.state.i" :custom-emojis="user.emojis" :plain="true" :nowrap="true"/>
+			</div>
+			<dp-follow-button class="koudoku-button" v-if="$store.getters.isSignedIn && user.id != $store.state.i.id" :user="user" mini/>
+		</div>
+	</div>
+</x-pagination>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import parseAcct from '../../../misc/acct/parse';
+import i18n from '../../i18n';
+import XPagination from '../../components/ui/pagination.vue';
+
+export default Vue.extend({
+	i18n,
+
+	components: {
+		XPagination,
+	},
+
+	props: {
+		type: {
+			type: String,
+			required: true
+		}
+	},
+
+	data() {
+		return {
+			pagination: {
+				endpoint: () => this.type === 'following' ? 'users/following' : 'users/followers',
+				limit: 20,
+				params: {
+					...parseAcct(this.$route.params.user),
+				}
+			},
+		};
+	},
+
+	watch: {
+		type() {
+			this.$refs.list.reload();
+		},
+
+		'$route'() {
+			this.$refs.list.reload();
+		}
+	}
+});
+</script>
+
+<style lang="scss" scoped>
+@import '../../theme';
+
+.dp-following-or-followers {
+	> .user {
+		display: flex;
+		padding: 16px;
+		background: var(--bg);
+		border-radius: 6px;
+		@include shadow();
+
+		> .avatar {
+			display: block;
+			flex-shrink: 0;
+			margin: 0 12px 0 0;
+			width: 42px;
+			height: 42px;
+			border-radius: 8px;
+		}
+
+		> .body {
+			display: flex;
+			width: calc(100% - 54px);
+			position: relative;
+
+			> .name {
+				width: 45%;
+
+				> .name {
+					margin: 0;
+					font-size: 16px;
+					line-height: 24px;
+					color: var(--text);
+				}
+
+				> .acct {
+					display: block;
+					margin: 0;
+					font-size: 15px;
+					line-height: 16px;
+					color: var(--text);
+					opacity: 0.7;
+				}
+			}
+
+			> .description {
+				width: 55%;
+				color: var(--text);
+				line-height: 42px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				opacity: 0.7;
+				font-size: 14px;
+				padding-right: 40px;
+			}
+
+			> .koudoku-button {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				right: 0;
+				margin: auto 0;
+			}
+		}
+	}
+}
+</style>

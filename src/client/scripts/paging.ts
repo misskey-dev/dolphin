@@ -78,7 +78,8 @@ export default (opts) => ({
 			if (opts.beforeInit) opts.beforeInit(this);
 			let params = typeof this.pagination.params === 'function' ? this.pagination.params(true) : this.pagination.params;
 			if (params && params.then) params = await params;
-			await this.$root.api(this.pagination.endpoint, {
+			const endpoint = typeof this.pagination.endpoint === 'function' ? this.pagination.endpoint() : this.pagination.endpoint;
+			await this.$root.api(endpoint, {
 				limit: (this.pagination.limit || 10) + 1,
 				...params
 			}).then(x => {
@@ -105,7 +106,8 @@ export default (opts) => ({
 			this.moreFetching = true;
 			let params = typeof this.pagination.params === 'function' ? this.pagination.params(false) : this.pagination.params;
 			if (params && params.then) params = await params;
-			await this.$root.api(this.pagination.endpoint, {
+			const endpoint = typeof this.pagination.endpoint === 'function' ? this.pagination.endpoint() : this.pagination.endpoint;
+			await this.$root.api(endpoint, {
 				limit: (this.pagination.limit || 10) + 1,
 				...(this.pagination.offsetMode ? {
 					offset: this.offset,

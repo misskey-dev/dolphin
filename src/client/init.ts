@@ -125,8 +125,8 @@ const router = new VueRouter({
 	routes: [
 		{ path: '/', name: 'index', component: DpIndex },
 		{ path: '/@:user', name: 'user', component: () => import('./pages/user/index.vue').then(m => m.default), children: [
-			{ path: 'following', component: () => import('./pages/user/following.vue').then(m => m.default) },
-			{ path: 'followers', component: () => import('./pages/user/followers.vue').then(m => m.default) },
+			{ path: 'following', name: 'userFollowing', component: () => import('./pages/user/follow-list.vue').then(m => m.default), props: { type: 'following' } },
+			{ path: 'followers', name: 'userFollowers', component: () => import('./pages/user/follow-list.vue').then(m => m.default), props: { type: 'followers' } },
 		]},
 		{ path: '/favorites', component: () => import('./pages/favorites.vue').then(m => m.default) },
 		{ path: '/messages', component: () => import('./pages/messages.vue').then(m => m.default) },
