@@ -163,7 +163,6 @@ os.init(async () => {
 			return {
 				stream: os.stream,
 				instanceName: os.instanceName,
-				isMobile: false
 			};
 		},
 		methods: {

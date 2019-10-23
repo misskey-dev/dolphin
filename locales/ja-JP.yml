@@ -81,6 +81,7 @@ privacy: "プライバシー"
 makeFollowManuallyApprove: "フォローを承認制にする"
 defaultNoteVisibility: "デフォルトの公開範囲"
 followRequests: "フォロー申請"
+enterEmoji: "絵文字を入力"
 
 _visibility:
   public: "パブリック"

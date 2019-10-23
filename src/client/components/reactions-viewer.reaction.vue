@@ -102,7 +102,7 @@ export default Vue.extend({
 			this.closeDetails();
 		},
 		openDetails() {
-			if (this.$root.isMobile) return;
+			if (window.innerWidth < 576) return;
 			this.$root.api('notes/reactions', {
 				noteId: this.note.id,
 				type: this.reaction,

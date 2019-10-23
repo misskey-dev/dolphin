@@ -28,7 +28,7 @@ export default Vue.extend({
 	},
 	data() {
 		return {
-			bubble: !this.$root.isMobile
+			bubble: !(window.innerWidth < 576)
 		};
 	},
 	mounted() {
@@ -42,7 +42,7 @@ export default Vue.extend({
 			let left;
 			let top;
 
-			if (this.$root.isMobile) {
+			if (window.innerWidth < 576) {
 				const x = rect.left + window.pageXOffset + (this.source.offsetWidth / 2);
 				const y = rect.top + window.pageYOffset + (this.source.offsetHeight / 2);
 				left = (x - (width / 2));

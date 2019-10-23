@@ -6,7 +6,7 @@
 			<button class="_button" v-for="(reaction, i) in $store.state.settings.reactions" :key="reaction" @click="react(reaction)" @mouseover="onMouseover" @mouseout="onMouseout" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction"><x-reaction-icon :reaction="reaction"/></button>
 		</div>
 		<div class="text">
-			<input v-model="text" :placeholder="$t('input-reaction-placeholder')" @keyup.enter="reactText" @input="tryReactText" v-autocomplete="{ model: 'text' }">
+			<input v-model="text" :placeholder="$t('enterEmoji')" @keyup.enter="reactText" @input="tryReactText" v-autocomplete="{ model: 'text' }">
 		</div>
 	</div>
 </div>
@@ -102,7 +102,7 @@ export default Vue.extend({
 			const width = popover.offsetWidth;
 			const height = popover.offsetHeight;
 
-			if (this.$root.isMobile) {
+			if (window.innerWidth < 576) {
 				const x = rect.left + window.pageXOffset + (this.source.offsetWidth / 2);
 				const y = rect.top + window.pageYOffset + (this.source.offsetHeight / 2);
 				popover.style.left = (x - (width / 2)) + 'px';
