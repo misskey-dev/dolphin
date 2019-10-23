@@ -57,79 +57,100 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.ui-switch
-	display flex
-	margin 32px 0
-	cursor pointer
-	transition all 0.3s
+@import '../../theme';
 
-	&:first-child
-		margin-top 0
+.ui-switch {
+	position: relative;
+	display: flex;
+	margin: 32px 0;
+	cursor: pointer;
+	transition: all 0.3s;
 
-	&:last-child
-		margin-bottom 0
+	&:first-child {
+		margin-top: 0;
+	}
 
-	> *
-		user-select none
+	&:last-child {
+		margin-bottom: 0;
+	}
 
-	&.disabled
-		opacity 0.6
-		cursor not-allowed
+	> * {
+		user-select: none;
+	}
 
-	&.checked
-		> .button
-			background-color var(--switchActiveTrack)
-			border-color var(--switchActiveTrack)
+	&.disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
 
-			> *
-				background-color var(--switchActive)
-				transform translateX(14px)
+	&.checked {
+		> .button {
+			background-color: rgba($primary, 0.4);
+			border-color: rgba($primary, 0.4);
 
-	> input
-		position absolute
-		width 0
-		height 0
-		opacity 0
-		margin 0
+			> * {
+				background-color: $primary;
+				transform: translateX(14px);
+			}
+		}
+	}
 
-	> .button
-		display inline-block
-		flex-shrink 0
-		margin 3px 0 0 0
-		width 34px
-		height 14px
-		background var(--switchTrack)
-		outline none
-		border-radius 14px
-		transition inherit
+	> input {
+		position: absolute;
+		width: 0;
+		height: 0;
+		opacity: 0;
+		margin: 0;
+	}
 
-		> *
-			position absolute
-			top -3px
-			left 0
-			border-radius 100%
-			transition background-color 0.3s, transform 0.3s
-			width 20px
-			height 20px
-			background-color #fff
-			box-shadow 0 2px 1px -1px rgba(#000, 0.2), 0 1px 1px 0 rgba(#000, 0.14), 0 1px 3px 0 rgba(#000, 0.12)
+	> .button {
+		position: relative;
+		display: inline-block;
+		flex-shrink: 0;
+		margin: 3px 0 0 0;
+		width: 34px;
+		height: 14px;
+		background: rgba(0, 0, 0, 0.25);
+		outline: none;
+		border-radius: 14px;
+		transition: inherit;
 
-	> .label
-		margin-left 8px
-		display block
-		font-size 16px
-		cursor pointer
-		transition inherit
-		color var(--fg)
+		@media (prefers-color-scheme: dark) {
+			background: rgba(255, 255, 255, 0.15);
+		}
 
-		> span
-			display block
-			line-height 20px
-			transition inherit
+		> * {
+			position: absolute;
+			top: -3px;
+			left: 0;
+			border-radius: 100%;
+			transition: background-color 0.3s, transform 0.3s;
+			width: 20px;
+			height: 20px;
+			background-color: #fff;
+			box-shadow: 0 2px 1px -1px rgba(#000, 0.2), 0 1px 1px 0 rgba(#000, 0.14), 0 1px 3px 0 rgba(#000, 0.12);
+		}
+	}
 
-		> p
-			margin 0
-			opacity 0.7
-			font-size 90%
+	> .label {
+		margin-left: 8px;
+		display: block;
+		font-size: 16px;
+		cursor: pointer;
+		transition: inherit;
+		color: var(--fg);
 
+		> span {
+			display: block;
+			line-height: 20px;
+			transition: inherit;
+		}
+
+		> p {
+			margin: 0;
+			opacity: 0.7;
+			font-size: 90%;
+		}
+	}
+}
 </style>

@@ -50,7 +50,6 @@ import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHom
 import { faBell, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
-import contains from './scripts/contains';
 import DpToast from './components/toast.vue';
 
 export default Vue.extend({

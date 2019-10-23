@@ -76,6 +76,9 @@ enterListName: "リスト名を入力してください"
 renameList: "リスト名を変更"
 deleteList: "リストを削除"
 deleteListConfirm: "リスト「{list}」を削除しますか？"
+privacy: "プライバシー"
+makeFollowManuallyApprove: "フォローを承認制にする"
+defaultNoteVisibility: "デフォルトの公開範囲"
 
 _visibility:
   public: "パブリック"

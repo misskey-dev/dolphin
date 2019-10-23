@@ -2,6 +2,7 @@
 <div class="dp-settings-page">
 	<header>{{ $t('settings') }}</header>
 	<x-profile-setting/>
+	<x-privacy-setting/>
 	<x-import-export/>
 	<x-drive/>
 </div>
@@ -10,12 +11,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import XProfileSetting from './settings.profile.vue';
+import XPrivacySetting from './settings.privacy.vue';
 import XImportExport from './settings.import-export.vue';
 import XDrive from './settings.drive.vue';
 
 export default Vue.extend({
 	components: {
 		XProfileSetting,
+		XPrivacySetting,
 		XImportExport,
 		XDrive,
 	},

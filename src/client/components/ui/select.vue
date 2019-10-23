@@ -76,6 +76,7 @@ export default Vue.extend({
 @import '../../theme';
 
 .ui-select {
+	position: relative;
 	margin: 32px 0;
 
 	> .icon {
@@ -85,7 +86,6 @@ export default Vue.extend({
 		width: 24px;
 		text-align: center;
 		line-height: 32px;
-		color: var(--inputLabel);
 
 		&:not(:empty) + .input {
 			margin-left: 28px;
@@ -103,7 +103,7 @@ export default Vue.extend({
 			left: 0;
 			right: 0;
 			height: 1px;
-			background: var(--inputBorder);
+			background: #dae0e4;
 		}
 
 		&:after {
@@ -130,7 +130,6 @@ export default Vue.extend({
 			transition-duration: 0.3s;
 			font-size: 16px;
 			line-height: 32px;
-			color: var(--inputLabel);
 			pointer-events: none;
 			//will-change transform
 			transform-origin: top left;
@@ -146,7 +145,6 @@ export default Vue.extend({
 			font-weight: normal;
 			font-size: 16px;
 			height: 32px;
-			color: var(--inputText);
 			background: transparent;
 			border: none;
 			border-radius: 0;
