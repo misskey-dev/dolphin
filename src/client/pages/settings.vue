@@ -5,6 +5,7 @@
 	<x-privacy-setting/>
 	<x-import-export/>
 	<x-drive/>
+	<x-button @click="$root.signout()">{{ $t('logout') }}</x-button>
 </div>
 </template>
 
@@ -14,6 +15,7 @@ import XProfileSetting from './settings.profile.vue';
 import XPrivacySetting from './settings.privacy.vue';
 import XImportExport from './settings.import-export.vue';
 import XDrive from './settings.drive.vue';
+import XButton from '../components/ui/button.vue';
 
 export default Vue.extend({
 	components: {
@@ -21,6 +23,7 @@ export default Vue.extend({
 		XPrivacySetting,
 		XImportExport,
 		XDrive,
+		XButton,
 	},
 });
 </script>
