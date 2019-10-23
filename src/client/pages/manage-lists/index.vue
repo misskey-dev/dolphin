@@ -1,7 +1,7 @@
 <template>
 <x-pagination :pagination="pagination" #default="{items}" class="dp-user-lists">
 	<div class="list" v-for="(list, i) in items" :key="list.id" :data-index="i">
-		<router-link :to="`/manage-lists/${ list.id }`" :key="list.id">{{ list.name }}</router-link>
+		<router-link :to="`/manage-lists/${ list.id }`">{{ list.name }}</router-link>
 	</div>
 </x-pagination>
 </template>

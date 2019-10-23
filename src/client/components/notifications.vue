@@ -26,12 +26,14 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import i18n from '../i18n';
 import paging from '../scripts/paging';
 import XNotification from './notification.vue';
+import XDateSeparator from './date-separator.vue';
 
 export default Vue.extend({
 	i18n,
 
 	components: {
-		XNotification
+		XNotification,
+		XDateSeparator,
 	},
 
 	mixins: [

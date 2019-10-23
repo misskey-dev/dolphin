@@ -79,6 +79,7 @@ deleteListConfirm: "リスト「{list}」を削除しますか？"
 privacy: "プライバシー"
 makeFollowManuallyApprove: "フォローを承認制にする"
 defaultNoteVisibility: "デフォルトの公開範囲"
+followRequests: "フォロー申請"
 
 _visibility:
   public: "パブリック"
