@@ -254,6 +254,14 @@ a {
 	transform: scale(0.9);
 }
 
+.fade-in-top-enter-active, .fade-in-top-leave-active {
+	transition: opacity 0.5s, transform 0.5s !important;
+}
+.fade-in-top-enter, .fade-in-top-leave-to {
+	opacity: 0;
+	transform: translateY(-32px);
+}
+
 .zoom-in-top-enter-active,
 .zoom-in-top-leave-active {
 	opacity: 1;
