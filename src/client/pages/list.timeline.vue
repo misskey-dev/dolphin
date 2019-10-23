@@ -1,12 +1,22 @@
 <template>
-<dp-notes ref="timeline" :pagination="pagination" @inited="() => $emit('loaded')"/>
+<x-notes ref="timeline" :pagination="pagination" @inited="() => $emit('loaded')"/>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import XNotes from '../components/notes.vue';
 
 export default Vue.extend({
-	props: ['list'],
+	components: {
+		XNotes
+	},
+
+	props: {
+		list: {
+			type: Object,
+			required: true
+		}
+	},
 
 	data() {
 		return {

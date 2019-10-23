@@ -72,6 +72,7 @@ createList: "リスト作成"
 manageLists: "リストの管理"
 error: "問題が発生しました"
 retry: "再試行"
+enterListName: "リスト名を入力してください"
 
 _visibility:
   public: "パブリック"

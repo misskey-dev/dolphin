@@ -25,7 +25,7 @@
 			</template>
 			<template v-else>
 				<span v-if="lists.length === 0" style="opacity: 0.5; pointer-events: none;">{{ $t('noLists') }}</span>
-				<router-link v-for="list in lists" :to="`/lists/@${ list.id }`" :key="list.id">{{ list.name }}</router-link>
+				<router-link v-for="list in lists" :to="`/lists/${ list.id }`" :key="list.id">{{ list.name }}</router-link>
 				<div></div>
 				<button class="_buttonPlain" @click="createList()"><fa :icon="faPlus" fixed-width/>{{ $t('createList') }}</button>
 				<router-link to="/lists"><fa :icon="faCog" fixed-width/>{{ $t('manageLists') }}</router-link>
@@ -142,6 +142,20 @@ export default Vue.extend({
 				search(this, query).finally(() => {
 					this.searching = false;
 				});
+			});
+		},
+
+		async createList() {
+			this.navOpen = false;
+			const { canceled, result: name } = await this.$root.dialog({
+				title: this.$t('enterListName'),
+				input: true
+			});
+			if (canceled) return;
+			await this.$root.api('users/lists/create', { name: name });
+			this.$root.dialog({
+				type: 'success',
+				splash: true
 			});
 		},
 
