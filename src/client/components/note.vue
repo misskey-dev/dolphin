@@ -50,24 +50,24 @@
 			</div>
 			<footer v-if="appearNote.deletedAt == null" class="footer">
 				<x-reactions-viewer :note="appearNote" ref="reactionsViewer"/>
-				<button @click="reply()" class="button _buttonPlain">
+				<button @click="reply()" class="button _button">
 					<template v-if="appearNote.reply"><fa :icon="faReplyAll"/></template>
 					<template v-else><fa :icon="faReply"/></template>
 					<p class="count" v-if="appearNote.repliesCount > 0">{{ appearNote.repliesCount }}</p>
 				</button>
-				<button v-if="['public', 'home'].includes(appearNote.visibility)" @click="renote()" title="Renote" class="button _buttonPlain">
+				<button v-if="['public', 'home'].includes(appearNote.visibility)" @click="renote()" title="Renote" class="button _button">
 					<fa :icon="faRetweet"/><p class="count" v-if="appearNote.renoteCount > 0">{{ appearNote.renoteCount }}</p>
 				</button>
-				<button v-else class="button _buttonPlain">
+				<button v-else class="button _button">
 					<fa :icon="faBan"/>
 				</button>
-				<button v-if="!isMyNote && appearNote.myReaction == null" class="button _buttonPlain" @click="react()" ref="reactButton">
+				<button v-if="!isMyNote && appearNote.myReaction == null" class="button _button" @click="react()" ref="reactButton">
 					<fa :icon="faPlus"/>
 				</button>
-				<button v-if="!isMyNote && appearNote.myReaction != null" class="button _buttonPlain reacted" @click="undoReact(appearNote)" ref="reactButton">
+				<button v-if="!isMyNote && appearNote.myReaction != null" class="button _button reacted" @click="undoReact(appearNote)" ref="reactButton">
 					<fa :icon="faMinus"/>
 				</button>
-				<button class="button _buttonPlain" @click="menu()" ref="menuButton">
+				<button class="button _button" @click="menu()" ref="menuButton">
 					<fa :icon="faEllipsisH"/>
 				</button>
 			</footer>

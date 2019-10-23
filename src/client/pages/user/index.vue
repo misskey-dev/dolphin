@@ -16,7 +16,7 @@
 				</div>
 				<span class="followed" v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed">{{ $t('followsYou') }}</span>
 				<div class="actions" v-if="$store.getters.isSignedIn">
-					<button @click="menu" class="menu _buttonPlain" ref="menu"><fa :icon="faEllipsisH"/></button>
+					<button @click="menu" class="menu _button" ref="menu"><fa :icon="faEllipsisH"/></button>
 					<dp-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
 				</div>
 			</div>

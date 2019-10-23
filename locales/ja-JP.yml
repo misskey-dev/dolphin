@@ -73,6 +73,9 @@ manageLists: "リストの管理"
 error: "問題が発生しました"
 retry: "再試行"
 enterListName: "リスト名を入力してください"
+renameList: "リスト名を変更"
+deleteList: "リストを削除"
+deleteListConfirm: "リスト「{list}」を削除しますか？"
 
 _visibility:
   public: "パブリック"

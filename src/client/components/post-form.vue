@@ -7,7 +7,7 @@
 		@drop.stop="onDrop"
 	>
 		<header>
-			<button class="cancel _buttonPlain" @click="cancel"><fa :icon="faTimes"/></button>
+			<button class="cancel _button" @click="cancel"><fa :icon="faTimes"/></button>
 			<div>
 				<span class="text-count" :class="{ over: trimmedLength(text) > 500 }">{{ 500 - trimmedLength(text) }}</span>
 				<button class="submit _buttonPrimary" :disabled="!canPost" @click="post">{{ submitText }}</button>

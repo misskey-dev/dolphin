@@ -4,7 +4,7 @@
 	<div class="popover" :class="{ bubble }" ref="popover">
 		<template v-for="item, i in items">
 			<div v-if="item === null"></div>
-			<button v-if="item" @click="clicked(item.action)" :tabindex="i" class="_buttonPlain">
+			<button v-if="item" @click="clicked(item.action)" :tabindex="i" class="_button">
 				<fa v-if="item.icon" :icon="item.icon"/>{{ item.text }}
 			</button>
 		</template>

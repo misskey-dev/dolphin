@@ -8,7 +8,7 @@
 			</template>
 		</sequential-entrance>
 
-		<button class="more _buttonPlain" v-if="more" @click="fetchMore" :disabled="moreFetching">
+		<button class="more _button" v-if="more" @click="fetchMore" :disabled="moreFetching">
 			<template v-if="!moreFetching">{{ $t('loadMore') }}</template>
 			<template v-if="moreFetching"><fa :icon="faSpinner" pulse fixed-width/></template>
 		</button>

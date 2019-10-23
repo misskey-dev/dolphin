@@ -1,14 +1,14 @@
 <template>
 <x-pagination :pagination="pagination" #default="{items}" class="dp-user-lists">
 	<div class="list" v-for="(list, i) in items" :key="list.id" :data-index="i">
-		{{ list.name }}
+		<router-link :to="`/manage-lists/${ list.id }`" :key="list.id">{{ list.name }}</router-link>
 	</div>
 </x-pagination>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import XPagination from '../components/ui/pagination.vue';
+import XPagination from '../../components/ui/pagination.vue';
 
 export default Vue.extend({
 	components: {
@@ -27,7 +27,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '../theme';
+@import '../../theme';
 
 .dp-user-lists {
 	> .list {

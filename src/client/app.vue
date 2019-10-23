@@ -14,20 +14,20 @@
 			<template v-if="!showLists">
 				<router-link :to="`/@${ $store.state.i.username }`"><dp-avatar :user="$store.state.i" class="avatar"/><dp-user-name :user="$store.state.i"/></router-link>
 				<div></div>
-				<button class="_buttonPlain" @click="list()"><fa :icon="faListUl" fixed-width/>{{ $t('lists') }}</button>
+				<button class="_button" @click="list()"><fa :icon="faListUl" fixed-width/>{{ $t('lists') }}</button>
 				<router-link to="/messages"><fa :icon="faEnvelope" fixed-width/>{{ $t('messages') }}<i v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa :icon="faCircle"/></i></router-link>
 				<router-link to="/favorites"><fa :icon="faStar" fixed-width/>{{ $t('favorites') }}</router-link>
 				<div></div>
 				<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
 				<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
 				<div></div>
-				<button class="_buttonPlain" @click="search()"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
+				<button class="_button" @click="search()"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
 			</template>
 			<template v-else>
 				<span v-if="lists.length === 0" style="opacity: 0.5; pointer-events: none;">{{ $t('noLists') }}</span>
 				<router-link v-for="list in lists" :to="`/lists/${ list.id }`" :key="list.id">{{ list.name }}</router-link>
 				<div></div>
-				<button class="_buttonPlain" @click="createList()"><fa :icon="faPlus" fixed-width/>{{ $t('createList') }}</button>
+				<button class="_button" @click="createList()"><fa :icon="faPlus" fixed-width/>{{ $t('createList') }}</button>
 				<router-link to="/manage-lists"><fa :icon="faCog" fixed-width/>{{ $t('manageLists') }}</router-link>
 			</template>
 		</nav>
@@ -36,9 +36,9 @@
 		<x-notifications v-if="notificationsOpen" class="notifications"/>
 	</transition>
 	<div class="buttons">
-		<button v-if="$store.getters.isSignedIn" class="button nav _buttonPlain" @click="() => { navOpen = !navOpen; notificationsOpen = false; }" ref="navButton"><fa :icon="navOpen ? faTimes : faBars"/><i v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa :icon="faCircle"/></i></button>
-		<button v-if="$store.getters.isSignedIn" class="button home _buttonPlain" :disabled="$route.path === '/'" @click="$router.push('/')"><fa :icon="faHome"/></button>
-		<button v-if="$store.getters.isSignedIn" class="button notifications _buttonPlain" @click="notificationsOpen = !notificationsOpen" ref="notificationsButton"><fa :icon="notificationsOpen ? faTimes : faBell"/><i v-if="$store.state.i.hasUnreadNotification"><fa :icon="faCircle"/></i></button>
+		<button v-if="$store.getters.isSignedIn" class="button nav _button" @click="() => { navOpen = !navOpen; notificationsOpen = false; }" ref="navButton"><fa :icon="navOpen ? faTimes : faBars"/><i v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa :icon="faCircle"/></i></button>
+		<button v-if="$store.getters.isSignedIn" class="button home _button" :disabled="$route.path === '/'" @click="$router.push('/')"><fa :icon="faHome"/></button>
+		<button v-if="$store.getters.isSignedIn" class="button notifications _button" @click="notificationsOpen = !notificationsOpen" ref="notificationsButton"><fa :icon="notificationsOpen ? faTimes : faBell"/><i v-if="$store.state.i.hasUnreadNotification"><fa :icon="faCircle"/></i></button>
 		<button v-if="$store.getters.isSignedIn" class="button post _buttonPrimary" @click="post()"><fa :icon="faPencilAlt"/></button>
 	</div>
 </div>

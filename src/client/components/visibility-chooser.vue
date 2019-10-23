@@ -2,21 +2,21 @@
 <div class="gqyayizv">
 	<div class="backdrop" ref="backdrop" @click="close"></div>
 	<div class="popover" ref="popover">
-		<button class="_buttonPlain" @click="choose('public')" :class="{ active: v == 'public' }">
+		<button class="_button" @click="choose('public')" :class="{ active: v == 'public' }">
 			<div><fa :icon="faGlobe"/></div>
 			<div>
 				<span>{{ $t('_visibility.public') }}</span>
 				<span>{{ $t('_visibility.publicDescription') }}</span>
 			</div>
 		</button>
-		<button class="_buttonPlain" @click="choose('followers')" :class="{ active: v == 'followers' }">
+		<button class="_button" @click="choose('followers')" :class="{ active: v == 'followers' }">
 			<div><fa :icon="faUnlock"/></div>
 			<div>
 				<span>{{ $t('_visibility.followers') }}</span>
 				<span>{{ $t('_visibility.followersDescription') }}</span>
 			</div>
 		</button>
-		<button class="_buttonPlain" @click="choose('specified')" :class="{ active: v == 'specified' }">
+		<button class="_button" @click="choose('specified')" :class="{ active: v == 'specified' }">
 			<div><fa :icon="faEnvelope"/></div>
 			<div>
 				<span>{{ $t('_visibility.specified') }}</span>
