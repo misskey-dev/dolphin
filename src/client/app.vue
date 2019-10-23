@@ -26,6 +26,9 @@
 			<template v-else>
 				<span v-if="lists.length === 0" style="opacity: 0.5; pointer-events: none;">{{ $t('noLists') }}</span>
 				<router-link v-for="list in lists" :to="`/lists/@${ list.id }`" :key="list.id">{{ list.name }}</router-link>
+				<div></div>
+				<button class="_buttonPlain" @click="createList()"><fa :icon="faPlus" fixed-width/>{{ $t('createList') }}</button>
+				<router-link to="/lists"><fa :icon="faCog" fixed-width/>{{ $t('manageLists') }}</router-link>
 			</template>
 		</nav>
 	</transition>
@@ -43,7 +46,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faListUl } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faListUl, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faBell, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
@@ -66,7 +69,7 @@ export default Vue.extend({
 			showLists: false,
 			lists: [],
 			connection: null,
-			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faEnvelope, faListUl
+			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faEnvelope, faListUl, faPlus
 		};
 	},
 

@@ -68,6 +68,8 @@ notes: "投稿"
 following: "フォロー"
 followers: "フォロワー"
 followsYou: "フォローされています"
+createList: "リスト作成"
+manageLists: "リストの管理"
 
 _visibility:
   public: "パブリック"
