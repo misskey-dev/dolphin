@@ -90,23 +90,6 @@ export default Vue.extend({
 
 		navOpen(opened) {
 			this.showLists = false;
-			const onMousedown = e => {
-				e.preventDefault();
-				if (
-					!contains(this.$refs.nav, e.target) && (this.$refs.nav != e.target) &&
-					!contains(this.$refs.navButton, e.target) && (this.$refs.navButton != e.target)
-				) this.navOpen = false;
-				return false;
-			};
-			if (opened) {
-				for (const el of Array.from(document.querySelectorAll('body *'))) {
-					el.addEventListener('mousedown', onMousedown);
-				}
-			} else {
-				for (const el of Array.from(document.querySelectorAll('body *'))) {
-					el.removeEventListener('mousedown', onMousedown);
-				}
-			}
 		},
 
 		async showLists() {
