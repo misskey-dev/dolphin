@@ -50,24 +50,24 @@
 			</div>
 			<footer v-if="appearNote.deletedAt == null" class="footer">
 				<x-reactions-viewer :note="appearNote" ref="reactionsViewer"/>
-				<button @click="reply()" class="button">
+				<button @click="reply()" class="button _buttonPlain">
 					<template v-if="appearNote.reply"><fa :icon="faReplyAll"/></template>
 					<template v-else><fa :icon="faReply"/></template>
 					<p class="count" v-if="appearNote.repliesCount > 0">{{ appearNote.repliesCount }}</p>
 				</button>
-				<button v-if="['public', 'home'].includes(appearNote.visibility)" @click="renote()" title="Renote" class="button">
+				<button v-if="['public', 'home'].includes(appearNote.visibility)" @click="renote()" title="Renote" class="button _buttonPlain">
 					<fa :icon="faRetweet"/><p class="count" v-if="appearNote.renoteCount > 0">{{ appearNote.renoteCount }}</p>
 				</button>
-				<button v-else class="button">
+				<button v-else class="button _buttonPlain">
 					<fa :icon="faBan"/>
 				</button>
-				<button v-if="!isMyNote && appearNote.myReaction == null" class="button" @click="react()" ref="reactButton">
+				<button v-if="!isMyNote && appearNote.myReaction == null" class="button _buttonPlain" @click="react()" ref="reactButton">
 					<fa :icon="faPlus"/>
 				</button>
-				<button v-if="!isMyNote && appearNote.myReaction != null" class="button reacted" @click="undoReact(appearNote)" ref="reactButton">
+				<button v-if="!isMyNote && appearNote.myReaction != null" class="button _buttonPlain reacted" @click="undoReact(appearNote)" ref="reactButton">
 					<fa :icon="faMinus"/>
 				</button>
-				<button class="button" @click="menu()" ref="menuButton">
+				<button class="button _buttonPlain" @click="menu()" ref="menuButton">
 					<fa :icon="faEllipsisH"/>
 				</button>
 			</footer>
@@ -164,6 +164,10 @@ export default Vue.extend({
 	&:focus {
 		outline: none;
 		box-shadow: 0 0 0 3px rgba($primary, 0.3);
+	}
+
+	&:hover > .article > .main > .footer > .button {
+		opacity: 1;
 	}
 
 	> *:first-child {
@@ -320,12 +324,7 @@ export default Vue.extend({
 				> .button {
 					margin: 0;
 					padding: 8px;
-					background: transparent;
-					border: none;
-					box-shadow: none;
-					font-size: 1em;
-					cursor: pointer;
-					color: #5c6a73;
+					opacity: 0.7;
 
 					&:not(:last-child) {
 						margin-right: 28px;
