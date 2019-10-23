@@ -45,7 +45,7 @@
 					</div>
 					<dp-poll v-if="appearNote.poll" :note="appearNote" ref="pollViewer"/>
 					<dp-url-preview v-for="url in urls" :url="url" :key="url" :compact="true"/>
-					<div class="renote" v-if="appearNote.renote"><dp-note-preview :note="appearNote.renote"/></div>
+					<div class="renote" v-if="appearNote.renote"><x-note-preview :note="appearNote.renote"/></div>
 				</div>
 			</div>
 			<footer v-if="appearNote.deletedAt == null" class="footer">
@@ -85,6 +85,7 @@ import { faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRi
 
 import XSub from './note.sub.vue';
 import XNoteHeader from './note-header.vue';
+import XNotePreview from './note-preview.vue';
 import XReactionsViewer from './reactions-viewer.vue';
 import XMediaList from './media-list.vue';
 import noteMixin from '../scripts/note-mixin';
@@ -96,6 +97,7 @@ export default Vue.extend({
 	components: {
 		XSub,
 		XNoteHeader,
+		XNotePreview,
 		XReactionsViewer,
 		XMediaList,
 	},
