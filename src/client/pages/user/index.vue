@@ -42,6 +42,20 @@
 					</dd>
 				</dl>
 			</div>
+			<div class="status">
+				<router-link :to="user | userPage()">
+					<b>{{ user.notesCount | number }}</b>
+					<span>{{ $t('notes') }}</span>
+				</router-link>
+				<router-link :to="user | userPage('following')">
+					<b>{{ user.followingCount | number }}</b>
+					<span>{{ $t('following') }}</span>
+				</router-link>
+				<router-link :to="user | userPage('followers')">
+					<b>{{ user.followersCount | number }}</b>
+					<span>{{ $t('followers') }}</span>
+				</router-link>
+			</div>
 		</div>
 	</transition>
 	<x-user-timeline :user="user"/>
@@ -317,6 +331,21 @@ export default Vue.extend({
 					overflow: hidden;
 					white-space: nowrap;
 					text-overflow: ellipsis;
+				}
+			}
+		}
+
+		> .status {
+			display: flex;
+			padding: 24px;
+			background: var(--bg);
+
+			> a {
+				flex: 1;
+				text-align: center;
+
+				> b {
+					display: block;
 				}
 			}
 		}

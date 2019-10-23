@@ -64,6 +64,9 @@ exportRequested: "エクスポートをリクエストしました。これに�
 importRequested: "インポートをリクエストしました。これには時間がかかる場合があります。"
 lists: "リスト"
 noLists: "リストはありません"
+notes: "投稿"
+following: "フォロー"
+followers: "フォロワー"
 
 _visibility:
   public: "パブリック"

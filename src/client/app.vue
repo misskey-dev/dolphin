@@ -297,6 +297,7 @@ export default Vue.extend({
 		}
 
 		> .button {
+			position: relative;
 			padding: 0;
 			margin: auto;
 			width: 64px;
