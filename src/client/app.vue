@@ -314,7 +314,7 @@ export default Vue.extend({
 			}
 
 			> * {
-				font-size: 24px;
+				font-size: 22px;
 			}
 
 			&:focus {

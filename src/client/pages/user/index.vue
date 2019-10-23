@@ -14,7 +14,7 @@
 						<span v-if="user.isBot" :title="$t('is-bot')"><fa icon="robot"/></span>
 					</div>
 				</div>
-				<span class="followed" v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed">{{ $t('follows-you') }}</span>
+				<span class="followed" v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed">{{ $t('followsYou') }}</span>
 				<div class="actions" v-if="$store.getters.isSignedIn">
 					<button @click="menu" class="menu _buttonPlain" ref="menu"><fa :icon="faEllipsisH"/></button>
 					<dp-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
@@ -288,6 +288,10 @@ export default Vue.extend({
 				margin: 0;
 				opacity: 0.5;
 			}
+
+			& + .status {
+				border-top: solid 1px rgba(0, 0, 0, 0.1);
+			}
 		}
 
 		> .fields {
@@ -340,12 +344,28 @@ export default Vue.extend({
 			padding: 24px;
 			background: var(--bg);
 
+			@media (max-width: 500px) {
+				padding: 16px;
+			}
+
 			> a {
 				flex: 1;
 				text-align: center;
 
+				&.router-link-active {
+					color: $primary;
+				}
+
+				&:hover {
+					text-decoration: none;
+				}
+
 				> b {
 					display: block;
+				}
+
+				> span {
+					font-size: 90%;
 				}
 			}
 		}

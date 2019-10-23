@@ -67,6 +67,7 @@ noLists: "リストはありません"
 notes: "投稿"
 following: "フォロー"
 followers: "フォロワー"
+followsYou: "フォローされています"
 
 _visibility:
   public: "パブリック"
