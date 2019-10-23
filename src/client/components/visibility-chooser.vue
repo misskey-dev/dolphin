@@ -135,7 +135,7 @@ export default Vue.extend({
 	}
 
 	> .popover {
-		$bgcolor: #fff;
+		$bgcolor: var(--bg);
 		position: absolute;
 		z-index: 10001;
 		width: 240px;

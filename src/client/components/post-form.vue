@@ -33,17 +33,17 @@
 			<x-poll-editor v-if="poll" ref="poll" @destroyed="poll = false" @updated="onPollUpdate()"/>
 			<x-uploader ref="uploader" @uploaded="attachMedia" @change="onChangeUploadings"/>
 			<footer>
-				<button class="upload" @click="chooseFile"><fa :icon="faUpload"/></button>
-				<button class="poll" @click="poll = true"><fa :icon="faChartPie"/></button>
-				<button class="poll" @click="useCw = !useCw"><fa :icon="faEyeSlash"/></button>
-				<button class="visibility" @click="setVisibility" ref="visibilityButton">
+				<button class="upload _button" @click="chooseFile"><fa :icon="faUpload"/></button>
+				<button class="poll _button" @click="poll = true"><fa :icon="faChartPie"/></button>
+				<button class="poll _button" @click="useCw = !useCw"><fa :icon="faEyeSlash"/></button>
+				<button class="visibility _button" @click="setVisibility" ref="visibilityButton">
 					<span v-if="visibility === 'public'"><fa :icon="faGlobe"/></span>
 					<span v-if="visibility === 'home'"><fa :icon="faHome"/></span>
 					<span v-if="visibility === 'followers'"><fa :icon="faUnlock"/></span>
 					<span v-if="visibility === 'specified'"><fa :icon="faEnvelope"/></span>
 				</button>
 			</footer>
-			<input ref="file" class="file" type="file" multiple="multiple" @change="onChangeFile"/>
+			<input ref="file" class="file _button" type="file" multiple="multiple" @change="onChangeFile"/>
 		</div>
 	</div>
 	<div class="hashtags" v-if="recentHashtags.length > 0 && $store.state.settings.suggestRecentHashtags">
@@ -411,6 +411,7 @@ export default Vue.extend({
 		},
 
 		onDragover(e) {
+			if (!e.dataTransfer.items[0]) return;
 			const isFile = e.dataTransfer.items[0].kind == 'file';
 			const isDriveFile = e.dataTransfer.types[0] == 'mk_drive_file';
 			if (isFile || isDriveFile) {
@@ -520,7 +521,6 @@ export default Vue.extend({
 
 		cancel() {
 			this.$emit('cancel');
-			this.close();
 		}
 	}
 });
@@ -536,7 +536,7 @@ export default Vue.extend({
 	margin: 8px auto;
 
 	> .form {
-		background: #fff;
+		background: var(--bg);
 		border-radius: 8px;
 		box-shadow: 0 0 2px rgba(#000, 0.1);
 
@@ -643,6 +643,12 @@ export default Vue.extend({
 				font-size: 16px;
 				border: none;
 				border-radius: 0;
+				background: transparent;
+				color: var(--fg);
+
+				&:focus {
+					outline: none;
+				}
 
 				&:disabled {
 					opacity: 0.5;
@@ -677,12 +683,14 @@ export default Vue.extend({
 					width: 48px;
 					height: 48px;
 					font-size: 20px;
-					color: var(--mobilePostFormButton);
-					background: transparent;
-					outline: none;
-					border: none;
-					border-radius: 0;
-					box-shadow: none;
+
+					&:hover {
+						background: rgba(0, 0, 0, 0.05);
+
+						@media (prefers-color-scheme: dark) {
+							background: rgba(255, 255, 255, 0.05);
+						}
+					}
 				}
 			}
 		}

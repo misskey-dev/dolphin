@@ -3,7 +3,6 @@
 	<x-draggable class="files" :list="files" animation="150">
 		<div v-for="file in files" :key="file.id" @click="showFileMenu(file, $event)" @contextmenu.prevent="showFileMenu(file, $event)">
 			<x-file-thumbnail :data-id="file.id" class="thumbnail" :file="file" fit="cover"/>
-			<img class="remove" @click.stop="detachMedia(file.id)" src="/assets/desktop/remove.png" :title="$t('attach-cancel')" alt=""/>
 			<div class="sensitive" v-if="file.isSensitive">
 				<fa class="icon" :icon="faExclamationTriangle"/>
 			</div>
@@ -85,12 +84,14 @@ export default Vue.extend({
 
 .skeikyzd {
 	padding: 4px;
+	position: relative;
 
 	> .files {
 		display: flex;
 		flex-wrap: wrap;
 
 		> div {
+			position: relative;
 			width: 64px;
 			height: 64px;
 			margin: 4px;
@@ -105,17 +106,6 @@ export default Vue.extend({
 				height: 100%;
 				z-index: 1;
 				color: var(--fg);
-			}
-
-			> .remove {
-				display: none;
-				position: absolute;
-				top: -6px;
-				right: -6px;
-				width: 16px;
-				height: 16px;
-				cursor: pointer;
-				z-index: 1000;
 			}
 
 			> .sensitive {
@@ -143,7 +133,6 @@ export default Vue.extend({
 		right: 8px;
 		margin: 0;
 		padding: 0;
-		color: var(--primaryAlpha04);
 	}
 }
 </style>
