@@ -85,6 +85,7 @@ enterEmoji: "絵文字を入力"
 renote: "Renote"
 quote: "引用"
 pinnedNote: "ピン留めされた投稿"
+you: "あなた"
 
 _visibility:
   public: "パブリック"

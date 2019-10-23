@@ -89,7 +89,7 @@ export default Vue.component('misskey-flavored-markdown', {
 							rel: 'nofollow noopener',
 						},
 						attrs: {
-							style: 'color:var(--mfmUrl);'
+							style: 'color:var(--link);'
 						}
 					})];
 				}
@@ -102,7 +102,7 @@ export default Vue.component('misskey-flavored-markdown', {
 							rel: 'nofollow noopener',
 							target: '_blank',
 							title: token.node.props.url,
-							style: 'color:var(--mfmLink);'
+							style: 'color:var(--link);'
 						}
 					}, genEl(token.children))];
 				}
@@ -122,7 +122,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						key: Math.random(),
 						attrs: {
 							to: this.isNote ? `/tags/${encodeURIComponent(token.node.props.hashtag)}` : `/explore/tags/${encodeURIComponent(token.node.props.hashtag)}`,
-							style: 'color:var(--mfmHashtag);'
+							style: 'color:var(--hashtag);'
 						}
 					}, `#${token.node.props.hashtag}`)];
 				}

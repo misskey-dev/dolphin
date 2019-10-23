@@ -90,10 +90,8 @@ html, body {
 
 a {
 	text-decoration: none;
-	color: var(--link);
 	cursor: pointer;
-	tap-highlight-color: var(--linkTapHighlight) !important;
-	-webkit-tap-highlight-color: var(--linkTapHighlight) !important;
+	color: var(--fg);
 
 	&:hover {
 		text-decoration: underline;

@@ -1,6 +1,6 @@
 <template>
 <router-link class="ldlomzub" :to="url" v-user-preview="canonical" v-if="url.startsWith('/')">
-	<span class="me" v-if="isMe">{{ $t('@.you') }}</span>
+	<span class="me" v-if="isMe">{{ $t('you') }}</span>
 	<span class="main">
 		<span class="username">@{{ username }}</span>
 		<span class="host" :class="{ fade: $store.state.settings.contrastedAcct }" v-if="(host != localHost) || $store.state.settings.showFullAcct">@{{ toUnicode(host) }}</span>
@@ -63,23 +63,16 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '../theme';
+
 .ldlomzub {
-	color: var(--mfmMention);
+	color: $primary;
 
 	> .me {
 		pointer-events: none;
 		user-select: none;
-		padding: 0 4px;
-		background: var(--mfmMention);
-		border: solid var(--lineWidth) var(--mfmMention);
-		border-radius: 4px 0 0 4px;
-		color: var(--mfmMentionForeground);
-
-		& + .main {
-			padding: 0 4px;
-			border: solid var(--lineWidth) var(--mfmMention);
-			border-radius: 0 4px 4px 0;
-		}
+		font-size: 70%;
+		vertical-align: top;
 	}
 
 	> .main {
