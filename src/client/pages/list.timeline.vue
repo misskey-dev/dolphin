@@ -28,16 +28,13 @@ export default Vue.extend({
 				params: init => ({
 					listId: this.list.id,
 					untilDate: init ? undefined : (this.date ? this.date.getTime() : undefined),
-					includeMyRenotes: this.$store.state.settings.showMyRenotes,
-					includeRenotedMyNotes: this.$store.state.settings.showRenotedMyNotes,
-					includeLocalRenotes: this.$store.state.settings.showLocalRenotes
 				})
 			}
 		};
 	},
 
 	watch: {
-		$route: 'init'
+		list: 'init'
 	},
 
 	mounted() {
