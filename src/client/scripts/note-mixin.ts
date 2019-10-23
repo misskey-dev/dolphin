@@ -123,24 +123,30 @@ export default (opts: Opts = {}) => ({
 			this.$root.dialog({
 				type: 'question',
 				text: this.$t('renoteConfirm'),
-				showCancelButton: true
-			}).then(({ canceled }) => {
-				if (canceled) return;
-
-				(this as any).$root.api('notes/create', {
-					renoteId: this.appearNote.id
-				});
-			});
-		},
-
-		quote(viaKeyboard = false) {
-			pleaseLogin(this.$root);
-			this.$root.post({
-				renote: this.appearNote,
-				animation: !viaKeyboard,
-				cb: () => {
-					this.focus();
-				}
+				actions: [{
+					text: this.$t('renote'),
+					primary: true,
+					callback: () => {
+						(this as any).$root.api('notes/create', {
+							renoteId: this.appearNote.id
+						});
+					}
+				}, {
+					text: this.$t('quote'),
+					primary: true,
+					callback: () => {
+						this.$root.post({
+							renote: this.appearNote,
+							cb: () => {
+								this.focus();
+							}
+						});
+					}
+				}, {
+					text: this.$t('cancel'),
+					primary: false,
+					callback: () => {}
+				}]
 			});
 		},
 

@@ -32,9 +32,12 @@
 					</optgroup>
 				</template>
 			</x-select>
-			<div class="buttons" v-if="!splash && (showOkButton || showCancelButton)">
+			<div class="buttons" v-if="!splash && (showOkButton || showCancelButton) && !actions">
 				<x-button inline @click="ok" v-if="showOkButton" primary :autofocus="!input && !select && !user" :disabled="!canOk">{{ (showCancelButton || input || select || user) ? $t('ok') : $t('gotIt') }}</x-button>
 				<x-button inline @click="cancel" v-if="showCancelButton || input || select || user">{{ $t('cancel') }}</x-button>
+			</div>
+			<div class="buttons" v-if="actions">
+				<x-button v-for="action in actions" inline @click="() => { action.callback(); close(); }" :primary="action.primary" :key="action.text">{{ action.text }}</x-button>
 			</div>
 		</template>
 	</div>
@@ -85,6 +88,9 @@ export default Vue.extend({
 			required: false
 		},
 		icon: {
+			required: false
+		},
+		actions: {
 			required: false
 		},
 		showOkButton: {
