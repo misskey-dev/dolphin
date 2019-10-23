@@ -112,7 +112,7 @@ module.exports = {
 	output: {
 		path: __dirname + '/built/client/assets',
 		filename: '[name].js',
-		chunkFilename: '[hash:6].[id].js',
+		chunkFilename: '[hash:5].[id].js',
 		publicPath: `/assets/`
 	},
 	resolve: {

@@ -70,6 +70,8 @@ followers: "フォロワー"
 followsYou: "フォローされています"
 createList: "リスト作成"
 manageLists: "リストの管理"
+error: "問題が発生しました"
+retry: "再試行"
 
 _visibility:
   public: "パブリック"

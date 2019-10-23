@@ -61,6 +61,9 @@
 	<router-view :user="user"></router-view>
 	<x-user-timeline v-if="$route.name == 'user'" :user="user"/>
 </div>
+<div v-else-if="error">
+	<dp-error @retry="fetch()"/>
+</div>
 </template>
 
 <script lang="ts">
@@ -78,8 +81,8 @@ export default Vue.extend({
 
 	data() {
 		return {
-			fetching: true,
 			user: null,
+			error: null,
 			faEllipsisH
 		};
 	},
@@ -104,13 +107,13 @@ export default Vue.extend({
 	methods: {
 		fetch() {
 			Progress.start();
-
 			this.$root.api('users/show', parseAcct(this.$route.params.user)).then(user => {
 				this.user = user;
-				this.fetching = false;
-
 				Progress.done();
 				document.title = `${Vue.filter('userName')(this.user)} | ${this.$root.instanceName}`;
+			}).catch(e => {
+				this.error = e;
+				Progress.done();
 			});
 		},
 
