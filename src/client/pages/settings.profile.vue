@@ -29,8 +29,8 @@
 			<template #desc v-if="bannerUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
 		</x-input>
 
-		<div class="fields">
-			<header>{{ $t('_profile.metadata') }}</header>
+		<details class="fields">
+			<summary>{{ $t('_profile.metadata') }}</summary>
 			<div class="row">
 				<x-input v-model="fieldName0">{{ $t('_profile.metadataLabel') }}</x-input>
 				<x-input v-model="fieldValue0">{{ $t('_profile.metadataContent') }}</x-input>
@@ -47,7 +47,7 @@
 				<x-input v-model="fieldName3">{{ $t('_profile.metadataLabel') }}</x-input>
 				<x-input v-model="fieldValue3">{{ $t('_profile.metadataContent') }}</x-input>
 			</div>
-		</div>
+		</details>
 	</div>
 	<div class="footer">
 		<x-button @click="save(true)" primary><fa :icon="faSave"/> {{ $t('save') }}</x-button>
