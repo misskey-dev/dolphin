@@ -132,6 +132,7 @@ const router = new VueRouter({
 		{ path: '/messages', component: () => import('./pages/messages.vue').then(m => m.default) },
 		{ path: '/settings', component: () => import('./pages/settings.vue').then(m => m.default) },
 		{ path: '/instance', component: () => import('./pages/instance.vue').then(m => m.default) },
+		{ path: '/manage-lists', component: () => import('./pages/manage-lists.vue').then(m => m.default) },
 		{ path: '/lists/:list', component: () => import('./pages/list.vue').then(m => m.default) },
 		{ path: '/notes/:note', component: () => import('./pages/note.vue').then(m => m.default) },/*
 		{ path: '/authorize-follow', component: DpFollow },

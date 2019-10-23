@@ -28,7 +28,7 @@
 				<router-link v-for="list in lists" :to="`/lists/${ list.id }`" :key="list.id">{{ list.name }}</router-link>
 				<div></div>
 				<button class="_buttonPlain" @click="createList()"><fa :icon="faPlus" fixed-width/>{{ $t('createList') }}</button>
-				<router-link to="/lists"><fa :icon="faCog" fixed-width/>{{ $t('manageLists') }}</router-link>
+				<router-link to="/manage-lists"><fa :icon="faCog" fixed-width/>{{ $t('manageLists') }}</router-link>
 			</template>
 		</nav>
 	</transition>
