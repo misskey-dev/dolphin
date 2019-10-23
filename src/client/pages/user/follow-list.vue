@@ -88,26 +88,33 @@ export default Vue.extend({
 			> .name {
 				width: 45%;
 
-				> .name {
+				@media (max-width: 500px) {
+					width: 100%;
+				}
+
+				> .name,
+				> .acct {
+					display: block;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
 					margin: 0;
+				}
+
+				> .name {
 					font-size: 16px;
 					line-height: 24px;
-					color: var(--text);
 				}
 
 				> .acct {
-					display: block;
-					margin: 0;
 					font-size: 15px;
 					line-height: 16px;
-					color: var(--text);
 					opacity: 0.7;
 				}
 			}
 
 			> .description {
 				width: 55%;
-				color: var(--text);
 				line-height: 42px;
 				white-space: nowrap;
 				overflow: hidden;
@@ -115,6 +122,12 @@ export default Vue.extend({
 				opacity: 0.7;
 				font-size: 14px;
 				padding-right: 40px;
+				padding-left: 8px;
+				box-sizing: border-box;
+
+				@media (max-width: 500px) {
+					display: none;
+				}
 			}
 
 			> .koudoku-button {
