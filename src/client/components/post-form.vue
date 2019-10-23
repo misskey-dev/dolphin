@@ -1,53 +1,48 @@
 <template>
-<div class="gafaadew">
-	<div class="form"
-		@dragover.stop="onDragover"
-		@dragenter="onDragenter"
-		@dragleave="onDragleave"
-		@drop.stop="onDrop"
-	>
-		<header>
-			<button class="cancel _button" @click="cancel"><fa :icon="faTimes"/></button>
-			<div>
-				<span class="text-count" :class="{ over: trimmedLength(text) > 500 }">{{ 500 - trimmedLength(text) }}</span>
-				<button class="submit _buttonPrimary" :disabled="!canPost" @click="post">{{ submitText }}</button>
-			</div>
-		</header>
-		<div class="form">
-			<x-note-preview class="preview" v-if="reply" :note="reply"/>
-			<x-note-preview class="preview" v-if="renote" :note="renote"/>
-			<div class="with-quote" v-if="quoteId"><fa icon="quote-left"/> {{ $t('@.post-form.quote-attached') }}<button @click="quoteId = null"><fa icon="times"/></button></div>
-			<div v-if="visibility === 'specified'" class="to-specified">
-				<fa icon="envelope"/> {{ $t('@.post-form.specified-recipient') }}
-				<div class="visibleUsers">
-					<span v-for="u in visibleUsers">
-						<dp-user-name :user="u"/>
-						<button @click="removeVisibleUser(u)"><fa icon="times"/></button>
-					</span>
-					<button @click="addVisibleUser">{{ $t('@.post-form.add-visible-user') }}</button>
-				</div>
-			</div>
-			<input v-show="useCw" ref="cw" v-model="cw" :placeholder="$t('@.post-form.cw-placeholder')" v-autocomplete="{ model: 'cw' }">
-			<textarea v-model="text" ref="text" :disabled="posting" :placeholder="placeholder" v-autocomplete="{ model: 'text' }" @keydown="onKeydown" @paste="onPaste"></textarea>
-			<x-post-form-attaches class="attaches" :files="files"/>
-			<x-poll-editor v-if="poll" ref="poll" @destroyed="poll = false" @updated="onPollUpdate()"/>
-			<x-uploader ref="uploader" @uploaded="attachMedia" @change="onChangeUploadings"/>
-			<footer>
-				<button class="upload _button" @click="chooseFile"><fa :icon="faUpload"/></button>
-				<button class="poll _button" @click="poll = true"><fa :icon="faChartPie"/></button>
-				<button class="poll _button" @click="useCw = !useCw"><fa :icon="faEyeSlash"/></button>
-				<button class="visibility _button" @click="setVisibility" ref="visibilityButton">
-					<span v-if="visibility === 'public'"><fa :icon="faGlobe"/></span>
-					<span v-if="visibility === 'home'"><fa :icon="faHome"/></span>
-					<span v-if="visibility === 'followers'"><fa :icon="faUnlock"/></span>
-					<span v-if="visibility === 'specified'"><fa :icon="faEnvelope"/></span>
-				</button>
-			</footer>
-			<input ref="file" class="file _button" type="file" multiple="multiple" @change="onChangeFile"/>
+<div class="gafaadew"
+	@dragover.stop="onDragover"
+	@dragenter="onDragenter"
+	@dragleave="onDragleave"
+	@drop.stop="onDrop"
+>
+	<header>
+		<button class="cancel _button" @click="cancel"><fa :icon="faTimes"/></button>
+		<div>
+			<span class="text-count" :class="{ over: trimmedLength(text) > 500 }">{{ 500 - trimmedLength(text) }}</span>
+			<button class="submit _buttonPrimary" :disabled="!canPost" @click="post">{{ submitText }}</button>
 		</div>
-	</div>
-	<div class="hashtags" v-if="recentHashtags.length > 0 && $store.state.settings.suggestRecentHashtags">
-		<a v-for="tag in recentHashtags.slice(0, 5)" @click="addTag(tag)">#{{ tag }}</a>
+	</header>
+	<div class="form">
+		<x-note-preview class="preview" v-if="reply" :note="reply"/>
+		<x-note-preview class="preview" v-if="renote" :note="renote"/>
+		<div class="with-quote" v-if="quoteId"><fa icon="quote-left"/> {{ $t('@.post-form.quote-attached') }}<button @click="quoteId = null"><fa icon="times"/></button></div>
+		<div v-if="visibility === 'specified'" class="to-specified">
+			<fa icon="envelope"/> {{ $t('@.post-form.specified-recipient') }}
+			<div class="visibleUsers">
+				<span v-for="u in visibleUsers">
+					<dp-user-name :user="u"/>
+					<button @click="removeVisibleUser(u)"><fa icon="times"/></button>
+				</span>
+				<button @click="addVisibleUser">{{ $t('@.post-form.add-visible-user') }}</button>
+			</div>
+		</div>
+		<input v-show="useCw" ref="cw" v-model="cw" :placeholder="$t('@.post-form.cw-placeholder')" v-autocomplete="{ model: 'cw' }">
+		<textarea v-model="text" ref="text" :disabled="posting" :placeholder="placeholder" v-autocomplete="{ model: 'text' }" @keydown="onKeydown" @paste="onPaste"></textarea>
+		<x-post-form-attaches class="attaches" :files="files"/>
+		<x-poll-editor v-if="poll" ref="poll" @destroyed="poll = false" @updated="onPollUpdate()"/>
+		<x-uploader ref="uploader" @uploaded="attachMedia" @change="onChangeUploadings"/>
+		<footer>
+			<button class="upload _button" @click="chooseFile"><fa :icon="faUpload"/></button>
+			<button class="poll _button" @click="poll = true"><fa :icon="faChartPie"/></button>
+			<button class="poll _button" @click="useCw = !useCw"><fa :icon="faEyeSlash"/></button>
+			<button class="visibility _button" @click="setVisibility" ref="visibilityButton">
+				<span v-if="visibility === 'public'"><fa :icon="faGlobe"/></span>
+				<span v-if="visibility === 'home'"><fa :icon="faHome"/></span>
+				<span v-if="visibility === 'followers'"><fa :icon="faUnlock"/></span>
+				<span v-if="visibility === 'specified'"><fa :icon="faEnvelope"/></span>
+			</button>
+		</footer>
+		<input ref="file" class="file _button" type="file" multiple="multiple" @change="onChangeFile"/>
 	</div>
 </div>
 </template>
@@ -530,177 +525,162 @@ export default Vue.extend({
 @import '../theme';
 
 .gafaadew {
-	position: relative;
-	max-width: 500px;
-	width: calc(100% - 16px);
-	margin: 8px auto;
+	background: var(--bg);
+	border-radius: 8px;
+	box-shadow: 0 0 2px rgba(#000, 0.1);
 
-	> .form {
-		background: var(--bg);
-		border-radius: 8px;
-		box-shadow: 0 0 2px rgba(#000, 0.1);
+	> header {
+		z-index: 1000;
+		height: 50px;
+		box-shadow: 0 1px 0 0 var(--mobilePostFormDivider);
 
-		> header {
-			z-index: 1000;
-			height: 50px;
-			box-shadow: 0 1px 0 0 var(--mobilePostFormDivider);
-
-			> .cancel {
-				padding: 0;
-				width: 50px;
-				line-height: 50px;
-				font-size: 24px;
-			}
-
-			> div {
-				position: absolute;
-				top: 0;
-				right: 0;
-
-				> .text-count {
-					line-height: 50px;
-				}
-
-				> .submit {
-					margin: 8px;
-					padding: 0 16px;
-					line-height: 34px;
-					vertical-align: bottom;
-					border-radius: 4px;
-
-					&:disabled {
-						opacity: 0.7;
-					}
-				}
-			}
+		> .cancel {
+			padding: 0;
+			width: 50px;
+			line-height: 50px;
+			font-size: 24px;
 		}
 
-		> .form {
-			max-width: 500px;
-			margin: 0 auto;
+		> div {
+			position: absolute;
+			top: 0;
+			right: 0;
 
-			> .preview {
-				padding: 16px;
+			> .text-count {
+				line-height: 50px;
 			}
 
-			> .with-quote {
-				margin: 0 0 8px 0;
-				color: $primary;
-
-				> button {
-					padding: 4px 8px;
-					color: var(--primaryAlpha04);
-
-					&:hover {
-						color: var(--primaryAlpha06);
-					}
-
-					&:active {
-						color: var(--primaryDarken30);
-					}
-				}
-			}
-
-			> .to-specified {
-				margin: 0 0 8px 0;
-				color: $primary;
-
-				> .visibleUsers {
-					display: inline;
-					top: -1px;
-					font-size: 14px;
-
-					> span {
-						margin-left: 14px;
-
-						> button {
-							padding: 4px 8px;
-							color: var(--primaryAlpha04);
-
-							&:hover {
-								color: var(--primaryAlpha06);
-							}
-
-							&:active {
-								color: var(--primaryDarken30);
-							}
-						}
-					}
-				}
-			}
-
-			> input {
-				z-index: 1;
-			}
-
-			> input,
-			> textarea {
-				display: block;
-				box-sizing: border-box;
-				padding: 12px;
-				margin: 0;
-				width: 100%;
-				font-size: 16px;
-				border: none;
-				border-radius: 0;
-				background: transparent;
-				color: var(--fg);
-
-				&:focus {
-					outline: none;
-				}
+			> .submit {
+				margin: 8px;
+				padding: 0 16px;
+				line-height: 34px;
+				vertical-align: bottom;
+				border-radius: 4px;
 
 				&:disabled {
-					opacity: 0.5;
-				}
-			}
-
-			> textarea {
-				max-width: 100%;
-				min-width: 100%;
-				min-height: 80px;
-			}
-
-			> .dp-uploader {
-				margin: 8px 0 0 0;
-				padding: 8px;
-			}
-
-			> .file {
-				display: none;
-			}
-
-			> footer {
-				white-space: nowrap;
-				overflow: auto;
-				-webkit-overflow-scrolling: touch;
-				overflow-scrolling: touch;
-
-				> * {
-					display: inline-block;
-					padding: 0;
-					margin: 0;
-					width: 48px;
-					height: 48px;
-					font-size: 20px;
-
-					&:hover {
-						background: rgba(0, 0, 0, 0.05);
-
-						@media (prefers-color-scheme: dark) {
-							background: rgba(255, 255, 255, 0.05);
-						}
-					}
+					opacity: 0.7;
 				}
 			}
 		}
 	}
 
-	> .hashtags {
-		margin: 8px;
+	> .form {
+		max-width: 500px;
+		margin: 0 auto;
 
-		> * {
-			margin-right: 8px;
+		> .preview {
+			padding: 16px;
+		}
+
+		> .with-quote {
+			margin: 0 0 8px 0;
+			color: $primary;
+
+			> button {
+				padding: 4px 8px;
+				color: var(--primaryAlpha04);
+
+				&:hover {
+					color: var(--primaryAlpha06);
+				}
+
+				&:active {
+					color: var(--primaryDarken30);
+				}
+			}
+		}
+
+		> .to-specified {
+			margin: 0 0 8px 0;
+			color: $primary;
+
+			> .visibleUsers {
+				display: inline;
+				top: -1px;
+				font-size: 14px;
+
+				> span {
+					margin-left: 14px;
+
+					> button {
+						padding: 4px 8px;
+						color: var(--primaryAlpha04);
+
+						&:hover {
+							color: var(--primaryAlpha06);
+						}
+
+						&:active {
+							color: var(--primaryDarken30);
+						}
+					}
+				}
+			}
+		}
+
+		> input {
+			z-index: 1;
+		}
+
+		> input,
+		> textarea {
+			display: block;
+			box-sizing: border-box;
+			padding: 12px;
+			margin: 0;
+			width: 100%;
+			font-size: 16px;
+			border: none;
+			border-radius: 0;
+			background: transparent;
+			color: var(--fg);
+
+			&:focus {
+				outline: none;
+			}
+
+			&:disabled {
+				opacity: 0.5;
+			}
+		}
+
+		> textarea {
+			max-width: 100%;
+			min-width: 100%;
+			min-height: 80px;
+		}
+
+		> .dp-uploader {
+			margin: 8px 0 0 0;
+			padding: 8px;
+		}
+
+		> .file {
+			display: none;
+		}
+
+		> footer {
+			white-space: nowrap;
+			overflow: auto;
+			-webkit-overflow-scrolling: touch;
+			overflow-scrolling: touch;
+
+			> * {
+				display: inline-block;
+				padding: 0;
+				margin: 0;
+				width: 48px;
+				height: 48px;
+				font-size: 20px;
+
+				&:hover {
+					background: rgba(0, 0, 0, 0.05);
+
+					@media (prefers-color-scheme: dark) {
+						background: rgba(255, 255, 255, 0.05);
+					}
+				}
+			}
 		}
 	}
 }

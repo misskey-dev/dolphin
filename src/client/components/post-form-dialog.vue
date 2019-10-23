@@ -1,23 +1,29 @@
 <template>
 <div class="ulveipglmagnxfgvitaxyszerjwiqmwl">
-	<div class="bg" ref="bg"></div>
+	<transition name="form-fade" appear>
+		<div class="bg" ref="bg" v-if="show"></div>
+	</transition>
 	<div class="main" ref="main">
-		<x-post-form ref="form"
-			:reply="reply"
-			:renote="renote"
-			:mention="mention"
-			:initial-text="initialText"
-			:initial-note="initialNote"
-			:instant="instant"
-			@posted="onPosted"
-			@cancel="onCanceled"/>
+		<transition name="form" appear
+			@after-leave="destroyDom"
+		>
+			<x-post-form ref="form"
+				v-if="show"
+				:reply="reply"
+				:renote="renote"
+				:mention="mention"
+				:initial-text="initialText"
+				:initial-note="initialNote"
+				:instant="instant"
+				@posted="onPosted"
+				@cancel="onCanceled"/>
+		</transition>
 	</div>
 </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import anime from 'animejs';
 import XPostForm from './post-form.vue';
 
 export default Vue.extend({
@@ -53,49 +59,22 @@ export default Vue.extend({
 		}
 	},
 
-	mounted() {
-		this.$nextTick(() => {
-			(this.$refs.bg as any).style.pointerEvents = 'auto';
-			anime({
-				targets: this.$refs.bg,
-				opacity: 1,
-				duration: 100,
-				easing: 'linear'
-			});
-
-			anime({
-				targets: this.$refs.main,
-				opacity: 1,
-				translateY: [-16, 0],
-				duration: 300,
-				easing: 'easeOutQuad'
-			});
-		});
+	data() {
+		return {
+			show: true
+		};
 	},
 
 	methods: {
 		focus() {
 			this.$refs.form.focus();
+			console.log(this.$props);
 		},
 
 		close() {
+			this.show = false;
 			(this.$refs.bg as any).style.pointerEvents = 'none';
-			anime({
-				targets: this.$refs.bg,
-				opacity: 0,
-				duration: 300,
-				easing: 'linear'
-			});
-
 			(this.$refs.main as any).style.pointerEvents = 'none';
-			anime({
-				targets: this.$refs.main,
-				opacity: 0,
-				translateY: 16,
-				duration: 300,
-				easing: 'easeOutQuad',
-				complete: () => this.destroyDom()
-			});
 		},
 
 		onPosted() {
@@ -112,6 +91,21 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.form-enter-active, .form-leave-active {
+	transition: opacity 0.3s, transform 0.3s !important;
+}
+.form-enter, .form-leave-to {
+	opacity: 0;
+	transform: scale(0.9);
+}
+
+.form-fade-enter-active, .form-fade-leave-active {
+	transition: opacity 0.3s !important;
+}
+.form-fade-enter, .form-fade-leave-to {
+	opacity: 0;
+}
+
 .ulveipglmagnxfgvitaxyszerjwiqmwl {
 	> .bg {
 		display: block;
@@ -122,22 +116,30 @@ export default Vue.extend({
 		width: 100%;
 		height: 100%;
 		background: rgba(#000, 0.7);
-		opacity: 0;
-		pointer-events: none;
 	}
 
 	> .main {
 		display: block;
 		position: fixed;
 		z-index: 10000;
-		top: 0;
+		top: 32px;
 		left: 0;
 		right: 0;
-		height: 100%;
+		height: calc(100% - 64px);
+		width: 500px;
+		max-width: calc(100% - 16px);
 		overflow: auto;
 		margin: 0 auto 0 auto;
-		opacity: 0;
-		transform: translateY(-16px);
+
+		@media (max-width: 550px) {
+			top: 16px;
+			height: calc(100% - 32px);
+		}
+
+		@media (max-width: 520px) {
+			top: 8px;
+			height: calc(100% - 16px);
+		}
 	}
 }
 </style>
