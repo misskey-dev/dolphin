@@ -58,7 +58,8 @@
 			</div>
 		</div>
 	</transition>
-	<x-user-timeline :user="user"/>
+	<router-view :user="user"></router-view>
+	<x-user-timeline v-if="$route.name == 'user'" :user="user"/>
 </div>
 </template>
 
