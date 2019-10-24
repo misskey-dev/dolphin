@@ -294,12 +294,14 @@ export default Vue.extend({
 
 		attachMedia(driveFile) {
 			this.files.push(driveFile);
-			this.$emit('change-attached-files', this.files);
 		},
 
 		detachMedia(id) {
 			this.files = this.files.filter(x => x.id != id);
-			this.$emit('change-attached-files', this.files);
+		},
+
+		updateMedia(file) {
+			Vue.set(this.files, this.files.findIndex(x => x.id === file.id), file);
 		},
 
 		onChangeFile() {

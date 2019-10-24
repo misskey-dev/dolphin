@@ -98,6 +98,11 @@ add: "追加"
 reaction: "リアクション"
 reactionSettingDescription: "リアクションピッカーに表示するリアクションを改行で区切って設定します。"
 rememberNoteVisibility: "公開範囲を記憶する"
+renameFile: "ファイル名を変更"
+attachCancel: "添付取り消し"
+markAsSensitive: "閲覧注意にする"
+unmarkAsSensitive: "閲覧注意を解除する"
+enterFileName: "ファイル名を入力してください"
 
 _cw:
   hide: "隠す"

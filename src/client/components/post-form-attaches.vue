@@ -18,7 +18,7 @@ import i18n from '../i18n';
 import * as XDraggable from 'vuedraggable';
 import XMenu from './menu.vue';
 import { faTimesCircle, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle, faICursor } from '@fortawesome/free-solid-svg-icons';
 import XFileThumbnail from './drive-file-thumbnail.vue'
 
 export default Vue.extend({
@@ -48,8 +48,11 @@ export default Vue.extend({
 
 	methods: {
 		detachMedia(id) {
-			if (this.detachMediaFn) this.detachMediaFn(id)
-			else if (this.$parent.detachMedia) this.$parent.detachMedia(id)
+			if (this.detachMediaFn) {
+				this.detachMediaFn(id);
+			} else if (this.$parent.detachMedia) {
+				this.$parent.detachMedia(id);
+			}
 		},
 		toggleSensitive(file) {
 			this.$root.api('drive/files/update', {
@@ -57,18 +60,41 @@ export default Vue.extend({
 				isSensitive: !file.isSensitive
 			}).then(() => {
 				file.isSensitive = !file.isSensitive;
+				this.$parent.updateMedia(file);
+			});
+		},
+		async rename(file) {
+			const { canceled, result } = await this.$root.dialog({
+				title: this.$t('enterFileName'),
+				input: {
+					default: file.name
+				},
+				allowEmpty: false
+			});
+			if (canceled) return;
+			this.$root.api('drive/files/update', {
+				fileId: file.id,
+				name: result
+			}).then(() => {
+				file.name = result;
+				this.$parent.updateMedia(file);
 			});
 		},
 		showFileMenu(file, ev: MouseEvent) {
 			this.$root.new(XMenu, {
 				items: [{
 					type: 'item',
-					text: file.isSensitive ? this.$t('unmark-as-sensitive') : this.$t('mark-as-sensitive'),
+					text: this.$t('renameFile'),
+					icon: faICursor,
+					action: () => { this.rename(file) }
+				}, {
+					type: 'item',
+					text: file.isSensitive ? this.$t('unmarkAsSensitive') : this.$t('markAsSensitive'),
 					icon: file.isSensitive ? faEyeSlash : faEye,
 					action: () => { this.toggleSensitive(file) }
 				}, {
 					type: 'item',
-					text: this.$t('attach-cancel'),
+					text: this.$t('attachCancel'),
 					icon: faTimesCircle,
 					action: () => { this.detachMedia(file.id) }
 				}],
