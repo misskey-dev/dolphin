@@ -1,6 +1,5 @@
 import getUserName from './get-user-name';
 import getNoteSummary from './get-note-summary';
-import getReactionEmoji from './get-reaction-emoji';
 
 /**
  * 通知を表す文字列を取得します。
@@ -19,7 +18,7 @@ export default function(notification: any): string {
 		case 'quote':
 			return `引用されました:\n${getUserName(notification.user)}「${getNoteSummary(notification.note)}」`;
 		case 'reaction':
-			return `リアクションされました:\n${getUserName(notification.user)} <${getReactionEmoji(notification.reaction)}>「${getNoteSummary(notification.note)}」`;
+			return `リアクションされました:\n${getUserName(notification.user)} <${notification.reaction}>「${getNoteSummary(notification.note)}」`;
 		case 'pollVote':
 			return `投票されました:\n${getUserName(notification.user)}「${getNoteSummary(notification.note)}」`;
 		default:

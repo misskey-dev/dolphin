@@ -11,12 +11,10 @@ const defaultSettings = {
 	showFullAcct: false,
 	rememberNoteVisibility: false,
 	defaultNoteVisibility: 'public',
-	mutedWords: [],
-	disableAnimatedMfm: false,
 	uploadFolder: null,
 	pastedFileName: 'yyyy-MM-dd HH-mm-ss [{{number}}]',
 	pasteDialog: false,
-	reactions: ['like', 'love', 'laugh', 'hmm', 'surprise', 'congrats', 'angry', 'confused', 'rip', 'pudding']
+	reactions: ['👍', '❤️', '😆', '🤔', '😮', '🎉', '💢', '😥', '😇', '🍮']
 };
 
 const defaultDeviceSettings = {

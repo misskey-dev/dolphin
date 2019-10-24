@@ -114,7 +114,7 @@ export default Vue.extend({
 
 .dp-settings-page-drive {
 	> .content {
-		max-height: 400px;
+		max-height: 350px;
 		overflow: auto;
 		
 		> .drive {

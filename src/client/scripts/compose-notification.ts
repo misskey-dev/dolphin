@@ -1,5 +1,4 @@
 import getNoteSummary from '../../misc/get-note-summary';
-import getReactionEmoji from '../../misc/get-reaction-emoji';
 import getUserName from '../../misc/get-user-name';
 
 type Notification = {
@@ -45,7 +44,7 @@ export default function(type, data): Notification {
 
 				case 'reaction':
 					return {
-						title: `${getUserName(data.user)}: ${getReactionEmoji(data.reaction)}:`,
+						title: `${getUserName(data.user)}: ${data.reaction}:`,
 						body: getNoteSummary(data.note),
 						icon: data.user.avatarUrl
 					};

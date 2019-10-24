@@ -97,6 +97,8 @@ sensitive: "閲覧注意"
 cwHide: "隠す"
 cwShow: "もっと見る"
 add: "追加"
+reaction: "リアクション"
+reactionSettingDescription: "リアクションピッカーに表示するリアクションを改行で区切って設定します。"
 
 _poll:
   noOnlyOneChoice: "選択肢は最低2つ必要です"
