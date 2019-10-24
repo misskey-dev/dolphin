@@ -39,6 +39,7 @@ export default Vue.extend({
 				const y = rect.top + window.pageYOffset + (this.source.offsetHeight / 2);
 				left = (x - (width / 2));
 				top = (y - (height / 2));
+				popover.style.transformOrigin = 'center';
 			} else {
 				const x = rect.left + window.pageXOffset + (this.source.offsetWidth / 2);
 				const y = rect.top + window.pageYOffset + this.source.offsetHeight;
