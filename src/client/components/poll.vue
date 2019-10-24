@@ -110,6 +110,7 @@ export default Vue.extend({
 
 		> li {
 			display: block;
+			position: relative;
 			margin: 4px 0;
 			padding: 4px 8px;
 			width: 100%;
@@ -137,6 +138,8 @@ export default Vue.extend({
 			}
 
 			> span {
+				position: relative;
+
 				> [data-icon] {
 					margin-right: 4px;
 				}
