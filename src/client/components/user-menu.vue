@@ -1,7 +1,5 @@
 <template>
-<div style="position:initial">
-	<x-menu :source="source" :items="items" @closed="closed"/>
-</div>
+<x-menu :source="source" :items="items" @closed="$emit('closed')"/>
 </template>
 
 <script lang="ts">
@@ -69,12 +67,6 @@ export default Vue.extend({
 	},
 
 	methods: {
-		closed() {
-			this.$nextTick(() => {
-				this.destroyDom();
-			});
-		},
-
 		async pushList() {
 			const t = this.$t('select-list'); // なぜか後で参照すると null になるので最初にメモリに確保しておく
 			const lists = await this.$root.api('users/lists/list');

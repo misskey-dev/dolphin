@@ -330,9 +330,6 @@ export default Vue.extend({
 			w.$once('chosen', v => {
 				this.applyVisibility(v);
 			});
-			this.$once('hook:beforeDestroy', () => {
-				w.close();
-			});
 		},
 
 		applyVisibility(v: string) {

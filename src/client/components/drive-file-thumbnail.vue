@@ -36,7 +36,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import anime from 'animejs';
 import {
 	faFile,
 	faFileAlt,
@@ -120,12 +119,7 @@ export default Vue.extend({
 	methods: {
 		onThumbnailLoaded() {
 			if (this.file.properties.avgColor) {
-				anime({
-					targets: this.$refs.thumbnail,
-					backgroundColor: 'transparent', // TODO fade
-					duration: 100,
-					easing: 'linear'
-				});
+				this.$refs.thumbnail.style.backgroundColor = 'transparent';
 			}
 		},
 		volumechange() {

@@ -165,9 +165,6 @@ export default (opts: Opts = {}) => ({
 				showFocus: viaKeyboard,
 				animation: !viaKeyboard
 			}).$once('closed', this.focus);
-			this.$once('hook:beforeDestroy', () => {
-				w.close();
-			});
 		},
 
 		reactDirectly(reaction) {
@@ -221,9 +218,6 @@ export default (opts: Opts = {}) => ({
 			}).$once('closed', () => {
 				this.openingMenu = false;
 				this.focus();
-			});
-			this.$once('hook:beforeDestroy', () => {
-				w.destroyDom();
 			});
 		},
 

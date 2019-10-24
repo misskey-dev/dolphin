@@ -1,7 +1,6 @@
 <template>
-<div class="rdfaahpb" v-hotkey.global="keymap">
-	<div class="backdrop" ref="backdrop" @click="close"></div>
-	<div class="popover" ref="popover">
+<x-popup :source="source" ref="popup" @closed="() => { $emit('closed'); destroyDom(); }" v-hotkey.global="keymap">
+	<div class="rdfaahpb">
 		<div class="buttons" ref="buttons" :class="{ showFocus }">
 			<button class="_button" v-for="(reaction, i) in $store.state.settings.reactions" :key="reaction" @click="react(reaction)" @mouseover="onMouseover" @mouseout="onMouseout" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction"><x-reaction-icon :reaction="reaction"/></button>
 		</div>
@@ -9,21 +8,24 @@
 			<input v-model="text" :placeholder="$t('enterEmoji')" @keyup.enter="reactText" @input="tryReactText" v-autocomplete="{ model: 'text' }">
 		</div>
 	</div>
-</div>
+</x-popup>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../i18n';
-import anime from 'animejs';
 import { emojiRegex } from '../../misc/emoji-regex';
 import XReactionIcon from './reaction-icon.vue';
+import XPopup from './popup.vue';
 
 export default Vue.extend({
 	i18n,
+
 	components: {
-		XReactionIcon
+		XPopup,
+		XReactionIcon,
 	},
+
 	props: {
 		note: {
 			type: Object,
@@ -93,41 +95,7 @@ export default Vue.extend({
 	},
 
 	mounted() {
-		this.$nextTick(() => {
-			this.focus = 0;
-
-			const popover = this.$refs.popover as any;
-
-			const rect = this.source.getBoundingClientRect();
-			const width = popover.offsetWidth;
-			const height = popover.offsetHeight;
-
-			if (window.innerWidth < 576) {
-				const x = rect.left + window.pageXOffset + (this.source.offsetWidth / 2);
-				const y = rect.top + window.pageYOffset + (this.source.offsetHeight / 2);
-				popover.style.left = (x - (width / 2)) + 'px';
-				popover.style.top = (y - (height / 2)) + 'px';
-			} else {
-				const x = rect.left + window.pageXOffset + (this.source.offsetWidth / 2);
-				const y = rect.top + window.pageYOffset + this.source.offsetHeight;
-				popover.style.left = (x - (width / 2)) + 'px';
-				popover.style.top = y + 'px';
-			}
-
-			anime({
-				targets: this.$refs.backdrop,
-				opacity: 1,
-				duration: this.animation ? 100 : 0,
-				easing: 'linear'
-			});
-
-			anime({
-				targets: this.$refs.popover,
-				opacity: 1,
-				scale: [0.5, 1],
-				duration: this.animation ? 500 : 0
-			});
-		});
+		this.focus = 0;
 	},
 
 	methods: {
@@ -161,29 +129,6 @@ export default Vue.extend({
 			this.title = this.$t('choose-reaction');
 		},
 
-		close() {
-			(this.$refs.backdrop as any).style.pointerEvents = 'none';
-			anime({
-				targets: this.$refs.backdrop,
-				opacity: 0,
-				duration: this.animation ? 200 : 0,
-				easing: 'linear'
-			});
-
-			(this.$refs.popover as any).style.pointerEvents = 'none';
-			anime({
-				targets: this.$refs.popover,
-				opacity: 0,
-				scale: 0.5,
-				duration: this.animation ? 200 : 0,
-				easing: 'easeInBack',
-				complete: () => {
-					this.$emit('closed');
-					this.destroyDom();
-				}
-			});
-		},
-
 		focusUp() {
 			this.focus = this.focus == 0 ? 9 : this.focus < 5 ? (this.focus + 4) : (this.focus - 5);
 		},
@@ -211,113 +156,89 @@ export default Vue.extend({
 @import '../theme';
 
 .rdfaahpb {
-	position: initial;
+	> div {
+		width: 280px;
 
-	> .backdrop {
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 10000;
-		width: 100%;
-		height: 100%;
-		background: rgba(0, 0, 0, 0.3);
-		opacity: 0;
+		> button {
+			width: 50px;
+			height: 50px;
+			font-size: 28px;
+			border-radius: 4px;
+		}
 	}
 
-	> .popover {
-		$bgcolor: #fff;
-		position: absolute;
-		z-index: 10001;
-		background: $bgcolor;
-		border-radius: 4px;
-		box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
-		transform: scale(0.5);
-		opacity: 0;
+	> .buttons {
+		padding: 4px 4px 8px 4px;
+		width: 216px;
+		box-sizing: border-box;
+		text-align: center;
 
-		> div {
-			width: 280px;
+		&.showFocus {
+			> button:focus {
+				z-index: 1;
 
-			> button {
-				width: 50px;
-				height: 50px;
-				font-size: 28px;
-				border-radius: 4px;
+				&:after {
+					content: "";
+					pointer-events: none;
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					border: 2px solid rgba($primary, 0.3);
+					border-radius: 4px;
+				}
 			}
 		}
 
-		> .buttons {
-			padding: 4px 4px 8px 4px;
-			width: 216px;
-			box-sizing: border-box;
+		> button {
+			padding: 0;
+			width: 40px;
+			height: 40px;
+			font-size: 24px;
+			border-radius: 2px;
+
+			> * {
+				height: 1em;
+			}
+
+			&:hover {
+				background: rgba(0, 0, 0, 0.05);
+			}
+
+			&:active {
+				background: $primary;
+				box-shadow: inset 0 0.15em 0.3em rgba(27, 31, 35, 0.15);
+			}
+		}
+	}
+
+	> .text {
+		width: 216px;
+		padding: 0 8px 8px 8px;
+		box-sizing: border-box;
+
+		> input {
+			width: 100%;
+			padding: 10px;
+			margin: 0;
 			text-align: center;
+			font-size: 16px;
+			color: var(--desktopPostFormTextareaFg);
+			background: var(--desktopPostFormTextareaBg);
+			outline: none;
+			border: solid 1px var(--primaryAlpha01);
+			border-radius: 4px;
+			transition: border-color .2s ease;
 
-			&.showFocus {
-				> button:focus {
-					z-index: 1;
-
-					&:after {
-						content: "";
-						pointer-events: none;
-						position: absolute;
-						top: 0;
-						right: 0;
-						bottom: 0;
-						left: 0;
-						border: 2px solid rgba($primary, 0.3);
-						border-radius: 4px;
-					}
-				}
+			&:hover {
+				border-color: var(--primaryAlpha02);
+				transition: border-color .1s ease;
 			}
 
-			> button {
-				padding: 0;
-				width: 40px;
-				height: 40px;
-				font-size: 24px;
-				border-radius: 2px;
-
-				> * {
-					height: 1em;
-				}
-
-				&:hover {
-					background: rgba(0, 0, 0, 0.05);
-				}
-
-				&:active {
-					background: $primary;
-					box-shadow: inset 0 0.15em 0.3em rgba(27, 31, 35, 0.15);
-				}
-			}
-		}
-
-		> .text {
-			width: 216px;
-			padding: 0 8px 8px 8px;
-			box-sizing: border-box;
-
-			> input {
-				width: 100%;
-				padding: 10px;
-				margin: 0;
-				text-align: center;
-				font-size: 16px;
-				color: var(--desktopPostFormTextareaFg);
-				background: var(--desktopPostFormTextareaBg);
-				outline: none;
-				border: solid 1px var(--primaryAlpha01);
-				border-radius: 4px;
-				transition: border-color .2s ease;
-
-				&:hover {
-					border-color: var(--primaryAlpha02);
-					transition: border-color .1s ease;
-				}
-
-				&:focus {
-					border-color: var(--primaryAlpha05);
-					transition: border-color 0s ease;
-				}
+			&:focus {
+				border-color: var(--primaryAlpha05);
+				transition: border-color 0s ease;
 			}
 		}
 	}
