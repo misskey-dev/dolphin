@@ -1,7 +1,5 @@
 <template>
-<div style="position:initial">
-	<x-menu :source="source" :items="items" @closed="closed"/>
-</div>
+<x-menu :source="source" :items="items" @closed="closed"/>
 </template>
 
 <script lang="ts">

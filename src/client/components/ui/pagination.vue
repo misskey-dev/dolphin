@@ -1,5 +1,5 @@
 <template>
-<sequential-entrance class="ui-pagination" mode="out-in">
+<sequential-entrance class="ui-pagination">
 	<slot :items="items"></slot>
 	<div class="more" v-if="more" key="more">
 		<x-button :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }" @click="fetchMore()">

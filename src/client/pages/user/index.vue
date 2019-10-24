@@ -59,10 +59,12 @@
 		</div>
 	</transition>
 	<router-view :user="user"></router-view>
-	<sequential-entrance class="pins">
-		<x-note v-for="(note, i) in user.pinnedNotes" class="note" :note="note" :key="note.id" :data-index="i" :detail="true" :pinned="true"/>
-	</sequential-entrance>
-	<x-user-timeline v-if="$route.name == 'user'" :user="user"/>
+	<template v-if="$route.name == 'user'">
+		<sequential-entrance class="pins">
+			<x-note v-for="(note, i) in user.pinnedNotes" class="note" :note="note" :key="note.id" :data-index="i" :detail="true" :pinned="true"/>
+		</sequential-entrance>
+		<x-user-timeline :user="user"/>
+	</template>
 </div>
 <div v-else-if="error">
 	<dp-error @retry="fetch()"/>
