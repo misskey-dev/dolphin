@@ -3,13 +3,13 @@
 	<span class="me" v-if="isMe">{{ $t('you') }}</span>
 	<span class="main">
 		<span class="username">@{{ username }}</span>
-		<span class="host" :class="{ fade: $store.state.settings.contrastedAcct }" v-if="(host != localHost) || $store.state.settings.showFullAcct">@{{ toUnicode(host) }}</span>
+		<span class="host" v-if="(host != localHost) || $store.state.settings.showFullAcct">@{{ toUnicode(host) }}</span>
 	</span>
 </router-link>
 <a class="ldlomzub" :href="url" target="_blank" rel="noopener" v-else>
 	<span class="main">
 		<span class="username">@{{ username }}</span>
-		<span class="host" :class="{ fade: $store.state.settings.contrastedAcct }">@{{ toUnicode(host) }}</span>
+		<span class="host">@{{ toUnicode(host) }}</span>
 	</span>
 </a>
 </template>
@@ -76,7 +76,7 @@ export default Vue.extend({
 	}
 
 	> .main {
-		> .host.fade {
+		> .host {
 			opacity: 0.5;
 		}
 	}

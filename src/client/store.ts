@@ -7,7 +7,6 @@ import getNoteSummary from '../misc/get-note-summary';
 
 const defaultSettings = {
 	keepCw: false,
-	contrastedAcct: true,
 	showFullAcct: false,
 	rememberNoteVisibility: false,
 	defaultNoteVisibility: 'public',
@@ -51,10 +50,6 @@ export default (os: MiOS) => new Vuex.Store({
 
 		indicate(state, x) {
 			state.indicate = x;
-		},
-
-		setUiHeaderHeight(state, height) {
-			state.uiHeaderHeight = height;
 		},
 
 		pushBehindNote(state, note) {

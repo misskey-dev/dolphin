@@ -9,6 +9,7 @@
 			<option value="followers">{{ $t('_visibility.followers') }}</option>
 			<option value="specified">{{ $t('_visibility.specified') }}</option>
 		</x-select>
+		<x-switch v-model="rememberNoteVisibility" @change="save()">{{ $t('rememberNoteVisibility') }}</x-switch>
 	</div>
 </section>
 </template>
@@ -39,6 +40,11 @@ export default Vue.extend({
 		defaultNoteVisibility: {
 			get() { return this.$store.state.settings.defaultNoteVisibility; },
 			set(value) { this.$store.dispatch('settings/set', { key: 'defaultNoteVisibility', value }); }
+		},
+
+		rememberNoteVisibility: {
+			get() { return this.$store.state.settings.rememberNoteVisibility; },
+			set(value) { this.$store.dispatch('settings/set', { key: 'rememberNoteVisibility', value }); }
 		},
 	},
 

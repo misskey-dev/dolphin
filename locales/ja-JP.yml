@@ -97,6 +97,7 @@ sensitive: "閲覧注意"
 add: "追加"
 reaction: "リアクション"
 reactionSettingDescription: "リアクションピッカーに表示するリアクションを改行で区切って設定します。"
+rememberNoteVisibility: "公開範囲を記憶する"
 
 _cw:
   hide: "隠す"
