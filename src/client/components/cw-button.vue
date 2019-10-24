@@ -1,6 +1,6 @@
 <template>
 <button class="nrvgflfuaxwgkxoynpnumyookecqrrvh _button" @click="toggle">
-	<b>{{ value ? this.$t('cwHide') : this.$t('cwShow') }}</b>
+	<b>{{ value ? this.$t('_cw.hide') : this.$t('_cw.show') }}</b>
 	<span v-if="!value">{{ this.label }}</span>
 </button>
 </template>
@@ -28,9 +28,9 @@ export default Vue.extend({
 	computed: {
 		label(): string {
 			return concat([
-				this.note.text ? [this.$t('chars', { count: length(this.note.text) })] : [],
-				this.note.files && this.note.files.length !== 0 ? [this.$t('files', { count: this.note.files.length }) ] : [],
-				this.note.poll != null ? [this.$t('poll')] : []
+				this.note.text ? [this.$t('_cw.chars', { count: length(this.note.text) })] : [],
+				this.note.files && this.note.files.length !== 0 ? [this.$t('_cw.files', { count: this.note.files.length }) ] : [],
+				this.note.poll != null ? [this.$t('_cw.poll')] : []
 			] as string[][]).join(' / ');
 		}
 	},

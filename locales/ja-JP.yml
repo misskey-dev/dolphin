@@ -94,11 +94,16 @@ pinnedNote: "ピン留めされた投稿"
 you: "あなた"
 clickToShow: "クリックして表示"
 sensitive: "閲覧注意"
-cwHide: "隠す"
-cwShow: "もっと見る"
 add: "追加"
 reaction: "リアクション"
 reactionSettingDescription: "リアクションピッカーに表示するリアクションを改行で区切って設定します。"
+
+_cw:
+  hide: "隠す"
+  show: "もっと見る"
+  chars: "{count}文字"
+  files: "{count}ファイル"
+  poll: "アンケート"
 
 _poll:
   noOnlyOneChoice: "選択肢は最低2つ必要です"
