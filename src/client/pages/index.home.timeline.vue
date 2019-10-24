@@ -1,5 +1,5 @@
 <template>
-<x-notes ref="timeline" :pagination="pagination" @loaded="() => $emit('loaded')"/>
+<x-notes ref="timeline" :pagination="pagination" @before="$emit('before')" @after="e => $emit('after', e)"/>
 </template>
 
 <script lang="ts">

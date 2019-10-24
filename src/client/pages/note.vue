@@ -2,6 +2,9 @@
 <div class="dp-note-page">
 	<transition name="zoom" mode="out-in">
 		<x-note v-if="note" :note="note" :key="note.id" :detail="true"/>
+		<div v-else-if="error">
+			<dp-error @retry="fetch()"/>
+		</div>
 	</transition>
 </div>
 </template>
@@ -19,8 +22,8 @@ export default Vue.extend({
 	},
 	data() {
 		return {
-			fetching: true,
-			note: null
+			note: null,
+			error: null,
 		};
 	},
 	watch: {
@@ -35,14 +38,13 @@ export default Vue.extend({
 	methods: {
 		fetch() {
 			Progress.start();
-			this.fetching = true;
-
 			this.$root.api('notes/show', {
 				noteId: this.$route.params.note
 			}).then(note => {
 				this.note = note;
-				this.fetching = false;
-
+			}).catch(e => {
+				this.error = e;
+			}).finally(() => {
 				Progress.done();
 			});
 		}

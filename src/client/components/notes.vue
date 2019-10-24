@@ -54,8 +54,12 @@ export default Vue.extend({
 				}
 			},
 
-			onInited: (self) => {
-				self.$emit('loaded');
+			before: (self) => {
+				self.$emit('before');
+			},
+
+			after: (self, e) => {
+				self.$emit('after', e);
 			}
 		}),
 	],

@@ -75,7 +75,7 @@ export default (opts) => ({
 
 		async init() {
 			this.fetching = true;
-			if (opts.beforeInit) opts.beforeInit(this);
+			if (opts.before) opts.before(this);
 			let params = typeof this.pagination.params === 'function' ? this.pagination.params(true) : this.pagination.params;
 			if (params && params.then) params = await params;
 			const endpoint = typeof this.pagination.endpoint === 'function' ? this.pagination.endpoint() : this.pagination.endpoint;
@@ -94,10 +94,10 @@ export default (opts) => ({
 				this.offset = x.length;
 				this.inited = true;
 				this.fetching = false;
-				if (opts.onInited) opts.onInited(this);
+				if (opts.after) opts.after(this, null);
 			}, e => {
 				this.fetching = false;
-				if (opts.onInited) opts.onInited(this);
+				if (opts.after) opts.after(this, e);
 			});
 		},
 

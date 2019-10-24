@@ -37,14 +37,7 @@ export default Vue.extend({
 	},
 
 	mixins: [
-		paging({
-			beforeInit: (self) => {
-				self.$emit('beforeInit');
-			},
-			onInited: (self) => {
-				self.$emit('inited');
-			}
-		}),
+		paging({}),
 	],
 
 	props: {

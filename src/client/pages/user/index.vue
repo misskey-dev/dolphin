@@ -116,10 +116,10 @@ export default Vue.extend({
 			Progress.start();
 			this.$root.api('users/show', parseAcct(this.$route.params.user)).then(user => {
 				this.user = user;
-				Progress.done();
 				document.title = `${Vue.filter('userName')(this.user)} | ${this.$root.instanceName}`;
 			}).catch(e => {
 				this.error = e;
+			}).finally(() => {
 				Progress.done();
 			});
 		},
