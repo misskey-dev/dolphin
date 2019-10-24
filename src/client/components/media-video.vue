@@ -2,7 +2,7 @@
 <div class="icozogqfvdetwohsdglrbswgrejoxbdj" v-if="video.isSensitive && hide && !$store.state.device.alwaysShowNsfw" @click="hide = false">
 	<div>
 		<b><fa icon="exclamation-triangle"/> {{ $t('sensitive') }}</b>
-		<span>{{ $t('click-to-show') }}</span>
+		<span>{{ $t('clickToShow') }}</span>
 	</div>
 </div>
 <a class="kkjnbbplepmiyuadieoenjgutgcmtsvu" v-else
@@ -12,12 +12,13 @@
 	:style="imageStyle"
 	:title="video.name"
 >
-	<fa :icon="['far', 'play-circle']"/>
+	<fa :icon="faPlayCircle"/>
 </a>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
 import i18n from '../i18n';
 
 export default Vue.extend({
@@ -30,7 +31,8 @@ export default Vue.extend({
 	},
 	data() {
 		return {
-			hide: true
+			hide: true,
+			faPlayCircle
 		};
 	},
 	computed: {

@@ -12,7 +12,7 @@
 	<transition name="zoom" mode="out-in">
 		<component :is="hasRoute ? 'router-link' : 'a'" :class="{ compact }" :[attr]="hasRoute ? url.substr(local.length) : url" rel="nofollow noopener" :target="target" :title="url" v-if="!fetching">
 			<div class="thumbnail" v-if="thumbnail" :style="`background-image: url('${thumbnail}')`">
-				<button v-if="!playerEnabled && player.url" @click.prevent="playerEnabled = true" :title="$t('enable-player')"><fa :icon="['far', 'play-circle']"/></button>
+				<button v-if="!playerEnabled && player.url" @click.prevent="playerEnabled = true" :title="$t('enable-player')"><fa :icon="faPlayCircle"/></button>
 			</div>
 			<article>
 				<header>
@@ -31,6 +31,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
 import i18n from '../i18n';
 import { url as local, lang } from '../config';
 
@@ -81,7 +82,8 @@ export default Vue.extend({
 			self: isSelf,
 			hasRoute: hasRoute,
 			attr: hasRoute ? 'to' : 'href',
-			target: hasRoute ? null : '_blank'
+			target: hasRoute ? null : '_blank',
+			faPlayCircle
 		};
 	},
 
