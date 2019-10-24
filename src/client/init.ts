@@ -5,7 +5,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
-import VModal from 'vue-js-modal';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import i18n from './i18n';
@@ -20,7 +19,6 @@ import DpIndex from './pages/index.vue';
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
-Vue.use(VModal);
 Vue.use(VueHotkey);
 Vue.use(VueSize);
 Vue.component('fa', FontAwesomeIcon);

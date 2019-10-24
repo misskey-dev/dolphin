@@ -192,7 +192,8 @@ export default Vue.extend({
 
 	> .pinned {
 		padding: 16px 32px 8px 32px;
-		line-height: 28px;
+		line-height: 24px;
+		font-size: 90%;
 		white-space: pre;
 		color: #d28a3f;
 
