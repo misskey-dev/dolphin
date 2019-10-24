@@ -1,25 +1,19 @@
 <template>
 <transition name="zoom-in-top">
 	<div class="buebdbiu" ref="popover" v-if="show">
-		<i18n path="few-users" v-if="users.length <= 10">
-			<span slot="users">
-				<b v-for="u in users" :key="u.id" style="margin-right: 12px;">
-					<dp-avatar :user="u" style="width: 24px; height: 24px; margin-right: 2px;"/>
-					<dp-user-name :user="u" :nowrap="false" style="line-height: 24px;"/>
-				</b>
-			</span>
-			<dp-reaction-icon slot="reaction" :reaction="reaction" ref="icon" />
-		</i18n>
-		<i18n path="many-users" v-if="10 < users.length">
-			<span slot="users">
-				<b v-for="u in users" :key="u.id" style="margin-right: 12px;">
-					<dp-avatar :user="u" style="width: 24px; height: 24px; margin-right: 2px;"/>
-					<dp-user-name :user="u" :nowrap="false" style="line-height: 24px;"/>
-				</b>
-			</span>
-			<span slot="omitted">{{ count - 10 }}</span>
-			<dp-reaction-icon slot="reaction" :reaction="reaction" ref="icon" />
-		</i18n>
+		<template v-if="users.length <= 10">
+			<b v-for="u in users" :key="u.id" style="margin-right: 12px;">
+				<dp-avatar :user="u" style="width: 24px; height: 24px; margin-right: 2px;"/>
+				<dp-user-name :user="u" :nowrap="false" style="line-height: 24px;"/>
+			</b>
+		</template>
+		<template v-if="10 < users.length">
+			<b v-for="u in users" :key="u.id" style="margin-right: 12px;">
+				<dp-avatar :user="u" style="width: 24px; height: 24px; margin-right: 2px;"/>
+				<dp-user-name :user="u" :nowrap="false" style="line-height: 24px;"/>
+			</b>
+			<span slot="omitted">+{{ count - 10 }}</span>
+		</template>
 	</div>
 </transition>
 </template>
@@ -87,7 +81,7 @@ export default Vue.extend({
 	max-width: 240px;
 	font-size: 0.8em;
 	padding: 6px 8px;
-	background: #fff;
+	background: var(--bg);
 	text-align: center;
 	border-radius: 4px;
 	box-shadow: 0 2px 8px rgba(0,0,0,0.25);
@@ -116,7 +110,7 @@ export default Vue.extend({
 		left: 12px;
 		border-top: solid 14px transparent;
 		border-right: solid 14px transparent;
-		border-bottom: solid 14px #fff;
+		border-bottom: solid 14px var(--bg);
 		border-left: solid 14px transparent;
 	}
 }
