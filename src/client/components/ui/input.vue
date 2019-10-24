@@ -68,7 +68,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import debounce from 'v-debounce';
-const getPasswordStrength = require('syuilo-password-strength');
 
 export default Vue.extend({
 	directives: {
@@ -131,7 +130,6 @@ export default Vue.extend({
 			v: this.value,
 			focused: false,
 			invalid: false,
-			passwordStrength: '',
 			id: Math.random().toString()
 		};
 	},
@@ -161,17 +159,6 @@ export default Vue.extend({
 				this.$emit('input', parseInt(v, 10));
 			} else {
 				this.$emit('input', v);
-			}
-
-			if (this.withPasswordMeter) {
-				if (v == '') {
-					this.passwordStrength = '';
-					return;
-				}
-
-				const strength = getPasswordStrength(v);
-				this.passwordStrength = strength > 0.7 ? 'high' : strength > 0.3 ? 'medium' : 'low';
-				(this.$refs.passwordMetar as any).style.width = `${strength * 100}%`;
 			}
 
 			this.invalid = this.$refs.input.validity.badInput;
