@@ -82,7 +82,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../i18n';
-import { faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight, faHome, faUnlock, faEnvelope, faThumbtack } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight, faHome, faUnlock, faEnvelope, faThumbtack, faBan } from '@fortawesome/free-solid-svg-icons';
 
 import XSub from './note.sub.vue';
 import XNoteHeader from './note-header.vue';
@@ -135,7 +135,7 @@ export default Vue.extend({
 		return {
 			conversation: [],
 			replies: [],
-			faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight, faHome, faUnlock, faEnvelope, faThumbtack
+			faPlus, faMinus, faRetweet, faReply, faReplyAll, faEllipsisH, faQuoteRight, faHome, faUnlock, faEnvelope, faThumbtack, faBan
 		};
 	},
 
