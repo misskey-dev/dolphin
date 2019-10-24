@@ -1,9 +1,9 @@
 <template>
 <div class="dp-media-banner">
 	<div class="sensitive" v-if="media.isSensitive && hide" @click="hide = false">
-		<span class="icon"><fa icon="exclamation-triangle"/></span>
+		<span class="icon"><fa :icon="faExclamationTriangle"/></span>
 		<b>{{ $t('sensitive') }}</b>
-		<span>{{ $t('click-to-show') }}</span>
+		<span>{{ $t('clickToShow') }}</span>
 	</div>
 	<div class="audio" v-else-if="media.type.startsWith('audio') && media.type !== 'audio/midi'">
 		<audio class="audio"
@@ -27,6 +27,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import i18n from '../i18n';
 
 export default Vue.extend({
@@ -39,7 +40,8 @@ export default Vue.extend({
 	},
 	data() {
 		return {
-			hide: true
+			hide: true,
+			faExclamationTriangle
 		};
 	},
 	mounted() {

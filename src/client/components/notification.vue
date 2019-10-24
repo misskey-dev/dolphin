@@ -101,7 +101,7 @@ export default Vue.extend({
 		box-sizing: border-box;
 		border-radius: 100%;
 		background: var(--bg);
-		box-shadow: 0 0 0 2px var(--bg);
+		box-shadow: 0 0 0 3px var(--bg);
 		font-size: 12px;
 
 		> * {

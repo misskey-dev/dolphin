@@ -13,7 +13,7 @@
 	</details>
 	<details v-if="note.poll">
 		<summary>{{ $t('poll') }}</summary>
-		<dp-poll :note="note"/>
+		<x-poll :note="note"/>
 	</details>
 </div>
 </template>
@@ -21,9 +21,19 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../i18n';
+import XPoll from './poll.vue';
+
 export default Vue.extend({
 	i18n,
-	props: ['note']
+	components: {
+		XPoll
+	},
+	props: {
+		note: {
+			type: Object,
+			required: true
+		}
+	},
 });
 </script>
 

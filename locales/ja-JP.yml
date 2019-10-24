@@ -1,4 +1,4 @@
-timeAgo:
+_ago:
   unknown: "謎"
   future: "未来"
   justNow: "たった今"
@@ -9,6 +9,12 @@ timeAgo:
   weeksAgo: "{}週間前"
   monthsAgo: "{}ヶ月前"
   yearsAgo: "{}年前"
+
+_time:
+  second: "秒"
+  minute: "分"
+  hour: "時間"
+  day: "日"
 
 monthAndDay: "{month}月 {day}日"
 
@@ -86,6 +92,34 @@ renote: "Renote"
 quote: "引用"
 pinnedNote: "ピン留めされた投稿"
 you: "あなた"
+clickToShow: "クリックして表示"
+sensitive: "閲覧注意"
+cwHide: "隠す"
+cwShow: "もっと見る"
+add: "追加"
+
+_poll:
+  noOnlyOneChoice: "選択肢は最低2つ必要です"
+  choiceN: "選択肢{n}"
+  noMore: "これ以上追加できません"
+  canMultipleVote: "複数回答可"
+  expiration: "期限"
+  infinite: "無期限"
+  at: "日時指定"
+  after: "経過指定"
+  deadlineDate: "期日"
+  deadlineTime: "時間"
+  interval: "期間"
+  votesCount: "{n}票"
+  totalVotes: "計{n}票"
+  vote: "投票する"
+  showResult: "結果を見る"
+  voted: "投票済み"
+  closed: "終了済み"
+  remainingDays: "終了まであと{d}日{h}時間"
+  remainingHours: "終了まであと{h}時間{m}分"
+  remainingMinutes: "終了まであと{m}分{s}秒"
+  remainingSeconds: "終了まであと{s}秒"
 
 _visibility:
   public: "パブリック"

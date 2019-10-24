@@ -1,48 +1,46 @@
 <template>
 <div class="zmdxowus">
 	<p class="caution" v-if="choices.length < 2">
-		<fa icon="exclamation-triangle"/>{{ $t('no-only-one-choice') }}
+		<fa :icon="faExclamationTriangle"/>{{ $t('_poll.noOnlyOneChoice') }}
 	</p>
 	<ul ref="choices">
 		<li v-for="(choice, i) in choices" :key="i">
-			<input :value="choice" @input="onInput(i, $event)" :placeholder="$t('choice-n').replace('{}', i + 1)">
-			<button @click="remove(i)" :title="$t('remove')">
-				<fa icon="times"/>
+			<x-input class="input" :value="choice" @input="onInput(i, $event)">
+				<template #title>{{ $t('_poll.choiceN', { n: i + 1 }) }}</template>
+			</x-input>
+			<button @click="remove(i)" class="_button">
+				<fa :icon="faTimes"/>
 			</button>
 		</li>
 	</ul>
-	<button class="add" v-if="choices.length < 10" @click="add">{{ $t('add') }}</button>
-	<button class="add" v-else disabled>{{ $t('no-more') }}</button>
-	<button class="destroy" @click="destroy" :title="$t('destroy')">
-		<fa icon="times"/>
-	</button>
+	<x-button class="add" v-if="choices.length < 10" @click="add">{{ $t('add') }}</x-button>
+	<x-button class="add" v-else disabled>{{ $t('_poll.noMore') }}</x-button>
 	<section>
-		<x-switch v-model="multiple">{{ $t('multiple') }}</x-switch>
+		<x-switch v-model="multiple">{{ $t('_poll.canMultipleVote') }}</x-switch>
 		<div>
 			<x-select v-model="expiration">
-				<template #label>{{ $t('expiration') }}</template>
-				<option value="infinite">{{ $t('infinite') }}</option>
-				<option value="at">{{ $t('at') }}</option>
-				<option value="after">{{ $t('after') }}</option>
+				<template #label>{{ $t('_poll.expiration') }}</template>
+				<option value="infinite">{{ $t('_poll.infinite') }}</option>
+				<option value="at">{{ $t('_poll.at') }}</option>
+				<option value="after">{{ $t('_poll.after') }}</option>
 			</x-select>
 			<section v-if="expiration === 'at'">
 				<x-input v-model="atDate" type="date">
-					<template #title>{{ $t('deadline-date') }}</template>
+					<template #title>{{ $t('_poll.deadlineDate') }}</template>
 				</x-input>
 				<x-input v-model="atTime" type="time">
-					<template #title>{{ $t('deadline-time') }}</template>
+					<template #title>{{ $t('_poll.deadlineTime') }}</template>
 				</x-input>
 			</section>
 			<section v-if="expiration === 'after'">
 				<x-input v-model="after" type="number">
-					<template #title>{{ $t('interval') }}</template>
+					<template #title>{{ $t('_poll.interval') }}</template>
 				</x-input>
 				<x-select v-model="unit">
-					<template #title>{{ $t('unit') }}</template>
-					<option value="second">{{ $t('second') }}</option>
-					<option value="minute">{{ $t('minute') }}</option>
-					<option value="hour">{{ $t('hour') }}</option>
-					<option value="day">{{ $t('day') }}</option>
+					<option value="second">{{ $t('_time.second') }}</option>
+					<option value="minute">{{ $t('_time.minute') }}</option>
+					<option value="hour">{{ $t('_time.hour') }}</option>
+					<option value="day">{{ $t('_time.day') }}</option>
 				</x-select>
 			</section>
 		</div>
@@ -52,18 +50,23 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { faExclamationTriangle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import i18n from '../i18n';
 import { erase } from '../../prelude/array';
 import { addTimespan } from '../../prelude/time';
 import { formatDateTimeString } from '../../misc/format-time-string';
 import XInput from './ui/input.vue';
 import XSelect from './ui/select.vue';
+import XSwitch from './ui/switch.vue';
+import XButton from './ui/button.vue';
 
 export default Vue.extend({
 	i18n,
 	components: {
 		XInput,
 		XSelect,
+		XSwitch,
+		XButton,
 	},
 	data() {
 		return {
@@ -73,7 +76,8 @@ export default Vue.extend({
 			atDate: formatDateTimeString(addTimespan(new Date(), 1, 'days'), 'yyyy-MM-dd'),
 			atTime: '00:00',
 			after: 0,
-			unit: 'second'
+			unit: 'second',
+			faExclamationTriangle, faTimes
 		};
 	},
 	watch: {
@@ -83,7 +87,7 @@ export default Vue.extend({
 	},
 	methods: {
 		onInput(i, e) {
-			Vue.set(this.choices, i, e.target.value);
+			Vue.set(this.choices, i, e);
 		},
 
 		add() {
@@ -95,10 +99,6 @@ export default Vue.extend({
 
 		remove(i) {
 			this.choices = this.choices.filter((_, _i) => _i != i);
-		},
-
-		destroy() {
-			this.$emit('destroyed');
 		},
 
 		get() {
@@ -168,73 +168,27 @@ export default Vue.extend({
 		list-style: none;
 
 		> li {
-			display: block;
+			display: flex;
 			margin: 8px 0;
 			padding: 0;
 			width: 100%;
 
-			&:first-child {
-				margin-top: 0;
-			}
-
-			&:last-child {
+			> .input {
+				flex: 1;
+				margin-top: 16px;
 				margin-bottom: 0;
 			}
 
-			> input {
-				padding: 6px 8px;
-				width: 300px;
-				font-size: 14px;
-				color: var(--inputText);
-				background: var(--pollEditorInputBg);
-				border: solid 1px var(--primaryAlpha01);
-				border-radius: 4px;
-
-				&:hover {
-					border-color: var(--primaryAlpha02);
-				}
-
-				&:focus {
-					border-color: var(--primaryAlpha05);
-				}
-			}
-
 			> button {
-				padding: 4px 8px;
-				color: var(--primaryAlpha04);
-
-				&:hover {
-					color: var(--primaryAlpha06);
-				}
-
-				&:active {
-					color: var(--primaryDarken30);
-				}
+				width: 32px;
+				padding: 4px 0;
 			}
 		}
 	}
 
 	> .add {
 		margin: 8px 0 0 0;
-		vertical-align: top;
-		color: $primary;
 		z-index: 1;
-	}
-
-	> .destroy {
-		position: absolute;
-		top: 0;
-		right: 0;
-		padding: 4px 8px;
-		color: var(--primaryAlpha04);
-
-		&:hover {
-			color: var(--primaryAlpha06);
-		}
-
-		&:active {
-			color: var(--primaryDarken30);
-		}
 	}
 
 	> section {

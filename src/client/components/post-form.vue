@@ -32,10 +32,10 @@
 		<x-poll-editor v-if="poll" ref="poll" @destroyed="poll = false" @updated="onPollUpdate()"/>
 		<x-uploader ref="uploader" @uploaded="attachMedia" @change="onChangeUploadings"/>
 		<footer>
-			<button class="upload _button" @click="chooseFile"><fa :icon="faUpload"/></button>
-			<button class="poll _button" @click="poll = true"><fa :icon="faChartPie"/></button>
-			<button class="poll _button" @click="useCw = !useCw"><fa :icon="faEyeSlash"/></button>
-			<button class="visibility _button" @click="setVisibility" ref="visibilityButton">
+			<button class="_button" @click="chooseFile"><fa :icon="faUpload"/></button>
+			<button class="_button" @click="poll = !poll"><fa :icon="faChartPie"/></button>
+			<button class="_button" @click="useCw = !useCw"><fa :icon="faEyeSlash"/></button>
+			<button class="_button" @click="setVisibility" ref="visibilityButton">
 				<span v-if="visibility === 'public'"><fa :icon="faGlobe"/></span>
 				<span v-if="visibility === 'home'"><fa :icon="faHome"/></span>
 				<span v-if="visibility === 'followers'"><fa :icon="faUnlock"/></span>
@@ -660,11 +660,6 @@ export default Vue.extend({
 		}
 
 		> footer {
-			white-space: nowrap;
-			overflow: auto;
-			-webkit-overflow-scrolling: touch;
-			overflow-scrolling: touch;
-
 			> * {
 				display: inline-block;
 				padding: 0;

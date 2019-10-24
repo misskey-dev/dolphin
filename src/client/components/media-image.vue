@@ -1,8 +1,8 @@
 <template>
 <div class="qjewsnkgzzxlxtzncydssfbgjibiehcy" v-if="image.isSensitive && hide && !$store.state.device.alwaysShowNsfw" @click="hide = false">
 	<div>
-		<b><fa icon="exclamation-triangle"/> {{ $t('sensitive') }}</b>
-		<span>{{ $t('click-to-show') }}</span>
+		<b><fa :icon="faExclamationTriangle"/> {{ $t('sensitive') }}</b>
+		<span>{{ $t('clickToShow') }}</span>
 	</div>
 </div>
 <a class="gqnyydlzavusgskkfvwvjiattxdzsqlf" v-else
@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import i18n from '../i18n';
 import { getStaticImageUrl } from '../scripts/get-static-image-url';
 
@@ -33,7 +34,8 @@ export default Vue.extend({
 	},
 	data() {
 		return {
-			hide: true
+			hide: true,
+			faExclamationTriangle
 		};
 	},
 	computed: {

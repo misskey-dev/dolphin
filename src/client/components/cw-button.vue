@@ -1,6 +1,6 @@
 <template>
-<button class="nrvgflfuaxwgkxoynpnumyookecqrrvh" @click="toggle">
-	<b>{{ value ? this.$t('hide') : this.$t('show') }}</b>
+<button class="nrvgflfuaxwgkxoynpnumyookecqrrvh _button" @click="toggle">
+	<b>{{ value ? this.$t('cwHide') : this.$t('cwShow') }}</b>
 	<span v-if="!value">{{ this.label }}</span>
 </button>
 </template>
@@ -9,7 +9,7 @@
 import Vue from 'vue';
 import i18n from '../i18n';
 import { length } from 'stringz';
-import { concat } from '../../../../../prelude/array';
+import { concat } from '../../prelude/array';
 
 export default Vue.extend({
 	i18n,
@@ -46,25 +46,37 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.nrvgflfuaxwgkxoynpnumyookecqrrvh
-	display inline-block
-	padding 4px 8px
-	font-size 0.7em
-	color var(--cwButtonFg)
-	background var(--cwButtonBg)
-	border-radius 2px
-	cursor pointer
-	user-select none
+.nrvgflfuaxwgkxoynpnumyookecqrrvh {
+	display: inline-block;
+	padding: 4px 8px;
+	font-size: 0.7em;
+	color: #fff;
+	background: #b1b9c1;
+	border-radius: 2px;
 
-	&:hover
-		background var(--cwButtonHoverBg)
+	@media (prefers-color-scheme: dark) {
+		color: #393f4f;
+		background: #687390;
+	}
 
-	> span
-		margin-left 4px
+	&:hover {
+		background: #bbc4ce;
 
-		&:before
-			content '('
-		&:after
-			content ')'
+		@media (prefers-color-scheme: dark) {
+			background: #707b97;
+		}
+	}
 
+	> span {
+		margin-left: 4px;
+
+		&:before {
+			content: '(';
+		}
+
+		&:after {
+			content: ')';
+		}
+	}
+}
 </style>

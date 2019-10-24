@@ -33,7 +33,7 @@
 			<div class="body" v-if="appearNote.deletedAt == null">
 				<p v-if="appearNote.cw != null" class="cw">
 				<mfm v-if="appearNote.cw != ''" class="text" :text="appearNote.cw" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis" />
-					<dp-cw-button v-model="showContent" :note="appearNote"/>
+					<x-cw-button v-model="showContent" :note="appearNote"/>
 				</p>
 				<div class="content" v-show="appearNote.cw == null || showContent">
 					<div class="text">
@@ -44,7 +44,7 @@
 					<div class="files" v-if="appearNote.files.length > 0">
 						<x-media-list :media-list="appearNote.files"/>
 					</div>
-					<dp-poll v-if="appearNote.poll" :note="appearNote" ref="pollViewer"/>
+					<x-poll v-if="appearNote.poll" :note="appearNote" ref="pollViewer"/>
 					<dp-url-preview v-for="url in urls" :url="url" :key="url" :compact="true"/>
 					<div class="renote" v-if="appearNote.renote"><x-note-preview :note="appearNote.renote"/></div>
 				</div>
@@ -89,6 +89,8 @@ import XNoteHeader from './note-header.vue';
 import XNotePreview from './note-preview.vue';
 import XReactionsViewer from './reactions-viewer.vue';
 import XMediaList from './media-list.vue';
+import XCwButton from './cw-button.vue';
+import XPoll from './poll.vue';
 import noteMixin from '../scripts/note-mixin';
 import noteSubscriber from '../scripts/note-subscriber';
 
@@ -101,6 +103,8 @@ export default Vue.extend({
 		XNotePreview,
 		XReactionsViewer,
 		XMediaList,
+		XCwButton,
+		XPoll,
 	},
 
 	mixins: [
