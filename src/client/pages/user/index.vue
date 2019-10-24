@@ -35,10 +35,10 @@
 			<div class="fields" v-if="user.fields.length > 0">
 				<dl class="field" v-for="(field, i) in user.fields" :key="i">
 					<dt class="name">
-						<mfm :text="field.name" :plain="true" :custom-emojis="user.emojis"/>
+						<mfm :text="field.name" :plain="true" :custom-emojis="user.emojis" :colored="false"/>
 					</dt>
 					<dd class="value">
-						<mfm :text="field.value" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
+						<mfm :text="field.value" :author="user" :i="$store.state.i" :custom-emojis="user.emojis" :colored="false"/>
 					</dd>
 				</dl>
 			</div>

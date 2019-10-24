@@ -7,6 +7,7 @@ $primary: #5da1c1;
 	--scrollbarHandleHover: rgba(0, 0, 0, 0.4);
 	--link: #5c4e94;
 	--hashtag: #94a029;
+	--mention: #{$primary};
 
 	@media (prefers-color-scheme: dark) {
 		--bg: #111213;

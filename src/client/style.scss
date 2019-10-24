@@ -91,7 +91,7 @@ html, body {
 a {
 	text-decoration: none;
 	cursor: pointer;
-	color: var(--fg);
+	color: inherit;
 
 	&:hover {
 		text-decoration: underline;

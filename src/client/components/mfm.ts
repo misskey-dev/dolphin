@@ -35,6 +35,10 @@ export default Vue.component('misskey-flavored-markdown', {
 			type: Boolean,
 			default: true
 		},
+		colored: {
+			type: Boolean,
+			default: true
+		},
 	},
 
 	render(createElement) {
@@ -88,9 +92,9 @@ export default Vue.component('misskey-flavored-markdown', {
 							url: token.node.props.url,
 							rel: 'nofollow noopener',
 						},
-						attrs: {
+						attrs: this.colored ? {
 							style: 'color:var(--link);'
-						}
+						} : {}
 					})];
 				}
 
@@ -102,7 +106,7 @@ export default Vue.component('misskey-flavored-markdown', {
 							rel: 'nofollow noopener',
 							target: '_blank',
 							title: token.node.props.url,
-							style: 'color:var(--link);'
+							style: this.colored ? 'color:var(--link);' : ''
 						}
 					}, genEl(token.children))];
 				}
@@ -113,6 +117,9 @@ export default Vue.component('misskey-flavored-markdown', {
 						props: {
 							host: (token.node.props.host == null && this.author && this.author.host != null ? this.author.host : token.node.props.host) || host,
 							username: token.node.props.username
+						},
+						attrs: {
+							style: this.colored ? 'color:var(--mention);' : ''
 						}
 					})];
 				}
@@ -122,7 +129,7 @@ export default Vue.component('misskey-flavored-markdown', {
 						key: Math.random(),
 						attrs: {
 							to: this.isNote ? `/tags/${encodeURIComponent(token.node.props.hashtag)}` : `/explore/tags/${encodeURIComponent(token.node.props.hashtag)}`,
-							style: 'color:var(--hashtag);'
+							style: this.colored ? 'color:var(--hashtag);' : ''
 						}
 					}, `#${token.node.props.hashtag}`)];
 				}

@@ -9,7 +9,7 @@
 	</div>
 	<details v-if="note.files.length > 0">
 		<summary>({{ $t('media-count').replace('{}', note.files.length) }})</summary>
-		<dp-media-list :media-list="note.files"/>
+		<x-media-list :media-list="note.files"/>
 	</details>
 	<details v-if="note.poll">
 		<summary>{{ $t('poll') }}</summary>
@@ -22,11 +22,13 @@
 import Vue from 'vue';
 import i18n from '../i18n';
 import XPoll from './poll.vue';
+import XMediaList from './media-list.vue';
 
 export default Vue.extend({
 	i18n,
 	components: {
-		XPoll
+		XPoll,
+		XMediaList,
 	},
 	props: {
 		note: {

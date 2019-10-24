@@ -341,13 +341,7 @@ export default Vue.extend({
 					}
 
 					> .renote {
-						margin: 8px 0;
-
-						> * {
-							padding: 16px;
-							border: dashed 1px var(--quoteBorder);
-							border-radius: 8px;
-						}
+						padding: 8px 0;
 					}
 				}
 			}

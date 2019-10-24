@@ -66,8 +66,6 @@ export default Vue.extend({
 @import '../theme';
 
 .ldlomzub {
-	color: $primary;
-
 	> .me {
 		pointer-events: none;
 		user-select: none;
