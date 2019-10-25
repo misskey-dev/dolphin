@@ -2,7 +2,7 @@
 <section class="dp-settings-page-import-export _section">
 	<div class="title"><fa :icon="faBoxes"/> {{ $t('importAndExport') }}</div>
 	<div class="content">
-		<x-select v-model="exportTarget">
+		<x-select v-model="exportTarget" style="margin-top: 0;">
 			<option value="notes">{{ $t('_exportOrImport.allNotes') }}</option>
 			<option value="following">{{ $t('_exportOrImport.followingList') }}</option>
 			<option value="user-lists">{{ $t('_exportOrImport.userLists') }}</option>
@@ -81,8 +81,3 @@ export default Vue.extend({
 	}
 });
 </script>
-
-<style lang="scss" scoped>
-.dp-settings-page-import-export {
-}
-</style>

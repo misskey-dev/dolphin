@@ -192,7 +192,7 @@ export default Vue.extend({
 				if (notify) {
 					this.$root.dialog({
 						type: 'success',
-						text: this.$t('saved')
+						splash: true
 					});
 				}
 			}).catch(err => {

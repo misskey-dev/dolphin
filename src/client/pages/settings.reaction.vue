@@ -2,7 +2,7 @@
 <section class="dp-settings-page-reaction _section">
 	<div class="title"><fa :icon="faLaugh"/> {{ $t('reaction') }}</div>
 	<div class="content">
-		<x-textarea v-model="reactions">
+		<x-textarea v-model="reactions" style="margin-top: 16px;">
 			{{ $t('reaction') }}<template #desc>{{ $t('reactionSettingDescription') }}</template>
 		</x-textarea>
 	</div>
@@ -36,7 +36,3 @@ export default Vue.extend({
 	},
 });
 </script>
-
-<style lang="scss" scoped>
-
-</style>
