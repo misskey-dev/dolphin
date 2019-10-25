@@ -2,9 +2,7 @@ import $ from 'cafy';
 import define from '../../define';
 import { ApiError } from '../../error';
 import { Notes } from '../../../../models';
-import { In } from 'typeorm';
 import { ID } from '../../../../misc/cafy-id';
-import config from '../../../../config';
 
 export const meta = {
 	desc: {

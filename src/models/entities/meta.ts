@@ -9,30 +9,9 @@ export class Meta {
 	public id: string;
 
 	@Column('varchar', {
-		length: 128, nullable: true
-	})
-	public name: string | null;
-
-	@Column('varchar', {
 		length: 1024, nullable: true
 	})
 	public description: string | null;
-
-	/**
-	 * メンテナの名前
-	 */
-	@Column('varchar', {
-		length: 128, nullable: true
-	})
-	public maintainerName: string | null;
-
-	/**
-	 * メンテナの連絡先
-	 */
-	@Column('varchar', {
-		length: 128, nullable: true
-	})
-	public maintainerEmail: string | null;
 
 	@Column('varchar', {
 		length: 256, array: true, default: '{}'

@@ -63,13 +63,6 @@ export const meta = {
 			}
 		},
 
-		name: {
-			validator: $.optional.nullable.str,
-			desc: {
-				'ja-JP': 'インスタンス名'
-			}
-		},
-
 		description: {
 			validator: $.optional.nullable.str,
 			desc: {
@@ -120,20 +113,6 @@ export const meta = {
 			}
 		},
 
-		maintainerName: {
-			validator: $.optional.nullable.str,
-			desc: {
-				'ja-JP': 'インスタンスの管理者名'
-			}
-		},
-
-		maintainerEmail: {
-			validator: $.optional.nullable.str,
-			desc: {
-				'ja-JP': 'インスタンス管理者の連絡先メールアドレス'
-			}
-		},
-
 		summalyProxy: {
 			validator: $.optional.nullable.str,
 			desc: {
@@ -171,10 +150,6 @@ export default define(meta, async (ps, me) => {
 		set.blockedHosts = ps.blockedHosts.filter(Boolean);
 	}
 
-	if (ps.name !== undefined) {
-		set.name = ps.name;
-	}
-
 	if (ps.description !== undefined) {
 		set.description = ps.description;
 	}
@@ -201,14 +176,6 @@ export default define(meta, async (ps, me) => {
 
 	if (ps.proxyAccount !== undefined) {
 		set.proxyAccount = ps.proxyAccount;
-	}
-
-	if (ps.maintainerName !== undefined) {
-		set.maintainerName = ps.maintainerName;
-	}
-
-	if (ps.maintainerEmail !== undefined) {
-		set.maintainerEmail = ps.maintainerEmail;
 	}
 
 	if (ps.summalyProxy !== undefined) {

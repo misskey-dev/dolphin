@@ -25,15 +25,6 @@ export default class MiOS extends EventEmitter {
 		chachedAt: Date;
 	};
 
-	public get instanceName() {
-		const siteName = document.querySelector('meta[property="og:site_name"]') as HTMLMetaElement;
-		if (siteName && siteName.content) {
-			return siteName.content;
-		}
-
-		return 'Dolphin';
-	}
-
 	private isMetaFetching = false;
 
 	public app: Vue;

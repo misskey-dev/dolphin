@@ -70,15 +70,15 @@ html
 			table
 				tr
 					th Instance
-					td= meta.name || 'Dolphin'
+					td= name
 				tr
 					th Description
 					td= meta.description
 				tr
 					th Maintainer
 					td
-						= meta.maintainerName
-						|  &lt;#{meta.maintainerEmail}&gt;
+						= maintainerName
+						|  &lt;#{maintainerEmail}&gt;
 				tr
 					th System
 					td= os

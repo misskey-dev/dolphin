@@ -96,7 +96,7 @@ export default define(meta, async (ps, me) => {
 		.leftJoinAndSelect('note.user', 'user');
 
 	if (me) generateVisibilityQuery(query, me);
-	if (user) generateMuteQuery(query, user);
+	if (me) generateMuteQuery(query, me);
 
 	if (ps.tag) {
 		query.andWhere(':tag = ANY(note.tags)', { tag: ps.tag.toLowerCase() });

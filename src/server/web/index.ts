@@ -151,7 +151,7 @@ router.get(['/@:user', '/@:user/:sub'], async (ctx, next) => {
 		await ctx.render('user', {
 			user, profile, me,
 			sub: ctx.params.sub,
-			instanceName: meta.name || 'Dolphin',
+			instanceName: config.name,
 			icon: meta.iconUrl
 		});
 		ctx.set('Cache-Control', 'public, max-age=30');
@@ -185,7 +185,7 @@ router.get('/notes/:note', async ctx => {
 		await ctx.render('note', {
 			note: _note,
 			summary: getNoteSummary(_note),
-			instanceName: meta.name || 'Dolphin',
+			instanceName: config.name,
 			icon: meta.iconUrl
 		});
 
@@ -220,6 +220,9 @@ router.get('/info', async ctx => {
 		},
 		emojis: emojis,
 		meta: meta,
+		name: config.name,
+		maintainerName: config.maintainerName,
+		maintainerEmail: config.maintainerEmail,
 		originalUsersCount: await Users.count({ host: null }),
 		originalNotesCount: await Notes.count({ userHost: null })
 	});
@@ -230,8 +233,8 @@ router.get('*', async ctx => {
 	const meta = await fetchMeta();
 	await ctx.render('base', {
 		img: meta.bannerUrl,
-		title: meta.name || 'Dolphin',
-		instanceName: meta.name || 'Dolphin',
+		title: config.name,
+		instanceName: config.name,
 		desc: meta.description,
 		icon: meta.iconUrl
 	});

@@ -11,7 +11,7 @@ import i18n from './i18n';
 import VueHotkey from './scripts/hotkey';
 import App from './app.vue';
 import MiOS from './mios';
-import { version, langs } from './config';
+import { version, langs, instanceName } from './config';
 import PostFormDialog from './components/post-form-dialog.vue';
 import Dialog from './components/dialog.vue';
 import { router } from './router';
@@ -124,17 +124,13 @@ os.init(async () => {
 
 	const app = new Vue({
 		store: os.store,
-		metaInfo() {
-			const name = os.instanceName;
-			return {
-				title: null,
-				titleTemplate: title => title ? `${title} | ${name}` : name
-			}
+		metaInfo: {
+			title: null,
+			titleTemplate: title => title ? `${title} | ${instanceName}` : instanceName
 		},
 		data() {
 			return {
 				stream: os.stream,
-				instanceName: os.instanceName,
 			};
 		},
 		methods: {

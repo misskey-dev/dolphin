@@ -2,6 +2,18 @@
 # Dolphin configuration
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+#   ┌──────────┐
+#───┘ Instance └─────────────────────────────────────────────────────
+
+# Your instance name
+name: 'Dolphin'
+
+# Your name
+maintainerName: ''
+
+# Youe email address
+maintainerEmail: ''
+
 #   ┌─────┐
 #───┘ URL └─────────────────────────────────────────────────────
 

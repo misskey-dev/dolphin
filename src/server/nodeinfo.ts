@@ -21,10 +21,7 @@ export const links = [/* (awaiting release) {
 const nodeinfo2 = async () => {
 	const [
 		{
-			name,
 			description,
-			maintainerName,
-			maintainerEmail,
 			enableRecaptcha,
 			enableServiceWorker
 		},
@@ -60,11 +57,11 @@ const nodeinfo2 = async () => {
 			// localComments
 		},
 		metadata: {
-			name,
+			name: config.name,
 			description,
 			maintainer: {
-				name: maintainerName,
-				email: maintainerEmail
+				name: config.maintainerName,
+				email: config.maintainerEmail
 			},
 			enableRecaptcha,
 			maxNoteTextLength: 500,

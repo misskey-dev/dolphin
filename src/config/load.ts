@@ -30,6 +30,8 @@ export default function load() {
 
 	config.port = config.port || parseInt(process.env.PORT || '', 10);
 
+	config.name = config.name || 'Dolphin';
+
 	mixin.host = url.host;
 	mixin.hostname = url.hostname;
 	mixin.scheme = url.protocol.replace(/:$/, '');
