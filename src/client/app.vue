@@ -25,7 +25,7 @@
 				<router-link to="/manage-lists"><fa :icon="faCog" fixed-width/>{{ $t('manageLists') }}</router-link>
 			</template>
 			<template v-else>
-				<button class="_button" @click="showAccounts = true"><dp-avatar :user="$store.state.i" class="avatar"/><dp-user-name :user="$store.state.i"/></button>
+				<button class="_button" @click="search()"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
 				<div></div>
 				<button class="_button" @click="showLists = true"><fa :icon="faListUl" fixed-width/>{{ $t('lists') }}</button>
 				<router-link to="/messages"><fa :icon="faEnvelope" fixed-width/>{{ $t('messages') }}<i v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa :icon="faCircle"/></i></router-link>
@@ -35,7 +35,7 @@
 				<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
 				<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
 				<div></div>
-				<button class="_button" @click="search()"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
+				<button class="_button" @click="showAccounts = true"><dp-avatar :user="$store.state.i" class="avatar"/><dp-user-name :user="$store.state.i"/></button>
 			</template>
 		</nav>
 	</transition>
