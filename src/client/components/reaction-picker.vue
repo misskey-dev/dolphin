@@ -207,6 +207,8 @@ export default Vue.extend({
 		font-size: 16px;
 		outline: none;
 		border: none;
+		background: transparent;
+		color: var(--fg);
 
 		@media (max-width: 1025px) {
 			width: 256px;
