@@ -340,15 +340,19 @@ export default Vue.extend({
 	> .buttons {
 		position: fixed;
 		z-index: 1000;
-		bottom: 32px;
-		padding: 0 32px;
+		bottom: 0;
+		padding: 0 32px 32px 32px;
 		display: flex;
 		width: 100%;
 		box-sizing: border-box;
+		background: linear-gradient(0deg, $lightHtml, rgba($lightHtml, 0));
+
+		@media (prefers-color-scheme: dark) {
+			background: linear-gradient(0deg, $darkHtml, rgba($darkHtml, 0));
+		}
 
 		@media (max-width: 500px) {
-			bottom: 16px;
-			padding: 0 16px;
+			padding: 0 16px 16px 16px;
 		}
 
 		> .button {

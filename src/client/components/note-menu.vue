@@ -60,13 +60,13 @@ export default Vue.extend({
 					text: this.$t('pin'),
 					action: () => this.togglePin(true)
 				} : undefined,
-				...(this.note.userId == this.$store.state.i.id || this.$store.state.i.isAdmin ? [
+				...(this.note.userId == this.$store.state.i.id ? [
 					null,
-					this.note.userId == this.$store.state.i.id ? {
+					{
 						icon: faTrashAlt,
 						text: this.$t('delete'),
 						action: this.del
-					} : undefined]
+					}]
 					: []
 				)]
 				.filter(x => x !== undefined);

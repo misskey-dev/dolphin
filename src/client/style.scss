@@ -8,7 +8,7 @@
 }
 
 html {
-	background-color: #edf3f7;
+	background-color: $lightHtml;
 	background-attachment: fixed;
 	background-size: cover;
 	background-position: center;
@@ -50,7 +50,7 @@ html {
 	}
 
 	@media (prefers-color-scheme: dark) {
-		background-color: #0b0c0c;
+		background-color: $darkHtml;
 	}
 }
 
