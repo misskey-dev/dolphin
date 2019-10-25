@@ -78,7 +78,6 @@ class NotificationManager {
 			}
 		}
 	}
-
 }
 
 type Option = {
@@ -250,6 +249,8 @@ export default async (user: User, data: Option, silent = false) => new Promise<N
 		}
 
 		publish(user, note, data.reply, data.renote, noteActivity);
+
+		nm.deliver();
 	}
 });
 
