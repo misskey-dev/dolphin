@@ -1,6 +1,6 @@
 <template>
 <section class="_section dp-instance-emojis">
-	<div class="title">{{ $t('customEmojis') }}</div>
+	<div class="title"><fa :icon="faLaugh"/> {{ $t('customEmojis') }}</div>
 	<div class="content">
 		<x-pagination :pagination="pagination" #default="{items}" class="emojis" ref="emojis">
 			<div class="emoji" v-for="(emoji, i) in items" :key="emoji.id" :data-index="i" @click="selected = emoji" :class="{ selected: selected && (selected.id === emoji.id) }">
@@ -21,7 +21,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { faTrashAlt, faLaugh } from '@fortawesome/free-regular-svg-icons';
 import XButton from '../components/ui/button.vue';
 import XPagination from '../components/ui/pagination.vue';
 
@@ -38,7 +38,7 @@ export default Vue.extend({
 				endpoint: 'admin/emoji/list',
 				limit: 10,
 			},
-			faTrashAlt, faPlus
+			faTrashAlt, faPlus, faLaugh
 		}
 	},
 

@@ -313,7 +313,7 @@ export default class MiOS extends EventEmitter {
 			fetch(endpoint.indexOf('://') > -1 ? endpoint : `${apiUrl}/${endpoint}`, {
 				method: 'POST',
 				body: JSON.stringify(data),
-				credentials: endpoint === 'signin' ? 'include' : 'omit',
+				credentials: 'omit',
 				cache: 'no-cache'
 			}).then(async (res) => {
 				const body = res.status === 204 ? null : await res.json();

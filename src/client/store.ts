@@ -12,6 +12,7 @@ const defaultSettings = {
 	defaultNoteVisibility: 'public',
 	uploadFolder: null,
 	pastedFileName: 'yyyy-MM-dd HH-mm-ss [{{number}}]',
+	wallpaper: null,
 	reactions: ['👍', '❤️', '😆', '🤔', '😮', '🎉', '💢', '😥', '😇', '🍮']
 };
 

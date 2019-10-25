@@ -4,32 +4,23 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import VueRouter from 'vue-router';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import i18n from './i18n';
 import VueHotkey from './scripts/hotkey';
-import VueSize from './scripts/size';
 import App from './app.vue';
 import MiOS from './mios';
 import { version, langs } from './config';
 import PostFormDialog from './components/post-form-dialog.vue';
 import Dialog from './components/dialog.vue';
-import DpIndex from './pages/index.vue';
+import { router } from './router';
 
 Vue.use(Vuex);
-Vue.use(VueRouter);
 Vue.use(VueHotkey);
-Vue.use(VueSize);
 Vue.component('fa', FontAwesomeIcon);
 
-// Register global directives
 require('./directives');
-
-// Register global components
 require('./components');
-
-// Register global filters
 require('./filters');
 
 Vue.mixin({
@@ -117,32 +108,11 @@ document.body.setAttribute('ontouchstart', '');
 // アプリ基底要素マウント
 document.body.innerHTML = '<div id="app"></div>';
 
-// Init router
-const router = new VueRouter({
-	mode: 'history',
-	routes: [
-		{ path: '/', name: 'index', component: DpIndex },
-		{ path: '/@:user', name: 'user', component: () => import('./pages/user/index.vue').then(m => m.default), children: [
-			{ path: 'following', name: 'userFollowing', component: () => import('./pages/user/follow-list.vue').then(m => m.default), props: { type: 'following' } },
-			{ path: 'followers', name: 'userFollowers', component: () => import('./pages/user/follow-list.vue').then(m => m.default), props: { type: 'followers' } },
-		]},
-		{ path: '/favorites', component: () => import('./pages/favorites.vue').then(m => m.default) },
-		{ path: '/messages', component: () => import('./pages/messages.vue').then(m => m.default) },
-		{ path: '/settings', component: () => import('./pages/settings.vue').then(m => m.default) },
-		{ path: '/instance', component: () => import('./pages/instance.vue').then(m => m.default) },
-		{ path: '/follow-requests', component: () => import('./pages/follow-requests.vue').then(m => m.default) },
-		{ path: '/manage-lists', component: () => import('./pages/manage-lists/index.vue').then(m => m.default) },
-		{ path: '/manage-lists/:list', component: () => import('./pages/manage-lists/list.vue').then(m => m.default) },
-		{ path: '/lists/:list', component: () => import('./pages/list.vue').then(m => m.default) },
-		{ path: '/notes/:note', component: () => import('./pages/note.vue').then(m => m.default) },/*
-		{ path: '/authorize-follow', component: DpFollow },
-		{ path: '*', component: DpNotFound }*/
-	]
-});
-
 const os = new MiOS();
 
 os.init(async () => {
+	if (os.store.state.settings.wallpaper) document.documentElement.style.backgroundImage = `url(${os.store.state.settings.wallpaper})`;
+
 	document.addEventListener('visibilitychange', () => {
 		if (!document.hidden) {
 			os.store.commit('clearBehindNotes');
@@ -205,7 +175,7 @@ os.init(async () => {
 				(vm as any).focus();
 			},
 		},
-		router,
+		router: router,
 		render: createEl => createEl(App)
 	});
 

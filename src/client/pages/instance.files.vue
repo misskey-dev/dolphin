@@ -1,6 +1,6 @@
 <template>
 <section class="_section dp-instance-files">
-	<div class="title">{{ $t('files') }}</div>
+	<div class="title"><fa :icon="faCloud"/> {{ $t('files') }}</div>
 	<div class="content">
 		<x-switch v-model="cacheRemoteFiles">{{ $t('cacheRemoteFiles') }}<template #desc>{{ $t('cacheRemoteFilesDescription') }}</template></x-switch>
 		<x-input v-model="remoteDriveCapacityMb" type="number" :disabled="!cacheRemoteFiles" style="margin-bottom: 0;">{{ $t('remoteFilesCacheCapacityPerAccount') }}<template #suffix>MB</template></x-input>
@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCloud } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import XButton from '../components/ui/button.vue';
 import XInput from '../components/ui/input.vue';
@@ -37,7 +37,7 @@ export default Vue.extend({
 		return {
 			cacheRemoteFiles: this.meta.cacheRemoteFiles,
 			remoteDriveCapacityMb: this.meta.driveCapacityPerRemoteUserMb,
-			faTrashAlt, faPlus
+			faTrashAlt, faPlus, faCloud
 		}
 	},
 

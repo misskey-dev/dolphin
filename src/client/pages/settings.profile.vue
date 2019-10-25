@@ -1,6 +1,6 @@
 <template>
 <section class="dp-settings-page-profile _section">
-	<div class="title">{{ $t('profile') }}</div>
+	<div class="title"><fa :icon="faUser"/> {{ $t('profile') }}</div>
 	<div class="content">
 		<x-input v-model="name" :max="30">
 			<span>{{ $t('_profile.name') }}</span>
@@ -20,13 +20,13 @@
 		<x-input type="file" @change="onAvatarChange">
 			<span>{{ $t('_profile.avatar') }}</span>
 			<template #icon><fa :icon="faImage"/></template>
-			<template #desc v-if="avatarUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
+			<template #desc v-if="avatarUploading">{{ $t('uploading') }}<dp-ellipsis/></template>
 		</x-input>
 
 		<x-input type="file" @change="onBannerChange">
 			<span>{{ $t('_profile.banner') }}</span>
 			<template #icon><fa :icon="faImage"/></template>
-			<template #desc v-if="bannerUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
+			<template #desc v-if="bannerUploading">{{ $t('uploading') }}<dp-ellipsis/></template>
 		</x-input>
 
 		<details class="fields">
@@ -59,7 +59,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faUnlockAlt, faCogs, faImage } from '@fortawesome/free-solid-svg-icons';
+import { faUnlockAlt, faCogs, faImage, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-regular-svg-icons';
 import XButton from '../components/ui/button.vue';
 import XInput from '../components/ui/input.vue';
@@ -97,7 +97,7 @@ export default Vue.extend({
 			saving: false,
 			avatarUploading: false,
 			bannerUploading: false,
-			faSave, faUnlockAlt, faCogs, faImage
+			faSave, faUnlockAlt, faCogs, faImage, faUser
 		}
 	},
 
@@ -130,15 +130,18 @@ export default Vue.extend({
 				method: 'POST',
 				body: data
 			})
-				.then(response => response.json())
-				.then(f => {
-					this.avatarId = f.id;
-					this.avatarUploading = false;
-				})
-				.catch(e => {
-					this.avatarUploading = false;
-					alert('%18n:@upload-failed%');
+			.then(response => response.json())
+			.then(f => {
+				this.avatarId = f.id;
+				this.avatarUploading = false;
+			})
+			.catch(e => {
+				this.avatarUploading = false;
+					this.$root.dialog({
+					type: 'error',
+					text: e
 				});
+			});
 		},
 
 		onBannerChange([file]) {
@@ -152,15 +155,18 @@ export default Vue.extend({
 				method: 'POST',
 				body: data
 			})
-				.then(response => response.json())
-				.then(f => {
-					this.bannerId = f.id;
-					this.bannerUploading = false;
-				})
-				.catch(e => {
-					this.bannerUploading = false;
-					alert('%18n:@upload-failed%');
+			.then(response => response.json())
+			.then(f => {
+				this.bannerId = f.id;
+				this.bannerUploading = false;
+			})
+			.catch(e => {
+				this.bannerUploading = false;
+				this.$root.dialog({
+					type: 'error',
+					text: e
 				});
+			});
 		},
 
 		save(notify) {

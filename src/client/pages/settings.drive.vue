@@ -1,6 +1,6 @@
 <template>
 <section class="dp-settings-page-drive _section">
-	<div class="title"><fa :icon="faCloud"/> {{ $t('uploadedFiles') }}</div>
+	<div class="title"><fa :icon="faCloud"/> {{ $t('files') }}</div>
 	<div class="content">
 		<x-pagination :pagination="drivePagination" #default="{items}" class="drive" ref="drive">
 			<div class="file" v-for="(file, i) in items" :key="file.id" :data-index="i" @click="selected = file" :class="{ selected: selected && (selected.id === file.id) }">

@@ -1,6 +1,6 @@
 <template>
 <section class="_section dp-instance-users">
-	<div class="title">{{ $t('users') }}</div>
+	<div class="title"><fa :icon="faUsers"/> {{ $t('users') }}</div>
 	<div class="content">
 		<x-pagination :pagination="pagination" #default="{items}" class="users" ref="users">
 			<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i">
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
 import XButton from '../components/ui/button.vue';
 import XPagination from '../components/ui/pagination.vue';
 
@@ -37,7 +37,7 @@ export default Vue.extend({
 				limit: 10,
 				offsetMode: true
 			},
-			faPlus
+			faPlus, faUsers
 		}
 	},
 

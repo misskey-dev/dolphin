@@ -6,7 +6,9 @@
 	<x-reaction-setting/>
 	<x-import-export/>
 	<x-drive/>
-	<x-button @click="$root.signout()">{{ $t('logout') }}</x-button>
+	<x-general/>
+
+	<x-button @click="$root.signout()" primary class="logout">{{ $t('logout') }}</x-button>
 </div>
 </template>
 
@@ -16,6 +18,7 @@ import XProfileSetting from './settings.profile.vue';
 import XPrivacySetting from './settings.privacy.vue';
 import XImportExport from './settings.import-export.vue';
 import XDrive from './settings.drive.vue';
+import XGeneral from './settings.general.vue';
 import XReactionSetting from './settings.reaction.vue';
 import XButton from '../components/ui/button.vue';
 
@@ -25,6 +28,7 @@ export default Vue.extend({
 		XPrivacySetting,
 		XImportExport,
 		XDrive,
+		XGeneral,
 		XReactionSetting,
 		XButton,
 	},
@@ -43,6 +47,10 @@ export default Vue.extend({
 		-webkit-backdrop-filter: blur(16px);
 		backdrop-filter: blur(16px);
 		border-radius: 6px;
+	}
+
+	> .logout {
+		margin: 8px auto;
 	}
 }
 </style>
