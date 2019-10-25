@@ -17,7 +17,7 @@
 				<span class="followed" v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed">{{ $t('followsYou') }}</span>
 				<div class="actions" v-if="$store.getters.isSignedIn">
 					<button @click="menu" class="menu _button" ref="menu"><fa :icon="faEllipsisH"/></button>
-					<dp-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
+					<x-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
 				</div>
 			</div>
 			<dp-avatar class="avatar" :user="user" :disable-preview="true"/>
@@ -77,6 +77,7 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import XUserTimeline from './index.timeline.vue';
 import XUserMenu from '../../components/user-menu.vue';
 import XNote from '../../components/note.vue';
+import XFollowButton from '../../components/follow-button.vue';
 import Progress from '../../scripts/loading';
 import parseAcct from '../../../misc/acct/parse';
 
@@ -84,6 +85,7 @@ export default Vue.extend({
 	components: {
 		XUserTimeline,
 		XNote,
+		XFollowButton,
 	},
 
 	data() {

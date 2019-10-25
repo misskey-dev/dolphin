@@ -45,7 +45,7 @@
 						<x-media-list :media-list="appearNote.files"/>
 					</div>
 					<x-poll v-if="appearNote.poll" :note="appearNote" ref="pollViewer"/>
-					<dp-url-preview v-for="url in urls" :url="url" :key="url" :compact="true"/>
+					<x-url-preview v-for="url in urls" :url="url" :key="url" :compact="true" class="url-preview"/>
 					<div class="renote" v-if="appearNote.renote"><x-note-preview :note="appearNote.renote"/></div>
 				</div>
 			</div>
@@ -91,6 +91,7 @@ import XReactionsViewer from './reactions-viewer.vue';
 import XMediaList from './media-list.vue';
 import XCwButton from './cw-button.vue';
 import XPoll from './poll.vue';
+import XUrlPreview from './url-preview.vue';
 import noteMixin from '../scripts/note-mixin';
 import noteSubscriber from '../scripts/note-subscriber';
 
@@ -105,6 +106,7 @@ export default Vue.extend({
 		XMediaList,
 		XCwButton,
 		XPoll,
+		XUrlPreview,
 	},
 
 	mixins: [
@@ -325,7 +327,7 @@ export default Vue.extend({
 						}
 					}
 
-					.dp-url-preview {
+					> .url-preview {
 						margin-top: 8px;
 					}
 

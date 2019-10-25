@@ -10,7 +10,7 @@
 			<div class="description" v-if="user.description" :title="user.description">
 				<mfm :text="user.description" :is-note="false" :author="user" :i="$store.state.i" :custom-emojis="user.emojis" :plain="true" :nowrap="true"/>
 			</div>
-			<dp-follow-button class="koudoku-button" v-if="$store.getters.isSignedIn && user.id != $store.state.i.id" :user="user" mini/>
+			<x-follow-button class="koudoku-button" v-if="$store.getters.isSignedIn && user.id != $store.state.i.id" :user="user" mini/>
 		</div>
 	</div>
 </x-pagination>
@@ -20,6 +20,7 @@
 import Vue from 'vue';
 import parseAcct from '../../../misc/acct/parse';
 import i18n from '../../i18n';
+import XFollowButton from '../../components/follow-button.vue';
 import XPagination from '../../components/ui/pagination.vue';
 
 export default Vue.extend({
@@ -27,6 +28,7 @@ export default Vue.extend({
 
 	components: {
 		XPagination,
+		XFollowButton,
 	},
 
 	props: {
