@@ -34,7 +34,7 @@ export default Vue.extend({
 			let left;
 			let top;
 
-			if (window.innerWidth < 576) {
+			if (this.$root.isMobile) {
 				const x = rect.left + window.pageXOffset + (this.source.offsetWidth / 2);
 				const y = rect.top + window.pageYOffset + (this.source.offsetHeight / 2);
 				left = (x - (width / 2));

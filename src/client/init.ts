@@ -131,6 +131,7 @@ os.init(async () => {
 		data() {
 			return {
 				stream: os.stream,
+				isMobile: isMobile
 			};
 		},
 		methods: {
