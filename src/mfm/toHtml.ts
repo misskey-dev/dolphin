@@ -24,12 +24,6 @@ export function toHtml(tokens: MfmForest | null, mentionedRemoteUsers: IMentione
 			return el;
 		},
 
-		big(token) {
-			const el = doc.createElement('strong');
-			appendChildren(token.children, el);
-			return el;
-		},
-
 		small(token) {
 			const el = doc.createElement('small');
 			appendChildren(token.children, el);
@@ -48,44 +42,6 @@ export function toHtml(tokens: MfmForest | null, mentionedRemoteUsers: IMentione
 			return el;
 		},
 
-		motion(token) {
-			const el = doc.createElement('i');
-			appendChildren(token.children, el);
-			return el;
-		},
-
-		spin(token) {
-			const el = doc.createElement('i');
-			appendChildren(token.children, el);
-			return el;
-		},
-
-		jump(token) {
-			const el = doc.createElement('i');
-			appendChildren(token.children, el);
-			return el;
-		},
-
-		flip(token) {
-			const el = doc.createElement('span');
-			appendChildren(token.children, el);
-			return el;
-		},
-
-		blockCode(token) {
-			const pre = doc.createElement('pre');
-			const inner = doc.createElement('code');
-			inner.innerHTML = token.node.props.code;
-			pre.appendChild(inner);
-			return pre;
-		},
-
-		center(token) {
-			const el = doc.createElement('div');
-			appendChildren(token.children, el);
-			return el;
-		},
-
 		emoji(token) {
 			return doc.createTextNode(token.node.props.emoji ? token.node.props.emoji : `:${token.node.props.name}:`);
 		},
@@ -96,24 +52,6 @@ export function toHtml(tokens: MfmForest | null, mentionedRemoteUsers: IMentione
 			a.textContent = `#${token.node.props.hashtag}`;
 			a.setAttribute('rel', 'tag');
 			return a;
-		},
-
-		inlineCode(token) {
-			const el = doc.createElement('code');
-			el.textContent = token.node.props.code;
-			return el;
-		},
-
-		mathInline(token) {
-			const el = doc.createElement('code');
-			el.textContent = token.node.props.formula;
-			return el;
-		},
-
-		mathBlock(token) {
-			const el = doc.createElement('code');
-			el.textContent = token.node.props.formula;
-			return el;
 		},
 
 		link(token) {
@@ -149,12 +87,6 @@ export function toHtml(tokens: MfmForest | null, mentionedRemoteUsers: IMentione
 			return el;
 		},
 
-		title(token) {
-			const el = doc.createElement('h1');
-			appendChildren(token.children, el);
-			return el;
-		},
-
 		text(token) {
 			const el = doc.createElement('span');
 			const nodes = (token.node.props.text as string).split(/\r\n|\r|\n/).map(x => doc.createTextNode(x) as Node);
@@ -172,13 +104,6 @@ export function toHtml(tokens: MfmForest | null, mentionedRemoteUsers: IMentione
 			a.textContent = token.node.props.url;
 			return a;
 		},
-
-		search(token) {
-			const a = doc.createElement('a');
-			a.href = `https://www.google.com/?#q=${token.node.props.query}`;
-			a.textContent = token.node.props.content;
-			return a;
-		}
 	};
 
 	appendChildren(tokens, doc.body);
