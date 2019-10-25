@@ -2,11 +2,9 @@
 <x-popup :source="source" ref="popup" @closed="() => { $emit('closed'); destroyDom(); }" v-hotkey.global="keymap">
 	<div class="rdfaahpb">
 		<div class="buttons" ref="buttons" :class="{ showFocus }">
-			<button class="_button" v-for="(reaction, i) in $store.state.settings.reactions" :key="reaction" @click="react(reaction)" @mouseover="onMouseover" @mouseout="onMouseout" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction"><x-reaction-icon :reaction="reaction"/></button>
+			<button class="_button" v-for="(reaction, i) in $store.state.settings.reactions" :key="reaction" @click="react(reaction)" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction"><x-reaction-icon :reaction="reaction"/></button>
 		</div>
-		<div class="text">
-			<input v-model="text" :placeholder="$t('enterEmoji')" @keyup.enter="reactText" @input="tryReactText" v-autocomplete="{ model: 'text' }">
-		</div>
+		<input class="text" v-model="text" :placeholder="$t('enterEmoji')" @keyup.enter="reactText" @input="tryReactText" v-autocomplete="{ model: 'text' }">
 	</div>
 </x-popup>
 </template>
@@ -55,7 +53,6 @@ export default Vue.extend({
 
 	data() {
 		return {
-			title: this.$t('choose-reaction'),
 			text: null,
 			focus: null
 		};
@@ -87,10 +84,6 @@ export default Vue.extend({
 	watch: {
 		focus(i) {
 			this.$refs.buttons.children[i].focus();
-
-			if (this.showFocus) {
-				this.title = this.$refs.buttons.children[i].title;
-			}
 		}
 	},
 
@@ -121,14 +114,6 @@ export default Vue.extend({
 			this.reactText();
 		},
 
-		onMouseover(e) {
-			this.title = e.target.title;
-		},
-
-		onMouseout(e) {
-			this.title = this.$t('choose-reaction');
-		},
-
 		focusUp() {
 			this.focus = this.focus == 0 ? 9 : this.focus < 5 ? (this.focus + 4) : (this.focus - 5);
 		},
@@ -156,22 +141,16 @@ export default Vue.extend({
 @import '../theme';
 
 .rdfaahpb {
-	> div {
-		width: 280px;
-
-		> button {
-			width: 50px;
-			height: 50px;
-			font-size: 28px;
-			border-radius: 4px;
-		}
-	}
-
 	> .buttons {
-		padding: 4px 4px 8px 4px;
-		width: 216px;
+		padding: 4px 4px 0 4px;
+		width: 208px;
 		box-sizing: border-box;
 		text-align: center;
+
+		@media (max-width: 1025px) {
+			padding: 8px 8px 0 8px;
+			width: 256px;
+		}
 
 		&.showFocus {
 			> button:focus {
@@ -198,6 +177,12 @@ export default Vue.extend({
 			font-size: 24px;
 			border-radius: 2px;
 
+			@media (max-width: 1025px) {
+				width: 48px;
+				height: 48px;
+				font-size: 26px;
+			}
+
 			> * {
 				height: 1em;
 			}
@@ -214,32 +199,18 @@ export default Vue.extend({
 	}
 
 	> .text {
-		width: 216px;
-		padding: 0 8px 8px 8px;
+		width: 208px;
+		padding: 8px;
+		margin: 0 0 4px 0;
 		box-sizing: border-box;
+		text-align: center;
+		font-size: 16px;
+		outline: none;
+		border: none;
 
-		> input {
-			width: 100%;
-			padding: 10px;
-			margin: 0;
-			text-align: center;
-			font-size: 16px;
-			color: var(--desktopPostFormTextareaFg);
-			background: var(--desktopPostFormTextareaBg);
-			outline: none;
-			border: solid 1px var(--primaryAlpha01);
-			border-radius: 4px;
-			transition: border-color .2s ease;
-
-			&:hover {
-				border-color: var(--primaryAlpha02);
-				transition: border-color .1s ease;
-			}
-
-			&:focus {
-				border-color: var(--primaryAlpha05);
-				transition: border-color 0s ease;
-			}
+		@media (max-width: 1025px) {
+			width: 256px;
+			margin: 4px 0 8px 0;
 		}
 	}
 }
