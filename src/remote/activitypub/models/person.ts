@@ -311,7 +311,6 @@ export async function updatePerson(uri: string, resolver?: Resolver | null, hint
 		name: person.name,
 		tags,
 		isBot: object.type == 'Service',
-		isCat: (person as any).isCat === true,
 		isLocked: !!person.manuallyApprovesFollowers,
 	} as Partial<User>;
 
