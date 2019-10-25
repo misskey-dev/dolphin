@@ -22,8 +22,6 @@ const nodeinfo2 = async () => {
 	const [
 		{
 			description,
-			enableRecaptcha,
-			enableServiceWorker
 		},
 		// total,
 		// activeHalfyear,
@@ -63,9 +61,9 @@ const nodeinfo2 = async () => {
 				name: config.maintainerName,
 				email: config.maintainerEmail
 			},
-			enableRecaptcha,
+			enableRecaptcha: config.recaptchaSiteKey && config.recaptchaSecretKey,
 			maxNoteTextLength: 500,
-			enableServiceWorker
+			enableServiceWorker: config.swPublicKey && config.swPrivateKey
 		}
 	};
 };

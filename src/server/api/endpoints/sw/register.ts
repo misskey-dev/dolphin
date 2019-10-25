@@ -1,8 +1,8 @@
 import $ from 'cafy';
 import define from '../../define';
-import { fetchMeta } from '../../../../misc/fetch-meta';
 import { genId } from '../../../../misc/gen-id';
 import { SwSubscriptions } from '../../../../models';
+import config from '../../../../config';
 
 export const meta = {
 	tags: ['account'],
@@ -33,12 +33,10 @@ export default define(meta, async (ps, user) => {
 		publickey: ps.publickey,
 	});
 
-	const instance = await fetchMeta(true);
-
 	if (exist != null) {
 		return {
 			state: 'already-subscribed',
-			key: instance.swPublicKey
+			key: config.swPublicKey
 		};
 	}
 
@@ -53,6 +51,6 @@ export default define(meta, async (ps, user) => {
 
 	return {
 		state: 'subscribed',
-		key: instance.swPublicKey
+		key: config.swPublicKey
 	};
 });

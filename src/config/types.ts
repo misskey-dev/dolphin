@@ -5,6 +5,8 @@ export type Source = {
 	name?: string;
 	maintainerName?: string;
 	maintainerEmail?: string;
+	swPublicKey?: string;
+	swPrivateKey?: string;
 	url: string;
 	port: number;
 	https?: { [x: string]: string };
@@ -40,6 +42,9 @@ export type Source = {
 
 	proxy?: string;
 	proxySmtp?: string;
+	summalyProxy?: string;
+	recaptchaSiteKey?: string;
+	recaptchaSecretKey?: string;
 
 	accesslog?: string;
 

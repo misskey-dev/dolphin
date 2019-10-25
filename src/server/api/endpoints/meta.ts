@@ -80,35 +80,29 @@ export default define(meta, async (ps, me) => {
 
 		driveCapacityPerRemoteUserMb: instance.remoteDriveCapacityMb,
 		cacheRemoteFiles: instance.cacheRemoteFiles,
-		enableRecaptcha: instance.enableRecaptcha,
-		recaptchaSiteKey: instance.recaptchaSiteKey,
-		swPublickey: instance.swPublicKey,
+		recaptchaSiteKey: config.recaptchaSiteKey,
+		swPublickey: config.swPublicKey,
 		emojis: emojis.map(e => ({
 			id: e.id,
 			aliases: e.aliases,
 			name: e.name,
 			url: e.url,
 		})),
-		enableServiceWorker: instance.enableServiceWorker,
 		requireSetup: (await Users.count({})) === 0
 	};
 
 	if (ps.detail) {
 		response.features = {
 			elasticsearch: false,
-			recaptcha: instance.enableRecaptcha,
+			recaptcha: config.recaptchaSiteKey && config.recaptchaSecretKey,
 			objectStorage: config.drive.storage !== 'fs',
-			serviceWorker: instance.enableServiceWorker,
+			serviceWorker: config.swPublicKey && config.swPrivateKey,
 		};
 	}
 
 	if (me) {
-		response.useStarForReactionFallback = 'like';
 		response.blockedHosts = instance.blockedHosts;
-		response.recaptchaSecretKey = instance.recaptchaSecretKey;
 		response.proxyAccount = instance.proxyAccount;
-		response.summalyProxy = instance.summalyProxy;
-		response.swPrivateKey = instance.swPrivateKey;
 	}
 
 	return response;

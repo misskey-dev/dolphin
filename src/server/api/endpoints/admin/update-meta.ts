@@ -85,59 +85,10 @@ export const meta = {
 			}
 		},
 
-		enableRecaptcha: {
-			validator: $.optional.bool,
-			desc: {
-				'ja-JP': 'reCAPTCHAを使用するか否か'
-			}
-		},
-
-		recaptchaSiteKey: {
-			validator: $.optional.nullable.str,
-			desc: {
-				'ja-JP': 'reCAPTCHA site key'
-			}
-		},
-
-		recaptchaSecretKey: {
-			validator: $.optional.nullable.str,
-			desc: {
-				'ja-JP': 'reCAPTCHA secret key'
-			}
-		},
-
 		proxyAccount: {
 			validator: $.optional.nullable.str,
 			desc: {
 				'ja-JP': 'プロキシアカウントのユーザー名'
-			}
-		},
-
-		summalyProxy: {
-			validator: $.optional.nullable.str,
-			desc: {
-				'ja-JP': 'summalyプロキシURL'
-			}
-		},
-
-		enableServiceWorker: {
-			validator: $.optional.bool,
-			desc: {
-				'ja-JP': 'ServiceWorkerを有効にするか否か'
-			}
-		},
-
-		swPublicKey: {
-			validator: $.optional.nullable.str,
-			desc: {
-				'ja-JP': 'ServiceWorkerのVAPIDキーペアの公開鍵'
-			}
-		},
-
-		swPrivateKey: {
-			validator: $.optional.nullable.str,
-			desc: {
-				'ja-JP': 'ServiceWorkerのVAPIDキーペアの秘密鍵'
 			}
 		},
 	}
@@ -162,36 +113,8 @@ export default define(meta, async (ps, me) => {
 		set.cacheRemoteFiles = ps.cacheRemoteFiles;
 	}
 
-	if (ps.enableRecaptcha !== undefined) {
-		set.enableRecaptcha = ps.enableRecaptcha;
-	}
-
-	if (ps.recaptchaSiteKey !== undefined) {
-		set.recaptchaSiteKey = ps.recaptchaSiteKey;
-	}
-
-	if (ps.recaptchaSecretKey !== undefined) {
-		set.recaptchaSecretKey = ps.recaptchaSecretKey;
-	}
-
 	if (ps.proxyAccount !== undefined) {
 		set.proxyAccount = ps.proxyAccount;
-	}
-
-	if (ps.summalyProxy !== undefined) {
-		set.summalyProxy = ps.summalyProxy;
-	}
-
-	if (ps.enableServiceWorker !== undefined) {
-		set.enableServiceWorker = ps.enableServiceWorker;
-	}
-
-	if (ps.swPublicKey !== undefined) {
-		set.swPublicKey = ps.swPublicKey;
-	}
-
-	if (ps.swPrivateKey !== undefined) {
-		set.swPrivateKey = ps.swPrivateKey;
 	}
 
 	await getConnection().transaction(async transactionalEntityManager => {

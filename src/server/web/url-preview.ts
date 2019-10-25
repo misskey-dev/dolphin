@@ -1,7 +1,6 @@
 import * as Koa from 'koa';
 import * as request from 'request-promise-native';
 import summaly from 'summaly';
-import { fetchMeta } from '../../misc/fetch-meta';
 import Logger from '../../services/logger';
 import config from '../../config';
 import { query } from '../../prelude/url';
@@ -9,15 +8,13 @@ import { query } from '../../prelude/url';
 const logger = new Logger('url-preview');
 
 module.exports = async (ctx: Koa.BaseContext) => {
-	const meta = await fetchMeta();
-
-	logger.info(meta.summalyProxy
+	logger.info(config.summalyProxy
 		? `(Proxy) Getting preview of ${ctx.query.url}@${ctx.query.lang} ...`
 		: `Getting preview of ${ctx.query.url}@${ctx.query.lang} ...`);
 
 	try {
-		const summary = meta.summalyProxy ? await request.get({
-			url: meta.summalyProxy,
+		const summary = config.summalyProxy ? await request.get({
+			url: config.summalyProxy,
 			qs: {
 				url: ctx.query.url,
 				lang: ctx.query.lang || 'ja-JP'

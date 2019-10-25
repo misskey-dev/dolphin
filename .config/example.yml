@@ -144,6 +144,18 @@ drive:
 #  accessKey: XXX
 #  secretKey: YYY
 
+#   ┌────────────────┐
+#───┘ Service Worker └───────────────────────────────────────────
+
+# If you want to enable ServiceWorker, you need to generate VAPID keys:
+# Unless you have set your global node_modules location elsewhere,
+# you need to run this in root.
+# > npm install web-push -g
+# > web-push generate-vapid-keys
+
+#swPublicKey: 
+#swPrivateKey: 
+
 #   ┌───────────────┐
 #───┘ ID generation └───────────────────────────────────────────
 
@@ -190,3 +202,6 @@ id: 'aid'
 #proxySmtp: http://127.0.0.1:3128   # use HTTP/1.1 CONNECT
 #proxySmtp: socks4://127.0.0.1:1080 # use SOCKS4
 #proxySmtp: socks5://127.0.0.1:1080 # use SOCKS5
+
+# Proxy for URL preview
+#summalyProxy: http://example.com
