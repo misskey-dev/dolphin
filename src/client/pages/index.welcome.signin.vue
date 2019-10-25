@@ -86,7 +86,7 @@ export default Vue.extend({
 			}).catch(() => {
 				this.$root.dialog({
 					type: 'error',
-					text: this.$t('login-failed')
+					text: this.$t('loginFailed')
 				});
 				this.signing = false;
 			});

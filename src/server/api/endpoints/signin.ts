@@ -35,7 +35,10 @@ export default define(meta, async (ps) => {
 	const same = await bcrypt.compare(ps.password, profile.password!);
 
 	if (same) {
-		return { token: user.token };
+		return {
+			id: user.id,
+			token: user.token
+		};
 	} else {
 		throw new Error('incorrect password');
 	}

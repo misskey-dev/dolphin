@@ -11,10 +11,23 @@
 	</main>
 	<transition name="zoom-in-bottom">
 		<nav v-if="navOpen" ref="nav">
-			<template v-if="!showLists">
-				<router-link :to="`/@${ $store.state.i.username }`"><dp-avatar :user="$store.state.i" class="avatar"/><dp-user-name :user="$store.state.i"/></router-link>
+			<template v-if="showAccounts">
+				<button class="_button" v-for="account in accounts" :key="account.id" @click="switchAccount(account)"><dp-avatar :user="account" class="avatar"/><dp-user-name :user="account"/></button>
+				<div v-if="accounts.length > 0"></div>
+				<button class="_button" @click="addAcount()"><fa :icon="faPlus" fixed-width/>{{ $t('addAcount') }}</button>
+				<router-link :to="`/@${ $store.state.i.username }`"><dp-avatar :user="$store.state.i" class="avatar"/>{{ $t('profile') }}</router-link>
+			</template>
+			<template v-else-if="showLists">
+				<span v-if="lists.length === 0" style="opacity: 0.5; pointer-events: none;">{{ $t('noLists') }}</span>
+				<router-link v-for="list in lists" :to="`/lists/${ list.id }`" :key="list.id">{{ list.name }}</router-link>
 				<div></div>
-				<button class="_button" @click="list()"><fa :icon="faListUl" fixed-width/>{{ $t('lists') }}</button>
+				<button class="_button" @click="createList()"><fa :icon="faPlus" fixed-width/>{{ $t('createList') }}</button>
+				<router-link to="/manage-lists"><fa :icon="faCog" fixed-width/>{{ $t('manageLists') }}</router-link>
+			</template>
+			<template v-else>
+				<button class="_button" @click="showAccounts = true"><dp-avatar :user="$store.state.i" class="avatar"/><dp-user-name :user="$store.state.i"/></button>
+				<div></div>
+				<button class="_button" @click="showLists = true"><fa :icon="faListUl" fixed-width/>{{ $t('lists') }}</button>
 				<router-link to="/messages"><fa :icon="faEnvelope" fixed-width/>{{ $t('messages') }}<i v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa :icon="faCircle"/></i></router-link>
 				<router-link to="/favorites"><fa :icon="faStar" fixed-width/>{{ $t('favorites') }}</router-link>
 				<router-link to="/follow-requests" v-if="$store.state.i.isLocked"><fa :icon="faUserClock" fixed-width/>{{ $t('followRequests') }}<i v-if="$store.state.i.pendingReceivedFollowRequestsCount"><fa :icon="faCircle"/></i></router-link>
@@ -23,13 +36,6 @@
 				<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
 				<div></div>
 				<button class="_button" @click="search()"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
-			</template>
-			<template v-else>
-				<span v-if="lists.length === 0" style="opacity: 0.5; pointer-events: none;">{{ $t('noLists') }}</span>
-				<router-link v-for="list in lists" :to="`/lists/${ list.id }`" :key="list.id">{{ list.name }}</router-link>
-				<div></div>
-				<button class="_button" @click="createList()"><fa :icon="faPlus" fixed-width/>{{ $t('createList') }}</button>
-				<router-link to="/manage-lists"><fa :icon="faCog" fixed-width/>{{ $t('manageLists') }}</router-link>
 			</template>
 		</nav>
 	</transition>
@@ -67,6 +73,8 @@ export default Vue.extend({
 			navOpen: false,
 			notificationsOpen: false,
 			showLists: false,
+			showAccounts: false,
+			accounts: [],
 			lists: [],
 			connection: null,
 			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faEnvelope, faListUl, faPlus, faUserClock
@@ -89,7 +97,14 @@ export default Vue.extend({
 		},
 
 		navOpen(opened) {
+			this.showAccounts = false;
 			this.showLists = false;
+		},
+
+		async showAccounts() {
+			if (this.showAccounts) {
+				this.accounts = (await this.$root.api('users/show', { userIds: this.$store.state.device.accounts.map(x => x.id) })).filter(x => x.id !== this.$store.state.i.id);
+			}
 		},
 
 		async showLists() {
@@ -128,6 +143,50 @@ export default Vue.extend({
 			});
 		},
 
+		async addAcount() {
+			this.navOpen = false;
+
+			const { canceled: canceled1, result: username } = await this.$root.dialog({
+				title: this.$t('username'),
+				input: true
+			});
+			if (canceled1) return;
+
+			const { canceled: canceled2, result: password } = await this.$root.dialog({
+				title: this.$t('password'),
+				input: { type: 'password' }
+			});
+			if (canceled2) return;
+
+			this.$root.api('signin', {
+				username: username,
+				password: password,
+			}).then(res => {
+				this.$root.dialog({
+					type: 'success',
+					splash: true
+				});
+				this.$store.commit('device/set', {
+					key: 'accounts',
+					value: this.$store.state.device.accounts.concat([{ id: res.id, token: res.token }])
+				});
+			}).catch(() => {
+				this.$root.dialog({
+					type: 'error',
+					text: this.$t('loginFailed')
+				});
+			});
+		},
+
+		async switchAccount(account) {
+			this.navOpen = false;
+			this.$store.dispatch('switchAccount', {
+				...account,
+				token: this.$store.state.device.accounts.find(x => x.id === account.id).token
+			});
+			location.reload();
+		},
+
 		async createList() {
 			this.navOpen = false;
 			const { canceled, result: name } = await this.$root.dialog({
@@ -140,10 +199,6 @@ export default Vue.extend({
 				type: 'success',
 				splash: true
 			});
-		},
-
-		list() {
-			this.showLists = true;
 		},
 
 		onNotification(notification) {

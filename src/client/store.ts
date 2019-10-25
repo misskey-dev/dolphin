@@ -20,6 +20,7 @@ const defaultDeviceSettings = {
 	loadRawImages: false,
 	alwaysShowNsfw: false,
 	useOsDefaultEmojis: false,
+	accounts: [],
 };
 
 export default (os: MiOS) => new Vuex.Store({
@@ -30,7 +31,6 @@ export default (os: MiOS) => new Vuex.Store({
 	state: {
 		i: null,
 		indicate: false,
-		uiHeaderHeight: 0,
 		behindNotes: []
 	},
 
@@ -68,12 +68,23 @@ export default (os: MiOS) => new Vuex.Store({
 		login(ctx, i) {
 			ctx.commit('updateI', i);
 			ctx.dispatch('settings/merge', i.clientData);
+			if (!ctx.state.device.accounts.some(x => x.id === i.id)) {
+				ctx.commit('device/set', {
+					key: 'accounts',
+					value: ctx.state.device.accounts.concat([{ id: i.id, token: localStorage.getItem('i') }])
+				});
+			}
 		},
 
 		logout(ctx) {
 			ctx.commit('updateI', null);
-			document.cookie = `i=; max-age=0; domain=${document.location.hostname}`;
 			localStorage.removeItem('i');
+		},
+
+		switchAccount(ctx, i) {
+			ctx.commit('updateI', i);
+			ctx.dispatch('settings/merge', i.clientData);
+			localStorage.setItem('i', i.token);
 		},
 
 		mergeMe(ctx, me) {

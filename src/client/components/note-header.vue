@@ -10,9 +10,9 @@
 			<dp-time :time="note.createdAt"/>
 		</router-link>
 		<span class="visibility" v-if="note.visibility != 'public'">
-			<fa v-if="note.visibility == 'home'" icon="home"/>
-			<fa v-if="note.visibility == 'followers'" icon="unlock"/>
-			<fa v-if="note.visibility == 'specified'" icon="envelope"/>
+			<fa v-if="note.visibility == 'home'" :icon="faHome"/>
+			<fa v-if="note.visibility == 'followers'" :icon="faUnlock"/>
+			<fa v-if="note.visibility == 'specified'" :icon="faEnvelope"/>
 		</span>
 	</div>
 </header>
@@ -20,6 +20,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { faHome, faUnlock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	props: {
@@ -27,6 +28,12 @@ export default Vue.extend({
 			type: Object,
 			required: true
 		},
+	},
+
+	data() {
+		return {
+			faHome, faUnlock, faEnvelope
+		};
 	}
 });
 </script>

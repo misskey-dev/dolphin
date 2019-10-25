@@ -123,6 +123,8 @@ cacheRemoteFilesDescription: "この設定を無効にすると、リモート�
 remoteFilesCacheCapacityPerAccount: "アカウントごとのファイルキャッシュ容量"
 files: "ファイル"
 flagAsBot: "Botとして設定"
+addAcount: "アカウント追加"
+loginFailed: "ログインに失敗しました"
 
 _cw:
   hide: "隠す"
