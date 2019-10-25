@@ -23,6 +23,12 @@ import XReactionSetting from './settings.reaction.vue';
 import XButton from '../components/ui/button.vue';
 
 export default Vue.extend({
+	metaInfo() {
+		return {
+			title: this.$t('settings')
+		};
+	},
+
 	components: {
 		XProfileSetting,
 		XPrivacySetting,

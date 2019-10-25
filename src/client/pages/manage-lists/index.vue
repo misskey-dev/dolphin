@@ -11,6 +11,12 @@ import Vue from 'vue';
 import XPagination from '../../components/ui/pagination.vue';
 
 export default Vue.extend({
+	metaInfo() {
+		return {
+			title: this.$t('manageLists'),
+		};
+	},
+
 	components: {
 		XPagination
 	},

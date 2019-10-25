@@ -14,6 +14,12 @@ import XEmojis from './instance.emojis.vue';
 import XUsers from './instance.users.vue';
 
 export default Vue.extend({
+	metaInfo() {
+		return {
+			title: this.$t('instance')
+		};
+	},
+
 	components: {
 		XEmojis,
 		XUsers,

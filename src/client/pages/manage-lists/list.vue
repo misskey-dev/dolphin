@@ -36,6 +36,12 @@ import XButton from '../../components/ui/button.vue';
 export default Vue.extend({
 	i18n,
 
+	metaInfo() {
+		return {
+			title: this.list ? `${this.list.name} | ${this.$t('manageLists')}` : this.$t('manageLists')
+		};
+	},
+
 	components: {
 		XButton
 	},

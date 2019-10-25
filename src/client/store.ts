@@ -3,7 +3,6 @@ import createPersistedState from 'vuex-persistedstate';
 import * as nestedProperty from 'nested-property';
 
 import MiOS from './mios';
-import getNoteSummary from '../misc/get-note-summary';
 
 const defaultSettings = {
 	keepCw: false,
@@ -31,8 +30,6 @@ export default (os: MiOS) => new Vuex.Store({
 
 	state: {
 		i: null,
-		indicate: false,
-		behindNotes: []
 	},
 
 	getters: {
@@ -46,22 +43,6 @@ export default (os: MiOS) => new Vuex.Store({
 
 		updateIKeyValue(state, x) {
 			state.i[x.key] = x.value;
-		},
-
-		indicate(state, x) {
-			state.indicate = x;
-		},
-
-		pushBehindNote(state, note) {
-			if (note.userId === state.i.id) return;
-			if (state.behindNotes.some(n => n.id === note.id)) return;
-			state.behindNotes.push(note);
-			document.title = `(${state.behindNotes.length}) ${getNoteSummary(note)}`;
-		},
-
-		clearBehindNotes(state) {
-			state.behindNotes = [];
-			document.title = os.instanceName;
 		},
 	},
 

@@ -88,6 +88,12 @@ export default Vue.extend({
 		XFollowButton,
 	},
 
+	metaInfo() {
+		return {
+			title: this.user ? Vue.filter('userName')(this.user) : null
+		};
+	},
+
 	data() {
 		return {
 			user: null,
@@ -118,7 +124,6 @@ export default Vue.extend({
 			Progress.start();
 			this.$root.api('users/show', parseAcct(this.$route.params.user)).then(user => {
 				this.user = user;
-				document.title = `${Vue.filter('userName')(this.user)} | ${this.$root.instanceName}`;
 			}).catch(e => {
 				this.error = e;
 			}).finally(() => {

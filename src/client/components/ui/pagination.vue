@@ -18,9 +18,7 @@ import paging from '../../scripts/paging';
 
 export default Vue.extend({
 	mixins: [
-		paging({
-			captureWindowScroll: false,
-		}),
+		paging({}),
 	],
 
 	components: {

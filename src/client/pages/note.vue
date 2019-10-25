@@ -32,9 +32,6 @@ export default Vue.extend({
 	created() {
 		this.fetch();
 	},
-	mounted() {
-		document.title = this.$root.instanceName;
-	},
 	methods: {
 		fetch() {
 			Progress.start();

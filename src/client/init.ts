@@ -4,6 +4,7 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
+import VueMeta from 'vue-meta';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import i18n from './i18n';
@@ -17,6 +18,7 @@ import { router } from './router';
 
 Vue.use(Vuex);
 Vue.use(VueHotkey);
+Vue.use(VueMeta);
 Vue.component('fa', FontAwesomeIcon);
 
 require('./directives');
@@ -113,20 +115,22 @@ const os = new MiOS();
 os.init(async () => {
 	if (os.store.state.settings.wallpaper) document.documentElement.style.backgroundImage = `url(${os.store.state.settings.wallpaper})`;
 
-	document.addEventListener('visibilitychange', () => {
-		if (!document.hidden) {
-			os.store.commit('clearBehindNotes');
+	if ('Notification' in window && os.store.getters.isSignedIn) {
+		// 許可を得ていなかったらリクエスト
+		if (Notification.permission === 'default') {
+			Notification.requestPermission();
 		}
-	}, false);
-
-	window.addEventListener('scroll', () => {
-		if (window.scrollY <= 8) {
-			os.store.commit('clearBehindNotes');
-		}
-	}, { passive: true });
+	}
 
 	const app = new Vue({
 		store: os.store,
+		metaInfo() {
+			const name = os.instanceName;
+			return {
+				title: null,
+				titleTemplate: title => title ? `${title} | ${name}` : name
+			}
+		},
 		data() {
 			return {
 				stream: os.stream,

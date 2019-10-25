@@ -27,6 +27,8 @@ import i18n from '../i18n';
 import paging from '../scripts/paging';
 import XNote from './note.vue';
 import XDateSeparator from './date-separator.vue';
+import getUserName from '../../misc/get-user-name';
+import getNoteSummary from '../../misc/get-note-summary';
 
 export default Vue.extend({
 	i18n,
@@ -37,20 +39,16 @@ export default Vue.extend({
 
 	mixins: [
 		paging({
-			captureWindowScroll: true,
-
-			onQueueChanged: (self, x) => {
-				if (x.length > 0) {
-					self.$store.commit('indicate', true);
-				} else {
-					self.$store.commit('indicate', false);
-				}
-			},
-
 			onPrepend: (self, note) => {
-				// タブが非表示またはスクロール位置が最上部ではないならタイトルで通知
-				if (document.hidden || !self.isScrollTop()) {
-					self.$store.commit('pushBehindNote', note);
+				// タブが非表示なら通知
+				if (document.hidden) {
+					if ('Notification' in window && Notification.permission === 'granted') {
+						new Notification(getUserName(note.user), {
+							body: getNoteSummary(note),
+							icon: note.user.avatarUrl,
+							tag: 'newNote'
+						});
+					}
 				}
 			},
 

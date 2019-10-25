@@ -25,6 +25,12 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import XPagination from '../components/ui/pagination.vue';
 
 export default Vue.extend({
+	metaInfo() {
+		return {
+			title: this.$t('followRequests')
+		};
+	},
+
 	components: {
 		XPagination
 	},
