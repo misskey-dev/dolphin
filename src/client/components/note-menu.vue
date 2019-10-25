@@ -5,7 +5,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { faStar, faLink, faThumbtack, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
-import { faCopy, faEye, faEyeSlash, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { faCopy, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import i18n from '../i18n';
 import { url } from '../config';
 import copyToClipboard from '../scripts/copy-to-clipboard';
@@ -27,14 +27,6 @@ export default Vue.extend({
 		items(): any[] {
 			if (this.$store.getters.isSignedIn) {
 				return [{
-					icon: 'at',
-					text: this.$t('mention'),
-					action: this.mention
-				}, null, {
-					icon: 'info-circle',
-					text: this.$t('detail'),
-					action: this.detail
-				}, {
 					icon: faCopy,
 					text: this.$t('copyContent'),
 					action: this.copyContent
@@ -44,7 +36,7 @@ export default Vue.extend({
 					action: this.copyLink
 				}, this.note.uri ? {
 					icon: faExternalLinkSquareAlt,
-					text: this.$t('remote'),
+					text: this.$t('showOnRemote'),
 					action: () => {
 						window.open(this.note.uri, '_blank');
 					}
@@ -71,24 +63,15 @@ export default Vue.extend({
 				...(this.note.userId == this.$store.state.i.id || this.$store.state.i.isAdmin ? [
 					null,
 					this.note.userId == this.$store.state.i.id ? {
-						icon: 'undo-alt',
-						text: this.$t('delete-and-edit'),
-						action: this.deleteAndEdit
-					} : undefined,
-					{
 						icon: faTrashAlt,
 						text: this.$t('delete'),
 						action: this.del
-					}]
+					} : undefined]
 					: []
 				)]
 				.filter(x => x !== undefined);
 			} else {
 				return [{
-					icon: 'info-circle',
-					text: this.$t('detail'),
-					action: this.detail
-				}, {
 					icon: faCopy,
 					text: this.$t('copyContent'),
 					action: this.copyContent
@@ -98,7 +81,7 @@ export default Vue.extend({
 					action: this.copyLink
 				}, this.note.uri ? {
 					icon: faExternalLinkSquareAlt,
-					text: this.$t('remote'),
+					text: this.$t('showOnRemote'),
 					action: () => {
 						window.open(this.note.uri, '_blank');
 					}
@@ -118,14 +101,6 @@ export default Vue.extend({
 	},
 
 	methods: {
-		mention() {
-			this.$post({ mention: this.note.user });
-		},
-
-		detail() {
-			this.$router.push(`/notes/${this.note.id}`);
-		},
-
 		copyContent() {
 			copyToClipboard(this.note.text);
 			this.$root.dialog({
@@ -173,25 +148,6 @@ export default Vue.extend({
 					noteId: this.note.id
 				}).then(() => {
 					this.destroyDom();
-				});
-			});
-		},
-
-		deleteAndEdit() {
-			this.$root.dialog({
-				type: 'warning',
-				text: this.$t('delete-and-edit-confirm'),
-				showCancelButton: true
-			}).then(({ canceled }) => {
-				if (canceled) return;
-				this.$root.api('notes/delete', {
-					noteId: this.note.id
-				}).then(() => {
-					this.destroyDom();
-				});
-				this.$post({
-					initialNote: this.note,
-					reply: this.note.reply,
 				});
 			});
 		},

@@ -125,6 +125,7 @@ files: "ファイル"
 flagAsBot: "Botとして設定"
 addAcount: "アカウント追加"
 loginFailed: "ログインに失敗しました"
+showOnRemote: "リモートで表示"
 
 _cw:
   hide: "隠す"
