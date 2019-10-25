@@ -98,6 +98,9 @@ export default Vue.extend({
 
 	> .users {
 		> .content {
+			max-height: 300px;
+			overflow: auto;
+			
 			> .users {
 				> .user {
 					display: flex;
