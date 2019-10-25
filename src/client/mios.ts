@@ -281,24 +281,21 @@ export default class MiOS extends EventEmitter {
 	 * @param data パラメータ
 	 */
 	@autobind
-	public api(endpoint: string, data: { [x: string]: any } = {}, silent = false): Promise<{ [x: string]: any }> {
-		if (!silent) {
-			if (++pending === 1) {
-				spinner = document.createElement('div');
-				spinner.setAttribute('id', 'wait');
-				document.body.appendChild(spinner);
-			}
+	public api(endpoint: string, data: { [x: string]: any } = {}, token?): Promise<{ [x: string]: any }> {
+		if (++pending === 1) {
+			spinner = document.createElement('div');
+			spinner.setAttribute('id', 'wait');
+			document.body.appendChild(spinner);
 		}
 
 		const onFinally = () => {
-			if (!silent) {
-				if (--pending === 0) spinner.parentNode.removeChild(spinner);
-			}
+			if (--pending === 0) spinner.parentNode.removeChild(spinner);
 		};
 
 		const promise = new Promise((resolve, reject) => {
 			// Append a credential
 			if (this.store.getters.isSignedIn) (data as any).i = this.store.state.i.token;
+			if (token) (data as any).i = token;
 
 			// Send request
 			fetch(endpoint.indexOf('://') > -1 ? endpoint : `${apiUrl}/${endpoint}`, {

@@ -180,11 +180,14 @@ export default Vue.extend({
 
 		async switchAccount(account) {
 			this.navOpen = false;
-			this.$store.dispatch('switchAccount', {
-				...account,
-				token: this.$store.state.device.accounts.find(x => x.id === account.id).token
+			const token = this.$store.state.device.accounts.find(x => x.id === account.id).token;
+			this.$root.api('i', {}, token).then(i => {
+				this.$store.dispatch('switchAccount', {
+					...i,
+					token: token
+				});
+				location.reload();
 			});
-			location.reload();
 		},
 
 		async createList() {
