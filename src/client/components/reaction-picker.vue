@@ -34,21 +34,11 @@ export default Vue.extend({
 			required: true
 		},
 
-		cb: {
-			required: false
-		},
-
 		showFocus: {
 			type: Boolean,
 			required: false,
 			default: false
 		},
-
-		animation: {
-			type: Boolean,
-			required: false,
-			default: true
-		}
 	},
 
 	data() {
@@ -97,7 +87,6 @@ export default Vue.extend({
 				noteId: this.note.id,
 				reaction: reaction
 			}).then(() => {
-				if (this.cb) this.cb();
 				this.$emit('closed');
 				this.destroyDom();
 			});
