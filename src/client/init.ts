@@ -199,17 +199,9 @@ os.init(async () => {
 				};
 				return p;
 			},
-			post(opts) {
-				const o = opts || {};
-				const vm = this.new(PostFormDialog, {
-					reply: o.reply,
-					mention: o.mention,
-					renote: o.renote,
-					initialText: o.initialText,
-					instant: o.instant,
-					initialNote: o.initialNote,
-				});
-				if (o.cb) vm.$once('closed', o.cb);
+			post(opts, cb) {
+				const vm = this.new(PostFormDialog, opts);
+				if (cb) vm.$once('closed', cb);
 				(vm as any).focus();
 			},
 		},

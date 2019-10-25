@@ -4,10 +4,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faExclamationCircle, faMicrophoneSlash, faAt, faListUl } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faListUl, faEye, faEyeSlash, faBan } from '@fortawesome/free-solid-svg-icons';
 import { faSnowflake, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import i18n from '../i18n';
 import XMenu from './menu.vue';
+import copyToClipboard from '../scripts/copy-to-clipboard';
+import { host } from '../config';
 
 export default Vue.extend({
 	i18n,
@@ -23,13 +25,13 @@ export default Vue.extend({
 			icon: faAt,
 			text: this.$t('copyUsername'),
 			action: () => {
-				
+				copyToClipboard(`@${this.user.username}@${this.user.host || host}`);
 			}
 		}, {
 			icon: faEnvelope,
 			text: this.$t('sendMessage'),
 			action: () => {
-				this.$post({ mention: this.user });
+				this.$root.post({ specified: this.user });
 			}
 		}, null, {
 			icon: faListUl,
@@ -39,22 +41,18 @@ export default Vue.extend({
 
 		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id) {
 			menu = menu.concat([null, {
-				icon: 'ban',
+				icon: this.user.isMuted ? faEye : faEyeSlash,
+				text: this.user.isMuted ? this.$t('unmute') : this.$t('mute'),
+				action: this.toggleMute
+			}, {
+				icon: faBan,
 				text: this.user.isBlocking ? this.$t('unblock') : this.$t('block'),
 				action: this.toggleBlock
-			}, null, {
-				icon: faExclamationCircle,
-				text: this.$t('report-abuse'),
-				action: this.reportAbuse
 			}]);
 		}
 
 		if (this.$store.getters.isSignedIn && this.$store.state.i.isAdmin) {
 			menu = menu.concat([null, {
-				icon: faMicrophoneSlash,
-				text: this.user.isSilenced ? this.$t('unsilence') : this.$t('silence'),
-				action: this.toggleSilence
-			}, {
 				icon: faSnowflake,
 				text: this.user.isSuspended ? this.$t('unsuspend') : this.$t('suspend'),
 				action: this.toggleSuspend
@@ -68,7 +66,7 @@ export default Vue.extend({
 
 	methods: {
 		async pushList() {
-			const t = this.$t('select-list'); // なぜか後で参照すると null になるので最初にメモリに確保しておく
+			const t = this.$t('selectList'); // なぜか後で参照すると null になるので最初にメモリに確保しておく
 			const lists = await this.$root.api('users/lists/list');
 			const { canceled, result: listId } = await this.$root.dialog({
 				type: null,
@@ -91,38 +89,44 @@ export default Vue.extend({
 			});
 		},
 
+		async toggleMute() {
+			this.$root.api(this.user.isMuted ? 'muting/delete' : 'muting/create', {
+				userId: this.user.id
+			}).then(() => {
+				this.user.isMuted = !this.user.isMuted;
+				this.$root.dialog({
+					type: 'success',
+					splash: true
+				});
+			}, () => {
+				this.$root.dialog({
+					type: 'error',
+					text: e
+				});
+			});
+		},
+
 		async toggleBlock() {
-			if (this.user.isBlocking) {
-				if (!await this.getConfirmed(this.$t('unblock-confirm'))) return;
+			if (!await this.getConfirmed(this.user.isBlocking ? this.$t('unblockConfirm') : this.$t('blockConfirm'))) return;
 
-				this.$root.api('blocking/delete', {
-					userId: this.user.id
-				}).then(() => {
-					this.user.isBlocking = false;
-				}, () => {
-					this.$root.dialog({
-						type: 'error',
-						text: e
-					});
+			this.$root.api(this.user.isBlocking ? 'blocking/delete' : 'blocking/create', {
+				userId: this.user.id
+			}).then(() => {
+				this.user.isBlocking = !this.user.isBlocking;
+				this.$root.dialog({
+					type: 'success',
+					splash: true
 				});
-			} else {
-				if (!await this.getConfirmed(this.$t('block-confirm'))) return;
-
-				this.$root.api('blocking/create', {
-					userId: this.user.id
-				}).then(() => {
-					this.user.isBlocking = true;
-				}, () => {
-					this.$root.dialog({
-						type: 'error',
-						text: e
-					});
+			}, () => {
+				this.$root.dialog({
+					type: 'error',
+					text: e
 				});
-			}
+			});
 		},
 
 		async toggleSuspend() {
-			if (!await this.getConfirmed(this.$t(this.user.isSuspended ? 'unsuspend-confirm' : 'suspend-confirm'))) return;
+			if (!await this.getConfirmed(this.$t(this.user.isSuspended ? 'unsuspendConfirm' : 'suspendConfirm'))) return;
 
 			this.$root.api(this.user.isSuspended ? 'admin/unsuspend-user' : 'admin/suspend-user', {
 				userId: this.user.id

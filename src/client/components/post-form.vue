@@ -86,6 +86,10 @@ export default Vue.extend({
 			type: Object,
 			required: false
 		},
+		specified: {
+			type: Object,
+			required: false
+		},
 		initialText: {
 			type: String,
 			required: false
@@ -206,6 +210,11 @@ export default Vue.extend({
 					});
 				}
 			}
+		}
+
+		if (this.specified) {
+			this.visibility = 'specified';
+			this.visibleUsers.push(this.specified);
 		}
 
 		// keep cw when reply

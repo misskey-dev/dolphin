@@ -12,6 +12,7 @@
 				:reply="reply"
 				:renote="renote"
 				:mention="mention"
+				:specified="specified"
 				:initial-text="initialText"
 				:initial-note="initialNote"
 				:instant="instant"
@@ -41,6 +42,10 @@ export default Vue.extend({
 			required: false
 		},
 		mention: {
+			type: Object,
+			required: false
+		},
+		specified: {
 			type: Object,
 			required: false
 		},

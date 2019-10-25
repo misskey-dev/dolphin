@@ -112,9 +112,8 @@ export default (opts: Opts = {}) => ({
 			this.$root.post({
 				reply: this.appearNote,
 				animation: !viaKeyboard,
-				cb: () => {
-					this.focus();
-				}
+			}, () => {
+				this.focus();
 			});
 		},
 
@@ -137,9 +136,8 @@ export default (opts: Opts = {}) => ({
 					callback: () => {
 						this.$root.post({
 							renote: this.appearNote,
-							cb: () => {
-								this.focus();
-							}
+						}, () => {
+							this.focus();
 						});
 					}
 				}, {

@@ -376,7 +376,7 @@ export default Vue.extend({
 				}
 
 				> span {
-					font-size: 80%;
+					font-size: 70%;
 				}
 			}
 		}
