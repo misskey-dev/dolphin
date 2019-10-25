@@ -83,44 +83,60 @@ function p(source: string, emojiOnly = false): MfmForest {
 	const res: MfmForest = [];
 	let cursor = 0;
 
-	while (cursor < source.length) {
-		const remain = source.substr(cursor);
-
-		{
-			const [mention, inc] = checkMention(source, cursor, remain);
-			if (mention) {
-				res.push(mention);
-				cursor += inc;
-				continue;
-			}
-		}
-		{
-			const [hashtag, inc] = checkHashtag(source, cursor, remain);
-			if (hashtag) {
-				res.push(hashtag);
-				cursor += inc;
-				continue;
-			}
-		}
-		{
-			const [url, inc] = checkUrl(source, cursor, remain);
-			if (url) {
-				res.push(url);
-				cursor += inc;
-				continue;
-			}
-		}
-		{
+	if (emojiOnly) {
+		while (cursor < source.length) {
+			const remain = source.substr(cursor);
+	
 			const [emoji, inc] = checkEmoji(source, cursor, remain);
 			if (emoji) {
 				res.push(emoji);
 				cursor += inc;
 				continue;
 			}
-		}
-
-		res.push(createLeaf('text', { text: remain[0] }));
-		cursor++;
+	
+			res.push(createLeaf('text', { text: remain[0] }));
+			cursor++;
+		}	
+	} else {
+		while (cursor < source.length) {
+			const remain = source.substr(cursor);
+	
+			{
+				const [mention, inc] = checkMention(source, cursor, remain);
+				if (mention) {
+					res.push(mention);
+					cursor += inc;
+					continue;
+				}
+			}
+			{
+				const [hashtag, inc] = checkHashtag(source, cursor, remain);
+				if (hashtag) {
+					res.push(hashtag);
+					cursor += inc;
+					continue;
+				}
+			}
+			{
+				const [url, inc] = checkUrl(source, cursor, remain);
+				if (url) {
+					res.push(url);
+					cursor += inc;
+					continue;
+				}
+			}
+			{
+				const [emoji, inc] = checkEmoji(source, cursor, remain);
+				if (emoji) {
+					res.push(emoji);
+					cursor += inc;
+					continue;
+				}
+			}
+	
+			res.push(createLeaf('text', { text: remain[0] }));
+			cursor++;
+		}	
 	}
 
 	return res;
