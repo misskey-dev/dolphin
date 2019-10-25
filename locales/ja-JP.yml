@@ -114,6 +114,11 @@ unblockConfirm: "ブロック解除しますか？"
 suspendConfirm: "凍結しますか？"
 unsuspendConfirm: "解凍しますか？"
 selectList: "リストを選択"
+customEmojis: "カスタム絵文字"
+emojiName: "絵文字名"
+emojiUrl: "絵文字画像URL"
+emojiDeleteConfirm: "絵文字「{name}」を削除しますか？"
+addEmoji: "絵文字を追加"
 
 _cw:
   hide: "隠す"
