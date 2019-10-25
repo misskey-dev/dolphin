@@ -48,6 +48,8 @@
 				<x-input v-model="fieldValue3">{{ $t('_profile.metadataContent') }}</x-input>
 			</div>
 		</details>
+
+		<x-switch v-model="isBot">{{ $t('flagAsBot') }}</x-switch>
 	</div>
 	<div class="footer">
 		<x-button @click="save(true)" primary><fa :icon="faSave"/> {{ $t('save') }}</x-button>
@@ -62,6 +64,7 @@ import { faSave } from '@fortawesome/free-regular-svg-icons';
 import XButton from '../components/ui/button.vue';
 import XInput from '../components/ui/input.vue';
 import XTextarea from '../components/ui/textarea.vue';
+import XSwitch from '../components/ui/switch.vue';
 import i18n from '../i18n';
 import { apiUrl, host } from '../config';
 
@@ -72,6 +75,7 @@ export default Vue.extend({
 		XButton,
 		XInput,
 		XTextarea,
+		XSwitch,
 	},
 	
 	data() {
@@ -90,8 +94,6 @@ export default Vue.extend({
 			avatarId: null,
 			bannerId: null,
 			isBot: false,
-			isLocked: false,
-			autoAcceptFollowed: false,
 			saving: false,
 			avatarUploading: false,
 			bannerUploading: false,
@@ -105,8 +107,6 @@ export default Vue.extend({
 		this.avatarId = this.$store.state.i.avatarId;
 		this.bannerId = this.$store.state.i.bannerId;
 		this.isBot = this.$store.state.i.isBot;
-		this.isLocked = this.$store.state.i.isLocked;
-		this.autoAcceptFollowed = this.$store.state.i.autoAcceptFollowed;
 
 		this.fieldName0 = this.$store.state.i.fields[0] ? this.$store.state.i.fields[0].name : null;
 		this.fieldValue0 = this.$store.state.i.fields[0] ? this.$store.state.i.fields[0].value : null;
@@ -180,8 +180,6 @@ export default Vue.extend({
 				bannerId: this.bannerId || undefined,
 				fields,
 				isBot: !!this.isBot,
-				isLocked: !!this.isLocked,
-				autoAcceptFollowed: !!this.autoAcceptFollowed
 			}).then(i => {
 				this.saving = false;
 				this.$store.state.i.avatarId = i.avatarId;

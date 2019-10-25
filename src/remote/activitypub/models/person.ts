@@ -209,7 +209,7 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<Us
 
 	const avatarId = avatar ? avatar.id : null;
 	const bannerId = banner ? banner.id : null;
-	const avatarUrl = avatar ? DriveFiles.getPublicUrl(avatar) : null;
+	const avatarUrl = avatar ? DriveFiles.getPublicUrl(avatar, true) : null;
 	const bannerUrl = banner ? DriveFiles.getPublicUrl(banner) : null;
 
 	await Users.update(user!.id, {
