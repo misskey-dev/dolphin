@@ -147,7 +147,7 @@ _poll:
   after: "End after..."
   deadlineDate: "End date"
   deadlineTime: "End time"
-  duration: "期間"
+  duration: "Duration"
   votesCount: "{n} votes"
   totalVotes: "{n} votes in total"
   vote: "Vote"
