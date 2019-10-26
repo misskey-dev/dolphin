@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faAt, faListUl, faEye, faEyeSlash, faBan } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faListUl, faEye, faEyeSlash, faBan, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
 import { faSnowflake, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import i18n from '../i18n';
 import XMenu from './menu.vue';
@@ -33,7 +33,13 @@ export default Vue.extend({
 			action: () => {
 				this.$root.post({ specified: this.user });
 			}
-		}, null, {
+		}, this.user.host !== null ? {
+			icon: faExternalLinkSquareAlt,
+			text: this.$t('showOnRemote'),
+			action: () => {
+				window.open(this.user.url, '_blank');
+			}
+		} : undefined, null, {
 			icon: faListUl,
 			text: this.$t('addToList'),
 			action: this.pushList
