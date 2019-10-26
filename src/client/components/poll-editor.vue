@@ -34,7 +34,7 @@
 			</section>
 			<section v-if="expiration === 'after'">
 				<x-input v-model="after" type="number">
-					<template #title>{{ $t('_poll.interval') }}</template>
+					<template #title>{{ $t('_poll.duration') }}</template>
 				</x-input>
 				<x-select v-model="unit">
 					<option value="second">{{ $t('_time.second') }}</option>
