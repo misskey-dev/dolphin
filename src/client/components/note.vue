@@ -240,11 +240,13 @@ export default Vue.extend({
 				this.replies = replies;
 			});
 
-			this.$root.api('notes/conversation', {
-				noteId: this.appearNote.replyId
-			}).then(conversation => {
-				this.conversation = conversation.reverse();
-			});
+			if (this.appearNote.replyId) {
+				this.$root.api('notes/conversation', {
+					noteId: this.appearNote.replyId
+				}).then(conversation => {
+					this.conversation = conversation.reverse();
+				});
+			}
 		}
 	},
 
