@@ -147,7 +147,7 @@ _poll:
   after: "経過指定"
   deadlineDate: "期日"
   deadlineTime: "時間"
-  interval: "期間"
+  duration: "期間"
   votesCount: "{n}票"
   totalVotes: "計{n}票"
   vote: "投票する"
