@@ -1,6 +1,7 @@
 <template>
 <div v-if="meta" class="dp-instance-page">
 	<header>{{ $t('instance') }}</header>
+	<x-general :meta="meta"/>
 	<x-files :meta="meta"/>
 	<x-emojis/>
 	<x-users/>
@@ -9,6 +10,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import XGeneral from './instance.general.vue';
 import XFiles from './instance.files.vue';
 import XEmojis from './instance.emojis.vue';
 import XUsers from './instance.users.vue';
@@ -21,6 +23,7 @@ export default Vue.extend({
 	},
 
 	components: {
+		XGeneral,
 		XEmojis,
 		XUsers,
 		XFiles,
