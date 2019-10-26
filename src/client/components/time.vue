@@ -39,13 +39,13 @@ export default Vue.extend({
 			const time = this._time;
 			const ago = (this.now.getTime() - time.getTime()) / 1000/*ms*/;
 			return (
-				ago >= 31536000 ? this.$t('_ago.yearsAgo')  .replace('{}', (~~(ago / 31536000)).toString()) :
-				ago >= 2592000  ? this.$t('_ago.monthsAgo') .replace('{}', (~~(ago / 2592000)).toString()) :
-				ago >= 604800   ? this.$t('_ago.weeksAgo')  .replace('{}', (~~(ago / 604800)).toString()) :
-				ago >= 86400    ? this.$t('_ago.daysAgo')   .replace('{}', (~~(ago / 86400)).toString()) :
-				ago >= 3600     ? this.$t('_ago.hoursAgo')  .replace('{}', (~~(ago / 3600)).toString()) :
-				ago >= 60       ? this.$t('_ago.minutesAgo').replace('{}', (~~(ago / 60)).toString()) :
-				ago >= 10       ? this.$t('_ago.secondsAgo').replace('{}', (~~(ago % 60)).toString()) :
+				ago >= 31536000 ? this.$t('_ago.yearsAgo',   { n: (~~(ago / 31536000)).toString() }) :
+				ago >= 2592000  ? this.$t('_ago.monthsAgo',  { n: (~~(ago / 2592000)).toString() }) :
+				ago >= 604800   ? this.$t('_ago.weeksAgo',   { n: (~~(ago / 604800)).toString() }) :
+				ago >= 86400    ? this.$t('_ago.daysAgo',    { n: (~~(ago / 86400)).toString() }) :
+				ago >= 3600     ? this.$t('_ago.hoursAgo',   { n: (~~(ago / 3600)).toString() }) :
+				ago >= 60       ? this.$t('_ago.minutesAgo', { n: (~~(ago / 60)).toString() }) :
+				ago >= 10       ? this.$t('_ago.secondsAgo', { n: (~~(ago % 60)).toString() }) :
 				ago >= -1       ? this.$t('_ago.justNow') :
 				ago <  -1       ? this.$t('_ago.future') :
 				this.$t('@.time.unknown'));
