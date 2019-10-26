@@ -52,7 +52,7 @@ export default Vue.extend({
 		> .rp {
 			margin-left: 4px;
 			font-style: oblique;
-			color: var(--renoteText);
+			color: #229e82;
 		}
 	}
 

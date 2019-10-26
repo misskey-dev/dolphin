@@ -640,7 +640,7 @@ export default Vue.extend({
 						> .rp {
 							margin-left: 4px;
 							font-style: oblique;
-							color: var(--renoteText);
+							color: #229e82;
 						}
 					}
 
@@ -677,6 +677,10 @@ export default Vue.extend({
 
 					&:hover {
 						color: darken(#5c6a73, 30%);
+
+						@media (prefers-color-scheme: dark) {
+							color: lighten(#c7d1d8, 30%);
+						}
 					}
 
 					> .count {
