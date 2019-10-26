@@ -337,7 +337,7 @@ export default Vue.extend({
 	max-width: 100%;
 	margin-top: calc(1em + 8px);
 	overflow: hidden;
-	background: var(--faceHeader);
+	background: var(--bg);
 	border: solid 1px rgba(#000, 0.1);
 	border-radius: 4px;
 	transition: top 0.1s ease, left 0.1s ease;
@@ -358,7 +358,6 @@ export default Vue.extend({
 			white-space: nowrap;
 			overflow: hidden;
 			font-size: 0.9em;
-			color: rgba(#000, 0.8);
 			cursor: default;
 
 			&, * {
@@ -371,7 +370,11 @@ export default Vue.extend({
 			}
 
 			&:hover {
-				background: var(--autocompleteItemHoverBg);
+				background: rgba(0, 0, 0, 0.05);
+
+				@media (prefers-color-scheme: dark) {
+					background: rgba(255, 255, 255, 0.05);
+				}
 			}
 
 			&[data-selected='true'] {
@@ -383,7 +386,7 @@ export default Vue.extend({
 			}
 
 			&:active {
-				background: var(--primaryDarken10);
+				background: darken($primary, 10%);
 
 				&, * {
 					color: #fff !important;
