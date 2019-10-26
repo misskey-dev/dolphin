@@ -22,8 +22,8 @@ export const router = new VueRouter({
 		{ path: '/manage-lists/:list', component: () => import('./pages/manage-lists/list.vue').then(m => m.default) },
 		{ path: '/lists/:list', component: () => import('./pages/list.vue').then(m => m.default) },
 		{ path: '/notes/:note', component: () => import('./pages/note.vue').then(m => m.default) },
-		{ path: '/tags/:tag', component: () => import('./pages/tag.vue').then(m => m.default) },/*
-		{ path: '/authorize-follow', component: DpFollow },
-		{ path: '*', component: DpNotFound }*/
+		{ path: '/tags/:tag', component: () => import('./pages/tag.vue').then(m => m.default) },
+		{ path: '/authorize-follow', component: () => import('./pages/follow.vue').then(m => m.default) },
+		/*{ path: '*', component: DpNotFound }*/
 	]
 });
