@@ -161,9 +161,9 @@ _poll:
 _visibility:
   public: "Public"
   publicDescription: "全てのユーザーに公開"
-  followers: "フォロワー"
+  followers: "Followers"
   followersDescription: "自分のフォロワーのみに公開"
-  specified: "ダイレクト"
+  specified: "Direct"
   specifiedDescription: "指定したユーザーのみに公開"
 _postForm:
   placeholder: "What's happening?"
@@ -177,8 +177,8 @@ _profile:
   avatar: "Avatar"
   banner: "Banner"
   metadata: "補足情報"
-  metadataLabel: "ラベル"
-  metadataContent: "内容"
+  metadataLabel: "Label"
+  metadataContent: "Content"
 _exportOrImport:
   allNotes: "All notes"
   followingList: "Following list"
