@@ -68,6 +68,13 @@ export default Vue.extend({
 		async pushList() {
 			const t = this.$t('selectList'); // なぜか後で参照すると null になるので最初にメモリに確保しておく
 			const lists = await this.$root.api('users/lists/list');
+			if (lists.length === 0) {
+				this.$root.dialog({
+					type: 'error',
+					text: this.$t('youHaveNoLists')
+				});
+				return;
+			}
 			const { canceled, result: listId } = await this.$root.dialog({
 				type: null,
 				title: t,
