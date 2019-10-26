@@ -12,6 +12,7 @@ export const router = new VueRouter({
 			{ path: 'following', name: 'userFollowing', component: () => import('./pages/user/follow-list.vue').then(m => m.default), props: { type: 'following' } },
 			{ path: 'followers', name: 'userFollowers', component: () => import('./pages/user/follow-list.vue').then(m => m.default), props: { type: 'followers' } },
 		]},
+		{ path: '/search', component: () => import('./pages/search.vue').then(m => m.default) },
 		{ path: '/favorites', component: () => import('./pages/favorites.vue').then(m => m.default) },
 		{ path: '/messages', component: () => import('./pages/messages.vue').then(m => m.default) },
 		{ path: '/settings', component: () => import('./pages/settings.vue').then(m => m.default) },

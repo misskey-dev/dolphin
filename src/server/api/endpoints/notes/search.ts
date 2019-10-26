@@ -1,8 +1,10 @@
 import $ from 'cafy';
 import define from '../../define';
-import { ApiError } from '../../error';
 import { Notes } from '../../../../models';
 import { ID } from '../../../../misc/cafy-id';
+import { makePaginationQuery } from '../../common/make-pagination-query';
+import { generateVisibilityQuery } from '../../common/generate-visibility-query';
+import { generateMuteQuery } from '../../common/generate-mute-query';
 
 export const meta = {
 	desc: {
@@ -19,14 +21,23 @@ export const meta = {
 			validator: $.str
 		},
 
+		sinceId: {
+			validator: $.optional.type(ID),
+			desc: {
+				'ja-JP': '指定すると、その投稿を基点としてより新しい投稿を取得します'
+			}
+		},
+
+		untilId: {
+			validator: $.optional.type(ID),
+			desc: {
+				'ja-JP': '指定すると、その投稿を基点としてより古い投稿を取得します'
+			}
+		},
+
 		limit: {
 			validator: $.optional.num.range(1, 100),
 			default: 10
-		},
-
-		offset: {
-			validator: $.optional.num.min(0),
-			default: 0
 		},
 
 		host: {
@@ -49,18 +60,17 @@ export const meta = {
 			ref: 'Note',
 		}
 	},
-
-	errors: {
-		searchingNotAvailable: {
-			message: 'Searching not available.',
-			code: 'SEARCHING_NOT_AVAILABLE',
-			id: '7ee9c119-16a1-479f-a6fd-6fab00ed946f'
-		}
-	}
 };
 
 export default define(meta, async (ps, me) => {
-	if (es == null) throw new ApiError(meta.errors.searchingNotAvailable);
+	const query = makePaginationQuery(Notes.createQueryBuilder('note'), ps.sinceId, ps.untilId)
+		.andWhere('note.text ILIKE :q', { q: `%${ps.query}%` })
+		.leftJoinAndSelect('note.user', 'user');
+
+	if (me) generateVisibilityQuery(query, me);
+	if (me) generateMuteQuery(query, me);
+
+	const notes = await query.take(ps.limit!).getMany();
 
 	return await Notes.packMany(notes, me);
 });

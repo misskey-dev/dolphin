@@ -127,6 +127,7 @@ showOnRemote: "リモートで表示"
 general: "全般"
 wallpaper: "壁紙"
 removeWallpaper: "壁紙を削除"
+searchWith: "検索: {q}"
 
 _cw:
   hide: "隠す"

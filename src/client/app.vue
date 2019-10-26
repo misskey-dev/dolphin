@@ -134,7 +134,7 @@ export default Vue.extend({
 				title: this.$t('search'),
 				input: true
 			}).then(async ({ canceled, result: query }) => {
-				if (canceled) return;
+				if (canceled || query == null || query == '') return;
 
 				this.searching = true;
 				search(this, query).finally(() => {
