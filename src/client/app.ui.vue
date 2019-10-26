@@ -24,7 +24,7 @@
 				<router-link to="/follow-requests" v-if="$store.state.i.isLocked"><fa :icon="faUserClock" fixed-width/>{{ $t('followRequests') }}<i v-if="$store.state.i.pendingReceivedFollowRequestsCount"><fa :icon="faCircle"/></i></router-link>
 				<div></div>
 				<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
-				<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
+				<router-link to="/instance" v-if="$store.state.i.isAdmin"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
 				<div></div>
 				<button class="_button" @click="showAccounts = true"><dp-avatar :user="$store.state.i" class="avatar"/><dp-user-name :user="$store.state.i"/></button>
 			</template>
