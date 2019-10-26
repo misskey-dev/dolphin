@@ -73,7 +73,6 @@ export default Vue.extend({
 	methods: {
 		focus() {
 			this.$refs.form.focus();
-			console.log(this.$props);
 		},
 
 		close() {

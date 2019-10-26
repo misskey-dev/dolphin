@@ -150,10 +150,7 @@ export default Vue.extend({
 			border-radius: 0;
 			outline: none;
 			box-shadow: none;
-
-			* {
-				color: #000;
-			}
+			color: var(--fg);
 		}
 
 		> .prefix,
