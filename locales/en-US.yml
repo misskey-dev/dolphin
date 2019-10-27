@@ -132,6 +132,7 @@ proxyAccount: "Proxy account"
 proxyAccountDescription: "A proxy account acts as a remote follower for users on other instances.\nExample: When a remote user is added to a list, their posts would not be delivered to the instance if nobody follows them. The proxy account would follow them so the posts are delivered."
 host: "ホスト"
 selectUser: "ユーザーを選択"
+recipient: "宛先"
 _cw:
   hide: "Hide"
   show: "See more"
