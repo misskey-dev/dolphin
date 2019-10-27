@@ -133,6 +133,7 @@ proxyAccountDescription: "A proxy account acts as a remote follower for users on
 host: "ホスト"
 selectUser: "ユーザーを選択"
 recipient: "宛先"
+annotation: "注釈"
 _cw:
   hide: "Hide"
   show: "See more"
