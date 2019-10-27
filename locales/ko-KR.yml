@@ -133,6 +133,7 @@ proxyAccountDescription: "프록시 계정은 특정 조건에서 사용자의 �
 host: "ホスト"
 selectUser: "ユーザーを選択"
 recipient: "宛先"
+annotation: "注釈"
 _cw:
   hide: "隠す"
   show: "더 보기"
