@@ -599,8 +599,12 @@ export default Vue.extend({
 				> span {
 					margin-right: 14px;
 					padding: 8px 0 8px 8px;
-					background: rgba(0, 0, 0, 0.1);
 					border-radius: 8px;
+					background: rgba(0, 0, 0, 0.1);
+
+					@media (prefers-color-scheme: dark) {
+						background: rgba(255, 255, 255, 0.1);
+					}
 
 					> button {
 						padding: 4px 8px;
