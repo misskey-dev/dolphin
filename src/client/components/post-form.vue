@@ -26,7 +26,7 @@
 				<button @click="addVisibleUser" class="_button"><fa :icon="faPlus"/></button>
 			</div>
 		</div>
-		<input v-show="useCw" ref="cw" v-model="cw" :placeholder="$t('@.post-form.cw-placeholder')" v-autocomplete="{ model: 'cw' }">
+		<input v-show="useCw" ref="cw" v-model="cw" :placeholder="$t('annotation')" v-autocomplete="{ model: 'cw' }">
 		<textarea v-model="text" ref="text" :disabled="posting" :placeholder="placeholder" v-autocomplete="{ model: 'text' }" @keydown="onKeydown" @paste="onPaste"></textarea>
 		<x-post-form-attaches class="attaches" :files="files"/>
 		<x-poll-editor v-if="poll" ref="poll" @destroyed="poll = false" @updated="onPollUpdate()"/>
@@ -588,6 +588,7 @@ export default Vue.extend({
 
 		> .to-specified {
 			padding: 6px 16px;
+			margin-bottom: 8px;
 			overflow: auto;
 			white-space: nowrap;
 
@@ -621,7 +622,7 @@ export default Vue.extend({
 		> textarea {
 			display: block;
 			box-sizing: border-box;
-			padding: 12px;
+			padding: 0 16px;
 			margin: 0;
 			width: 100%;
 			font-size: 16px;
@@ -629,6 +630,7 @@ export default Vue.extend({
 			border-radius: 0;
 			background: transparent;
 			color: var(--fg);
+			font-family: initial;
 
 			&:focus {
 				outline: none;
