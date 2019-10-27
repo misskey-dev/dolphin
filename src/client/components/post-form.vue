@@ -537,7 +537,7 @@ export default Vue.extend({
 			padding: 0;
 			width: 50px;
 			line-height: 50px;
-			font-size: 24px;
+			font-size: 20px;
 		}
 
 		> div {
@@ -665,7 +665,7 @@ export default Vue.extend({
 				margin: 0;
 				width: 48px;
 				height: 48px;
-				font-size: 20px;
+				font-size: 16px;
 
 				&:hover {
 					background: rgba(0, 0, 0, 0.05);
