@@ -16,7 +16,7 @@
 					<x-input v-model="host" class="input" @input="search"><span>{{ $t('host') }}</span><template #prefix>@</template></x-input>
 				</div>
 				<div class="users">
-					<div class="user" v-for="user in users" :key="user.id" :class="{ selected: selected && selected.id === user.id }" @click="selected = user">
+					<div class="user" v-for="user in users" :key="user.id" :class="{ selected: selected && selected.id === user.id }" @click="selected = user" @dblclick="ok()">
 						<dp-avatar :user="user" class="avatar" :disable-link="true"/>
 						<div class="body">
 							<dp-user-name :user="user" class="name"/>
