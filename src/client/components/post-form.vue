@@ -17,13 +17,13 @@
 		<x-note-preview class="preview" v-if="renote" :note="renote"/>
 		<div class="with-quote" v-if="quoteId"><fa icon="quote-left"/> {{ $t('@.post-form.quote-attached') }}<button @click="quoteId = null"><fa icon="times"/></button></div>
 		<div v-if="visibility === 'specified'" class="to-specified">
-			<fa icon="envelope"/> {{ $t('@.post-form.specified-recipient') }}
+			{{ $t('recipient') }}
 			<div class="visibleUsers">
 				<span v-for="u in visibleUsers">
-					<dp-user-name :user="u"/>
-					<button @click="removeVisibleUser(u)"><fa icon="times"/></button>
+					<dp-acct :user="u"/>
+					<button class="_button" @click="removeVisibleUser(u)"><fa :icon="faTimes"/></button>
 				</span>
-				<button @click="addVisibleUser">{{ $t('@.post-form.add-visible-user') }}</button>
+				<button @click="addVisibleUser" class="_button"><fa :icon="faPlus"/></button>
 			</div>
 		</div>
 		<input v-show="useCw" ref="cw" v-model="cw" :placeholder="$t('@.post-form.cw-placeholder')" v-autocomplete="{ model: 'cw' }">
@@ -49,8 +49,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faTimes, faUpload, faChartPie, faGlobe, faHome, faUnlock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { faTimes, faUpload, faChartPie, faGlobe, faHome, faUnlock, faEnvelope, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash, faLaugh } from '@fortawesome/free-regular-svg-icons';
 import insertTextAtCursor from 'insert-text-at-cursor';
 import { length } from 'stringz';
 import { toASCII } from 'punycode';
@@ -124,7 +124,7 @@ export default Vue.extend({
 			draghover: false,
 			quoteId: null,
 			recentHashtags: JSON.parse(localStorage.getItem('hashtags') || '[]'),
-			faTimes, faUpload, faChartPie, faGlobe, faHome, faUnlock, faEnvelope, faEyeSlash
+			faTimes, faUpload, faChartPie, faGlobe, faHome, faUnlock, faEnvelope, faEyeSlash, faLaugh, faPlus
 		};
 	},
 
@@ -529,7 +529,6 @@ export default Vue.extend({
 	> header {
 		z-index: 1000;
 		height: 50px;
-		box-shadow: 0 1px 0 0 var(--mobilePostFormDivider);
 
 		> .cancel {
 			padding: 0;
@@ -588,8 +587,9 @@ export default Vue.extend({
 		}
 
 		> .to-specified {
-			margin: 0 0 8px 0;
-			color: $primary;
+			padding: 6px 16px;
+			overflow: auto;
+			white-space: nowrap;
 
 			> .visibleUsers {
 				display: inline;
@@ -597,19 +597,13 @@ export default Vue.extend({
 				font-size: 14px;
 
 				> span {
-					margin-left: 14px;
+					margin-right: 14px;
+					padding: 8px 0 8px 8px;
+					background: rgba(0, 0, 0, 0.1);
+					border-radius: 8px;
 
 					> button {
 						padding: 4px 8px;
-						color: var(--primaryAlpha04);
-
-						&:hover {
-							color: var(--primaryAlpha06);
-						}
-
-						&:active {
-							color: var(--primaryDarken30);
-						}
 					}
 				}
 			}
