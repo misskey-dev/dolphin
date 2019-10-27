@@ -184,7 +184,8 @@ export default Vue.extend({
 				> .user {
 					display: flex;
 					align-items: center;
-					padding: 8px;
+					padding: 8px 16px;
+					font-size: 14px;
 
 					&:hover {
 						background: rgba(0, 0, 0, 0.05);
@@ -213,12 +214,12 @@ export default Vue.extend({
 					}
 
 					> .avatar {
-						width: 50px;
-						height: 50px;
+						width: 45px;
+						height: 45px;
 					}
 
 					> .body {
-						padding: 8px;
+						padding: 0 8px;
 
 						> .name {
 							display: block;
