@@ -14,7 +14,21 @@ export const meta = {
 
 	params: {
 		query: {
-			validator: $.str,
+			validator: $.optional.str,
+			desc: {
+				'ja-JP': 'クエリ'
+			}
+		},
+
+		username: {
+			validator: $.optional.nullable.str,
+			desc: {
+				'ja-JP': 'クエリ'
+			}
+		},
+
+		host: {
+			validator: $.optional.nullable.str,
 			desc: {
 				'ja-JP': 'クエリ'
 			}
@@ -57,30 +71,67 @@ export const meta = {
 };
 
 export default define(meta, async (ps, me) => {
-	const isUsername = Users.validateRemoteUsername.ok(ps.query.replace('@', ''));
+	if (ps.query) {
+		const isUsername = Users.validateRemoteUsername.ok(ps.query.replace('@', ''));
 
-	let users: User[] = [];
+		let users: User[] = [];
 
-	if (isUsername) {
-		users = await Users.createQueryBuilder('user')
-			.where('user.host IS NULL')
-			.andWhere('user.isSuspended = FALSE')
-			.andWhere('user.usernameLower like :username', { username: ps.query.replace('@', '').toLowerCase() + '%' })
-			.take(ps.limit!)
-			.skip(ps.offset)
-			.getMany();
-
-		if (users.length < ps.limit!) {
-			const otherUsers = await Users.createQueryBuilder('user')
-				.where('user.host IS NOT NULL')
+		if (isUsername) {
+			users = await Users.createQueryBuilder('user')
+				.where('user.host IS NULL')
 				.andWhere('user.isSuspended = FALSE')
 				.andWhere('user.usernameLower like :username', { username: ps.query.replace('@', '').toLowerCase() + '%' })
-				.take(ps.limit! - users.length)
+				.take(ps.limit!)
+				.skip(ps.offset)
 				.getMany();
 
-			users = users.concat(otherUsers);
+			if (users.length < ps.limit!) {
+				const otherUsers = await Users.createQueryBuilder('user')
+					.where('user.host IS NOT NULL')
+					.andWhere('user.isSuspended = FALSE')
+					.andWhere('user.usernameLower like :username', { username: ps.query.replace('@', '').toLowerCase() + '%' })
+					.take(ps.limit! - users.length)
+					.getMany();
+
+				users = users.concat(otherUsers);
+			}
+		}
+
+		return await Users.packMany(users, me, { detail: ps.detail });
+	} else {
+		if (ps.host) {
+			const q = Users.createQueryBuilder('user')
+				.where('user.isSuspended = FALSE')
+				.andWhere('user.host LIKE :host', { host: ps.host.toLowerCase() + '%' });
+
+			if (ps.username) {
+				q.andWhere('user.usernameLower like :username', { username: ps.username.toLowerCase() + '%' })
+			}
+
+			const users = await q.take(ps.limit!).skip(ps.offset).getMany();
+
+			return await Users.packMany(users, me, { detail: ps.detail });
+		} else {
+			let users = await Users.createQueryBuilder('user')
+				.where('user.host IS NULL')
+				.andWhere('user.isSuspended = FALSE')
+				.andWhere('user.usernameLower like :username', { username: ps.username.toLowerCase() + '%' })
+				.take(ps.limit!)
+				.skip(ps.offset)
+				.getMany();
+
+			if (users.length < ps.limit!) {
+				const otherUsers = await Users.createQueryBuilder('user')
+					.where('user.host IS NOT NULL')
+					.andWhere('user.isSuspended = FALSE')
+					.andWhere('user.usernameLower like :username', { username: ps.username.toLowerCase() + '%' })
+					.take(ps.limit! - users.length)
+					.getMany();
+
+				users = users.concat(otherUsers);
+			}
+
+			return await Users.packMany(users, me, { detail: ps.detail });
 		}
 	}
-
-	return await Users.packMany(users, me, { detail: ps.detail });
 });

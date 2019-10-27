@@ -56,6 +56,7 @@ import { length } from 'stringz';
 import { toASCII } from 'punycode';
 import i18n from '../i18n';
 import DpVisibilityChooser from './visibility-chooser.vue';
+import DpUserSelect from './user-select.vue';
 import XNotePreview from './note-preview.vue';
 import { parse } from '../../mfm/parse';
 import { host, url } from '../config';
@@ -348,11 +349,8 @@ export default Vue.extend({
 		},
 
 		addVisibleUser() {
-			this.$root.dialog({
-				title: this.$t('@.post-form.enter-username'),
-				user: true
-			}).then(({ canceled, result: user }) => {
-				if (canceled) return;
+			const vm = this.$root.new(DpUserSelect, {});
+			vm.$once('selected', user => {
 				this.visibleUsers.push(user);
 			});
 		},
