@@ -1,11 +1,7 @@
 import * as cluster from 'cluster';
-import * as os from 'os';
 import chalk from 'chalk';
 import * as dateformat from 'dateformat';
 import { program } from '../argv';
-import { getRepository } from 'typeorm';
-import { Log } from '../models/entities/log';
-import { genId } from '../misc/gen-id';
 import config from '../config';
 
 const SyslogPro = require('syslog-pro');
@@ -94,18 +90,6 @@ export default class Logger {
 					null as never;
 
 				send(message);
-			} else {
-				const Logs = getRepository(Log);
-				Logs.insert({
-					id: genId(),
-					createdAt: new Date(),
-					machine: os.hostname(),
-					worker: worker.toString(),
-					domain: [this.domain].concat(subDomains).map(d => d.name),
-					level: level,
-					message: message,
-					data: data,
-				} as Log);
 			}
 		}
 	}

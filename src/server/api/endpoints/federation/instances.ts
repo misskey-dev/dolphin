@@ -51,8 +51,8 @@ export default define(meta, async (ps, me) => {
 		case '-following': query.orderBy('instance.followingCount', 'ASC'); break;
 		case '+followers': query.orderBy('instance.followersCount', 'DESC'); break;
 		case '-followers': query.orderBy('instance.followersCount', 'ASC'); break;
-		case '+caughtAt': query.orderBy('instance.caughtAt', 'DESC'); break;
-		case '-caughtAt': query.orderBy('instance.caughtAt', 'ASC'); break;
+		case '+registeredAt': query.orderBy('instance.registeredAt', 'DESC'); break;
+		case '-registeredAt': query.orderBy('instance.registeredAt', 'ASC'); break;
 		case '+lastCommunicatedAt': query.orderBy('instance.lastCommunicatedAt', 'DESC'); break;
 		case '-lastCommunicatedAt': query.orderBy('instance.lastCommunicatedAt', 'ASC'); break;
 		case '+driveUsage': query.orderBy('instance.driveUsage', 'DESC'); break;

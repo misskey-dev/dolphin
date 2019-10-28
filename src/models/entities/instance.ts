@@ -11,9 +11,9 @@ export class Instance {
 	 */
 	@Index()
 	@Column('timestamp with time zone', {
-		comment: 'The caught date of the Instance.'
+		comment: 'The registered date of the Instance.'
 	})
-	public caughtAt: Date;
+	public registeredAt: Date;
 
 	/**
 	 * ホスト
@@ -24,15 +24,6 @@ export class Instance {
 		comment: 'The host of the Instance.'
 	})
 	public host: string;
-
-	/**
-	 * インスタンスのシステム (MastodonとかMisskeyとかPleromaとか)
-	 */
-	@Column('varchar', {
-		length: 64, nullable: true,
-		comment: 'The system of the Instance.'
-	})
-	public system: string | null;
 
 	/**
 	 * インスタンスのユーザー数
@@ -129,4 +120,51 @@ export class Instance {
 		default: false
 	})
 	public isSuspended: boolean;
+
+	@Column('varchar', {
+		length: 64, nullable: true, default: null,
+		comment: 'The software of the Instance.'
+	})
+	public softwareName: string | null;
+
+	@Column('varchar', {
+		length: 64, nullable: true, default: null,
+	})
+	public softwareVersion: string | null;
+
+	@Column('boolean', {
+		nullable: true, default: null,
+	})
+	public openRegistrations: boolean | null;
+
+	@Column('jsonb', {
+		nullable: true, default: null,
+	})
+	public metadata: Record<string, any> | null;
+
+	@Column('varchar', {
+		length: 256, nullable: true, default: null,
+	})
+	public name: string | null;
+
+	@Column('varchar', {
+		length: 4096, nullable: true, default: null,
+	})
+	public description: string | null;
+
+	@Column('varchar', {
+		length: 128, nullable: true, default: null,
+	})
+	public maintainerName: string | null;
+
+	@Column('varchar', {
+		length: 256, nullable: true, default: null,
+	})
+	public maintainerEmail: string | null;
+
+	@Index()
+	@Column('timestamp with time zone', {
+		nullable: true,
+	})
+	public infoUpdatedAt: Date | null;
 }

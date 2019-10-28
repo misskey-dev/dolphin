@@ -13,9 +13,8 @@ export async function registerOrFetchInstanceDoc(host: string): Promise<Instance
 		const i = await Instances.save({
 			id: genId(),
 			host,
-			caughtAt: new Date(),
+			registeredAt: new Date(),
 			lastCommunicatedAt: new Date(),
-			system: null // TODO
 		});
 
 		federationChart.update(true);

@@ -9,8 +9,8 @@
 			<div class="table">
 				<div class="row">
 					<div class="cell">
-						<div class="label"><fa :icon="faCrosshairs" fixed-width class="icon"/>{{ $t('foundAt') }}</div>
-						<div class="data">{{ new Date(instance.caughtAt).toLocaleString() }}</div>
+						<div class="label"><fa :icon="faCrosshairs" fixed-width class="icon"/>{{ $t('registeredAt') }}</div>
+						<div class="data">{{ new Date(instance.registeredAt).toLocaleString() }}</div>
 					</div>
 				</div>
 				<div class="row">

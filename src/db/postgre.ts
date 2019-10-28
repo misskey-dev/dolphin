@@ -4,7 +4,6 @@ import { entities as charts } from '../services/chart/entities';
 import { dbLogger } from './logger';
 import * as highlight from 'cli-highlight';
 
-import { Log } from '../models/entities/log';
 import { User } from '../models/entities/user';
 import { DriveFile } from '../models/entities/drive-file';
 import { DriveFolder } from '../models/entities/drive-folder';
@@ -85,7 +84,6 @@ export const entities = [
 	NoteFavorite,
 	NoteReaction,
 	NoteUnread,
-	Log,
 	DriveFile,
 	DriveFolder,
 	Poll,

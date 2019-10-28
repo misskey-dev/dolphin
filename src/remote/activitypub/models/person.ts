@@ -26,6 +26,7 @@ import { validActor } from '../../../remote/activitypub/type';
 import { getConnection } from 'typeorm';
 import { ensure } from '../../../prelude/ensure';
 import { toArray } from '../../../prelude/array';
+import { fetchNodeinfo } from '../../../services/fetch-nodeinfo';
 
 const logger = apLogger;
 
@@ -189,6 +190,7 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<Us
 	registerOrFetchInstanceDoc(host).then(i => {
 		Instances.increment({ id: i.id }, 'usersCount', 1);
 		instanceChart.newUser(i.host);
+		fetchNodeinfo(i);
 	});
 
 	usersChart.update(user!, true);

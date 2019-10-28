@@ -1,13 +1,8 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class Init1572039055729 implements MigrationInterface {
+export class Init1572255591845 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.query(`CREATE TYPE "log_level_enum" AS ENUM('error', 'warning', 'info', 'success', 'debug')`, undefined);
-        await queryRunner.query(`CREATE TABLE "log" ("id" character varying(32) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "domain" character varying(64) array NOT NULL DEFAULT '{}'::varchar[], "level" "log_level_enum" NOT NULL, "worker" character varying(8) NOT NULL, "machine" character varying(128) NOT NULL, "message" character varying(2048) NOT NULL, "data" jsonb NOT NULL DEFAULT '{}', CONSTRAINT "PK_350604cbdf991d5930d9e618fbd" PRIMARY KEY ("id"))`, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_8e4eb51a35d81b64dda28eed0a" ON "log" ("createdAt") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_8cb40cfc8f3c28261e6f887b03" ON "log" ("domain") `, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_584b536b49e53ac81beb39a177" ON "log" ("level") `, undefined);
         await queryRunner.query(`CREATE TABLE "drive_folder" ("id" character varying(32) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "name" character varying(128) NOT NULL, "userId" character varying(32), "parentId" character varying(32), CONSTRAINT "PK_7a0c089191f5ebdc214e0af808a" PRIMARY KEY ("id"))`, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_02878d441ceae15ce060b73daf" ON "drive_folder" ("createdAt") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_f4fc06e49c0171c85f1c48060d" ON "drive_folder" ("userId") `, undefined);
@@ -69,9 +64,10 @@ export class Init1572039055729 implements MigrationInterface {
         await queryRunner.query(`CREATE INDEX "IDX_24e0042143a18157b234df186c" ON "following" ("followeeId") `, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_6516c5a6f3c015b4eed39978be" ON "following" ("followerId") `, undefined);
         await queryRunner.query(`CREATE UNIQUE INDEX "IDX_307be5f1d1252e0388662acb96" ON "following" ("followerId", "followeeId") `, undefined);
-        await queryRunner.query(`CREATE TABLE "instance" ("id" character varying(32) NOT NULL, "caughtAt" TIMESTAMP WITH TIME ZONE NOT NULL, "host" character varying(128) NOT NULL, "system" character varying(64), "usersCount" integer NOT NULL DEFAULT 0, "notesCount" integer NOT NULL DEFAULT 0, "followingCount" integer NOT NULL DEFAULT 0, "followersCount" integer NOT NULL DEFAULT 0, "driveUsage" bigint NOT NULL DEFAULT 0, "driveFiles" integer NOT NULL DEFAULT 0, "latestRequestSentAt" TIMESTAMP WITH TIME ZONE, "latestStatus" integer, "latestRequestReceivedAt" TIMESTAMP WITH TIME ZONE, "lastCommunicatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, "isNotResponding" boolean NOT NULL DEFAULT false, "isSuspended" boolean NOT NULL DEFAULT false, CONSTRAINT "PK_eaf60e4a0c399c9935413e06474" PRIMARY KEY ("id"))`, undefined);
-        await queryRunner.query(`CREATE INDEX "IDX_2cd3b2a6b4cf0b910b260afe08" ON "instance" ("caughtAt") `, undefined);
+        await queryRunner.query(`CREATE TABLE "instance" ("id" character varying(32) NOT NULL, "registeredAt" TIMESTAMP WITH TIME ZONE NOT NULL, "host" character varying(128) NOT NULL, "usersCount" integer NOT NULL DEFAULT 0, "notesCount" integer NOT NULL DEFAULT 0, "followingCount" integer NOT NULL DEFAULT 0, "followersCount" integer NOT NULL DEFAULT 0, "driveUsage" bigint NOT NULL DEFAULT 0, "driveFiles" integer NOT NULL DEFAULT 0, "latestRequestSentAt" TIMESTAMP WITH TIME ZONE, "latestStatus" integer, "latestRequestReceivedAt" TIMESTAMP WITH TIME ZONE, "lastCommunicatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, "isNotResponding" boolean NOT NULL DEFAULT false, "isSuspended" boolean NOT NULL DEFAULT false, "softwareName" character varying(64) DEFAULT null, "softwareVersion" character varying(64) DEFAULT null, "openRegistrations" boolean DEFAULT null, "metadata" jsonb DEFAULT null, "name" character varying(256) DEFAULT null, "description" character varying(4096) DEFAULT null, "maintainerName" character varying(128) DEFAULT null, "maintainerEmail" character varying(256) DEFAULT null, "infoUpdatedAt" TIMESTAMP WITH TIME ZONE, CONSTRAINT "PK_eaf60e4a0c399c9935413e06474" PRIMARY KEY ("id"))`, undefined);
+        await queryRunner.query(`CREATE INDEX "IDX_63044bc9dc69c84a7ffbb64e17" ON "instance" ("registeredAt") `, undefined);
         await queryRunner.query(`CREATE UNIQUE INDEX "IDX_8d5afc98982185799b160e10eb" ON "instance" ("host") `, undefined);
+        await queryRunner.query(`CREATE INDEX "IDX_3c43f1da59f99e6e50f2b69678" ON "instance" ("infoUpdatedAt") `, undefined);
         await queryRunner.query(`CREATE TABLE "sw_subscription" ("id" character varying(32) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "userId" character varying(32) NOT NULL, "endpoint" character varying(512) NOT NULL, "auth" character varying(256) NOT NULL, "publickey" character varying(128) NOT NULL, CONSTRAINT "PK_e8f763631530051b95eb6279b91" PRIMARY KEY ("id"))`, undefined);
         await queryRunner.query(`CREATE INDEX "IDX_97754ca6f2baff9b4abb7f853d" ON "sw_subscription" ("userId") `, undefined);
         await queryRunner.query(`CREATE TABLE "blocking" ("id" character varying(32) NOT NULL, "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "blockeeId" character varying(32) NOT NULL, "blockerId" character varying(32) NOT NULL, CONSTRAINT "PK_e5d9a541cc1965ee7e048ea09dd" PRIMARY KEY ("id"))`, undefined);
@@ -459,8 +455,9 @@ export class Init1572039055729 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE "blocking"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_97754ca6f2baff9b4abb7f853d"`, undefined);
         await queryRunner.query(`DROP TABLE "sw_subscription"`, undefined);
+        await queryRunner.query(`DROP INDEX "IDX_3c43f1da59f99e6e50f2b69678"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_8d5afc98982185799b160e10eb"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_2cd3b2a6b4cf0b910b260afe08"`, undefined);
+        await queryRunner.query(`DROP INDEX "IDX_63044bc9dc69c84a7ffbb64e17"`, undefined);
         await queryRunner.query(`DROP TABLE "instance"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_307be5f1d1252e0388662acb96"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_6516c5a6f3c015b4eed39978be"`, undefined);
@@ -523,11 +520,6 @@ export class Init1572039055729 implements MigrationInterface {
         await queryRunner.query(`DROP INDEX "IDX_f4fc06e49c0171c85f1c48060d"`, undefined);
         await queryRunner.query(`DROP INDEX "IDX_02878d441ceae15ce060b73daf"`, undefined);
         await queryRunner.query(`DROP TABLE "drive_folder"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_584b536b49e53ac81beb39a177"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_8cb40cfc8f3c28261e6f887b03"`, undefined);
-        await queryRunner.query(`DROP INDEX "IDX_8e4eb51a35d81b64dda28eed0a"`, undefined);
-        await queryRunner.query(`DROP TABLE "log"`, undefined);
-        await queryRunner.query(`DROP TYPE "log_level_enum"`, undefined);
     }
 
 }
