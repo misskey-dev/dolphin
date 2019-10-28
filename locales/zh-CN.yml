@@ -141,6 +141,7 @@ latestRequestSentAt: "直近のリクエスト送信"
 latestRequestReceivedAt: "直近のリクエスト受信"
 latestStatus: "直近のステータス"
 storageUsage: "ストレージ使用量"
+charts: "チャート"
 _cw:
   hide: "隠す"
   show: "もっと見る"
