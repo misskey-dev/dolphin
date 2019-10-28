@@ -4,7 +4,7 @@
 		<div class="title"><fa :icon="faGlobe"/> {{ $t('instances') }}</div>
 		<div class="content">
 			<x-pagination :pagination="pagination" #default="{items}" class="instances" ref="instances">
-				<div class="instance" v-for="(instance, i) in items" :key="instance.id" :data-index="i">
+				<div class="instance" v-for="(instance, i) in items" :key="instance.id" :data-index="i" @click="info(instance)">
 					<div class="host"><fa :icon="faCircle" class="indicator" :class="getStatus(instance)"/><b>{{ instance.host }}</b></div>
 					<div class="status">
 						<span class="sub" v-if="instance.followersCount > 0"><fa :icon="faCaretDown" class="icon"/>Sub</span>
@@ -27,6 +27,7 @@ import { faGlobe, faCircle, faExchangeAlt, faCaretDown, faCaretUp, faTrafficLigh
 import i18n from '../i18n';
 import XButton from '../components/ui/button.vue';
 import XPagination from '../components/ui/pagination.vue';
+import DpInstanceInfo from './federation.instance.vue';
 
 export default Vue.extend({
 	i18n,
@@ -62,6 +63,12 @@ export default Vue.extend({
 			if (instance.isSuspended) return 'off';
 			if (instance.isNotResponding) return 'red';
 			return 'green';
+		},
+
+		info(instance) {
+			this.$root.new(DpInstanceInfo, {
+				instance: instance
+			});
 		}
 	}
 });
@@ -76,6 +83,8 @@ export default Vue.extend({
 			
 			> .instances {
 				> .instance {
+					cursor: pointer;
+
 					&:hover {
 						background: rgba(0, 0, 0, 0.05);
 						box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.05);
