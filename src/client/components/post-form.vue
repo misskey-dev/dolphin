@@ -139,7 +139,7 @@ export default Vue.extend({
 
 		placeholder(): string {
 			return this.renote
-				? this.$t('@.post-form.quote-placeholder')
+				? this.$t('_postForm.quotePlaceholder')
 				: this.reply
 					? this.$t('_postForm.replyPlaceholder')
 					: this.$t('_postForm.placeholder');
@@ -147,7 +147,7 @@ export default Vue.extend({
 
 		submitText(): string {
 			return this.renote
-				? this.$t('@.post-form.renote')
+				? this.$t('renote')
 				: this.reply
 					? this.$t('reply')
 					: this.$t('_postForm.post');
