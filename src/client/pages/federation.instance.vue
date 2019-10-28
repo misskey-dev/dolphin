@@ -208,7 +208,8 @@ export default Vue.extend({
 						label: x.name,
 						data: x.data.slice().reverse(),
 						pointRadius: 0,
-						borderWidth: 1,
+						lineTension: 0,
+						borderWidth: 2,
 						borderColor: x.color,
 						backgroundColor: alpha(x.color),
 					}))
