@@ -81,7 +81,7 @@
 						<option value="day">{{ $t('chart-spans.day') }}</option>
 					</x-select>
 				</div>
-				<div ref="chart"></div>
+				<canvas ref="chart"></canvas>
 			</details>
 		</div>
 	</div>
@@ -90,7 +90,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import ApexCharts from 'apexcharts';
+import Chart from 'chart.js';
 import i18n from '../i18n';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import XModal from '../components/modal.vue';
@@ -187,70 +187,32 @@ export default Vue.extend({
 		},
 
 		renderChart() {
-			if (this.chartInstance) {
+			/*if (this.chartInstance) {
 				this.chartInstance.destroy();
-			}
+			}*/
 
 			const color = getComputedStyle(document.documentElement).getPropertyValue('--text');
 
-			this.chartInstance = new ApexCharts(this.$refs.chart, {
-				chart: {
-					type: 'area',
-					height: 120,
-					animations: {
-						dynamicAnimation: {
-							enabled: false
-						}
-					},
-					sparkline: {
-						enabled: true,
+			this.chartInstance = new Chart(this.$refs.chart, {
+				type: 'line',
+				data: {
+					datasets: this.data.series.map(x => ({
+						label: x.name,
+						data: x.data,
+						borderWidth: 1,
+						borderColor: x.color,
+					}))
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								display: false
+							}
+						}]
 					}
-				},
-				dataLabels: {
-					enabled: false
-				},
-				grid: {
-					clipMarkers: false,
-					borderColor: 'rgba(0, 0, 0, 0.1)'
-				},
-				stroke: {
-					curve: 'straight',
-					width: 2
-				},
-				tooltip: {
-					theme: 'light'
-				},
-				legend: {
-					labels: {
-						colors: color
-					},
-				},
-				xaxis: {
-					type: 'datetime',
-					labels: {
-						style: {
-							colors: color
-						}
-					},
-					axisBorder: {
-						color: 'rgba(0, 0, 0, 0.1)'
-					},
-					axisTicks: {
-						color: 'rgba(0, 0, 0, 0.1)'
-					},
-				},
-				yaxis: {
-					labels: {
-						formatter: this.data.bytes ? v => Vue.filter('bytes')(v, 0) : v => Vue.filter('number')(v),
-						style: {
-							color: color
-						}
-					}
-				},
-				series: this.data.series
+				}
 			});
-
-			this.chartInstance.render();
 		},
 
 		getDate(i: number) {
@@ -274,12 +236,15 @@ export default Vue.extend({
 			return {
 				series: [{
 					name: 'Incoming',
+					color: '#008FFB',
 					data: this.format(this.stats.requests.received)
 				}, {
 					name: 'Outgoing (succeeded)',
+					color: '#00E396',
 					data: this.format(this.stats.requests.succeeded)
 				}, {
 					name: 'Outgoing (failed)',
+					color: '#FEB019',
 					data: this.format(this.stats.requests.failed)
 				}]
 			};
@@ -413,7 +378,7 @@ export default Vue.extend({
 		}
 
 		> .chart {
-			padding: 0 16px;
+			padding: 0 16px 16px 16px;
 		}
 	}
 }

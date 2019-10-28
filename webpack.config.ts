@@ -126,6 +126,9 @@ module.exports = {
 	resolveLoader: {
 		modules: ['node_modules']
 	},
+	externals: {
+		moment: 'moment'
+	},
 	optimization: {
 		minimizer: [new TerserPlugin()]
 	},
