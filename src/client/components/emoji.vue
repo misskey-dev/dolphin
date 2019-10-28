@@ -126,7 +126,7 @@ export default Vue.extend({
 	}
 
 	&.noStyle {
-		height: initial;
+		height: auto !important;
 	}
 }
 </style>
