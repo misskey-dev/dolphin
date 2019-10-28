@@ -1,5 +1,5 @@
 <template>
-<x-modal ref="modal" @closed="() => { $emit('closed'); destroyDom(); }" :width="350" :height="350">
+<x-modal ref="modal" @closed="() => { $emit('closed'); destroyDom(); }">
 	<div class="dp-instance-info">
 		<div class="header">
 			<span>{{ instance.host }}</span>
@@ -95,7 +95,9 @@
 						</x-select>
 					</div>
 				</div>
-				<canvas ref="chart"></canvas>
+				<div class="chart">
+					<canvas ref="chart"></canvas>
+				</div>
 			</div>
 			<div class="operations">
 				<span class="label">{{ $t('operations') }}</span>
@@ -409,27 +411,43 @@ export default Vue.extend({
 @import '../theme';
 
 .dp-instance-info {
-	height: 100%;
+	width: 400px;
+	height: 400px;
 	background: var(--bg);
 	border-radius: 6px;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 
+	@media (max-width: 500px) {
+		width: 350px;
+		height: 350px;
+	}
+
 	> .header {
 		display: flex;
 		flex-shrink: 0;
 
 		> button {
-			height: 42px;
-			width: 42px;
+			height: 58px;
+			width: 58px;
+
+			@media (max-width: 500px) {
+				height: 42px;
+				width: 42px;
+			}
 		}
 
 		> span {
 			flex: 1;
-			line-height: 42px;
-			padding-left: 16px;
+			line-height: 58px;
+			padding-left: 32px;
 			font-weight: bold;
+
+			@media (max-width: 500px) {
+				line-height: 42px;
+				padding-left: 16px;
+			}
 		}
 	}
 
@@ -437,7 +455,11 @@ export default Vue.extend({
 		overflow: auto;
 
 		> .table {
-			padding: 0 16px;
+			padding: 0 32px;
+
+			@media (max-width: 500px) {
+				padding: 0 16px;
+			}
 
 			> .row {
 				display: flex;
@@ -463,18 +485,32 @@ export default Vue.extend({
 		}
 
 		> .data {
-			margin-top: 8px;
-			padding-top: 8px;
+			margin-top: 16px;
+			padding-top: 16px;
 			border-top: solid 1px rgba(0, 0, 0, 0.1);
+
+			@media (max-width: 500px) {
+				margin-top: 8px;
+				padding-top: 8px;
+			}
 		}
 
 		> .chart {
-			margin-top: 8px;
-			padding-top: 8px;
+			margin-top: 16px;
+			padding-top: 16px;
 			border-top: solid 1px rgba(0, 0, 0, 0.1);
 
+			@media (max-width: 500px) {
+				margin-top: 8px;
+				padding-top: 8px;
+			}
+
 			> .header {
-				padding: 0 16px;
+				padding: 0 32px;
+
+				@media (max-width: 500px) {
+					padding: 0 16px;
+				}
 
 				> .label {
 					font-size: 80%;
@@ -485,11 +521,23 @@ export default Vue.extend({
 					display: flex;
 				}
 			}
+
+			> .chart {
+				padding: 0 16px;
+
+				@media (max-width: 500px) {
+					padding: 0;
+				}
+			}
 		}
 
 		> .operations {
-			padding: 8px 16px 8px 16px;
+			padding: 16px 32px 16px 32px;
 			border-top: solid 1px rgba(0, 0, 0, 0.1);
+
+			@media (max-width: 500px) {
+				padding: 8px 16px 8px 16px;
+			}
 
 			> .label {
 				font-size: 80%;
@@ -502,8 +550,12 @@ export default Vue.extend({
 		}
 
 		> .metadata {
-			padding: 8px 16px 8px 16px;
+			padding: 16px 32px 16px 32px;
 			border-top: solid 1px rgba(0, 0, 0, 0.1);
+
+			@media (max-width: 500px) {
+				padding: 8px 16px 8px 16px;
+			}
 
 			> .label {
 				font-size: 80%;

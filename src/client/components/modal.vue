@@ -4,7 +4,7 @@
 		<div class="bg" ref="bg" v-if="show"></div>
 	</transition>
 	<transition name="modal" appear @after-leave="() => { $emit('closed'); destroyDom(); }">
-		<div class="content" ref="content" v-if="show" :style="{ width: width + 'px', height: height + 'px' }"><slot></slot></div>
+		<div class="content" ref="content" v-if="show"><slot></slot></div>
 	</transition>
 </div>
 </template>
@@ -14,14 +14,6 @@ import Vue from 'vue';
 
 export default Vue.extend({
 	props: {
-		width: {
-			type: Number,
-			required: true,
-		},
-		height: {
-			type: Number,
-			required: true,
-		},
 	},
 	data() {
 		return {
@@ -78,6 +70,17 @@ export default Vue.extend({
 		max-height: calc(100% - 16px);
 		overflow: auto;
 		margin: auto;
+
+		/deep/ > * {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			max-height: 100%;
+			max-width: 100%;
+		}
 	}
 }
 </style>

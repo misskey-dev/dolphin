@@ -1,5 +1,5 @@
 <template>
-<x-modal ref="modal" @closed="() => { $emit('closed'); destroyDom(); }" :width="350" :height="350">
+<x-modal ref="modal" @closed="() => { $emit('closed'); destroyDom(); }">
 	<div class="dp-user-select">
 		<div class="header">
 			<button class="_button" @click="close()"><fa :icon="faTimes"/></button>
@@ -95,7 +95,8 @@ export default Vue.extend({
 @import '../theme';
 
 .dp-user-select {
-	height: 100%;
+	width: 350px;
+	height: 350px;
 	background: var(--bg);
 	border-radius: 6px;
 	overflow: hidden;
