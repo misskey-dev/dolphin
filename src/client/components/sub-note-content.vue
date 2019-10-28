@@ -8,7 +8,7 @@
 		<a class="rp" v-if="note.renoteId">RN: ...</a>
 	</div>
 	<details v-if="note.files.length > 0">
-		<summary>({{ $t('media-count').replace('{}', note.files.length) }})</summary>
+		<summary>({{ $t('withNFiles', { n: note.files.length }) }})</summary>
 		<x-media-list :media-list="note.files"/>
 	</details>
 	<details v-if="note.poll">
