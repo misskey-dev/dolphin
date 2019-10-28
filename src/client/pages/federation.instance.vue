@@ -71,7 +71,7 @@
 							<option value="notes">{{ $t('_instanceCharts.notes') }}</option>
 							<option value="notes-total">{{ $t('_instanceCharts.notesTotal') }}</option>
 							<option value="ff">{{ $t('_instanceCharts.ff') }}</option>
-							<option value="ff-total">{{ $t('_instanceCharts.ff-total') }}</option>
+							<option value="ff-total">{{ $t('_instanceCharts.ffTotal') }}</option>
 							<option value="drive-usage">{{ $t('_instanceCharts.cacheSize') }}</option>
 							<option value="drive-usage-total">{{ $t('_instanceCharts.cacheSizeTotal') }}</option>
 							<option value="drive-files">{{ $t('_instanceCharts.files') }}</option>
