@@ -1,6 +1,6 @@
 <template>
-<img v-if="customEmoji" class="fvgwvorwhxigeolkkrcderjzcawqrscl custom" :class="{ normal: normal }" :src="url" :alt="alt" :title="alt"/>
-<img v-else-if="char && !useOsDefaultEmojis" class="fvgwvorwhxigeolkkrcderjzcawqrscl" :src="url" :alt="alt" :title="alt"/>
+<img v-if="customEmoji" class="dp-emoji custom" :class="{ normal, noStyle }" :src="url" :alt="alt" :title="alt"/>
+<img v-else-if="char && !useOsDefaultEmojis" class="dp-emoji" :src="url" :alt="alt" :title="alt"/>
 <span v-else-if="char && useOsDefaultEmojis">{{ char }}</span>
 <span v-else>:{{ name }}:</span>
 </template>
@@ -21,6 +21,11 @@ export default Vue.extend({
 			required: false
 		},
 		normal: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+		noStyle: {
 			type: Boolean,
 			required: false,
 			default: false
@@ -97,7 +102,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.fvgwvorwhxigeolkkrcderjzcawqrscl {
+.dp-emoji {
 	height: 1.25em;
 	vertical-align: -0.25em;
 
@@ -118,6 +123,10 @@ export default Vue.extend({
 				transform: none;
 			}
 		}
+	}
+
+	&.noStyle {
+		height: initial;
 	}
 }
 </style>

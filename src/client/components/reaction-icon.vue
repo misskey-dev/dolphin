@@ -1,5 +1,5 @@
 <template>
-<dp-emoji :emoji="reaction.startsWith(':') ? null : reaction" :name="reaction.startsWith(':') ? reaction.substr(1, reaction.length - 2) : null" :is-reaction="true" :custom-emojis="customEmojis" :normal="true"/>
+<dp-emoji :emoji="reaction.startsWith(':') ? null : reaction" :name="reaction.startsWith(':') ? reaction.substr(1, reaction.length - 2) : null" :is-reaction="true" :custom-emojis="customEmojis" :normal="true" :no-style="noStyle"/>
 </template>
 
 <script lang="ts">
@@ -11,6 +11,11 @@ export default Vue.extend({
 		reaction: {
 			type: String,
 			required: true
+		},
+		noStyle: {
+			type: Boolean,
+			required: false,
+			default: false
 		},
 	},
 	data() {

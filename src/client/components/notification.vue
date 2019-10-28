@@ -8,7 +8,7 @@
 		<fa :icon="faReply" v-if="notification.type === 'reply'"/>
 		<fa :icon="faAt" v-if="notification.type === 'mention'"/>
 		<fa :icon="faQuoteLeft" v-if="notification.type === 'quote'"/>
-		<x-reaction-icon v-if="notification.type === 'reaction'" :reaction="notification.reaction"/>
+		<x-reaction-icon v-if="notification.type === 'reaction'" :reaction="notification.reaction" :no-style="true"/>
 	</div>
 	<header>
 		<router-link class="name" :to="notification.user | userPage"><dp-user-name :user="notification.user"/></router-link>
