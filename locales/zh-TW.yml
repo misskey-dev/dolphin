@@ -134,6 +134,8 @@ host: "ホスト"
 selectUser: "ユーザーを選択"
 recipient: "宛先"
 annotation: "注釈"
+federation: "連合"
+instances: "インスタンス"
 _cw:
   hide: "隠す"
   show: "もっと見る"
