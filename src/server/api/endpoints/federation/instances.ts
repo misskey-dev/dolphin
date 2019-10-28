@@ -41,6 +41,8 @@ export default define(meta, async (ps, me) => {
 	const query = Instances.createQueryBuilder('instance');
 
 	switch (ps.sort) {
+		case '+pubSub': query.orderBy('instance.followingCount', 'DESC').orderBy('instance.followersCount', 'DESC'); break;
+		case '-pubSub': query.orderBy('instance.followingCount', 'ASC').orderBy('instance.followersCount', 'ASC'); break;
 		case '+notes': query.orderBy('instance.notesCount', 'DESC'); break;
 		case '-notes': query.orderBy('instance.notesCount', 'ASC'); break;
 		case '+users': query.orderBy('instance.usersCount', 'DESC'); break;

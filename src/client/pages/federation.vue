@@ -44,10 +44,14 @@ export default Vue.extend({
 
 	data() {
 		return {
+			sort: '+pubSub',
 			pagination: {
 				endpoint: 'federation/instances',
 				limit: 10,
-				offsetMode: true
+				offsetMode: true,
+				params: () => ({
+					sort: this.sort
+				})
 			},
 			faGlobe, faCircle, faExchangeAlt, faCaretDown, faCaretUp, faTrafficLight
 		}
