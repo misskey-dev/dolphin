@@ -96,7 +96,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import XModal from '../components/modal.vue';
 import XSelect from '../components/ui/select.vue';
 
-const chartLimit = 90;
+const chartLimit = 50;
 const sum = (...arr) => arr.reduce((r, a) => r.map((b, i) => a[i] + b));
 const negate = arr => arr.map(x => -x);
 const alpha = hex => {
@@ -203,9 +203,11 @@ export default Vue.extend({
 			this.chartInstance = new Chart(this.$refs.chart, {
 				type: 'line',
 				data: {
+					labels: new Array(chartLimit).fill(0).map((_, i) => this.getDate(i).toLocaleString()),
 					datasets: this.data.series.map(x => ({
 						label: x.name,
-						data: x.data,
+						data: x.data.slice().reverse(),
+						pointRadius: 0,
 						borderWidth: 1,
 						borderColor: x.color,
 						backgroundColor: alpha(x.color),
@@ -216,11 +218,22 @@ export default Vue.extend({
 						position: 'bottom',
 					},
 					scales: {
+						xAxes: [{
+							gridLines: {
+								display: false
+							},
+							ticks: {
+								display: false
+							}
+						}],
 						yAxes: [{
 							ticks: {
 								display: false
 							}
 						}]
+					},
+					tooltips: {
+						intersect: false
 					}
 				}
 			});
@@ -232,11 +245,7 @@ export default Vue.extend({
 			const d = this.now.getDate();
 			const h = this.now.getHours();
 
-			return (
-				this.chartSpan == 'day' ? new Date(y, m, d - i) :
-				this.chartSpan == 'hour' ? new Date(y, m, d, h - i) :
-				null
-			);
+			return this.chartSpan == 'day' ? new Date(y, m, d - i) : new Date(y, m, d, h - i);
 		},
 
 		format(arr) {
