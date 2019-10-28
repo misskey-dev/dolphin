@@ -99,6 +99,13 @@ import XSelect from '../components/ui/select.vue';
 const chartLimit = 90;
 const sum = (...arr) => arr.reduce((r, a) => r.map((b, i) => a[i] + b));
 const negate = arr => arr.map(x => -x);
+const alpha = hex => {
+	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)!;
+	const r = parseInt(result[1], 16);
+	const g = parseInt(result[2], 16);
+	const b = parseInt(result[3], 16);
+	return `rgba(${r}, ${g}, ${b}, 0.1)`;
+};
 
 export default Vue.extend({
 	i18n,
@@ -201,9 +208,13 @@ export default Vue.extend({
 						data: x.data,
 						borderWidth: 1,
 						borderColor: x.color,
+						backgroundColor: alpha(x.color),
 					}))
 				},
 				options: {
+					legend: {
+						position: 'bottom',
+					},
 					scales: {
 						yAxes: [{
 							ticks: {
@@ -229,7 +240,7 @@ export default Vue.extend({
 		},
 
 		format(arr) {
-			return arr.map((v, i) => ({ x: this.getDate(i).getTime(), y: v }));
+			return arr;
 		},
 
 		requestsChart(): any {
