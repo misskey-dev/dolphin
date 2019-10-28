@@ -150,6 +150,7 @@ operations: "작업"
 software: "소프트웨어"
 version: "버전"
 metadata: "메타데이터"
+withNFiles: "{n}つのファイル"
 _cw:
   hide: "숨기기"
   show: "더 보기"
@@ -188,6 +189,7 @@ _visibility:
 _postForm:
   placeholder: "지금 무엇을 하고 있나요?"
   replyPlaceholder: "이 글에 답글..."
+  quotePlaceholder: "この投稿を引用..."
   post: "글쓰기"
 _profile:
   name: "이름"
