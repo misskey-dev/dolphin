@@ -60,10 +60,10 @@
 					</div>
 				</div>
 			</div>
-			<details class="chart">
-				<summary>{{ $t('charts') }}</summary>
+			<div class="chart">
+				<span class="label">{{ $t('charts') }}</span>
 				<div class="selects">
-					<x-select v-model="chartSrc">
+					<x-select v-model="chartSrc" style="margin: 0;">
 						<option value="requests">{{ $t('chart-srcs.requests') }}</option>
 						<option value="users">{{ $t('chart-srcs.users') }}</option>
 						<option value="users-total">{{ $t('chart-srcs.users-total') }}</option>
@@ -76,13 +76,13 @@
 						<option value="drive-files">{{ $t('chart-srcs.drive-files') }}</option>
 						<option value="drive-files-total">{{ $t('chart-srcs.drive-files-total') }}</option>
 					</x-select>
-					<x-select v-model="chartSpan">
+					<x-select v-model="chartSpan" style="margin: 0;">
 						<option value="hour">{{ $t('chart-spans.hour') }}</option>
 						<option value="day">{{ $t('chart-spans.day') }}</option>
 					</x-select>
 				</div>
 				<canvas ref="chart"></canvas>
-			</details>
+			</div>
 		</div>
 	</div>
 </x-modal>
@@ -194,9 +194,9 @@ export default Vue.extend({
 		},
 
 		renderChart() {
-			/*if (this.chartInstance) {
+			if (this.chartInstance) {
 				this.chartInstance.destroy();
-			}*/
+			}
 
 			const color = getComputedStyle(document.documentElement).getPropertyValue('--text');
 
@@ -277,7 +277,7 @@ export default Vue.extend({
 			return {
 				series: [{
 					name: 'Users',
-					type: 'area',
+					color: '#008FFB',
 					data: this.format(total
 						? this.stats.users.total
 						: sum(this.stats.users.inc, negate(this.stats.users.dec))
@@ -290,7 +290,7 @@ export default Vue.extend({
 			return {
 				series: [{
 					name: 'Notes',
-					type: 'area',
+					color: '#008FFB',
 					data: this.format(total
 						? this.stats.notes.total
 						: sum(this.stats.notes.inc, negate(this.stats.notes.dec))
@@ -303,14 +303,14 @@ export default Vue.extend({
 			return {
 				series: [{
 					name: 'Following',
-					type: 'area',
+					color: '#008FFB',
 					data: this.format(total
 						? this.stats.following.total
 						: sum(this.stats.following.inc, negate(this.stats.following.dec))
 					)
 				}, {
 					name: 'Followers',
-					type: 'area',
+					color: '#00E396',
 					data: this.format(total
 						? this.stats.followers.total
 						: sum(this.stats.followers.inc, negate(this.stats.followers.dec))
@@ -324,7 +324,7 @@ export default Vue.extend({
 				bytes: true,
 				series: [{
 					name: 'Drive usage',
-					type: 'area',
+					color: '#008FFB',
 					data: this.format(total
 						? this.stats.drive.totalUsage
 						: sum(this.stats.drive.incUsage, negate(this.stats.drive.decUsage))
@@ -337,7 +337,7 @@ export default Vue.extend({
 			return {
 				series: [{
 					name: 'Drive files',
-					type: 'area',
+					color: '#008FFB',
 					data: this.format(total
 						? this.stats.drive.totalFiles
 						: sum(this.stats.drive.incFiles, negate(this.stats.drive.decFiles))
@@ -402,6 +402,17 @@ export default Vue.extend({
 
 		> .chart {
 			padding: 0 16px 16px 16px;
+			margin-top: 8px;
+
+			> .label {
+				font-size: 80%;
+				opacity: 0.7;
+			}
+
+			> .selects {
+				display: flex;
+				margin-bottom: 16px;
+			}
 		}
 	}
 }
