@@ -78,9 +78,6 @@ export default Vue.extend({
 .dp-federation {
 	> .instances {
 		> .content {
-			max-height: 300px;
-			overflow: auto;
-			
 			> .instances {
 				> .instance {
 					cursor: pointer;

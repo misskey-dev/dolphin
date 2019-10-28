@@ -61,25 +61,27 @@
 				</div>
 			</div>
 			<div class="chart">
-				<span class="label">{{ $t('charts') }}</span>
-				<div class="selects">
-					<x-select v-model="chartSrc" style="margin: 0;">
-						<option value="requests">{{ $t('chart-srcs.requests') }}</option>
-						<option value="users">{{ $t('chart-srcs.users') }}</option>
-						<option value="users-total">{{ $t('chart-srcs.users-total') }}</option>
-						<option value="notes">{{ $t('chart-srcs.notes') }}</option>
-						<option value="notes-total">{{ $t('chart-srcs.notes-total') }}</option>
-						<option value="ff">{{ $t('chart-srcs.ff') }}</option>
-						<option value="ff-total">{{ $t('chart-srcs.ff-total') }}</option>
-						<option value="drive-usage">{{ $t('chart-srcs.drive-usage') }}</option>
-						<option value="drive-usage-total">{{ $t('chart-srcs.drive-usage-total') }}</option>
-						<option value="drive-files">{{ $t('chart-srcs.drive-files') }}</option>
-						<option value="drive-files-total">{{ $t('chart-srcs.drive-files-total') }}</option>
-					</x-select>
-					<x-select v-model="chartSpan" style="margin: 0;">
-						<option value="hour">{{ $t('chart-spans.hour') }}</option>
-						<option value="day">{{ $t('chart-spans.day') }}</option>
-					</x-select>
+				<div class="header">
+					<span class="label">{{ $t('charts') }}</span>
+					<div class="selects">
+						<x-select v-model="chartSrc" style="margin: 0;">
+							<option value="requests">{{ $t('chart-srcs.requests') }}</option>
+							<option value="users">{{ $t('chart-srcs.users') }}</option>
+							<option value="users-total">{{ $t('chart-srcs.users-total') }}</option>
+							<option value="notes">{{ $t('chart-srcs.notes') }}</option>
+							<option value="notes-total">{{ $t('chart-srcs.notes-total') }}</option>
+							<option value="ff">{{ $t('chart-srcs.ff') }}</option>
+							<option value="ff-total">{{ $t('chart-srcs.ff-total') }}</option>
+							<option value="drive-usage">{{ $t('chart-srcs.drive-usage') }}</option>
+							<option value="drive-usage-total">{{ $t('chart-srcs.drive-usage-total') }}</option>
+							<option value="drive-files">{{ $t('chart-srcs.drive-files') }}</option>
+							<option value="drive-files-total">{{ $t('chart-srcs.drive-files-total') }}</option>
+						</x-select>
+						<x-select v-model="chartSpan" style="margin: 0;">
+							<option value="hour">{{ $t('chart-spans.hour') }}</option>
+							<option value="day">{{ $t('chart-spans.day') }}</option>
+						</x-select>
+					</div>
 				</div>
 				<canvas ref="chart"></canvas>
 			</div>
@@ -198,8 +200,9 @@ export default Vue.extend({
 				this.chartInstance.destroy();
 			}
 
-			const color = getComputedStyle(document.documentElement).getPropertyValue('--text');
+			const color = getComputedStyle(document.documentElement).getPropertyValue('--fg');
 
+			Chart.defaults.global.defaultFontColor = color;
 			this.chartInstance = new Chart(this.$refs.chart, {
 				type: 'line',
 				data: {
@@ -215,6 +218,14 @@ export default Vue.extend({
 					}))
 				},
 				options: {
+					layout: {
+						padding: {
+							left: 16,
+							right: 16,
+							top: 16,
+							bottom: 16
+						}
+					},
 					legend: {
 						position: 'bottom',
 					},
@@ -402,17 +413,19 @@ export default Vue.extend({
 		}
 
 		> .chart {
-			padding: 0 16px 16px 16px;
 			margin-top: 8px;
 
-			> .label {
-				font-size: 80%;
-				opacity: 0.7;
-			}
+			> .header {
+				padding: 0 16px;
 
-			> .selects {
-				display: flex;
-				margin-bottom: 16px;
+				> .label {
+					font-size: 80%;
+					opacity: 0.7;
+				}
+
+				> .selects {
+					display: flex;
+				}
 			}
 		}
 	}
