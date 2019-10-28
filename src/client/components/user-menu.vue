@@ -92,13 +92,19 @@ export default Vue.extend({
 				showCancelButton: true
 			});
 			if (canceled) return;
-			await this.$root.api('users/lists/push', {
+			this.$root.api('users/lists/push', {
 				listId: listId,
 				userId: this.user.id
-			});
-			this.$root.dialog({
-				type: 'success',
-				splash: true
+			}).then(() => {
+				this.$root.dialog({
+					type: 'success',
+					splash: true
+				});
+			}).catch(e => {
+				this.$root.dialog({
+					type: 'error',
+					text: e
+				});
 			});
 		},
 
@@ -111,7 +117,7 @@ export default Vue.extend({
 					type: 'success',
 					splash: true
 				});
-			}, () => {
+			}, e => {
 				this.$root.dialog({
 					type: 'error',
 					text: e
@@ -130,7 +136,7 @@ export default Vue.extend({
 					type: 'success',
 					splash: true
 				});
-			}, () => {
+			}, e => {
 				this.$root.dialog({
 					type: 'error',
 					text: e
