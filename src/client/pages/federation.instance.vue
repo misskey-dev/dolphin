@@ -45,7 +45,7 @@
 			<div class="row">
 				<div class="cell">
 					<div class="label">{{ $t('latestRequestSentAt') }}</div>
-					<div class="data">{{ new Date(instance.latestRequestSentAt).toLocaleString() }}</div>
+					<div class="data"><dp-time :time="instance.latestRequestSentAt"/></div>
 				</div>
 				<div class="cell">
 					<div class="label">{{ $t('latestStatus') }}</div>
@@ -55,7 +55,7 @@
 			<div class="row">
 				<div class="cell">
 					<div class="label">{{ $t('latestRequestReceivedAt') }}</div>
-					<div class="data">{{ new Date(instance.latestRequestReceivedAt).toLocaleString() }}</div>
+					<div class="data"><dp-time :time="instance.latestRequestReceivedAt"/></div>
 				</div>
 			</div>
 		</div>
