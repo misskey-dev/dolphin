@@ -80,9 +80,9 @@ export default define(meta, async (ps, me) => {
 
 	if (typeof ps.markedAsClosed === 'boolean') {
 		if (ps.markedAsClosed) {
-			query.andWhere('instance.isMarkedAsClosed = TRUE');
+			query.andWhere('instance.isSuspended = TRUE');
 		} else {
-			query.andWhere('instance.isMarkedAsClosed = FALSE');
+			query.andWhere('instance.isSuspended = FALSE');
 		}
 	}
 

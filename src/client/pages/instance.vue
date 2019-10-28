@@ -5,6 +5,7 @@
 	<x-files :meta="meta"/>
 	<x-emojis/>
 	<x-users/>
+	<x-proxy :meta="meta"/>
 </div>
 </template>
 
@@ -14,6 +15,7 @@ import XGeneral from './instance.general.vue';
 import XFiles from './instance.files.vue';
 import XEmojis from './instance.emojis.vue';
 import XUsers from './instance.users.vue';
+import XProxy from './instance.proxy.vue';
 
 export default Vue.extend({
 	metaInfo() {
@@ -27,6 +29,7 @@ export default Vue.extend({
 		XEmojis,
 		XUsers,
 		XFiles,
+		XProxy,
 	},
 
 	data() {

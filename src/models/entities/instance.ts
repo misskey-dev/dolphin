@@ -123,10 +123,10 @@ export class Instance {
 	public isNotResponding: boolean;
 
 	/**
-	 * このインスタンスが閉鎖済みとしてマークされているか
+	 * このインスタンスへの配信を停止するか
 	 */
 	@Column('boolean', {
 		default: false
 	})
-	public isMarkedAsClosed: boolean;
+	public isSuspended: boolean;
 }
