@@ -85,6 +85,11 @@
 				</div>
 				<canvas ref="chart"></canvas>
 			</div>
+			<div class="operations">
+				<span class="label">{{ $t('operations') }}</span>
+				<x-switch v-model="isSuspended" class="switch">{{ $t('stopActivityDelivery') }}</x-switch>
+				<x-switch v-model="isBlocked" class="switch">{{ $t('blockThisInstance') }}</x-switch>
+			</div>
 		</div>
 	</div>
 </x-modal>
@@ -97,6 +102,7 @@ import i18n from '../i18n';
 import { faTimes, faCrosshairs, faCloudDownloadAlt, faCloudUploadAlt, faUsers, faPencilAlt, faFileImage, faDatabase, faTrafficLight, faLongArrowAltUp, faLongArrowAltDown } from '@fortawesome/free-solid-svg-icons';
 import XModal from '../components/modal.vue';
 import XSelect from '../components/ui/select.vue';
+import XSwitch from '../components/ui/switch.vue';
 
 const chartLimit = 50;
 const sum = (...arr) => arr.reduce((r, a) => r.map((b, i) => a[i] + b));
@@ -115,6 +121,7 @@ export default Vue.extend({
 	components: {
 		XModal,
 		XSelect,
+		XSwitch,
 	},
 
 	props: {
@@ -126,6 +133,9 @@ export default Vue.extend({
 
 	data() {
 		return {
+			meta: null,
+			isSuspended: false,
+			isBlocked: false,
 			now: null,
 			chart: null,
 			chartSrc: 'requests',
@@ -163,6 +173,19 @@ export default Vue.extend({
 	},
 
 	watch: {
+		isSuspended() {
+			this.$root.api('admin/federation/update-instance', {
+				host: this.instance.host,
+				isSuspended: this.isSuspended
+			});
+		},
+
+		isBlocked() {
+			this.$root.api('admin/update-meta', {
+				blockedHosts: this.isBlocked ? this.meta.blockedHosts.concat([this.instance.host]) : this.meta.blockedHosts.filter(x => x !== this.instance.host)
+			});
+		},
+
 		chartSrc() {
 			this.renderChart();
 		},
@@ -173,6 +196,12 @@ export default Vue.extend({
 	},
 
 	async created() {
+		this.$root.getMeta().then(meta => {
+			this.meta = meta;
+			this.isSuspended = this.instance.isSuspended;
+			this.isBlocked = this.meta.blockedHosts.includes(this.instance.host);
+		});
+	
 		this.now = new Date();
 
 		const [perHour, perDay] = await Promise.all([
@@ -223,7 +252,7 @@ export default Vue.extend({
 							left: 16,
 							right: 16,
 							top: 16,
-							bottom: 16
+							bottom: 0
 						}
 					},
 					legend: {
@@ -430,6 +459,19 @@ export default Vue.extend({
 				> .selects {
 					display: flex;
 				}
+			}
+		}
+
+		> .operations {
+			padding: 0 16px 8px 16px;
+
+			> .label {
+				font-size: 80%;
+				opacity: 0.7;
+			}
+
+			> .switch {
+				margin: 16px 0;
 			}
 		}
 	}

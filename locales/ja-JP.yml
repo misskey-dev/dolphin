@@ -146,6 +146,9 @@ storageUsage: "ストレージ使用量"
 charts: "チャート"
 perHour: "1時間ごと"
 perDay: "1日ごと"
+stopActivityDelivery: "アクティビティの配送を停止"
+blockThisInstance: "このインスタンスをブロック"
+operations: "操作"
 
 _cw:
   hide: "隠す"
@@ -220,4 +223,3 @@ _instanceCharts:
   cacheSizeTotal: "キャッシュサイズの積算"
   files: "ファイル数の増減"
   filesTotal: "ファイル数の積算"
-
