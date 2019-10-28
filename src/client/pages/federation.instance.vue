@@ -362,6 +362,7 @@ export default Vue.extend({
 
 	> .header {
 		display: flex;
+		flex-shrink: 0;
 
 		> button {
 			height: 42px;
