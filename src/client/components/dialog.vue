@@ -174,6 +174,7 @@ export default Vue.extend({
 		},
 
 		close() {
+			if (!this.show) return;
 			this.show = false;
 			this.$el.style.pointerEvents = 'none';
 			(this.$refs.bg as any).style.pointerEvents = 'none';
