@@ -203,7 +203,7 @@ export default Vue.extend({
 			this.chartInstance = new Chart(this.$refs.chart, {
 				type: 'line',
 				data: {
-					labels: new Array(chartLimit).fill(0).map((_, i) => this.getDate(i).toLocaleString()),
+					labels: new Array(chartLimit).fill(0).map((_, i) => this.getDate(i).toLocaleString()).slice().reverse(),
 					datasets: this.data.series.map(x => ({
 						label: x.name,
 						data: x.data.slice().reverse(),
@@ -228,25 +228,27 @@ export default Vue.extend({
 							}
 						}],
 						yAxes: [{
+							position: 'right',
 							ticks: {
 								display: false
 							}
 						}]
 					},
 					tooltips: {
-						intersect: false
+						intersect: false,
+						mode: 'index',
 					}
 				}
 			});
 		},
 
-		getDate(i: number) {
+		getDate(ago: number) {
 			const y = this.now.getFullYear();
 			const m = this.now.getMonth();
 			const d = this.now.getDate();
 			const h = this.now.getHours();
 
-			return this.chartSpan == 'day' ? new Date(y, m, d - i) : new Date(y, m, d, h - i);
+			return this.chartSpan == 'day' ? new Date(y, m, d - ago) : new Date(y, m, d, h - ago);
 		},
 
 		format(arr) {
