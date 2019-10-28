@@ -149,6 +149,9 @@ perDay: "1日ごと"
 stopActivityDelivery: "アクティビティの配送を停止"
 blockThisInstance: "このインスタンスをブロック"
 operations: "操作"
+software: "ソフトウェア"
+version: "バージョン"
+metadata: "メタデータ"
 
 _cw:
   hide: "隠す"

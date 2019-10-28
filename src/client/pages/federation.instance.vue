@@ -6,7 +6,19 @@
 			<button class="_button" @click="$refs.modal.close()"><fa :icon="faTimes"/></button>
 		</div>
 		<div class="body">
-			<div class="table">
+			<div class="table info">
+				<div class="row">
+					<div class="cell">
+						<div class="label">{{ $t('software') }}</div>
+						<div class="data">{{ instance.softwareName }}</div>
+					</div>
+					<div class="cell">
+						<div class="label">{{ $t('version') }}</div>
+						<div class="data">{{ instance.softwareVersion }}</div>
+					</div>
+				</div>
+			</div>
+			<div class="table data">
 				<div class="row">
 					<div class="cell">
 						<div class="label"><fa :icon="faCrosshairs" fixed-width class="icon"/>{{ $t('registeredAt') }}</div>
@@ -90,6 +102,10 @@
 				<x-switch v-model="isSuspended" class="switch">{{ $t('stopActivityDelivery') }}</x-switch>
 				<x-switch v-model="isBlocked" class="switch">{{ $t('blockThisInstance') }}</x-switch>
 			</div>
+			<details class="metadata">
+				<summary class="label">{{ $t('metadata') }}</summary>
+				<pre><code>{{ JSON.stringify(instance.metadata, null, 2) }}</code></pre>
+			</details>
 		</div>
 	</div>
 </x-modal>
@@ -439,14 +455,23 @@ export default Vue.extend({
 
 						> .icon {
 							margin-right: 4px;
+							display: none;
 						}
 					}
 				}
 			}
 		}
 
+		> .data {
+			margin-top: 8px;
+			padding-top: 8px;
+			border-top: solid 1px rgba(0, 0, 0, 0.1);
+		}
+
 		> .chart {
 			margin-top: 8px;
+			padding-top: 8px;
+			border-top: solid 1px rgba(0, 0, 0, 0.1);
 
 			> .header {
 				padding: 0 16px;
@@ -463,7 +488,8 @@ export default Vue.extend({
 		}
 
 		> .operations {
-			padding: 0 16px 8px 16px;
+			padding: 8px 16px 8px 16px;
+			border-top: solid 1px rgba(0, 0, 0, 0.1);
 
 			> .label {
 				font-size: 80%;
@@ -472,6 +498,22 @@ export default Vue.extend({
 
 			> .switch {
 				margin: 16px 0;
+			}
+		}
+
+		> .metadata {
+			padding: 8px 16px 8px 16px;
+			border-top: solid 1px rgba(0, 0, 0, 0.1);
+
+			> .label {
+				font-size: 80%;
+				opacity: 0.7;
+			}
+
+			> pre > code {
+				display: block;
+				max-height: 200px;
+				overflow: auto;
 			}
 		}
 	}

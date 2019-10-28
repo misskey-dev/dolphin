@@ -28,6 +28,7 @@ export class Instance {
 	/**
 	 * インスタンスのユーザー数
 	 */
+	@Index()
 	@Column('integer', {
 		default: 0,
 		comment: 'The count of the users of the Instance.'
@@ -37,6 +38,7 @@ export class Instance {
 	/**
 	 * インスタンスの投稿数
 	 */
+	@Index()
 	@Column('integer', {
 		default: 0,
 		comment: 'The count of the notes of the Instance.'
@@ -46,6 +48,7 @@ export class Instance {
 	/**
 	 * このインスタンスのユーザーからフォローされている、自インスタンスのユーザーの数
 	 */
+	@Index()
 	@Column('integer', {
 		default: 0,
 	})
@@ -54,6 +57,7 @@ export class Instance {
 	/**
 	 * このインスタンスのユーザーをフォローしている、自インスタンスのユーザーの数
 	 */
+	@Index()
 	@Column('integer', {
 		default: 0,
 	})
@@ -62,6 +66,7 @@ export class Instance {
 	/**
 	 * ドライブ使用量
 	 */
+	@Index()
 	@Column('bigint', {
 		default: 0,
 	})
@@ -70,6 +75,7 @@ export class Instance {
 	/**
 	 * ドライブのファイル数
 	 */
+	@Index()
 	@Column('integer', {
 		default: 0,
 	})
@@ -78,6 +84,7 @@ export class Instance {
 	/**
 	 * 直近のリクエスト送信日時
 	 */
+	@Index()
 	@Column('timestamp with time zone', {
 		nullable: true,
 	})
@@ -94,6 +101,7 @@ export class Instance {
 	/**
 	 * 直近のリクエスト受信日時
 	 */
+	@Index()
 	@Column('timestamp with time zone', {
 		nullable: true,
 	})
@@ -102,12 +110,14 @@ export class Instance {
 	/**
 	 * このインスタンスと最後にやり取りした日時
 	 */
+	@Index()
 	@Column('timestamp with time zone')
 	public lastCommunicatedAt: Date;
 
 	/**
 	 * このインスタンスと不通かどうか
 	 */
+	@Index()
 	@Column('boolean', {
 		default: false
 	})
@@ -116,6 +126,7 @@ export class Instance {
 	/**
 	 * このインスタンスへの配信を停止するか
 	 */
+	@Index()
 	@Column('boolean', {
 		default: false
 	})
