@@ -64,7 +64,7 @@
 				<div class="header">
 					<span class="label">{{ $t('charts') }}</span>
 					<div class="selects">
-						<x-select v-model="chartSrc" style="margin: 0;">
+						<x-select v-model="chartSrc" style="margin: 0; flex: 1;">
 							<option value="requests">{{ $t('_instanceCharts.requests') }}</option>
 							<option value="users">{{ $t('_instanceCharts.users') }}</option>
 							<option value="users-total">{{ $t('_instanceCharts.usersTotal') }}</option>
