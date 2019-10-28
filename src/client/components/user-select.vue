@@ -104,7 +104,7 @@ export default Vue.extend({
 
 	> .header {
 		display: flex;
-		border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+		flex-shrink: 0;
 
 		> button {
 			height: 42px;
@@ -118,7 +118,7 @@ export default Vue.extend({
 	}
 
 	> .inputs {
-		padding: 16px;
+		padding: 8px 16px 16px 16px;
 
 		> .input {
 			display: inline-block;
