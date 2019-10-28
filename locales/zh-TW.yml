@@ -150,6 +150,7 @@ operations: "操作"
 software: "ソフトウェア"
 version: "バージョン"
 metadata: "メタデータ"
+withNFiles: "{n}つのファイル"
 _cw:
   hide: "隠す"
   show: "もっと見る"
@@ -188,6 +189,7 @@ _visibility:
 _postForm:
   placeholder: "いまどうしてる？"
   replyPlaceholder: "この投稿に返信..."
+  quotePlaceholder: "この投稿を引用..."
   post: "投稿"
 _profile:
   name: "名前"
