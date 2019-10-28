@@ -9,53 +9,53 @@
 			<div class="table">
 				<div class="row">
 					<div class="cell">
-						<div class="label">{{ $t('foundAt') }}</div>
+						<div class="label"><fa :icon="faCrosshairs" fixed-width class="icon"/>{{ $t('foundAt') }}</div>
 						<div class="data">{{ new Date(instance.caughtAt).toLocaleString() }}</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="cell">
-						<div class="label">{{ $t('following') }}</div>
+						<div class="label"><fa :icon="faCloudDownloadAlt" fixed-width class="icon"/>{{ $t('following') }}</div>
 						<div class="data">{{ instance.followingCount | number }}</div>
 					</div>
 					<div class="cell">
-						<div class="label">{{ $t('followers') }}</div>
+						<div class="label"><fa :icon="faCloudUploadAlt" fixed-width class="icon"/>{{ $t('followers') }}</div>
 						<div class="data">{{ instance.followersCount | number }}</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="cell">
-						<div class="label">{{ $t('users') }}</div>
+						<div class="label"><fa :icon="faUsers" fixed-width class="icon"/>{{ $t('users') }}</div>
 						<div class="data">{{ instance.usersCount | number }}</div>
 					</div>
 					<div class="cell">
-						<div class="label">{{ $t('notes') }}</div>
+						<div class="label"><fa :icon="faPencilAlt" fixed-width class="icon"/>{{ $t('notes') }}</div>
 						<div class="data">{{ instance.notesCount | number }}</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="cell">
-						<div class="label">{{ $t('files') }}</div>
+						<div class="label"><fa :icon="faFileImage" fixed-width class="icon"/>{{ $t('files') }}</div>
 						<div class="data">{{ instance.driveFiles | number }}</div>
 					</div>
 					<div class="cell">
-						<div class="label">{{ $t('storageUsage') }}</div>
+						<div class="label"><fa :icon="faDatabase" fixed-width class="icon"/>{{ $t('storageUsage') }}</div>
 						<div class="data">{{ instance.driveUsage | bytes }}</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="cell">
-						<div class="label">{{ $t('latestRequestSentAt') }}</div>
+						<div class="label"><fa :icon="faLongArrowAltUp" fixed-width class="icon"/>{{ $t('latestRequestSentAt') }}</div>
 						<div class="data"><dp-time v-if="instance.latestRequestSentAt" :time="instance.latestRequestSentAt"/><span v-else>N/A</span></div>
 					</div>
 					<div class="cell">
-						<div class="label">{{ $t('latestStatus') }}</div>
+						<div class="label"><fa :icon="faTrafficLight" fixed-width class="icon"/>{{ $t('latestStatus') }}</div>
 						<div class="data">{{ instance.latestStatus ? instance.latestStatus : 'N/A' }}</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="cell">
-						<div class="label">{{ $t('latestRequestReceivedAt') }}</div>
+						<div class="label"><fa :icon="faLongArrowAltDown" fixed-width class="icon"/>{{ $t('latestRequestReceivedAt') }}</div>
 						<div class="data"><dp-time v-if="instance.latestRequestReceivedAt" :time="instance.latestRequestReceivedAt"/><span v-else>N/A</span></div>
 					</div>
 				</div>
@@ -65,21 +65,21 @@
 					<span class="label">{{ $t('charts') }}</span>
 					<div class="selects">
 						<x-select v-model="chartSrc" style="margin: 0;">
-							<option value="requests">{{ $t('chart-srcs.requests') }}</option>
-							<option value="users">{{ $t('chart-srcs.users') }}</option>
-							<option value="users-total">{{ $t('chart-srcs.users-total') }}</option>
-							<option value="notes">{{ $t('chart-srcs.notes') }}</option>
-							<option value="notes-total">{{ $t('chart-srcs.notes-total') }}</option>
-							<option value="ff">{{ $t('chart-srcs.ff') }}</option>
-							<option value="ff-total">{{ $t('chart-srcs.ff-total') }}</option>
-							<option value="drive-usage">{{ $t('chart-srcs.drive-usage') }}</option>
-							<option value="drive-usage-total">{{ $t('chart-srcs.drive-usage-total') }}</option>
-							<option value="drive-files">{{ $t('chart-srcs.drive-files') }}</option>
-							<option value="drive-files-total">{{ $t('chart-srcs.drive-files-total') }}</option>
+							<option value="requests">{{ $t('_instanceCharts.requests') }}</option>
+							<option value="users">{{ $t('_instanceCharts.users') }}</option>
+							<option value="users-total">{{ $t('_instanceCharts.usersTotal') }}</option>
+							<option value="notes">{{ $t('_instanceCharts.notes') }}</option>
+							<option value="notes-total">{{ $t('_instanceCharts.notesTotal') }}</option>
+							<option value="ff">{{ $t('_instanceCharts.ff') }}</option>
+							<option value="ff-total">{{ $t('_instanceCharts.ff-total') }}</option>
+							<option value="drive-usage">{{ $t('_instanceCharts.cacheSize') }}</option>
+							<option value="drive-usage-total">{{ $t('_instanceCharts.cacheSizeTotal') }}</option>
+							<option value="drive-files">{{ $t('_instanceCharts.files') }}</option>
+							<option value="drive-files-total">{{ $t('_instanceCharts.filesTotal') }}</option>
 						</x-select>
 						<x-select v-model="chartSpan" style="margin: 0;">
-							<option value="hour">{{ $t('chart-spans.hour') }}</option>
-							<option value="day">{{ $t('chart-spans.day') }}</option>
+							<option value="hour">{{ $t('perHour') }}</option>
+							<option value="day">{{ $t('perDay') }}</option>
 						</x-select>
 					</div>
 				</div>
@@ -94,7 +94,7 @@
 import Vue from 'vue';
 import Chart from 'chart.js';
 import i18n from '../i18n';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faCrosshairs, faCloudDownloadAlt, faCloudUploadAlt, faUsers, faPencilAlt, faFileImage, faDatabase, faTrafficLight, faLongArrowAltUp, faLongArrowAltDown } from '@fortawesome/free-solid-svg-icons';
 import XModal from '../components/modal.vue';
 import XSelect from '../components/ui/select.vue';
 
@@ -130,7 +130,7 @@ export default Vue.extend({
 			chart: null,
 			chartSrc: 'requests',
 			chartSpan: 'hour',
-			faTimes
+			faTimes, faCrosshairs, faCloudDownloadAlt, faCloudUploadAlt, faUsers, faPencilAlt, faFileImage, faDatabase, faTrafficLight, faLongArrowAltUp, faLongArrowAltDown
 		};
 	},
 
@@ -407,6 +407,10 @@ export default Vue.extend({
 					> .label {
 						font-size: 80%;
 						opacity: 0.7;
+
+						> .icon {
+							margin-right: 4px;
+						}
 					}
 				}
 			}
