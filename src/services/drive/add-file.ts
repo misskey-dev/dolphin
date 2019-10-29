@@ -126,9 +126,9 @@ export async function generateThumbnail(path: string, type: string) {
 
 	try {
 		if (['image/jpeg', 'image/webp'].includes(type)) {
-			thumbnail = await convertToJpeg(path, 498, 280);
+			thumbnail = await convertToJpeg(path, 250, 160);
 		} else if (['image/png'].includes(type)) {
-			thumbnail = await convertToPng(path, 498, 280);
+			thumbnail = await convertToPng(path, 250, 160);
 		} else if (['image/gif'].includes(type)) {
 			thumbnail = await convertToGif(path);
 		} else if (['image/apng', 'image/vnd.mozilla.apng'].includes(type)) {
