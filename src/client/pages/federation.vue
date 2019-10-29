@@ -3,6 +3,7 @@
 	<section class="_section instances">
 		<div class="title"><fa :icon="faGlobe"/> {{ $t('instances') }}</div>
 		<div class="content">
+			<x-input v-model="host" :debounce="true"><template #title>{{ $t('host') }}</template></x-input>
 			<x-pagination :pagination="pagination" #default="{items}" class="instances" ref="instances">
 				<div class="instance" v-for="(instance, i) in items" :key="instance.id" :data-index="i" @click="info(instance)">
 					<div class="host"><fa :icon="faCircle" class="indicator" :class="getStatus(instance)"/><b>{{ instance.host }}</b></div>
@@ -26,6 +27,7 @@ import Vue from 'vue';
 import { faGlobe, faCircle, faExchangeAlt, faCaretDown, faCaretUp, faTrafficLight } from '@fortawesome/free-solid-svg-icons';
 import i18n from '../i18n';
 import XButton from '../components/ui/button.vue';
+import XInput from '../components/ui/input.vue';
 import XPagination from '../components/ui/pagination.vue';
 import DpInstanceInfo from './federation.instance.vue';
 
@@ -40,21 +42,30 @@ export default Vue.extend({
 
 	components: {
 		XButton,
+		XInput,
 		XPagination,
 	},
 
 	data() {
 		return {
+			host: '',
 			sort: '+pubSub',
 			pagination: {
 				endpoint: 'federation/instances',
 				limit: 10,
 				offsetMode: true,
 				params: () => ({
-					sort: this.sort
+					sort: this.sort,
+					host: this.host != '' ? this.host : null
 				})
 			},
 			faGlobe, faCircle, faExchangeAlt, faCaretDown, faCaretUp, faTrafficLight
+		}
+	},
+
+	watch: {
+		host() {
+			this.$refs.instances.reload();
 		}
 	},
 

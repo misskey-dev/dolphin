@@ -9,6 +9,10 @@ export const meta = {
 	requireCredential: false,
 
 	params: {
+		host: {
+			validator: $.optional.nullable.str,
+		},
+
 		blocked: {
 			validator: $.optional.nullable.bool,
 		},
@@ -86,6 +90,10 @@ export default define(meta, async (ps, me) => {
 		} else {
 			query.andWhere('instance.isSuspended = FALSE');
 		}
+	}
+
+	if (ps.host) {
+		query.andWhere('instance.host like :host', { host: '%' + ps.host.toLowerCase() + '%' })
 	}
 
 	const instances = await query.take(ps.limit!).skip(ps.offset).getMany();
