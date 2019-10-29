@@ -250,7 +250,7 @@ export default Vue.extend({
 			left: 16px;
 		}
 
-		@media (min-width: 700px) {
+		@media (min-width: 850px) {
 			top: 402px;
 			bottom: initial;
 			left: initial;
@@ -338,7 +338,7 @@ export default Vue.extend({
 			padding: 0 16px 16px 16px;
 		}
 
-		@media (min-width: 900px) {
+		@media (min-width: 850px) {
 			bottom: initial;
 			right: 0;
 			top: 0;
@@ -365,7 +365,7 @@ export default Vue.extend({
 				margin-right: 0;
 			}
 
-			@media (min-width: 900px) {
+			@media (min-width: 850px) {
 				margin: 16px 0;
 
 				&:first-child {
