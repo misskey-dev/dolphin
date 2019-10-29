@@ -7,15 +7,17 @@ $darkHtml: #050606;
 	--fg: #5c6a73;
 	--scrollbarHandle: rgba(0, 0, 0, 0.2);
 	--scrollbarHandleHover: rgba(0, 0, 0, 0.4);
-	--link: #5c4e94;
-	--hashtag: #94a029;
+	--link: #94a029;
+	--hashtag: #ff9156;
 	--mention: #{$primary};
+	--modalBg: rgba(0, 0, 0, 0.3);
 
 	@media (prefers-color-scheme: dark) {
 		--bg: #111213;
 		--fg: #c7d1d8;
 		--scrollbarHandle: rgba(255, 255, 255, 0.2);
 		--scrollbarHandleHover: rgba(255, 255, 255, 0.4);	
+		--modalBg: rgba(0, 0, 0, 0.5);
 	}
 }
 
