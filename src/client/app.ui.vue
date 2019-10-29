@@ -1,6 +1,6 @@
 <template>
 <div class="dp-app-ui" v-hotkey.global="keymap">
-	<transition name="zoom-in-bottom">
+	<transition name="nav">
 		<nav v-if="navOpen" ref="nav">
 			<template v-if="showAccounts">
 				<button class="_button" v-for="account in accounts" :key="account.id" @click="switchAccount(account)"><dp-avatar :user="account" class="avatar"/><dp-user-name :user="account"/></button>
@@ -217,6 +217,23 @@ export default Vue.extend({
 	90% { opacity: 0; }
 }
 
+.nav-enter-active,
+.nav-leave-active {
+	opacity: 1;
+	transform: scaleY(1);
+	transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+	transform-origin: center bottom;
+
+	@media (min-width: 700px) {
+		transform-origin: center top;
+	}
+}
+.nav-enter,
+.nav-leave-active {
+	opacity: 0;
+	transform: scaleY(0);
+}
+
 .dp-app-ui {
 	> nav {
 		position: fixed;
@@ -231,6 +248,13 @@ export default Vue.extend({
 		@media (max-width: 500px) {
 			bottom: 92px;
 			left: 16px;
+		}
+
+		@media (min-width: 700px) {
+			top: 402px;
+			bottom: initial;
+			left: initial;
+			right: 32px;
 		}
 
 		> div {
@@ -314,6 +338,16 @@ export default Vue.extend({
 			padding: 0 16px 16px 16px;
 		}
 
+		@media (min-width: 900px) {
+			bottom: initial;
+			right: 0;
+			top: 0;
+			flex-direction: column-reverse;
+			width: initial;
+			padding: 32px 32px 32px 0;
+			background: none;
+		}
+
 		> .button {
 			position: relative;
 			padding: 0;
@@ -329,6 +363,18 @@ export default Vue.extend({
 
 			&:last-child {
 				margin-right: 0;
+			}
+
+			@media (min-width: 900px) {
+				margin: 16px 0;
+
+				&:first-child {
+					margin-bottom: 0;
+				}
+
+				&:last-child {
+					margin-top: 0;
+				}
 			}
 
 			> * {
