@@ -208,7 +208,7 @@ _exportOrImport:
   blockingList: "Block list"
   userLists: "Lists"
 _instanceCharts:
-  requests: "リクエスト"
+  requests: "Requests"
   users: "ユーザーの増減"
   usersTotal: "ユーザーの積算"
   notes: "投稿の増減"
