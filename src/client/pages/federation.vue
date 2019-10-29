@@ -3,7 +3,7 @@
 	<section class="_section instances">
 		<div class="title"><fa :icon="faGlobe"/> {{ $t('instances') }}</div>
 		<div class="content">
-			<x-input v-model="host" :debounce="true"><template #title>{{ $t('host') }}</template></x-input>
+			<x-input v-model="host" :debounce="true" style="margin-top: 0;"><template #title>{{ $t('host') }}</template></x-input>
 			<x-pagination :pagination="pagination" #default="{items}" class="instances" ref="instances">
 				<div class="instance" v-for="(instance, i) in items" :key="instance.id" :data-index="i" @click="info(instance)">
 					<div class="host"><fa :icon="faCircle" class="indicator" :class="getStatus(instance)"/><b>{{ instance.host }}</b></div>
