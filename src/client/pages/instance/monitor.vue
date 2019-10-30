@@ -46,8 +46,29 @@ export default Vue.extend({
 
 	mounted() {
 		Chart.defaults.global.defaultFontColor = getComputedStyle(document.documentElement).getPropertyValue('--fg');
-		const opts = {
+
+		this.chartCpuMem = new Chart(this.$refs.cpumem, {
 			type: 'line',
+			data: {
+				labels: [],
+				datasets: [{
+					label: 'CPU',
+					pointRadius: 0,
+					lineTension: 0,
+					borderWidth: 2,
+					borderColor: '#5da1c1',
+					backgroundColor: alpha('#5da1c1', 0.1),
+					data: []
+				}, {
+					label: 'MEM',
+					pointRadius: 0,
+					lineTension: 0,
+					borderWidth: 2,
+					borderColor: '#935dbf',
+					backgroundColor: alpha('#935dbf', 0.02),
+					data: []
+				}]
+			},
 			options: {
 				aspectRatio: 3,
 				layout: {
@@ -83,34 +104,10 @@ export default Vue.extend({
 					mode: 'index',
 				}
 			}
-		};
-
-		this.chartCpuMem = new Chart(this.$refs.cpumem, {
-			...opts,
-			data: {
-				labels: [],
-				datasets: [{
-					label: 'CPU',
-					pointRadius: 0,
-					lineTension: 0,
-					borderWidth: 2,
-					borderColor: '#5da1c1',
-					backgroundColor: alpha('#5da1c1', 0.1),
-					data: []
-				}, {
-					label: 'MEM',
-					pointRadius: 0,
-					lineTension: 0,
-					borderWidth: 2,
-					borderColor: '#935dbf',
-					backgroundColor: alpha('#935dbf', 0.02),
-					data: []
-				}]
-			},
 		});
 
 		this.chartNet = new Chart(this.$refs.net, {
-			...opts,
+			type: 'line',
 			data: {
 				labels: [],
 				datasets: [{
@@ -131,10 +128,44 @@ export default Vue.extend({
 					data: []
 				}]
 			},
+			options: {
+				aspectRatio: 3,
+				layout: {
+					padding: {
+						left: 0,
+						right: 0,
+						top: 8,
+						bottom: 0
+					}
+				},
+				legend: {
+					position: 'bottom',
+				},
+				scales: {
+					xAxes: [{
+						gridLines: {
+							display: false
+						},
+						ticks: {
+							display: false
+						}
+					}],
+					yAxes: [{
+						position: 'right',
+						ticks: {
+							display: false,
+						}
+					}]
+				},
+				tooltips: {
+					intersect: false,
+					mode: 'index',
+				}
+			}
 		});
 
 		this.chartDisk = new Chart(this.$refs.disk, {
-			...opts,
+			type: 'line',
 			data: {
 				labels: [],
 				datasets: [{
@@ -155,6 +186,40 @@ export default Vue.extend({
 					data: []
 				}]
 			},
+			options: {
+				aspectRatio: 3,
+				layout: {
+					padding: {
+						left: 0,
+						right: 0,
+						top: 8,
+						bottom: 0
+					}
+				},
+				legend: {
+					position: 'bottom',
+				},
+				scales: {
+					xAxes: [{
+						gridLines: {
+							display: false
+						},
+						ticks: {
+							display: false
+						}
+					}],
+					yAxes: [{
+						position: 'right',
+						ticks: {
+							display: false,
+						}
+					}]
+				},
+				tooltips: {
+					intersect: false,
+					mode: 'index',
+				}
+			}
 		});
 	
 		this.connection = this.$root.stream.useSharedConnection('serverStats');
