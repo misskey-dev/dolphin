@@ -281,7 +281,7 @@ export default Vue.extend({
 			this.connection.on('statsLog', this.onStatsLog);
 			this.connection.send('requestLog', {
 				id: Math.random().toString().substr(2, 8),
-				length: 200
+				length: 150
 			});
 		});
 	},
@@ -309,7 +309,7 @@ export default Vue.extend({
 			this.chartDisk.data.labels.push('');
 			this.chartDisk.data.datasets[0].data.push(stats.fs.r);
 			this.chartDisk.data.datasets[1].data.push(stats.fs.w);
-			if (this.chartCpuMem.data.datasets[0].data.length > 200) {
+			if (this.chartCpuMem.data.datasets[0].data.length > 150) {
 				this.chartCpuMem.data.labels.shift();
 				this.chartCpuMem.data.datasets[0].data.shift();
 				this.chartCpuMem.data.datasets[1].data.shift();
