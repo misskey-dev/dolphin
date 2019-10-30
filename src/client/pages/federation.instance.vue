@@ -266,6 +266,7 @@ export default Vue.extend({
 					}))
 				},
 				options: {
+					aspectRatio: 2.5,
 					layout: {
 						padding: {
 							left: 16,
