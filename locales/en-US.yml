@@ -163,6 +163,7 @@ clearQueueConfirmTitle: "キューをクリアしますか？"
 clearQueueConfirmText: "未配達の投稿は配送されなくなります。通常この操作を行う必要はありません。"
 clearCachedFiles: "キャッシュをクリア"
 clearCachedFilesConfirm: "キャッシュされたリモートファイルをすべて削除しますか？"
+blockedInstancesDescription: "ブロックしたいインスタンスのホストを改行で区切って設定します。ブロックされたインスタンスは、このインスタンスとやり取りできなくなります。"
 _cw:
   hide: "Hide"
   show: "See more"
