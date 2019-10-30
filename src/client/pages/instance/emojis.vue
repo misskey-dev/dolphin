@@ -22,10 +22,16 @@
 import Vue from 'vue';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt, faLaugh } from '@fortawesome/free-regular-svg-icons';
-import XButton from '../components/ui/button.vue';
-import XPagination from '../components/ui/pagination.vue';
+import XButton from '../../components/ui/button.vue';
+import XPagination from '../../components/ui/pagination.vue';
 
 export default Vue.extend({
+	metaInfo() {
+		return {
+			title: `${this.$t('emojis')} | ${this.$t('instance')}`
+		};
+	},
+
 	components: {
 		XButton,
 		XPagination,
@@ -92,7 +98,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '../theme';
+@import '../../theme';
 
 .dp-instance-emojis {
 	> .content {

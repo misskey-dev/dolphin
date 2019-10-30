@@ -21,10 +21,16 @@
 <script lang="ts">
 import Vue from 'vue';
 import { faPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
-import XButton from '../components/ui/button.vue';
-import XPagination from '../components/ui/pagination.vue';
+import XButton from '../../components/ui/button.vue';
+import XPagination from '../../components/ui/pagination.vue';
 
 export default Vue.extend({
+	metaInfo() {
+		return {
+			title: `${this.$t('users')} | ${this.$t('instance')}`
+		};
+	},
+
 	components: {
 		XButton,
 		XPagination,

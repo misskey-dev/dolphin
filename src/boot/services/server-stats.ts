@@ -21,9 +21,11 @@ export default function() {
 		const cpu = await cpuUsage();
 		const usedmem = await usedMem();
 		const totalmem = await totalMem();
+		const netStats = await net();
+		console.log(netStats);
 
 		const stats = {
-			cpu_usage: cpu,
+			cpu: cpu,
 			mem: {
 				total: totalmem,
 				used: usedmem
@@ -58,4 +60,11 @@ async function usedMem() {
 async function totalMem() {
 	const data = await sysUtils.mem();
 	return data.total;
+}
+
+// NETWORK STAT
+async function net() {
+	const iface = await sysUtils.networkInterfaceDefault();
+	const data = await sysUtils.networkStats(iface);
+	return data[0];
 }

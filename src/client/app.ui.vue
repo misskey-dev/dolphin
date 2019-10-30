@@ -15,6 +15,14 @@
 				<button class="_button" @click="createList()"><fa :icon="faPlus" fixed-width/>{{ $t('createList') }}</button>
 				<router-link to="/manage-lists"><fa :icon="faCog" fixed-width/>{{ $t('manageLists') }}</router-link>
 			</template>
+			<template v-else-if="showInstance">
+				<router-link to="/instance/emojis"><fa :icon="faLaugh" fixed-width/>{{ $t('emojis') }}</router-link>
+				<router-link to="/instance/users"><fa :icon="faUsers" fixed-width/>{{ $t('users') }}</router-link>
+				<router-link to="/instance/monitor"><fa :icon="faTachometerAlt" fixed-width/>{{ $t('monitor') }}</router-link>
+				<router-link to="/instance/queue"><fa :icon="faExchangeAlt" fixed-width/>{{ $t('jobQueue') }}</router-link>
+				<div></div>
+				<router-link to="/instance"><fa :icon="faCog" fixed-width/>{{ $t('general') }}</router-link>
+			</template>
 			<template v-else>
 				<button class="_button" @click="search()"><fa :icon="faSearch" fixed-width/>{{ $t('search') }}</button>
 				<div></div>
@@ -24,7 +32,7 @@
 				<router-link to="/follow-requests" v-if="$store.state.i.isLocked"><fa :icon="faUserClock" fixed-width/>{{ $t('followRequests') }}<i v-if="$store.state.i.pendingReceivedFollowRequestsCount"><fa :icon="faCircle"/></i></router-link>
 				<div></div>
 				<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
-				<router-link to="/instance" v-if="$store.state.i.isAdmin"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</router-link>
+				<button class="_button" v-if="$store.state.i.isAdmin" @click="showInstance = true"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</button>
 				<div></div>
 				<button class="_button" @click="showAccounts = true"><dp-avatar :user="$store.state.i" class="avatar"/><dp-user-name :user="$store.state.i"/></button>
 			</template>
@@ -44,8 +52,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faListUl, faPlus, faUserClock } from '@fortawesome/free-solid-svg-icons';
-import { faBell, faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faListUl, faPlus, faUserClock, faUsers, faTachometerAlt, faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faEnvelope, faLaugh } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
 import DpToast from './components/toast.vue';
@@ -64,10 +72,11 @@ export default Vue.extend({
 			notificationsOpen: false,
 			showLists: false,
 			showAccounts: false,
+			showInstance: false,
 			accounts: [],
 			lists: [],
 			connection: null,
-			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faEnvelope, faListUl, faPlus, faUserClock
+			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faEnvelope, faListUl, faPlus, faUserClock, faLaugh, faUsers, faTachometerAlt, faExchangeAlt
 		};
 	},
 
@@ -89,6 +98,7 @@ export default Vue.extend({
 		navOpen(opened) {
 			this.showAccounts = false;
 			this.showLists = false;
+			this.showInstance = false;
 		},
 
 		async showAccounts() {

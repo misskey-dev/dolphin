@@ -11,7 +11,7 @@
 import Vue from 'vue';
 import { faTachometerAlt } from '@fortawesome/free-solid-svg-icons';
 import Chart from 'chart.js';
-import i18n from '../i18n';
+import i18n from '../../i18n';
 
 const alpha = (hex, a) => {
 	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)!;
@@ -23,6 +23,12 @@ const alpha = (hex, a) => {
 
 export default Vue.extend({
 	i18n,
+
+	metaInfo() {
+		return {
+			title: `${this.$t('monitor')} | ${this.$t('instance')}`
+		};
+	},
 
 	components: {
 	},
@@ -114,7 +120,7 @@ export default Vue.extend({
 
 	methods: {
 		onStats(stats) {
-			const cpu = (stats.cpu_usage * 100).toFixed(0);
+			const cpu = (stats.cpu * 100).toFixed(0);
 			const mem = (stats.mem.used / stats.mem.total * 100).toFixed(0);
 
 			this.chart.data.labels.push('');
