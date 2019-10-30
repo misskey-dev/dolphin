@@ -157,6 +157,7 @@ cpuAndMemory: "CPUとメモリ"
 network: "ネットワーク"
 disk: "ディスク"
 instanceInfo: "インスタンス情報"
+statistics: "統計"
 _cw:
   hide: "Hide"
   show: "See more"
