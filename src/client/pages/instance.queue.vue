@@ -44,83 +44,85 @@ export default Vue.extend({
 
 	mounted() {
 		Chart.defaults.global.defaultFontColor = getComputedStyle(document.documentElement).getPropertyValue('--fg');
-		const opts = {
-			type: 'line',
-			data: {
-				labels: [],
-				datasets: [{
-					label: 'Process',
-					pointRadius: 0,
-					lineTension: 0,
-					borderWidth: 2,
-					borderColor: '#00E396',
-					backgroundColor: alpha('#00E396', 0.1),
-					data: []
-				}, {
-					label: 'Active',
-					pointRadius: 0,
-					lineTension: 0,
-					borderWidth: 2,
-					borderColor: '#00BCD4',
-					backgroundColor: alpha('#00BCD4', 0.1),
-					data: []
-				}, {
-					label: 'Waiting',
-					pointRadius: 0,
-					lineTension: 0,
-					borderWidth: 2,
-					borderColor: '#FFB300',
-					backgroundColor: alpha('#FFB300', 0.1),
-					data: []
-				}, {
-					label: 'Delayed',
-					pointRadius: 0,
-					lineTension: 0,
-					borderWidth: 2,
-					borderColor: '#E53935',
-					backgroundColor: alpha('#E53935', 0.02),
-					data: []
-				}]
-			},
-			options: {
-				aspectRatio: 3,
-				layout: {
-					padding: {
-						left: 0,
-						right: 0,
-						top: 0,
-						bottom: 0
-					}
-				},
-				legend: {
-					position: 'bottom',
-				},
-				scales: {
-					xAxes: [{
-						gridLines: {
-							display: false
-						},
-						ticks: {
-							display: false
-						}
-					}],
-					yAxes: [{
-						position: 'right',
-						ticks: {
-							display: false,
-							max: 100
-						}
+		const makeChart = el => {
+			return new Chart(el, {
+				type: 'line',
+				data: {
+					labels: [],
+					datasets: [{
+						label: 'Process',
+						pointRadius: 0,
+						lineTension: 0,
+						borderWidth: 2,
+						borderColor: '#00E396',
+						backgroundColor: alpha('#00E396', 0.1),
+						data: []
+					}, {
+						label: 'Active',
+						pointRadius: 0,
+						lineTension: 0,
+						borderWidth: 2,
+						borderColor: '#00BCD4',
+						backgroundColor: alpha('#00BCD4', 0.1),
+						data: []
+					}, {
+						label: 'Waiting',
+						pointRadius: 0,
+						lineTension: 0,
+						borderWidth: 2,
+						borderColor: '#FFB300',
+						backgroundColor: alpha('#FFB300', 0.1),
+						data: []
+					}, {
+						label: 'Delayed',
+						pointRadius: 0,
+						lineTension: 0,
+						borderWidth: 2,
+						borderColor: '#E53935',
+						backgroundColor: alpha('#E53935', 0.02),
+						data: []
 					}]
 				},
-				tooltips: {
-					intersect: false,
-					mode: 'index',
+				options: {
+					aspectRatio: 3,
+					layout: {
+						padding: {
+							left: 0,
+							right: 0,
+							top: 8,
+							bottom: 0
+						}
+					},
+					legend: {
+						position: 'bottom',
+					},
+					scales: {
+						xAxes: [{
+							gridLines: {
+								display: false
+							},
+							ticks: {
+								display: false
+							}
+						}],
+						yAxes: [{
+							position: 'right',
+							ticks: {
+								display: false,
+								max: 100
+							}
+						}]
+					},
+					tooltips: {
+						intersect: false,
+						mode: 'index',
+					}
 				}
-			}
+			});
 		};
 
-		this.chartIn = new Chart(this.$refs.in, opts);
-		this.chartOut = new Chart(this.$refs.out, opts);
+		this.chartIn = makeChart(this.$refs.in);
+		this.chartOut = makeChart(this.$refs.out);
 	
 		this.connection = this.$root.stream.useSharedConnection('queueStats');
 		this.connection.on('stats', this.onStats);
