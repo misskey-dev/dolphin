@@ -151,6 +151,8 @@ software: "ソフトウェア"
 version: "バージョン"
 metadata: "メタデータ"
 withNFiles: "{n}つのファイル"
+monitor: "モニター"
+jobQueue: "ジョブキュー"
 _cw:
   hide: "隠す"
   show: "もっと見る"
