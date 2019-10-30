@@ -19,6 +19,7 @@ export const meta = {
 export default define(meta, async () => {
 	const memStats = await si.mem();
 	const fsStats = await si.fsSize();
+	const netInterface = await si.networkInterfaceDefault();
 
 	return {
 		machine: os.hostname(),
@@ -36,6 +37,9 @@ export default define(meta, async () => {
 		fs: {
 			total: fsStats[0].size,
 			used: fsStats[0].used,
+		},
+		net: {
+			interface: netInterface
 		}
 	};
 });

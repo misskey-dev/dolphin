@@ -13,6 +13,7 @@
 				<div class="row">
 					<div class="cell"><div class="label">MEM total</div>{{ serverInfo.mem.total | bytes }}</div>
 					<div class="cell"><div class="label">MEM used</div>{{ memUsage | bytes }} ({{ (memUsage / serverInfo.mem.total * 100).toFixed(0) }}%)</div>
+					<div class="cell"><div class="label">MEM free</div>{{ serverInfo.mem.total - memUsage | bytes }} ({{ ((serverInfo.mem.total - memUsage) / serverInfo.mem.total * 100).toFixed(0) }}%)</div>
 				</div>
 			</div>
 		</div>
@@ -27,6 +28,7 @@
 				<div class="row">
 					<div class="cell"><div class="label">Disk total</div>{{ serverInfo.fs.total | bytes }}</div>
 					<div class="cell"><div class="label">Disk used</div>{{ serverInfo.fs.used | bytes }} ({{ (serverInfo.fs.used / serverInfo.fs.total * 100).toFixed(0) }}%)</div>
+					<div class="cell"><div class="label">Disk free</div>{{ serverInfo.fs.total - serverInfo.fs.used | bytes }} ({{ ((serverInfo.fs.total - serverInfo.fs.used) / serverInfo.fs.total * 100).toFixed(0) }}%)</div>
 				</div>
 			</div>
 		</div>
@@ -35,6 +37,13 @@
 		<div class="title"><fa :icon="faExchangeAlt"/> {{ $t('network') }}</div>
 		<div class="content" style="margin-top: -8px; margin-bottom: -12px;">
 			<canvas ref="net"></canvas>
+		</div>
+		<div class="content" v-if="serverInfo">
+			<div class="table">
+				<div class="row">
+					<div class="cell"><div class="label">Interface</div>{{ serverInfo.net.interface }}</div>
+				</div>
+			</div>
 		</div>
 	</section>
 </div>
@@ -288,7 +297,7 @@ export default Vue.extend({
 			const cpu = (stats.cpu * 100).toFixed(0);
 			const memActive = (stats.mem.active / this.serverInfo.mem.total * 100).toFixed(0);
 			const memUsed = (stats.mem.used / this.serverInfo.mem.total * 100).toFixed(0);
-			this.memUsage = stats.mem.used;
+			this.memUsage = stats.mem.active;
 
 			this.chartCpuMem.data.labels.push('');
 			this.chartCpuMem.data.datasets[0].data.push(cpu);
@@ -325,7 +334,6 @@ export default Vue.extend({
 	}
 });
 </script>
-
 
 <style lang="scss" scoped>
 @import '../../theme';

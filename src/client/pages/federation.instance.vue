@@ -317,15 +317,15 @@ export default Vue.extend({
 		requestsChart(): any {
 			return {
 				series: [{
-					name: 'Incoming',
+					name: 'In',
 					color: '#008FFB',
 					data: this.format(this.stats.requests.received)
 				}, {
-					name: 'Outgoing (succeeded)',
+					name: 'Out (succ)',
 					color: '#00E396',
 					data: this.format(this.stats.requests.succeeded)
 				}, {
-					name: 'Outgoing (failed)',
+					name: 'Out (fail)',
 					color: '#FEB019',
 					data: this.format(this.stats.requests.failed)
 				}]
