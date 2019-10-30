@@ -155,6 +155,9 @@ metadata: "メタデータ"
 withNFiles: "{n}つのファイル"
 monitor: "モニター"
 jobQueue: "ジョブキュー"
+cpuAndMemory: "CPUとメモリ"
+network: "ネットワーク"
+disk: "ディスク"
 
 _cw:
   hide: "隠す"

@@ -31,12 +31,12 @@ export default function() {
 				used: usedmem
 			},
 			net: {
-				rx: netStats.rx_sec,
-				tx: netStats.tx_sec,
+				rx: Math.max(0, netStats.rx_sec),
+				tx: Math.max(0, netStats.tx_sec),
 			},
 			fs: {
-				r: fsStats.rIO_sec,
-				w: fsStats.wIO_sec,
+				r: Math.max(0, fsStats.rIO_sec),
+				w: Math.max(0, fsStats.wIO_sec),
 			}
 		};
 		ev.emit('serverStats', stats);

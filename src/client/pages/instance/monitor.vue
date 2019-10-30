@@ -1,9 +1,16 @@
 <template>
 <section class="_section dp-instance-monitor">
 	<div class="title"><fa :icon="faTachometerAlt"/> {{ $t('monitor') }}</div>
-	<div class="content">
+	<div class="content" style="margin-bottom: -8px;">
+		<span>{{ $t('cpuAndMemory') }}</span>
 		<canvas ref="cpumem"></canvas>
+	</div>
+	<div class="content" style="margin-bottom: -8px;">
+		<span>{{ $t('network') }}</span>
 		<canvas ref="net"></canvas>
+	</div>
+	<div class="content" style="margin-bottom: -8px;">
+		<span>{{ $t('disk') }}</span>
 		<canvas ref="disk"></canvas>
 	</div>
 </section>

@@ -1,13 +1,13 @@
 <template>
 <section class="_section dp-instance-queue">
 	<div class="title"><fa :icon="faExchangeAlt"/> {{ $t('jobQueue') }}</div>
-	<div class="content">
-		<div class="in">
-			<canvas ref="in"></canvas>
-		</div>
-		<div class="out">
-			<canvas ref="out"></canvas>
-		</div>
+	<div class="content in">
+		<span>In</span>
+		<canvas ref="in"></canvas>
+	</div>
+	<div class="content out">
+		<span>Out</span>
+		<canvas ref="out"></canvas>
 	</div>
 </section>
 </template>

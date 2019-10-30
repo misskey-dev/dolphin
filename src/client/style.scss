@@ -237,6 +237,10 @@ a {
 		@media (max-width: 500px) {
 			padding: 16px;
 		}
+
+		& + .content {
+			border-top: solid 1px rgba(0, 0, 0, 0.1);
+		}
 	}
 
 	> .footer {
