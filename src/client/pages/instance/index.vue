@@ -21,7 +21,7 @@
 			<x-input v-model="remoteDriveCapacityMb" type="number" :disabled="!cacheRemoteFiles" style="margin-bottom: 0;">{{ $t('remoteFilesCacheCapacityPerAccount') }}<template #suffix>MB</template></x-input>
 		</div>
 		<div class="footer">
-			<x-button primary @click="save()">{{ $t('save') }}</x-button>
+			<x-button primary @click="save()"><fa :icon="faSave"/> {{ $t('save') }}</x-button>
 		</div>
 	</section>
 
@@ -31,7 +31,19 @@
 			<x-input v-model="proxyAccount" style="margin: 0;"><template #prefix>@</template>{{ $t('proxyAccount') }}<template #desc>{{ $t('proxyAccountDescription') }}</template></x-input>
 		</div>
 		<div class="footer">
-			<x-button primary @click="save()">{{ $t('save') }}</x-button>
+			<x-button primary @click="save()"><fa :icon="faSave"/> {{ $t('save') }}</x-button>
+		</div>
+	</section>
+
+	<section class="_section">
+		<div class="title"><fa :icon="faBan"/> {{ $t('blockedInstances') }}</div>
+		<div class="content">
+			<x-textarea v-model="blockedHosts" style="margin-top: 0;">
+				<template #desc>{{ $t('blockedInstancesDescription') }}</template>
+			</x-textarea>
+		</div>
+		<div class="footer">
+			<x-button primary @click="save()"><fa :icon="faSave"/> {{ $t('save') }}</x-button>
 		</div>
 	</section>
 </div>
@@ -39,10 +51,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faGhost, faCog, faPlus, faCloud, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faGhost, faCog, faPlus, faCloud, faInfoCircle, faBan, faSave } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import XButton from '../../components/ui/button.vue';
 import XInput from '../../components/ui/input.vue';
+import XTextarea from '../../components/ui/textarea.vue';
 import XSwitch from '../../components/ui/switch.vue';
 import { version } from '../../config';
 import i18n from '../../i18n';
@@ -59,6 +72,7 @@ export default Vue.extend({
 	components: {
 		XButton,
 		XInput,
+		XTextarea,
 		XSwitch,
 	},
 
@@ -70,7 +84,8 @@ export default Vue.extend({
 			proxyAccount: null,
 			cacheRemoteFiles: false,
 			remoteDriveCapacityMb: 0,
-			faTrashAlt, faGhost, faCog, faPlus, faCloud, faInfoCircle
+			blockedHosts: '',
+			faTrashAlt, faGhost, faCog, faPlus, faCloud, faInfoCircle, faBan, faSave
 		}
 	},
 
@@ -80,6 +95,7 @@ export default Vue.extend({
 			this.proxyAccount = this.meta.proxyAccount;
 			this.cacheRemoteFiles = this.meta.cacheRemoteFiles;
 			this.remoteDriveCapacityMb = this.meta.driveCapacityPerRemoteUserMb;
+			this.blockedHosts = meta.blockedHosts.join('\n');
 		});
 
 		this.$root.api('admin/server-info', {}).then(res => {
@@ -93,6 +109,7 @@ export default Vue.extend({
 				proxyAccount: this.proxyAccount,
 				cacheRemoteFiles: this.cacheRemoteFiles,
 				remoteDriveCapacityMb: this.remoteDriveCapacityMb,
+				blockedHosts: this.blockedHosts.split('\n') || []
 			}).then(() => {
 				this.$root.dialog({
 					type: 'success',
