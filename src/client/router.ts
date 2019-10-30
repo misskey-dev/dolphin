@@ -19,6 +19,7 @@ export const router = new VueRouter({
 		{ path: '/instance', component: () => import('./pages/instance/index.vue').then(m => m.default) },
 		{ path: '/instance/emojis', component: () => import('./pages/instance/emojis.vue').then(m => m.default) },
 		{ path: '/instance/users', component: () => import('./pages/instance/users.vue').then(m => m.default) },
+		{ path: '/instance/files', component: () => import('./pages/instance/files.vue').then(m => m.default) },
 		{ path: '/instance/monitor', component: () => import('./pages/instance/monitor.vue').then(m => m.default) },
 		{ path: '/instance/queue', component: () => import('./pages/instance/queue.vue').then(m => m.default) },
 		{ path: '/instance/stats', component: () => import('./pages/instance/stats.vue').then(m => m.default) },

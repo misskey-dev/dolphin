@@ -163,6 +163,8 @@ statistics: "統計"
 clearQueue: "キューをクリア"
 clearQueueConfirmTitle: "キューをクリアしますか？"
 clearQueueConfirmText: "未配達の投稿は配送されなくなります。通常この操作を行う必要はありません。"
+clearCachedFiles: "キャッシュをクリア"
+clearCachedFilesConfirm: "キャッシュされたリモートファイルをすべて削除しますか？"
 
 _cw:
   hide: "隠す"

@@ -19,6 +19,7 @@
 				<router-link to="/instance/stats"><fa :icon="faChartBar" fixed-width/>{{ $t('statistics') }}</router-link>
 				<router-link to="/instance/emojis"><fa :icon="faLaugh" fixed-width/>{{ $t('customEmojis') }}</router-link>
 				<router-link to="/instance/users"><fa :icon="faUsers" fixed-width/>{{ $t('users') }}</router-link>
+				<router-link to="/instance/files"><fa :icon="faCloud" fixed-width/>{{ $t('files') }}</router-link>
 				<router-link to="/instance/monitor"><fa :icon="faTachometerAlt" fixed-width/>{{ $t('monitor') }}</router-link>
 				<router-link to="/instance/queue"><fa :icon="faExchangeAlt" fixed-width/>{{ $t('jobQueue') }}</router-link>
 				<router-link to="/federation"><fa :icon="faGlobe" fixed-width/>{{ $t('federation') }}</router-link>
@@ -54,7 +55,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faListUl, faPlus, faUserClock, faUsers, faTachometerAlt, faExchangeAlt, faGlobe, faChartBar } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faBars, faTimes, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faListUl, faPlus, faUserClock, faUsers, faTachometerAlt, faExchangeAlt, faGlobe, faChartBar, faCloud } from '@fortawesome/free-solid-svg-icons';
 import { faBell, faEnvelope, faLaugh } from '@fortawesome/free-regular-svg-icons';
 import i18n from './i18n';
 import { search } from './scripts/search';
@@ -78,7 +79,7 @@ export default Vue.extend({
 			accounts: [],
 			lists: [],
 			connection: null,
-			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faEnvelope, faListUl, faPlus, faUserClock, faLaugh, faUsers, faTachometerAlt, faExchangeAlt, faGlobe, faChartBar
+			faPencilAlt, faBars, faTimes, faBell, faSearch, faUserCog, faCog, faUser, faHome, faStar, faCircle, faAt, faEnvelope, faListUl, faPlus, faUserClock, faLaugh, faUsers, faTachometerAlt, faExchangeAlt, faGlobe, faChartBar, faCloud
 		};
 	},
 
