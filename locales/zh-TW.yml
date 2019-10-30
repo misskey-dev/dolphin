@@ -169,6 +169,7 @@ muteAndBlock: "ミュートとブロック"
 mutedUsers: "ミュートしたユーザー"
 blockedUsers: "ブロックしたユーザー"
 noUsers: "ユーザーはいません"
+editProfile: "プロフィールを編集"
 _cw:
   hide: "隠す"
   show: "もっと見る"
