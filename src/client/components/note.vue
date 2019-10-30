@@ -430,7 +430,7 @@ export default Vue.extend({
 		del() {
 			this.$root.dialog({
 				type: 'warning',
-				text: this.$t('@.delete-confirm'),
+				text: this.$t('noteDeleteConfirm'),
 				showCancelButton: true
 			}).then(({ canceled }) => {
 				if (canceled) return;

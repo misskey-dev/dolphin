@@ -130,7 +130,7 @@ export default Vue.extend({
 				if (e.id === '72dab508-c64d-498f-8740-a8eec1ba385a') {
 					this.$root.dialog({
 						type: 'error',
-						text: this.$t('pin-limit-exceeded')
+						text: this.$t('pinLimitExceeded')
 					});
 				}
 			});
@@ -139,7 +139,7 @@ export default Vue.extend({
 		del() {
 			this.$root.dialog({
 				type: 'warning',
-				text: this.$t('delete-confirm'),
+				text: this.$t('noteDeleteConfirm'),
 				showCancelButton: true
 			}).then(({ canceled }) => {
 				if (canceled) return;
