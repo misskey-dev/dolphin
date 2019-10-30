@@ -2,7 +2,9 @@
 <section class="_section dp-instance-monitor">
 	<div class="title"><fa :icon="faTachometerAlt"/> {{ $t('monitor') }}</div>
 	<div class="content">
-		<canvas ref="chart"></canvas>
+		<canvas ref="cpumem"></canvas>
+		<canvas ref="net"></canvas>
+		<canvas ref="disk"></canvas>
 	</div>
 </section>
 </template>
@@ -36,43 +38,23 @@ export default Vue.extend({
 	data() {
 		return {
 			connection: null,
-			stats: [],
-			chart: null,
+			chartCpuMem: null,
+			chartNet: null,
 			faTachometerAlt
 		}
 	},
 
 	mounted() {
 		Chart.defaults.global.defaultFontColor = getComputedStyle(document.documentElement).getPropertyValue('--fg');
-		this.chart = new Chart(this.$refs.chart, {
+		const opts = {
 			type: 'line',
-			data: {
-				labels: [],
-				datasets: [{
-					label: 'CPU',
-					pointRadius: 0,
-					lineTension: 0,
-					borderWidth: 2,
-					borderColor: '#5da1c1',
-					backgroundColor: alpha('#5da1c1', 0.1),
-					data: []
-				}, {
-					label: 'MEM',
-					pointRadius: 0,
-					lineTension: 0,
-					borderWidth: 2,
-					borderColor: '#935dbf',
-					backgroundColor: alpha('#935dbf', 0.02),
-					data: []
-				}]
-			},
 			options: {
 				aspectRatio: 3,
 				layout: {
 					padding: {
 						left: 0,
 						right: 0,
-						top: 0,
+						top: 8,
 						bottom: 0
 					}
 				},
@@ -101,6 +83,78 @@ export default Vue.extend({
 					mode: 'index',
 				}
 			}
+		};
+
+		this.chartCpuMem = new Chart(this.$refs.cpumem, {
+			...opts,
+			data: {
+				labels: [],
+				datasets: [{
+					label: 'CPU',
+					pointRadius: 0,
+					lineTension: 0,
+					borderWidth: 2,
+					borderColor: '#5da1c1',
+					backgroundColor: alpha('#5da1c1', 0.1),
+					data: []
+				}, {
+					label: 'MEM',
+					pointRadius: 0,
+					lineTension: 0,
+					borderWidth: 2,
+					borderColor: '#935dbf',
+					backgroundColor: alpha('#935dbf', 0.02),
+					data: []
+				}]
+			},
+		});
+
+		this.chartNet = new Chart(this.$refs.net, {
+			...opts,
+			data: {
+				labels: [],
+				datasets: [{
+					label: 'In',
+					pointRadius: 0,
+					lineTension: 0,
+					borderWidth: 2,
+					borderColor: '#94a029',
+					backgroundColor: alpha('#94a029', 0.1),
+					data: []
+				}, {
+					label: 'Out',
+					pointRadius: 0,
+					lineTension: 0,
+					borderWidth: 2,
+					borderColor: '#ff9156',
+					backgroundColor: alpha('#ff9156', 0.1),
+					data: []
+				}]
+			},
+		});
+
+		this.chartDisk = new Chart(this.$refs.disk, {
+			...opts,
+			data: {
+				labels: [],
+				datasets: [{
+					label: 'Read',
+					pointRadius: 0,
+					lineTension: 0,
+					borderWidth: 2,
+					borderColor: '#94a029',
+					backgroundColor: alpha('#94a029', 0.1),
+					data: []
+				}, {
+					label: 'Write',
+					pointRadius: 0,
+					lineTension: 0,
+					borderWidth: 2,
+					borderColor: '#ff9156',
+					backgroundColor: alpha('#ff9156', 0.1),
+					data: []
+				}]
+			},
 		});
 	
 		this.connection = this.$root.stream.useSharedConnection('serverStats');
@@ -123,15 +177,29 @@ export default Vue.extend({
 			const cpu = (stats.cpu * 100).toFixed(0);
 			const mem = (stats.mem.used / stats.mem.total * 100).toFixed(0);
 
-			this.chart.data.labels.push('');
-			this.chart.data.datasets[0].data.push(cpu);
-			this.chart.data.datasets[1].data.push(mem);
-			if (this.chart.data.datasets[0].data.length > 200) {
-				this.chart.data.labels.shift();
-				this.chart.data.datasets[0].data.shift();
-				this.chart.data.datasets[1].data.shift();
+			this.chartCpuMem.data.labels.push('');
+			this.chartCpuMem.data.datasets[0].data.push(cpu);
+			this.chartCpuMem.data.datasets[1].data.push(mem);
+			this.chartNet.data.labels.push('');
+			this.chartNet.data.datasets[0].data.push(stats.net.rx);
+			this.chartNet.data.datasets[1].data.push(stats.net.tx);
+			this.chartDisk.data.labels.push('');
+			this.chartDisk.data.datasets[0].data.push(stats.fs.r);
+			this.chartDisk.data.datasets[1].data.push(stats.fs.w);
+			if (this.chartCpuMem.data.datasets[0].data.length > 200) {
+				this.chartCpuMem.data.labels.shift();
+				this.chartCpuMem.data.datasets[0].data.shift();
+				this.chartCpuMem.data.datasets[1].data.shift();
+				this.chartNet.data.labels.shift();
+				this.chartNet.data.datasets[0].data.shift();
+				this.chartNet.data.datasets[1].data.shift();
+				this.chartDisk.data.labels.shift();
+				this.chartDisk.data.datasets[0].data.shift();
+				this.chartDisk.data.datasets[1].data.shift();
 			}
-			this.chart.update();
+			this.chartCpuMem.update();
+			this.chartNet.update();
+			this.chartDisk.update();
 		},
 
 		onStatsLog(statsLog) {

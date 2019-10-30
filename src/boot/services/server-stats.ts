@@ -22,7 +22,7 @@ export default function() {
 		const usedmem = await usedMem();
 		const totalmem = await totalMem();
 		const netStats = await net();
-		console.log(netStats);
+		const fsStats = await fs();
 
 		const stats = {
 			cpu: cpu,
@@ -30,6 +30,14 @@ export default function() {
 				total: totalmem,
 				used: usedmem
 			},
+			net: {
+				rx: netStats.rx_sec,
+				tx: netStats.tx_sec,
+			},
+			fs: {
+				r: fsStats.rIO_sec,
+				w: fsStats.wIO_sec,
+			}
 		};
 		ev.emit('serverStats', stats);
 		log.unshift(stats);
@@ -67,4 +75,10 @@ async function net() {
 	const iface = await sysUtils.networkInterfaceDefault();
 	const data = await sysUtils.networkStats(iface);
 	return data[0];
+}
+
+// FS STAT
+async function fs() {
+	const data = await sysUtils.disksIO().catch(() => ({ rIO_sec: 0, wIO_sec: 0 }));
+	return data;
 }

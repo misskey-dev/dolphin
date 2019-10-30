@@ -41,7 +41,6 @@ export default Vue.extend({
 	data() {
 		return {
 			connection: null,
-			stats: [],
 			chartIn: null,
 			chartOut: null,
 			faExchangeAlt
