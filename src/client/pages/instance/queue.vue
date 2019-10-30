@@ -1,22 +1,32 @@
 <template>
-<section class="_section dp-instance-queue">
-	<div class="title"><fa :icon="faExchangeAlt"/> {{ $t('jobQueue') }}</div>
-	<div class="content in">
-		<span>In</span>
-		<canvas ref="in"></canvas>
-	</div>
-	<div class="content out">
-		<span>Out</span>
-		<canvas ref="out"></canvas>
-	</div>
-</section>
+<div>
+	<section class="_section">
+		<div class="title"><fa :icon="faExchangeAlt"/> In</div>
+		<div class="content">
+			<canvas ref="in"></canvas>
+		</div>
+	</section>
+	<section class="_section">
+		<div class="title"><fa :icon="faExchangeAlt"/> Out</div>
+		<div class="content">
+			<canvas ref="out"></canvas>
+		</div>
+	</section>
+	<section class="_section">
+		<div class="content">
+			<x-button @click="clear()"><fa :icon="faTrashAlt"/> {{ $t('clearQueue') }}</x-button>
+		</div>
+	</section>
+</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import Chart from 'chart.js';
 import i18n from '../../i18n';
+import XButton from '../../components/ui/button.vue';
 
 const alpha = (hex, a) => {
 	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)!;
@@ -36,6 +46,7 @@ export default Vue.extend({
 	},
 
 	components: {
+		XButton,
 	},
 
 	data() {
@@ -43,7 +54,7 @@ export default Vue.extend({
 			connection: null,
 			chartIn: null,
 			chartOut: null,
-			faExchangeAlt
+			faExchangeAlt, faTrashAlt
 		}
 	},
 
@@ -84,7 +95,8 @@ export default Vue.extend({
 						lineTension: 0,
 						borderWidth: 2,
 						borderColor: '#E53935',
-						backgroundColor: alpha('#E53935', 0.02),
+						borderDash: [5, 5],
+						fill: false,
 						data: []
 					}]
 				},
@@ -100,6 +112,9 @@ export default Vue.extend({
 					},
 					legend: {
 						position: 'bottom',
+						labels: {
+							boxWidth: 16,
+						}
 					},
 					scales: {
 						xAxes: [{
@@ -175,6 +190,24 @@ export default Vue.extend({
 			for (const stats of statsLog.reverse()) {
 				this.onStats(stats);
 			}
+		},
+
+		clear() {
+			this.$root.dialog({
+				type: 'warning',
+				title: this.$t('clearQueueConfirmTitle'),
+				text: this.$t('clearQueueConfirmText'),
+				showCancelButton: true
+			}).then(({ canceled }) => {
+				if (canceled) return;
+
+				this.$root.api('admin/queue/clear', {}).then(() => {
+					this.$root.dialog({
+						type: 'success',
+						splash: true
+					});
+				});
+			});
 		}
 	}
 });
