@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faAt, faListUl, faEye, faEyeSlash, faBan, faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faListUl, faEye, faEyeSlash, faBan, faExternalLinkSquareAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faSnowflake, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import i18n from '../i18n';
 import XMenu from './menu.vue';
@@ -55,13 +55,23 @@ export default Vue.extend({
 				text: this.user.isBlocking ? this.$t('unblock') : this.$t('block'),
 				action: this.toggleBlock
 			}]);
+
+			if (this.$store.state.i.isAdmin) {
+				menu = menu.concat([null, {
+					icon: faSnowflake,
+					text: this.user.isSuspended ? this.$t('unsuspend') : this.$t('suspend'),
+					action: this.toggleSuspend
+				}]);
+			}
 		}
 
-		if (this.$store.getters.isSignedIn && this.$store.state.i.isAdmin) {
+		if (this.$store.getters.isSignedIn && this.$store.state.i.id === this.user.id) {
 			menu = menu.concat([null, {
-				icon: faSnowflake,
-				text: this.user.isSuspended ? this.$t('unsuspend') : this.$t('suspend'),
-				action: this.toggleSuspend
+				icon: faPencilAlt,
+				text: this.$t('editProfile'),
+				action: () => {
+					this.$router.push('/settings');
+				}
 			}]);
 		}
 

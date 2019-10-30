@@ -7,6 +7,7 @@
 				<div v-if="accounts.length > 0"></div>
 				<button class="_button" @click="addAcount()"><fa :icon="faPlus" fixed-width/>{{ $t('addAcount') }}</button>
 				<router-link :to="`/@${ $store.state.i.username }`"><dp-avatar :user="$store.state.i" class="avatar"/>{{ $t('profile') }}</router-link>
+				<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
 			</template>
 			<template v-else-if="showLists">
 				<span v-if="lists.length === 0" style="opacity: 0.5; pointer-events: none;">{{ $t('noLists') }}</span>
@@ -33,8 +34,7 @@
 				<router-link to="/messages"><fa :icon="faEnvelope" fixed-width/>{{ $t('messages') }}<i v-if="$store.state.i.hasUnreadSpecifiedNotes"><fa :icon="faCircle"/></i></router-link>
 				<router-link to="/favorites"><fa :icon="faStar" fixed-width/>{{ $t('favorites') }}</router-link>
 				<router-link to="/follow-requests" v-if="$store.state.i.isLocked"><fa :icon="faUserClock" fixed-width/>{{ $t('followRequests') }}<i v-if="$store.state.i.pendingReceivedFollowRequestsCount"><fa :icon="faCircle"/></i></router-link>
-				<div></div>
-				<router-link to="/settings"><fa :icon="faUserCog" fixed-width/>{{ $t('settings') }}</router-link>
+				<div v-if="$store.state.i.isAdmin"></div>
 				<button class="_button" v-if="$store.state.i.isAdmin" @click="showInstance = true"><fa :icon="faCog" fixed-width/>{{ $t('instance') }}</button>
 				<div></div>
 				<button class="_button" @click="showAccounts = true"><dp-avatar :user="$store.state.i" class="avatar"/><dp-user-name :user="$store.state.i"/></button>
