@@ -6,24 +6,24 @@
 			<div class="selects" style="display: flex;">
 				<x-select v-model="chartSrc" style="margin: 0; flex: 1;">
 					<optgroup :label="$t('federation')">
-						<option value="federation-instances">{{ $t('charts.federation-instances') }}</option>
-						<option value="federation-instances-total">{{ $t('charts.federation-instances-total') }}</option>
+						<option value="federation-instances">{{ $t('_charts.federationInstancesIncDec') }}</option>
+						<option value="federation-instances-total">{{ $t('_charts.federationInstancesTotal') }}</option>
 					</optgroup>
 					<optgroup :label="$t('users')">
-						<option value="users">{{ $t('charts.users') }}</option>
-						<option value="users-total">{{ $t('charts.users-total') }}</option>
+						<option value="users">{{ $t('_charts.usersIncDec') }}</option>
+						<option value="users-total">{{ $t('_charts.usersTotal') }}</option>
 					</optgroup>
 					<optgroup :label="$t('notes')">
-						<option value="notes">{{ $t('charts.notes') }}</option>
-						<option value="local-notes">{{ $t('charts.local-notes') }}</option>
-						<option value="remote-notes">{{ $t('charts.remote-notes') }}</option>
-						<option value="notes-total">{{ $t('charts.notes-total') }}</option>
+						<option value="notes">{{ $t('_charts.notesIncDec') }}</option>
+						<option value="local-notes">{{ $t('_charts.localNotesIncDec') }}</option>
+						<option value="remote-notes">{{ $t('_charts.remoteNotesIncDec') }}</option>
+						<option value="notes-total">{{ $t('_charts.notesTotal') }}</option>
 					</optgroup>
 					<optgroup :label="$t('files')">
-						<option value="drive-files">{{ $t('charts.drive-files') }}</option>
-						<option value="drive-files-total">{{ $t('charts.drive-files-total') }}</option>
-						<option value="drive">{{ $t('charts.drive') }}</option>
-						<option value="drive-total">{{ $t('charts.drive-total') }}</option>
+						<option value="drive-files">{{ $t('_charts.filesIncDec') }}</option>
+						<option value="drive-files-total">{{ $t('_charts.filesTotal') }}</option>
+						<option value="drive">{{ $t('_charts.storageUsageIncDec') }}</option>
+						<option value="drive-total">{{ $t('_charts.storageUsageTotal') }}</option>
 					</optgroup>
 				</x-select>
 				<x-select v-model="chartSpan" style="margin: 0;">
@@ -44,7 +44,7 @@ import Chart from 'chart.js';
 import i18n from '../../i18n';
 import XSelect from '../../components/ui/select.vue';
 
-const chartLimit = 60;
+const chartLimit = 90;
 const sum = (...arr) => arr.reduce((r, a) => r.map((b, i) => a[i] + b));
 const negate = arr => arr.map(x => -x);
 const alpha = (hex, a) => {
@@ -172,6 +172,7 @@ export default Vue.extend({
 						borderWidth: 2,
 						borderColor: x.color,
 						backgroundColor: alpha(x.color, 0.1),
+						hidden: !!x.hidden
 					}))
 				},
 				options: {
@@ -228,6 +229,7 @@ export default Vue.extend({
 			return {
 				series: [{
 					name: 'Instances',
+					color: '#008FFB',
 					data: this.format(total
 						? this.stats.federation.instance.total
 						: sum(this.stats.federation.instance.inc, negate(this.stats.federation.instance.dec))
@@ -285,11 +287,13 @@ export default Vue.extend({
 					name: 'Local',
 					type: 'area',
 					color: '#008FFB',
+					hidden: true,
 					data: this.format(this.stats.notes.local.total)
 				}, {
 					name: 'Remote',
 					type: 'area',
 					color: '#008FFB',
+					hidden: true,
 					data: this.format(this.stats.notes.remote.total)
 				}]
 			};
@@ -309,6 +313,7 @@ export default Vue.extend({
 					name: 'Local',
 					type: 'area',
 					color: '#008FFB',
+					hidden: true,
 					data: this.format(total
 						? this.stats.users.local.total
 						: sum(this.stats.users.local.inc, negate(this.stats.users.local.dec))
@@ -317,6 +322,7 @@ export default Vue.extend({
 					name: 'Remote',
 					type: 'area',
 					color: '#008FFB',
+					hidden: true,
 					data: this.format(total
 						? this.stats.users.remote.total
 						: sum(this.stats.users.remote.inc, negate(this.stats.users.remote.dec))
@@ -336,11 +342,13 @@ export default Vue.extend({
 					name: 'Local',
 					type: 'area',
 					color: '#008FFB',
+					hidden: true,
 					data: this.format(this.stats.activeUsers.local.count)
 				}, {
 					name: 'Remote',
 					type: 'area',
 					color: '#008FFB',
+					hidden: true,
 					data: this.format(this.stats.activeUsers.remote.count)
 				}]
 			};
@@ -397,11 +405,13 @@ export default Vue.extend({
 					name: 'Local',
 					type: 'area',
 					color: '#008FFB',
+					hidden: true,
 					data: this.format(this.stats.drive.local.totalSize)
 				}, {
 					name: 'Remote',
 					type: 'area',
 					color: '#008FFB',
+					hidden: true,
 					data: this.format(this.stats.drive.remote.totalSize)
 				}]
 			};
@@ -456,11 +466,13 @@ export default Vue.extend({
 					name: 'Local',
 					type: 'area',
 					color: '#008FFB',
+					hidden: true,
 					data: this.format(this.stats.drive.local.totalCount)
 				}, {
 					name: 'Remote',
 					type: 'area',
 					color: '#008FFB',
+					hidden: true,
 					data: this.format(this.stats.drive.remote.totalCount)
 				}]
 			};
