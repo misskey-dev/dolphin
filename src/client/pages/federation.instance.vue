@@ -248,9 +248,7 @@ export default Vue.extend({
 				this.chartInstance.destroy();
 			}
 
-			const color = getComputedStyle(document.documentElement).getPropertyValue('--fg');
-
-			Chart.defaults.global.defaultFontColor = color;
+			Chart.defaults.global.defaultFontColor = getComputedStyle(document.documentElement).getPropertyValue('--fg');
 			this.chartInstance = new Chart(this.$refs.chart, {
 				type: 'line',
 				data: {
