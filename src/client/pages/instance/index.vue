@@ -2,10 +2,15 @@
 <div v-if="meta" class="dp-instance-page">
 	<header>{{ $t('instance') }}</header>
 
-	<section class="_section">
-		<div class="title"><fa :icon="faCog"/> {{ $t('general') }}</div>
+	<section class="_section info">
+		<div class="title"><fa :icon="faInfoCircle"/> {{ $t('instanceInfo') }}</div>
 		<div class="content">
 			<b>Dolphin v{{ version }}</b>
+		</div>
+		<div class="content deps" v-if="serverInfo">
+			<div><b>Node.js</b><span>{{ serverInfo.node }}</span></div>
+			<div><b>PostgreSQL</b><span>v{{ serverInfo.psql }}</span></div>
+			<div><b>Redis</b><span>v{{ serverInfo.redis }}</span></div>
 		</div>
 	</section>
 
@@ -34,7 +39,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { faGhost, faCog, faPlus, faCloud } from '@fortawesome/free-solid-svg-icons';
+import { faGhost, faCog, faPlus, faCloud, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import XButton from '../../components/ui/button.vue';
 import XInput from '../../components/ui/input.vue';
@@ -61,10 +66,11 @@ export default Vue.extend({
 		return {
 			version,
 			meta: null,
+			serverInfo: null,
 			proxyAccount: null,
 			cacheRemoteFiles: false,
 			remoteDriveCapacityMb: 0,
-			faTrashAlt, faGhost, faCog, faPlus, faCloud
+			faTrashAlt, faGhost, faCog, faPlus, faCloud, faInfoCircle
 		}
 	},
 
@@ -74,6 +80,10 @@ export default Vue.extend({
 			this.proxyAccount = this.meta.proxyAccount;
 			this.cacheRemoteFiles = this.meta.cacheRemoteFiles;
 			this.remoteDriveCapacityMb = this.meta.driveCapacityPerRemoteUserMb;
+		});
+
+		this.$root.api('admin/server-info', {}).then(res => {
+			this.serverInfo = res;
 		});
 	},
 
@@ -111,6 +121,18 @@ export default Vue.extend({
 		-webkit-backdrop-filter: blur(16px);
 		backdrop-filter: blur(16px);
 		border-radius: 6px;
+	}
+
+	> .info {
+		> .deps {
+			> div {
+				display: flex;
+
+				> * {
+					flex: 1;
+				}
+			}
+		}
 	}
 }
 </style>

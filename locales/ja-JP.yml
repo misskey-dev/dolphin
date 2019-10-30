@@ -158,6 +158,7 @@ jobQueue: "ジョブキュー"
 cpuAndMemory: "CPUとメモリ"
 network: "ネットワーク"
 disk: "ディスク"
+instanceInfo: "インスタンス情報"
 
 _cw:
   hide: "隠す"
