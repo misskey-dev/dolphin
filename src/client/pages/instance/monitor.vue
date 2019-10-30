@@ -1,21 +1,40 @@
 <template>
-<div>
+<div class="dp-instance-monitor">
 	<section class="_section">
 		<div class="title"><fa :icon="faMicrochip"/> {{ $t('cpuAndMemory') }}</div>
 		<div class="content" style="margin-top: -8px; margin-bottom: -12px;">
 			<canvas ref="cpumem"></canvas>
 		</div>
-	</section>
-	<section class="_section">
-		<div class="title"><fa :icon="faExchangeAlt"/> {{ $t('network') }}</div>
-		<div class="content" style="margin-top: -8px; margin-bottom: -12px;">
-			<canvas ref="net"></canvas>
+		<div class="content" v-if="serverInfo">
+			<div class="table">
+				<div class="row">
+					<div class="cell"><div class="label">CPU</div>{{ serverInfo.cpu.model }}</div>
+				</div>
+				<div class="row">
+					<div class="cell"><div class="label">MEM total</div>{{ serverInfo.mem.total | bytes }}</div>
+					<div class="cell"><div class="label">MEM used</div>{{ memUsage | bytes }} ({{ (memUsage / serverInfo.mem.total * 100).toFixed(0) }}%)</div>
+				</div>
+			</div>
 		</div>
 	</section>
 	<section class="_section">
 		<div class="title"><fa :icon="faHdd"/> {{ $t('disk') }}</div>
 		<div class="content" style="margin-top: -8px; margin-bottom: -12px;">
 			<canvas ref="disk"></canvas>
+		</div>
+		<div class="content" v-if="serverInfo">
+			<div class="table">
+				<div class="row">
+					<div class="cell"><div class="label">Disk total</div>{{ serverInfo.fs.total | bytes }}</div>
+					<div class="cell"><div class="label">Disk used</div>{{ serverInfo.fs.used | bytes }} ({{ (serverInfo.fs.used / serverInfo.fs.total * 100).toFixed(0) }}%)</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="_section">
+		<div class="title"><fa :icon="faExchangeAlt"/> {{ $t('network') }}</div>
+		<div class="content" style="margin-top: -8px; margin-bottom: -12px;">
+			<canvas ref="net"></canvas>
 		</div>
 	</section>
 </div>
@@ -50,6 +69,8 @@ export default Vue.extend({
 	data() {
 		return {
 			connection: null,
+			serverInfo: null,
+			memUsage: 0,
 			chartCpuMem: null,
 			chartNet: null,
 			faTachometerAlt, faExchangeAlt, faMicrochip, faHdd
@@ -242,13 +263,17 @@ export default Vue.extend({
 				}
 			}
 		});
-	
-		this.connection = this.$root.stream.useSharedConnection('serverStats');
-		this.connection.on('stats', this.onStats);
-		this.connection.on('statsLog', this.onStatsLog);
-		this.connection.send('requestLog', {
-			id: Math.random().toString().substr(2, 8),
-			length: 200
+
+		this.$root.api('admin/server-info', {}).then(res => {
+			this.serverInfo = res;
+
+			this.connection = this.$root.stream.useSharedConnection('serverStats');
+			this.connection.on('stats', this.onStats);
+			this.connection.on('statsLog', this.onStatsLog);
+			this.connection.send('requestLog', {
+				id: Math.random().toString().substr(2, 8),
+				length: 200
+			});
 		});
 	},
 
@@ -261,8 +286,9 @@ export default Vue.extend({
 	methods: {
 		onStats(stats) {
 			const cpu = (stats.cpu * 100).toFixed(0);
-			const memActive = (stats.mem.active / stats.mem.total * 100).toFixed(0);
-			const memUsed = (stats.mem.used / stats.mem.total * 100).toFixed(0);
+			const memActive = (stats.mem.active / this.serverInfo.mem.total * 100).toFixed(0);
+			const memUsed = (stats.mem.used / this.serverInfo.mem.total * 100).toFixed(0);
+			this.memUsage = stats.mem.used;
 
 			this.chartCpuMem.data.labels.push('');
 			this.chartCpuMem.data.datasets[0].data.push(cpu);
@@ -299,3 +325,42 @@ export default Vue.extend({
 	}
 });
 </script>
+
+
+<style lang="scss" scoped>
+@import '../../theme';
+
+.dp-instance-monitor {
+	> section {
+		> .content {
+			> .table {
+				> .row {
+					display: flex;
+
+					&:not(:last-child) {
+						margin-bottom: 16px;
+
+						@media (max-width: 500px) {
+							margin-bottom: 8px;
+						}
+					}
+
+					> .cell {
+						flex: 1;
+
+						> .label {
+							font-size: 80%;
+							opacity: 0.7;
+
+							> .icon {
+								margin-right: 4px;
+								display: none;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+</style>

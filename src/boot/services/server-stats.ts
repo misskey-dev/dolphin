@@ -1,4 +1,4 @@
-import * as sysUtils from 'systeminformation';
+import * as si from 'systeminformation';
 import * as Deque from 'double-ended-queue';
 import Xev from 'xev';
 import * as osUtils from 'os-utils';
@@ -26,7 +26,6 @@ export default function() {
 		const stats = {
 			cpu: cpu,
 			mem: {
-				total: memStats.total,
 				used: memStats.used,
 				active: memStats.active,
 			},
@@ -60,19 +59,19 @@ function cpuUsage() {
 
 // MEMORY STAT
 async function mem() {
-	const data = await sysUtils.mem();
+	const data = await si.mem();
 	return data;
 }
 
 // NETWORK STAT
 async function net() {
-	const iface = await sysUtils.networkInterfaceDefault();
-	const data = await sysUtils.networkStats(iface);
+	const iface = await si.networkInterfaceDefault();
+	const data = await si.networkStats(iface);
 	return data[0];
 }
 
 // FS STAT
 async function fs() {
-	const data = await sysUtils.disksIO().catch(() => ({ rIO_sec: 0, wIO_sec: 0 }));
+	const data = await si.disksIO().catch(() => ({ rIO_sec: 0, wIO_sec: 0 }));
 	return data;
 }
