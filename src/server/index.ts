@@ -62,10 +62,11 @@ router.use(nodeinfo.routes());
 router.use(wellKnown.routes());
 
 router.get('/avatar/:x', async ctx => {
-	const [temp] = await createTemp();
+	const [temp, cleanup] = await createTemp();
 	await genAvatar(ctx.params.x, fs.createWriteStream(temp));
 	ctx.set('Content-Type', 'image/png');
 	ctx.body = fs.createReadStream(temp);
+	cleanup();
 });
 
 // Register router

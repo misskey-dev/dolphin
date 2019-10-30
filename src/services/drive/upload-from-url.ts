@@ -27,7 +27,16 @@ export default async (
 	const [path, cleanup] = await createTemp();
 
 	// write content at URL to temp file
-	await downloadUrl(url, path);
+	try {
+		await downloadUrl(url, path);
+	} catch (e) {
+		cleanup();
+		logger.error(`Failed to download file: ${e}`, {
+			url: url,
+			e: e
+		});
+		throw e;
+	}
 
 	let driveFile: DriveFile;
 	let error;
