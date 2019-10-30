@@ -70,6 +70,9 @@ export async function masterMain() {
 
 	bootLogger.succ('Dolphin initialized');
 
+	require('./services/server-stats').default();
+	require('./services/queue-stats').default();
+
 	if (!program.disableClustering) {
 		await spawnWorkers(config.clusterLimit);
 	}

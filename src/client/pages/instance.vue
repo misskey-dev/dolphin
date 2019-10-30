@@ -2,6 +2,8 @@
 <div v-if="meta" class="dp-instance-page">
 	<header>{{ $t('instance') }}</header>
 	<x-general :meta="meta"/>
+	<x-monitor/>
+	<x-queue/>
 	<x-files :meta="meta"/>
 	<x-emojis/>
 	<x-users/>
@@ -12,6 +14,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import XGeneral from './instance.general.vue';
+import XMonitor from './instance.monitor.vue';
+import XQueue from './instance.queue.vue';
 import XFiles from './instance.files.vue';
 import XEmojis from './instance.emojis.vue';
 import XUsers from './instance.users.vue';
@@ -26,6 +30,8 @@ export default Vue.extend({
 
 	components: {
 		XGeneral,
+		XMonitor,
+		XQueue,
 		XEmojis,
 		XUsers,
 		XFiles,

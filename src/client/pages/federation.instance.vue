@@ -156,6 +156,7 @@ export default Vue.extend({
 			isBlocked: false,
 			now: null,
 			chart: null,
+			chartInstance: null,
 			chartSrc: 'requests',
 			chartSpan: 'hour',
 			faTimes, faCrosshairs, faCloudDownloadAlt, faCloudUploadAlt, faUsers, faPencilAlt, faFileImage, faDatabase, faTrafficLight, faLongArrowAltUp, faLongArrowAltDown
