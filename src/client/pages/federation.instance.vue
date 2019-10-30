@@ -533,10 +533,12 @@ export default Vue.extend({
 
 		> .operations {
 			padding: 16px 32px 16px 32px;
+			margin-top: 8px;
 			border-top: solid 1px rgba(0, 0, 0, 0.1);
 
 			@media (max-width: 500px) {
 				padding: 8px 16px 8px 16px;
+				margin-top: 0;
 			}
 
 			> .label {
