@@ -6,7 +6,6 @@
 		<div class="title"><fa :icon="faCog"/> {{ $t('general') }}</div>
 		<div class="content">
 			<b>Dolphin v{{ version }}</b>
-			<x-button @click="$router.push('/federation')">{{ $t('federation') }}</x-button>
 		</div>
 	</section>
 

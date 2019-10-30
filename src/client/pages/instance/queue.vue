@@ -114,7 +114,6 @@ export default Vue.extend({
 							position: 'right',
 							ticks: {
 								display: false,
-								max: 100
 							}
 						}]
 					},

@@ -19,16 +19,16 @@ export default function() {
 
 	async function tick() {
 		const cpu = await cpuUsage();
-		const usedmem = await usedMem();
-		const totalmem = await totalMem();
+		const memStats = await mem();
 		const netStats = await net();
 		const fsStats = await fs();
 
 		const stats = {
 			cpu: cpu,
 			mem: {
-				total: totalmem,
-				used: usedmem
+				total: memStats.total,
+				used: memStats.used,
+				active: memStats.active,
 			},
 			net: {
 				rx: Math.max(0, netStats.rx_sec),
@@ -58,16 +58,10 @@ function cpuUsage() {
 	});
 }
 
-// MEMORY(excl buffer + cache) STAT
-async function usedMem() {
+// MEMORY STAT
+async function mem() {
 	const data = await sysUtils.mem();
-	return data.active;
-}
-
-// TOTAL MEMORY STAT
-async function totalMem() {
-	const data = await sysUtils.mem();
-	return data.total;
+	return data;
 }
 
 // NETWORK STAT

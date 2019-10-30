@@ -1,24 +1,29 @@
 <template>
-<section class="_section dp-instance-monitor">
-	<div class="title"><fa :icon="faTachometerAlt"/> {{ $t('monitor') }}</div>
-	<div class="content" style="margin-bottom: -8px;">
-		<span>{{ $t('cpuAndMemory') }}</span>
-		<canvas ref="cpumem"></canvas>
-	</div>
-	<div class="content" style="margin-bottom: -8px;">
-		<span>{{ $t('network') }}</span>
-		<canvas ref="net"></canvas>
-	</div>
-	<div class="content" style="margin-bottom: -8px;">
-		<span>{{ $t('disk') }}</span>
-		<canvas ref="disk"></canvas>
-	</div>
-</section>
+<div>
+	<section class="_section">
+		<div class="title"><fa :icon="faMicrochip"/> {{ $t('cpuAndMemory') }}</div>
+		<div class="content" style="margin-top: -8px; margin-bottom: -12px;">
+			<canvas ref="cpumem"></canvas>
+		</div>
+	</section>
+	<section class="_section">
+		<div class="title"><fa :icon="faExchangeAlt"/> {{ $t('network') }}</div>
+		<div class="content" style="margin-top: -8px; margin-bottom: -12px;">
+			<canvas ref="net"></canvas>
+		</div>
+	</section>
+	<section class="_section">
+		<div class="title"><fa :icon="faHdd"/> {{ $t('disk') }}</div>
+		<div class="content" style="margin-top: -8px; margin-bottom: -12px;">
+			<canvas ref="disk"></canvas>
+		</div>
+	</section>
+</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { faTachometerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTachometerAlt, faExchangeAlt, faMicrochip, faHdd } from '@fortawesome/free-solid-svg-icons';
 import Chart from 'chart.js';
 import i18n from '../../i18n';
 
@@ -47,7 +52,7 @@ export default Vue.extend({
 			connection: null,
 			chartCpuMem: null,
 			chartNet: null,
-			faTachometerAlt
+			faTachometerAlt, faExchangeAlt, faMicrochip, faHdd
 		}
 	},
 
@@ -67,12 +72,21 @@ export default Vue.extend({
 					backgroundColor: alpha('#5da1c1', 0.1),
 					data: []
 				}, {
-					label: 'MEM',
+					label: 'MEM (active)',
 					pointRadius: 0,
 					lineTension: 0,
 					borderWidth: 2,
 					borderColor: '#935dbf',
 					backgroundColor: alpha('#935dbf', 0.02),
+					data: []
+				}, {
+					label: 'MEM (used)',
+					pointRadius: 0,
+					lineTension: 0,
+					borderWidth: 2,
+					borderColor: '#935dbf',
+					borderDash: [5, 5],
+					fill: false,
 					data: []
 				}]
 			},
@@ -247,11 +261,13 @@ export default Vue.extend({
 	methods: {
 		onStats(stats) {
 			const cpu = (stats.cpu * 100).toFixed(0);
-			const mem = (stats.mem.used / stats.mem.total * 100).toFixed(0);
+			const memActive = (stats.mem.active / stats.mem.total * 100).toFixed(0);
+			const memUsed = (stats.mem.used / stats.mem.total * 100).toFixed(0);
 
 			this.chartCpuMem.data.labels.push('');
 			this.chartCpuMem.data.datasets[0].data.push(cpu);
-			this.chartCpuMem.data.datasets[1].data.push(mem);
+			this.chartCpuMem.data.datasets[1].data.push(memActive);
+			this.chartCpuMem.data.datasets[2].data.push(memUsed);
 			this.chartNet.data.labels.push('');
 			this.chartNet.data.datasets[0].data.push(stats.net.rx);
 			this.chartNet.data.datasets[1].data.push(stats.net.tx);
@@ -262,6 +278,7 @@ export default Vue.extend({
 				this.chartCpuMem.data.labels.shift();
 				this.chartCpuMem.data.datasets[0].data.shift();
 				this.chartCpuMem.data.datasets[1].data.shift();
+				this.chartCpuMem.data.datasets[2].data.shift();
 				this.chartNet.data.labels.shift();
 				this.chartNet.data.datasets[0].data.shift();
 				this.chartNet.data.datasets[1].data.shift();
