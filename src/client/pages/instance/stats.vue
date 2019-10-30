@@ -187,6 +187,9 @@ export default Vue.extend({
 					},
 					legend: {
 						position: 'bottom',
+						labels: {
+							boxWidth: 16,
+						}
 					},
 					scales: {
 						xAxes: [{
