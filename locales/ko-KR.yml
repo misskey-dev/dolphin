@@ -164,6 +164,10 @@ clearQueueConfirmText: "未配達の投稿は配送されなくなります。�
 clearCachedFiles: "キャッシュをクリア"
 clearCachedFilesConfirm: "キャッシュされたリモートファイルをすべて削除しますか？"
 blockedInstancesDescription: "ブロックしたいインスタンスのホストを改行で区切って設定します。ブロックされたインスタンスは、このインスタンスとやり取りできなくなります。"
+muteAndBlock: "ミュートとブロック"
+mutedUsers: "ミュートしたユーザー"
+blockedUsers: "ブロックしたユーザー"
+noUsers: "ユーザーはいません"
 _cw:
   hide: "숨기기"
   show: "더 보기"
