@@ -122,7 +122,7 @@ import XModal from '../components/modal.vue';
 import XSelect from '../components/ui/select.vue';
 import XSwitch from '../components/ui/switch.vue';
 
-const chartLimit = 50;
+const chartLimit = 60;
 const sum = (...arr) => arr.reduce((r, a) => r.map((b, i) => a[i] + b));
 const negate = arr => arr.map(x => -x);
 const alpha = hex => {
