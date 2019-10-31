@@ -2,18 +2,18 @@
 <form class="dp-setup" @submit.prevent="submit()">
 	<h1>Welcome to Dolphin!</h1>
 	<div>
-		<p>Dolphinのインストールが完了しました。あなたのアカウントを作成してください。</p>
+		<p>{{ $t('intro') }}</p>
 		<x-input v-model="username" pattern="^[a-zA-Z0-9_]{1,20}$" spellcheck="false" required>
-			<span>ユーザー名</span>
+			<span>{{ $t('username') }}</span>
 			<template #prefix>@</template>
 			<template #suffix>@{{ host }}</template>
 		</x-input>
 		<x-input v-model="password" type="password">
-			<span>パスワード</span>
+			<span>{{ $t('password') }}</span>
 			<template #prefix><fa :icon="faLock"/></template>
 		</x-input>
 		<footer>
-			<x-button primary type="submit" :disabled="submitting">{{ submitting ? '処理中' : '完了' }}<dp-ellipsis v-if="submitting"/></x-button>
+			<x-button primary type="submit" :disabled="submitting">{{ submitting ? $t('processing') : $t('done') }}<dp-ellipsis v-if="submitting"/></x-button>
 		</footer>
 	</div>
 </form>
@@ -25,8 +25,11 @@ import { faLock } from '@fortawesome/free-solid-svg-icons';
 import XButton from '../components/ui/button.vue';
 import XInput from '../components/ui/input.vue';
 import { host } from '../config';
+import i18n from '../i18n';
 
 export default Vue.extend({
+	i18n,
+	
 	components: {
 		XButton,
 		XInput,
