@@ -386,7 +386,7 @@ export default async function(
 			if (isDuplicateKeyValueError(e)) {
 				logger.info(`already registered ${file.uri}`);
 
-				file = await DriveFiles.findOne({
+				return await DriveFiles.findOne({
 					uri: file.uri,
 					userId: user.id
 				}) as DriveFile;
