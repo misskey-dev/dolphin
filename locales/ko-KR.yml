@@ -133,7 +133,7 @@ proxyAccountDescription: "프록시 계정은 특정 조건에서 사용자의 �
 host: "호스트"
 selectUser: "사용자 선택"
 recipient: "수신인"
-annotation: "주석"
+annotation: "내용에 대한 주석"
 federation: "연합"
 instances: "인스턴스"
 registeredAt: "등록 날짜"
