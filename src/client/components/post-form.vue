@@ -294,14 +294,6 @@ export default Vue.extend({
 			(this.$refs.file as any).click();
 		},
 
-		chooseFileFromDrive() {
-			this.$chooseDriveFile({
-				multiple: true
-			}).then(files => {
-				for (const x of files) this.attachMedia(x);
-			});
-		},
-
 		attachMedia(driveFile) {
 			this.files.push(driveFile);
 		},
