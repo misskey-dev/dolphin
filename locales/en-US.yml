@@ -239,7 +239,7 @@ _charts:
   notesIncDec: "投稿の増減"
   localNotesIncDec: "ローカルの投稿の増減"
   remoteNotesIncDec: "リモートの投稿の増減"
-  notesTotal: "投稿の合計"
+  notesTotal: "Posts in total"
   filesIncDec: "ファイルの増減"
   filesTotal: "ファイルの合計"
   storageUsageIncDec: "ストレージ使用量の増減"
