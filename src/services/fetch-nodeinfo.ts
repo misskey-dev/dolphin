@@ -38,8 +38,8 @@ export async function fetchNodeinfo(instance: Instance) {
 			softwareVersion: info.software.version,
 			openRegistrations: info.openRegistrations,
 			metadata: info.metadata,
-			name: info.metadata ? (info.metadata.name || null) : null,
-			description: info.metadata ? (info.metadata.description || null) : null,
+			name: info.metadata ? (info.metadata.nodeName || info.metadata.name || null) : null,
+			description: info.metadata ? (info.metadata.nodeDescription || info.metadata.description || null) : null,
 			maintainerName: info.metadata ? info.metadata.maintainer ? (info.metadata.maintainer.name || null) : null : null,
 			maintainerEmail: info.metadata ? info.metadata.maintainer ? (info.metadata.maintainer.email || null) : null : null,
 		});

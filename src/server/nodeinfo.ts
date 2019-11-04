@@ -55,8 +55,8 @@ const nodeinfo2 = async () => {
 			// localComments
 		},
 		metadata: {
-			name: config.name,
-			description,
+			nodeName: config.name,
+			nodeDescription: description,
 			maintainer: {
 				name: config.maintainerName,
 				email: config.maintainerEmail
