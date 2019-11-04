@@ -393,11 +393,19 @@ export default Vue.extend({
 		react(viaKeyboard = false) {
 			pleaseLogin(this.$root);
 			this.blur();
-			this.$root.new(DpReactionPicker, {
+			const picker = this.$root.new(DpReactionPicker, {
 				source: this.$refs.reactButton,
-				note: this.appearNote,
 				showFocus: viaKeyboard,
-			}).$once('closed', this.focus);
+			});
+			picker.$once('chosen', reaction => {
+				this.$root.api('notes/reactions/create', {
+					noteId: this.appearNote.id,
+					reaction: reaction
+				}).then(() => {
+					picker.close();
+				});
+			});
+			picker.$once('closed', this.focus);
 		},
 
 		reactDirectly(reaction) {

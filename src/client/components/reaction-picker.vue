@@ -2,7 +2,7 @@
 <x-popup :source="source" ref="popup" @closed="() => { $emit('closed'); destroyDom(); }" v-hotkey.global="keymap">
 	<div class="rdfaahpb">
 		<div class="buttons" ref="buttons" :class="{ showFocus }">
-			<button class="_button" v-for="(reaction, i) in $store.state.settings.reactions" :key="reaction" @click="react(reaction)" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction"><x-reaction-icon :reaction="reaction"/></button>
+			<button class="_button" v-for="(reaction, i) in rs" :key="reaction" @click="react(reaction)" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction"><x-reaction-icon :reaction="reaction"/></button>
 		</div>
 		<input class="text" v-model="text" :placeholder="$t('enterEmoji')" @keyup.enter="reactText" @input="tryReactText" v-autocomplete="{ model: 'text' }">
 	</div>
@@ -25,13 +25,12 @@ export default Vue.extend({
 	},
 
 	props: {
-		note: {
-			type: Object,
+		source: {
 			required: true
 		},
 
-		source: {
-			required: true
+		reactions: {
+			required: false
 		},
 
 		showFocus: {
@@ -43,6 +42,7 @@ export default Vue.extend({
 
 	data() {
 		return {
+			rs: this.reactions || this.$store.state.settings.reactions,
 			text: null,
 			focus: null
 		};
@@ -57,16 +57,16 @@ export default Vue.extend({
 				'left|h|shift+tab': this.focusLeft,
 				'right|l|tab': this.focusRight,
 				'down|j': this.focusDown,
-				'1': () => this.react(this.$store.state.settings.reactions[0]),
-				'2': () => this.react(this.$store.state.settings.reactions[1]),
-				'3': () => this.react(this.$store.state.settings.reactions[2]),
-				'4': () => this.react(this.$store.state.settings.reactions[3]),
-				'5': () => this.react(this.$store.state.settings.reactions[4]),
-				'6': () => this.react(this.$store.state.settings.reactions[5]),
-				'7': () => this.react(this.$store.state.settings.reactions[6]),
-				'8': () => this.react(this.$store.state.settings.reactions[7]),
-				'9': () => this.react(this.$store.state.settings.reactions[8]),
-				'0': () => this.react(this.$store.state.settings.reactions[9]),
+				'1': () => this.react(this.rs[0]),
+				'2': () => this.react(this.rs[1]),
+				'3': () => this.react(this.rs[2]),
+				'4': () => this.react(this.rs[3]),
+				'5': () => this.react(this.rs[4]),
+				'6': () => this.react(this.rs[5]),
+				'7': () => this.react(this.rs[6]),
+				'8': () => this.react(this.rs[7]),
+				'9': () => this.react(this.rs[8]),
+				'0': () => this.react(this.rs[9]),
 			};
 		}
 	},
@@ -82,14 +82,12 @@ export default Vue.extend({
 	},
 
 	methods: {
+		close() {
+			this.$refs.popup.close();
+		},
+	
 		react(reaction) {
-			this.$root.api('notes/reactions/create', {
-				noteId: this.note.id,
-				reaction: reaction
-			}).then(() => {
-				this.$emit('closed');
-				this.destroyDom();
-			});
+			this.$emit('chosen', reaction);
 		},
 
 		reactText() {

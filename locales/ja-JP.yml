@@ -177,6 +177,7 @@ pinLimitExceeded: "これ以上ピン留めできません"
 intro: "Dolphinのインストールが完了しました！あなたのアカウントを作成しましょう。"
 done: "完了"
 processing: "処理中"
+preview: "プレビュー"
 
 _cw:
   hide: "隠す"

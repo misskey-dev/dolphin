@@ -6,13 +6,19 @@
 			{{ $t('reaction') }}<template #desc>{{ $t('reactionSettingDescription') }}</template>
 		</x-textarea>
 	</div>
+	<div class="footer">
+		<x-button @click="save()" primary inline :disabled="!changed"><fa :icon="faSave"/> {{ $t('save') }}</x-button>
+		<x-button ref="previewButton" inline @click="preview()"><fa :icon="faEye"/> {{ $t('preview') }}</x-button>
+	</div>
 </section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { faLaugh } from '@fortawesome/free-regular-svg-icons';
+import { faLaugh, faSave, faEye } from '@fortawesome/free-regular-svg-icons';
 import XTextarea from '../components/ui/textarea.vue';
+import XButton from '../components/ui/button.vue';
+import DpReactionPicker from '../components/reaction-picker.vue';
 import i18n from '../i18n';
 
 export default Vue.extend({
@@ -20,19 +26,39 @@ export default Vue.extend({
 
 	components: {
 		XTextarea,
+		XButton,
 	},
 	
 	data() {
 		return {
-			faLaugh
+			reactions: this.$store.state.settings.reactions.join('\n'),
+			changed: false,
+			faLaugh, faSave, faEye
 		}
 	},
 
-	computed: {
-		reactions: {
-			get() { return this.$store.state.settings.reactions.join('\n'); },
-			set(value: string) { this.$store.dispatch('settings/set', { key: 'reactions', value: value.trim().split('\n') }); }
-		},
+	watch: {
+		reactions() {
+			this.changed = true;
+		}
 	},
+
+	methods: {
+		save() {
+			this.$store.dispatch('settings/set', { key: 'reactions', value: this.reactions.trim().split('\n') });
+			this.changed = false;
+		},
+
+		preview() {
+			const picker = this.$root.new(DpReactionPicker, {
+				source: this.$refs.previewButton.$el,
+				reactions: this.reactions.trim().split('\n'),
+				showFocus: false,
+			});
+			picker.$once('chosen', reaction => {
+				picker.close();
+			});
+		}
+	}
 });
 </script>
