@@ -22,7 +22,7 @@
 				<div class="row">
 					<div class="cell">
 						<div class="label"><fa :icon="faCrosshairs" fixed-width class="icon"/>{{ $t('registeredAt') }}</div>
-						<div class="data">{{ new Date(instance.registeredAt).toLocaleString() }}</div>
+						<div class="data">{{ new Date(instance.registeredAt).toLocaleString() }} (<dp-time :time="instance.registeredAt"/>)</div>
 					</div>
 				</div>
 				<div class="row">
