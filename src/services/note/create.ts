@@ -175,7 +175,6 @@ export default async (user: User, data: Option, silent = false) => new Promise<N
 		registerOrFetchInstanceDoc(user.host).then(i => {
 			Instances.increment({ id: i.id }, 'notesCount', 1);
 			instanceChart.updateNote(i.host, note, true);
-			fetchNodeinfo(i);
 		});
 	}
 
