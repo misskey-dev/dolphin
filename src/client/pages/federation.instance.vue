@@ -490,7 +490,7 @@ export default Vue.extend({
 		> .data {
 			margin-top: 16px;
 			padding-top: 16px;
-			border-top: solid 1px rgba(0, 0, 0, 0.1);
+			border-top: solid 1px var(--divider);
 
 			@media (max-width: 500px) {
 				margin-top: 8px;
@@ -501,7 +501,7 @@ export default Vue.extend({
 		> .chart {
 			margin-top: 16px;
 			padding-top: 16px;
-			border-top: solid 1px rgba(0, 0, 0, 0.1);
+			border-top: solid 1px var(--divider);
 
 			@media (max-width: 500px) {
 				margin-top: 8px;
@@ -537,7 +537,7 @@ export default Vue.extend({
 		> .operations {
 			padding: 16px 32px 16px 32px;
 			margin-top: 8px;
-			border-top: solid 1px rgba(0, 0, 0, 0.1);
+			border-top: solid 1px var(--divider);
 
 			@media (max-width: 500px) {
 				padding: 8px 16px 8px 16px;
@@ -556,7 +556,7 @@ export default Vue.extend({
 
 		> .metadata {
 			padding: 16px 32px 16px 32px;
-			border-top: solid 1px rgba(0, 0, 0, 0.1);
+			border-top: solid 1px var(--divider);
 
 			@media (max-width: 500px) {
 				padding: 8px 16px 8px 16px;

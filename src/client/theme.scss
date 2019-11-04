@@ -11,6 +11,7 @@ $darkHtml: #050606;
 	--hashtag: #ff9156;
 	--mention: #{$primary};
 	--modalBg: rgba(0, 0, 0, 0.3);
+	--divider: rgba(0, 0, 0, 0.1);
 
 	@media (prefers-color-scheme: dark) {
 		--bg: #111213;
@@ -18,6 +19,7 @@ $darkHtml: #050606;
 		--scrollbarHandle: rgba(255, 255, 255, 0.2);
 		--scrollbarHandleHover: rgba(255, 255, 255, 0.4);	
 		--modalBg: rgba(0, 0, 0, 0.5);
+		--divider: rgba(255, 255, 255, 0.1);
 	}
 }
 

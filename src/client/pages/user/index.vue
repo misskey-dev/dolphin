@@ -265,7 +265,7 @@ export default Vue.extend({
 			text-align: center;
 			padding: 50px 0 16px 0;
 			font-weight: bold;
-			border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+			border-bottom: solid 1px var(--divider);
 
 			@media (max-width: 500px) {
 				display: block;
@@ -308,7 +308,7 @@ export default Vue.extend({
 			}
 
 			& + .status {
-				border-top: solid 1px rgba(0, 0, 0, 0.1);
+				border-top: solid 1px var(--divider);
 			}
 		}
 
@@ -331,7 +331,7 @@ export default Vue.extend({
 				align-items: center;
 
 				&:not(:last-child) {
-					border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+					border-bottom: solid 1px var(--divider);
 				}
 
 				> .name {

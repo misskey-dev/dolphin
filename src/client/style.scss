@@ -223,7 +223,7 @@ a {
 		margin: 0;
 		padding: 16px 32px;
 		font-size: 1.2em;
-		border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+		border-bottom: solid 1px var(--divider);
 
 		@media (max-width: 500px) {
 			padding: 16px;
@@ -239,12 +239,12 @@ a {
 		}
 
 		& + .content {
-			border-top: solid 1px rgba(0, 0, 0, 0.1);
+			border-top: solid 1px var(--divider);
 		}
 	}
 
 	> .footer {
-		border-top: solid 1px rgba(0, 0, 0, 0.1);
+		border-top: solid 1px var(--divider);
 		padding: 24px 32px;
 
 		@media (max-width: 500px) {
