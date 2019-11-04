@@ -20,20 +20,38 @@ export async function fetchNodeinfo(instance: Instance) {
 	logger.info(`Fetching nodeinfo of ${instance.host} ...`);
 
 	try {
-		const wellknown = await request({
-			url: 'https://' + instance.host + '/.well-known/nodeinfo',
-			proxy: config.proxy,
-			timeout: 1000 * 10,
-			forever: true,
-			headers: {
-				'User-Agent': config.userAgent,
-				Accept: 'application/json'
-			},
-			json: true
-		});
+		const skip = async () => {
+			logger.info(`Skipped nodeinfo of ${instance.host}`);
+			await Instances.update(instance.id, {
+				infoUpdatedAt: new Date(),
+			});
+		};
+
+		let wellknown: any;
+
+		try {
+			wellknown = await request({
+				url: 'https://' + instance.host + '/.well-known/nodeinfo',
+				proxy: config.proxy,
+				timeout: 1000 * 10,
+				forever: true,
+				headers: {
+					'User-Agent': config.userAgent,
+					Accept: 'application/json'
+				},
+				json: true
+			});
+		} catch (e) {
+			if (e.statusCode === 404) {
+				await skip();
+				return;
+			} else {
+				throw e;
+			}
+		}
 
 		if (wellknown.links == null || !Array.isArray(wellknown.links)) {
-			logger.info(`Skipped nodeinfo of ${instance.host}`);
+			await skip();
 			return;
 		}
 
@@ -50,7 +68,7 @@ export async function fetchNodeinfo(instance: Instance) {
 		}
 
 		const info = await request({
-			url: link,
+			url: link.href,
 			proxy: config.proxy,
 			timeout: 1000 * 10,
 			forever: true,
