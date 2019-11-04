@@ -175,6 +175,7 @@ pinLimitExceeded: "You can't pin any more posts"
 intro: "Dolphin installation is completed! Let's create your own account."
 done: "Done"
 processing: "Processing"
+preview: "プレビュー"
 _cw:
   hide: "Hide"
   show: "See more"
