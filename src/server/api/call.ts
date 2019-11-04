@@ -1,4 +1,3 @@
-import { performance } from 'perf_hooks';
 import { User } from '../../models/entities/user';
 import endpoints from './endpoints';
 import { ApiError } from './error';
@@ -40,7 +39,6 @@ export default async (endpoint: string, user: User | null | undefined, data: any
 	}
 
 	// API invoking
-	const before = performance.now();
 	return await ep.exec(data, user, file).catch((e: Error) => {
 		if (e instanceof ApiError) {
 			throw e;
@@ -61,12 +59,6 @@ export default async (endpoint: string, user: User | null | undefined, data: any
 					stack: e.stack
 				}
 			});
-		}
-	}).finally(() => {
-		const after = performance.now();
-		const time = after - before;
-		if (time > 1000) {
-			apiLogger.warn(`SLOW API CALL DETECTED: ${ep.name} (${time}ms)`);
 		}
 	});
 };
