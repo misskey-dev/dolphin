@@ -20,8 +20,37 @@ export async function fetchNodeinfo(instance: Instance) {
 	logger.info(`Fetching nodeinfo of ${instance.host} ...`);
 
 	try {
+		const wellknown = await request({
+			url: 'https://' + instance.host + '/.well-known/nodeinfo',
+			proxy: config.proxy,
+			timeout: 1000 * 10,
+			forever: true,
+			headers: {
+				'User-Agent': config.userAgent,
+				Accept: 'application/json'
+			},
+			json: true
+		});
+
+		if (wellknown.links == null || !Array.isArray(wellknown.links)) {
+			logger.info(`Skipped nodeinfo of ${instance.host}`);
+			return;
+		}
+
+		const links = wellknown.links as any[];
+
+		const lnik1_0 = links.find(link => link.rel === 'http://nodeinfo.diaspora.software/ns/schema/1.0');
+		const lnik2_0 = links.find(link => link.rel === 'http://nodeinfo.diaspora.software/ns/schema/2.0');
+		const lnik2_1 = links.find(link => link.rel === 'http://nodeinfo.diaspora.software/ns/schema/2.1');
+		const link = lnik2_1 || lnik2_0 || lnik1_0;
+
+		if (link == null) {
+			logger.info(`Skipped nodeinfo of ${instance.host}`);
+			return;
+		}
+
 		const info = await request({
-			url: 'https://' + instance.host + '/nodeinfo/2.0',
+			url: link,
 			proxy: config.proxy,
 			timeout: 1000 * 10,
 			forever: true,
@@ -34,7 +63,7 @@ export async function fetchNodeinfo(instance: Instance) {
 
 		await Instances.update(instance.id, {
 			infoUpdatedAt: new Date(),
-			softwareName: info.software.name,
+			softwareName: info.software.name.toLowerCase(),
 			softwareVersion: info.software.version,
 			openRegistrations: info.openRegistrations,
 			metadata: info.metadata,
