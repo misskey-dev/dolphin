@@ -250,7 +250,7 @@ export default Vue.extend({
 			height: 1px;
 			width: 100%;
 			margin: 8px 0;
-			background: rgba(0, 0, 0, 0.1);
+			background: var(--divider);
 		}
 
 		> *:not(div) {
