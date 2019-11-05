@@ -176,6 +176,8 @@ intro: "Dolphin 설치가 완료되었습니다! 당신의 계정을 만들 차�
 done: "완료"
 processing: "처리중"
 preview: "プレビュー"
+noCustomEmojis: "絵文字はありません"
+customEmojisOfRemote: "リモートの絵文字"
 _cw:
   hide: "숨기기"
   show: "더 보기"
