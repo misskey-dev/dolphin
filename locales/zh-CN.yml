@@ -176,6 +176,8 @@ intro: "Dolphinのインストールが完了しました！あなたのアカ�
 done: "完了"
 processing: "処理中"
 preview: "プレビュー"
+noCustomEmojis: "絵文字はありません"
+customEmojisOfRemote: "リモートの絵文字"
 _cw:
   hide: "隠す"
   show: "もっと見る"
