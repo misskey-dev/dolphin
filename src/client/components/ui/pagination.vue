@@ -1,7 +1,10 @@
 <template>
 <sequential-entrance class="ui-pagination">
 	<slot :items="items"></slot>
-	<div class="more" v-if="more" key="more">
+	<div class="empty" v-if="empty" key="_empty_">
+		<slot name="empty"></slot>
+	</div>
+	<div class="more" v-if="more" key="_more_">
 		<x-button :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }" @click="fetchMore()">
 			<template v-if="!moreFetching">{{ $t('loadMore') }}</template>
 			<template v-if="moreFetching"><fa :icon="faSpinner" pulse fixed-width/></template>

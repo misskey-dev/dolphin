@@ -3,24 +3,28 @@
 	<div class="title"><fa :icon="faBan"/> {{ $t('muteAndBlock') }}</div>
 	<div class="content">
 		<span>{{ $t('mutedUsers') }}</span>
-		<x-pagination :pagination="mutingPagination" #default="{items}" class="muting">
-			<div v-if="items.length === 0" key="_" class="empty">{{ $t('noUsers') }}</div>
-			<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i">
-				<router-link class="name" :to="user | userPage">
-					<dp-acct :user="user"/>
-				</router-link>
-			</div>
+		<x-pagination :pagination="mutingPagination" class="muting">
+			<template #empty><span>{{ $t('noUsers') }}</span></template>
+			<template #default="{items}">
+				<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i">
+					<router-link class="name" :to="user | userPage">
+						<dp-acct :user="user"/>
+					</router-link>
+				</div>
+			</template>
 		</x-pagination>
 	</div>
 	<div class="content">
 		<span>{{ $t('blockedUsers') }}</span>
-		<x-pagination :pagination="blockingPagination" #default="{items}" class="blocking">
-			<div v-if="items.length === 0" key="_" class="empty">{{ $t('noUsers') }}</div>
-			<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i">
-				<router-link class="name" :to="user | userPage">
-					<dp-acct :user="user"/>
-				</router-link>
-			</div>
+		<x-pagination :pagination="blockingPagination" class="blocking">
+			<template #empty><span>{{ $t('noUsers') }}</span></template>
+			<template #default="{items}">
+				<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i">
+					<router-link class="name" :to="user | userPage">
+						<dp-acct :user="user"/>
+					</router-link>
+				</div>
+			</template>
 		</x-pagination>
 	</div>
 </section>

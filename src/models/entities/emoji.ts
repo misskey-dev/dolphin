@@ -1,5 +1,6 @@
-import { PrimaryColumn, Entity, Index, Column } from 'typeorm';
+import { PrimaryColumn, Entity, Index, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { id } from '../id';
+import { DriveFile } from './drive-file';
 
 @Entity()
 @Index(['name', 'host'], { unique: true })
@@ -33,6 +34,19 @@ export class Emoji {
 		length: 512, nullable: true
 	})
 	public uri: string | null;
+
+	@Index()
+	@Column({
+		...id(),
+		nullable: true, default: null,
+	})
+	public fileId: DriveFile['id'] | null;
+
+	@ManyToOne(type => DriveFile, {
+		onDelete: 'CASCADE'
+	})
+	@JoinColumn()
+	public file: DriveFile | null;
 
 	@Column('varchar', {
 		length: 64, nullable: true

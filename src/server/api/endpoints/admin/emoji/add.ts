@@ -1,10 +1,11 @@
 import $ from 'cafy';
 import define from '../../../define';
-import { detectUrlMine } from '../../../../../misc/detect-url-mine';
+import create from '../../../../../services/drive/add-file';
 import { Emojis } from '../../../../../models';
 import { genId } from '../../../../../misc/gen-id';
 import { getConnection } from 'typeorm';
 import { ApiError } from '../../../error';
+import { DriveFile } from '../../../../../models/entities/drive-file';
 
 export const meta = {
 	desc: {
@@ -15,13 +16,10 @@ export const meta = {
 
 	requireCredential: true,
 	requireModerator: true,
+	requireFile: true,
 
 	params: {
 		name: {
-			validator: $.str.min(1)
-		},
-
-		url: {
 			validator: $.str.min(1)
 		},
 
@@ -40,9 +38,7 @@ export const meta = {
 	}
 };
 
-export default define(meta, async (ps, me) => {
-	const type = await detectUrlMine(ps.url);
-
+export default define(meta, async (ps, me, file, cleanup) => {
 	const exists = await Emojis.findOne({
 		name: ps.name,
 		host: null
@@ -50,14 +46,26 @@ export default define(meta, async (ps, me) => {
 
 	if (exists != null) throw new ApiError(meta.errors.emojiAlredyExists);
 
+	let driveFile: DriveFile;
+
+	try {
+		// Create file
+		driveFile = await create(null, file.path, ps.name, null, null, true, false, null, null, false);
+	} catch (e) {
+		throw new ApiError(e);
+	} finally {
+		cleanup!();
+	}
+
 	const emoji = await Emojis.save({
 		id: genId(),
 		updatedAt: new Date(),
 		name: ps.name,
 		host: null,
 		aliases: ps.aliases,
-		url: ps.url,
-		type,
+		url: driveFile.url,
+		type: driveFile.type,
+		fileId: driveFile.id,
 	});
 
 	await getConnection().queryResultCache!.remove(['meta_emojis']);
