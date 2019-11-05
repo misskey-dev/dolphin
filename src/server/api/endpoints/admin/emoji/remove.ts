@@ -1,9 +1,10 @@
 import $ from 'cafy';
 import define from '../../../define';
 import { ID } from '../../../../../misc/cafy-id';
-import { Emojis } from '../../../../../models';
+import { Emojis, DriveFiles } from '../../../../../models';
 import { getConnection } from 'typeorm';
 import { ApiError } from '../../../error';
+import { deleteFile } from '../../../../../services/drive/delete-file';
 
 export const meta = {
 	desc: {
@@ -36,6 +37,9 @@ export default define(meta, async (ps, me) => {
 	if (emoji == null) throw new ApiError(meta.errors.noSuchEmoji);
 
 	await Emojis.delete(emoji.id);
+	if (emoji.fileId) DriveFiles.findOne(emoji.fileId).then(file => {
+		if (file) deleteFile(file);
+	});
 
 	await getConnection().queryResultCache!.remove(['meta_emojis']);
 });
