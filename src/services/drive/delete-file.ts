@@ -53,6 +53,7 @@ function postProcess(file: DriveFile, isExpired = false) {
 			isLink: true,
 			url: file.uri,
 			thumbnailUrl: file.uri,
+			size: 0,
 		});
 	} else {
 		DriveFiles.delete(file.id);
