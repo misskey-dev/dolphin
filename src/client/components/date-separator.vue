@@ -58,8 +58,12 @@ export default Vue.extend({
 		text-align: center;
 		font-size: 12px;
 		color: #fff;
-		background: rgba(0, 0, 0, 0.5);
 		border-radius: 64px;
+		background: rgba(0, 0, 0, 0.5);
+
+		@media (prefers-color-scheme: dark) {
+			background: rgba(255, 255, 255, 0.08);
+		}
 
 		span {
 			&:first-child {
