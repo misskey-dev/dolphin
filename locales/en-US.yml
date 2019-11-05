@@ -176,6 +176,8 @@ intro: "Dolphin installation is completed! Let's create your own account."
 done: "Done"
 processing: "Processing"
 preview: "Preview"
+noCustomEmojis: "絵文字はありません"
+customEmojisOfRemote: "リモートの絵文字"
 _cw:
   hide: "Hide"
   show: "See more"
