@@ -6,9 +6,9 @@
 		<x-pagination :pagination="mutingPagination" class="muting">
 			<template #empty><span>{{ $t('noUsers') }}</span></template>
 			<template #default="{items}">
-				<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i">
-					<router-link class="name" :to="user | userPage">
-						<dp-acct :user="user"/>
+				<div class="user" v-for="(mute, i) in items" :key="mute.id" :data-index="i">
+					<router-link class="name" :to="mute.mutee | userPage">
+						<dp-acct :user="mute.mutee"/>
 					</router-link>
 				</div>
 			</template>
@@ -19,9 +19,9 @@
 		<x-pagination :pagination="blockingPagination" class="blocking">
 			<template #empty><span>{{ $t('noUsers') }}</span></template>
 			<template #default="{items}">
-				<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i">
-					<router-link class="name" :to="user | userPage">
-						<dp-acct :user="user"/>
+				<div class="user" v-for="(block, i) in items" :key="block.id" :data-index="i">
+					<router-link class="name" :to="block.blockee | userPage">
+						<dp-acct :user="block.blockee"/>
 					</router-link>
 				</div>
 			</template>
