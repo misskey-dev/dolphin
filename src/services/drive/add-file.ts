@@ -208,7 +208,7 @@ async function deleteOldFile(user: IRemoteUser) {
  * @return Created drive file
  */
 export default async function(
-	user: User,
+	user: User | null,
 	path: string,
 	name: string | null = null,
 	comment: string | null = null,
@@ -252,9 +252,12 @@ export default async function(
 
 	if (!force) {
 		// Check if there is a file with the same hash
-		const much = await DriveFiles.findOne({
+		const much = await DriveFiles.findOne(user ? {
 			md5: hash,
 			userId: user.id,
+		} : {
+			md5: hash,
+			ownedBySystem: true
 		});
 
 		if (much) {
@@ -264,7 +267,7 @@ export default async function(
 	}
 
 	//#region Check drive usage
-	if (!isLink && Users.isRemoteUser(user)) {
+	if (!isLink && user && Users.isRemoteUser(user)) {
 		const usage = await DriveFiles.clacDriveUsageOf(user);
 
 		const instance = await fetchMeta();
@@ -285,7 +288,7 @@ export default async function(
 	//#endregion
 
 	const fetchFolder = async () => {
-		if (!folderId) {
+		if (!folderId || !user) {
 			return null;
 		}
 
@@ -341,23 +344,31 @@ export default async function(
 		propPromises = [calcWh(), calcAvg()];
 	}
 
-	const profile = await UserProfiles.findOne(user.id);
+	const profile = user ? await UserProfiles.findOne(user.id) : null;
 
 	const [folder] = await Promise.all([fetchFolder(), Promise.all(propPromises)]);
 
 	let file = new DriveFile();
 	file.id = genId();
 	file.createdAt = new Date();
-	file.userId = user.id;
-	file.userHost = user.host;
 	file.folderId = folder !== null ? folder.id : null;
 	file.comment = comment;
 	file.properties = properties;
 	file.isLink = isLink;
-	file.isSensitive = Users.isLocalUser(user) && profile!.alwaysMarkNsfw ? true :
-		(sensitive !== null && sensitive !== undefined)
-			? sensitive
-			: false;
+	
+	if (user) {
+		file.userId = user.id;
+		file.userHost = user.host;
+		file.isSensitive = Users.isLocalUser(user) && profile!.alwaysMarkNsfw ? true :
+			(sensitive !== null && sensitive !== undefined)
+				? sensitive
+				: false;
+	} else {
+		file.isSensitive =
+			(sensitive !== null && sensitive !== undefined)
+				? sensitive
+				: false;
+	}
 
 	if (url !== null) {
 		file.src = url;
@@ -386,9 +397,12 @@ export default async function(
 			if (isDuplicateKeyValueError(e)) {
 				logger.info(`already registered ${file.uri}`);
 
-				return await DriveFiles.findOne({
+				return await DriveFiles.findOne(user ? {
 					uri: file.uri,
 					userId: user.id
+				} : {
+					uri: file.uri,
+					ownedBySystem: true
 				}) as DriveFile;
 			} else {
 				logger.error(e);
@@ -401,11 +415,13 @@ export default async function(
 
 	logger.succ(`drive file has been created ${file.id}`);
 
-	DriveFiles.pack(file, { self: true }).then(packedFile => {
-		// Publish driveFileCreated event
-		publishMainStream(user.id, 'driveFileCreated', packedFile);
-		publishDriveStream(user.id, 'fileCreated', packedFile);
-	});
+	if (user) {
+		DriveFiles.pack(file, { self: true }).then(packedFile => {
+			// Publish driveFileCreated event
+			publishMainStream(user.id, 'driveFileCreated', packedFile);
+			publishDriveStream(user.id, 'fileCreated', packedFile);
+		});
+	}
 
 	// 統計を更新
 	driveChart.update(file, true);

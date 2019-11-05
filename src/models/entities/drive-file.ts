@@ -141,4 +141,9 @@ export class DriveFile {
 		comment: 'Whether the DriveFile is direct link to remote server.'
 	})
 	public isLink: boolean;
+
+	@Column('boolean', {
+		default: false,
+	})
+	public ownedBySystem: boolean;
 }
