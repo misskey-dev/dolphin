@@ -10,6 +10,7 @@
 		"declaration": false,
 		"sourceMap": false,
 		"isolatedModules": true,
+		"skipLibCheck": true,
 		"target": "es2017",
 		"module": "commonjs",
 		"moduleResolution": "node",
