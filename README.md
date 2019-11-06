@@ -13,6 +13,14 @@ While inheriting features such as reaction and high performance, it has been opt
 
 Looking for a lightweight, high-performance ActivityPub server? Want to use Misskey, but is it heavy to use alone? Try Dolphin.
 
+## ✨ Gallery
+<img src="./assets/ss/1.jpg" alt="" height="200">
+<img src="./assets/ss/2.jpg" alt="" height="200">
+<img src="./assets/ss/3.jpg" alt="" height="200">
+<img src="./assets/ss/4.jpg" alt="" height="200">
+<img src="./assets/ss/5.jpg" alt="" height="200">
+<img src="./assets/ss/0.png" alt="" height="200">
+
 ## 📊 Comparison
 <table>
 	<thead>
@@ -156,6 +164,6 @@ Enjoy!
 4. `npm run migrate`
 5. Restart your Dolphin process to apply changes
 
-# Contribution
+# 🛠️ Contribution
 ## Localization
 Visit https://crowdin.com/project/dolphin-ap
