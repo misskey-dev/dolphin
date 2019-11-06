@@ -155,3 +155,7 @@ Enjoy!
 3. `NODE_ENV=production npm run build`
 4. `npm run migrate`
 5. Restart your Dolphin process to apply changes
+
+# Contribution
+## Localization
+Visit https://crowdin.com/project/dolphin-ap
