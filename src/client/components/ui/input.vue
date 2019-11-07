@@ -374,8 +374,9 @@ export default Vue.extend({
 	}
 
 	> .desc {
-		margin: 6px 0;
+		margin: 6px 0 0 0;
 		font-size: 13px;
+		opacity: 0.7;
 
 		&:empty {
 			display: none;
