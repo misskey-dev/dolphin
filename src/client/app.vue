@@ -10,7 +10,7 @@
 		<transition name="title-top">
 			<h1 class="title" v-if="showTitle" v-text="title" :key="title"></h1>
 		</transition>
-		<transition name="fade-in-top" mode="out-in">
+		<transition name="page" mode="out-in">
 			<router-view :class="{ withTitle: showTitle }"></router-view>
 		</transition>
 		<div class="powerd-by" :style="{ visibility: $store.getters.isSignedIn ? 'hidden' : 'visible' }">
@@ -88,6 +88,18 @@ export default Vue.extend({
 .title-top-leave-to {
 	opacity: 0;
 	transform: scale(0.9);
+}
+
+.page-enter-active, .page-leave-active {
+	transition: opacity 0.5s, transform 0.5s !important;
+}
+.page-enter {
+	opacity: 0;
+	transform: translateY(-32px);
+}
+.page-leave-to {
+	opacity: 0;
+	transform: translateY(32px);
 }
 
 .dp-app {

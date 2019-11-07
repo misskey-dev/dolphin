@@ -221,7 +221,7 @@ a {
 
 	> .title {
 		margin: 0;
-		padding: 16px 32px;
+		padding: 22px 32px;
 		font-size: 1.2em;
 		border-bottom: solid 1px var(--divider);
 
@@ -259,14 +259,6 @@ a {
 .zoom-enter, .zoom-leave-to {
 	opacity: 0;
 	transform: scale(0.9);
-}
-
-.fade-in-top-enter-active, .fade-in-top-leave-active {
-	transition: opacity 0.5s, transform 0.5s !important;
-}
-.fade-in-top-enter, .fade-in-top-leave-to {
-	opacity: 0;
-	transform: translateY(-32px);
 }
 
 .zoom-in-top-enter-active,

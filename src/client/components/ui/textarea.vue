@@ -98,6 +98,10 @@ export default Vue.extend({
 			border: solid 1px #dae0e4;
 			border-radius: 3px;
 			pointer-events: none;
+
+			@media (prefers-color-scheme: dark) {
+				border: solid 1px #959da2;
+			}
 		}
 
 		&:after {

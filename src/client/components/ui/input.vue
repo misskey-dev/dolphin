@@ -254,6 +254,10 @@ export default Vue.extend({
 			right: 0;
 			height: 1px;
 			background: #dae0e4;
+
+			@media (prefers-color-scheme: dark) {
+				background: #959da2;
+			}
 		}
 
 		&:after {
