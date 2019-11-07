@@ -90,7 +90,7 @@ export default Vue.extend({
 
 	metaInfo() {
 		return {
-			title: this.user ? Vue.filter('userName')(this.user) : null
+			title: this.user ? '@' + Vue.filter('acct')(this.user).replace('@', ' | ') : null
 		};
 	},
 
