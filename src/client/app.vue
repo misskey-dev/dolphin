@@ -13,9 +13,9 @@
 		<transition name="page" mode="out-in">
 			<router-view :class="{ withTitle: showTitle }"></router-view>
 		</transition>
-		<div class="powerd-by" :style="{ visibility: $store.getters.isSignedIn ? 'hidden' : 'visible' }">
-			<span>Powered by</span>
-			<x-logo class="logo"/>
+		<div class="powerd-by" :class="{ visible: !$store.getters.isSignedIn }">
+			<b><router-link to="/">{{ host }}</router-link></b>
+			<small>Powered by <a href="https://github.com/syuilo/dolphin" target="_blank">Dolphin</a></small>
 		</div>
 	</main>
 	<x-ui/>
@@ -25,6 +25,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from './i18n';
+import { host } from './config';
 
 export default Vue.extend({
 	i18n,
@@ -42,12 +43,12 @@ export default Vue.extend({
 
 	components: {
 		XNotifications: () => import('./components/notifications.vue').then(m => m.default),
-		XLogo: () => import('./components/logo.vue').then(m => m.default),
 		XUi: () => import('./app.ui.vue').then(m => m.default),
 	},
 
 	data() {
 		return {
+			host: host,
 			title: null,
 			subTitle: null,
 			showTitle: false
@@ -187,21 +188,33 @@ export default Vue.extend({
 		}
 
 		> .powerd-by {
-			color: #fff;
 			font-size: 14px;
 			text-align: center;
-			opacity: 0.7;
-			margin-top: 16px;
-			transition: opacity 1s ease;
+			margin: 32px 0;
+			visibility: hidden;
 
-			@media (max-width: 500px) {
-				margin-top: 8px;
+			&.visible {
+				visibility: visible;
 			}
 
-			> .logo {
+			&:not(.visible) {
+				@media (min-width: 850px) {
+					display: none;
+				}
+			}
+
+			@media (max-width: 500px) {
+				margin-top: 16px;
+			}
+
+			> small {
 				display: block;
-				width: 50px;
-				margin: 8px auto 0 auto;
+				margin-top: 8px;
+				opacity: 0.5;
+
+				@media (max-width: 500px) {
+					margin-top: 4px;
+				}
 			}
 		}
 	}
