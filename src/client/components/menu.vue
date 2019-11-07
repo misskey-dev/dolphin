@@ -72,7 +72,7 @@ export default Vue.extend({
 	> div {
 		margin: 8px 0;
 		height: 1px;
-		background: rgba(0, 0, 0, 0.1);
+		background: var(--divider);
 	}
 }
 </style>

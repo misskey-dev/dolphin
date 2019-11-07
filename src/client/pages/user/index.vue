@@ -379,6 +379,7 @@ export default Vue.extend({
 
 				> b {
 					display: block;
+					line-height: 16px;
 				}
 
 				> span {
