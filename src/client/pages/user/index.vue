@@ -1,7 +1,7 @@
 <template>
 <div class="dp-user-page" v-if="user">
 	<transition name="zoom" mode="out-in" appear>
-		<div class="profile" :key="user.id">
+		<div class="profile _shadow" :key="user.id">
 			<div class="banner-container" :style="style">
 				<div class="banner" ref="banner" :style="style"></div>
 				<div class="fade"></div>
@@ -148,9 +148,8 @@ export default Vue.extend({
 	> .profile {
 		position: relative;
 		margin-bottom: 16px;
-		border-radius: 6px;
+		border-radius: var(--radius);
 		overflow: hidden;
-		@include shadow();
 
 		@media (max-width: 500px) {
 			margin-bottom: 8px;

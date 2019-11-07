@@ -1,5 +1,5 @@
 <template>
-<div class="wjqjnyhzogztorhrdgcpqlkxhkmuetgj">
+<div class="wjqjnyhzogztorhrdgcpqlkxhkmuetgj _panel">
 	<p><fa :icon="faExclamationTriangle"/> {{ $t('error') }}</p>
 	<x-button @click="() => $emit('retry')" class="button">{{ $t('retry') }}</x-button>
 </div>
@@ -32,9 +32,6 @@ export default Vue.extend({
 	margin: 0 auto;
 	padding: 32px;
 	text-align: center;
-	background: var(--bg);
-	border-radius: 6px;
-	@include shadow();
 
 	> p {
 		margin: 0 0 8px 0;

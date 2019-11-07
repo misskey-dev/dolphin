@@ -1,6 +1,6 @@
 <template>
 <div
-	class="note"
+	class="note _panel"
 	v-show="appearNote.deletedAt == null && !hideThisNote"
 	:tabindex="appearNote.deletedAt == null ? '-1' : null"
 	:class="{ renote: isRenote }"
@@ -491,9 +491,6 @@ export default Vue.extend({
 .note {
 	position: relative;
 	font-size: 16px;
-	background: var(--bg);
-	border-radius: 6px;
-	@include shadow();
 	transition: box-shadow 0.1s ease;
 
 	@media (max-width: 500px) {
@@ -510,11 +507,11 @@ export default Vue.extend({
 	}
 
 	> *:first-child {
-		border-radius: 6px 6px 0 0;
+		border-radius: var(--radius) var(--radius) 0 0;
 	}
 
 	> *:last-child {
-		border-radius: 0 0 6px 6px;
+		border-radius: 0 0 var(--radius) var(--radius);
 	}
 
 	> .pinned {

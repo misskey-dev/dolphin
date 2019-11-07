@@ -417,7 +417,7 @@ export default Vue.extend({
 	width: 400px;
 	height: 400px;
 	background: var(--bg);
-	border-radius: 6px;
+	border-radius: var(--radius);
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;

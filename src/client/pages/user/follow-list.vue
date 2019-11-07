@@ -1,6 +1,6 @@
 <template>
 <x-pagination :pagination="pagination" #default="{items}" class="dp-following-or-followers" ref="list">
-	<div class="user" v-for="(user, i) in items.map(x => type === 'following' ? x.followee : x.follower)" :key="user.id" :data-index="i">
+	<div class="user _panel" v-for="(user, i) in items.map(x => type === 'following' ? x.followee : x.follower)" :key="user.id" :data-index="i">
 		<dp-avatar class="avatar" :user="user"/>
 		<div class="body">
 			<div class="name">
@@ -69,9 +69,6 @@ export default Vue.extend({
 	> .user {
 		display: flex;
 		padding: 16px;
-		background: var(--bg);
-		border-radius: 6px;
-		@include shadow();
 
 		> .avatar {
 			display: block;

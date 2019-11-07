@@ -1,6 +1,6 @@
 <template>
 <x-pagination :pagination="pagination" #default="{items}" class="dp-follow-requests" ref="list">
-	<div class="user" v-for="(req, i) in items" :key="req.id" :data-index="i">
+	<div class="user _panel" v-for="(req, i) in items" :key="req.id" :data-index="i">
 		<dp-avatar class="avatar" :user="req.follower"/>
 		<div class="body">
 			<div class="name">
@@ -67,9 +67,6 @@ export default Vue.extend({
 	> .user {
 		display: flex;
 		padding: 16px;
-		background: var(--bg);
-		border-radius: 6px;
-		@include shadow();
 
 		> .avatar {
 			display: block;

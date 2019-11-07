@@ -1,6 +1,6 @@
 <template>
 <x-pagination :pagination="pagination" #default="{items}" class="dp-user-lists">
-	<div class="list" v-for="(list, i) in items" :key="list.id" :data-index="i">
+	<div class="list _panel" v-for="(list, i) in items" :key="list.id" :data-index="i">
 		<router-link :to="`/manage-lists/${ list.id }`">{{ list.name }}</router-link>
 	</div>
 </x-pagination>
@@ -39,9 +39,6 @@ export default Vue.extend({
 	> .list {
 		display: flex;
 		padding: 16px;
-		background: var(--bg);
-		border-radius: 6px;
-		@include shadow();
 	}
 }
 </style>

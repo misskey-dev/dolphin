@@ -1,5 +1,5 @@
 <template>
-<form class="dp-signin" :class="{ signing }" @submit.prevent="onSubmit">
+<form class="dp-signin _panel" :class="{ signing }" @submit.prevent="onSubmit">
 	<div class="avatar" :style="{ backgroundImage: user ? `url('${ user.avatarUrl }')` : null }" v-show="withAvatar"></div>
 	<div>
 		<x-input v-model="username" type="text" pattern="^[a-zA-Z0-9_]+$" spellcheck="false" autofocus required @input="onUsernameChange">
@@ -99,9 +99,6 @@ export default Vue.extend({
 .dp-signin {
 	max-width: 420px;
 	box-sizing: border-box;
-	background: var(--bg);
-	border-radius: 6px;
-	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
 	padding: 32px;
 

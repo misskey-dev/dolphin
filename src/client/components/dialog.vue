@@ -253,7 +253,7 @@ export default Vue.extend({
 		width: calc(100% - 32px);
 		text-align: center;
 		background: var(--bg);
-		border-radius: 8px;
+		border-radius: var(--radius);
 
 		> .icon {
 			font-size: 32px;

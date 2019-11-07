@@ -515,7 +515,7 @@ export default Vue.extend({
 
 .gafaadew {
 	background: var(--bg);
-	border-radius: 8px;
+	border-radius: var(--radius);
 	box-shadow: 0 0 2px rgba(#000, 0.1);
 
 	> header {

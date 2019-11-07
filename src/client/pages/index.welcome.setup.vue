@@ -74,7 +74,7 @@ export default Vue.extend({
 
 .dp-setup {
 	max-width: 470px;
-	border-radius: 6px;
+	border-radius: var(--radius);
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
 

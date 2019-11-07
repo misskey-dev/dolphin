@@ -111,18 +111,29 @@ export default Vue.extend({
 		text-align: right;
 		padding-left: 32px;
 		box-sizing: border-box;
+		font-size: 32px;
 
-		@media (max-width: 1024px) {
+		@media (max-width: 1300px) {
+			font-size: 26px;
+		}
+
+		@media (max-width: 1200px) {
+			font-size: 20px;
+		}
+
+		@media (max-width: 1100px) {
 			display: none;
 		}
 
 		> h1 {
 			margin: 0;
+			font-size: 100%;
 		}
 
 		> h2 {
 			margin: 0;
 			opacity: 0.5;
+			font-size: 70%;
 		}
 	}
 
@@ -146,7 +157,7 @@ export default Vue.extend({
 			margin: 0;
 			line-height: 48px;
 
-			@media (min-width: 1025px) {
+			@media (min-width: 1101px) {
 				display: none;
 			}
 
@@ -170,7 +181,7 @@ export default Vue.extend({
 				margin-top: 60px;
 			}
 
-			@media (min-width: 1025px) {
+			@media (min-width: 1101px) {
 				margin-top: 0;
 			}
 		}

@@ -98,7 +98,7 @@ export default Vue.extend({
 	width: 350px;
 	height: 350px;
 	background: var(--bg);
-	border-radius: 6px;
+	border-radius: var(--radius);
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
