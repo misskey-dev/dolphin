@@ -177,20 +177,9 @@ a {
 }
 
 ._buttonPrimary {
-	appearance: none;
-	padding: 0;
-	border: none;
-	cursor: pointer;
-	touch-action: manipulation;
+	@extend ._button;
 	color: #fff;
 	background: $primary;
-	font-size: 1em;
-	user-select: none;
-
-	* {
-		pointer-events: none;
-		user-select: none;
-	}
 
 	&:not(:disabled):hover {
 		background: lighten($primary, 5%);
@@ -198,10 +187,6 @@ a {
 
 	&:not(:disabled):active {
 		background: darken($primary, 5%);
-	}
-
-	&:focus {
-		outline: none;
 	}
 }
 
