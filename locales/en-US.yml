@@ -178,6 +178,7 @@ processing: "Processing"
 preview: "Preview"
 noCustomEmojis: "There is no Emojis"
 customEmojisOfRemote: "Emojis from Remote"
+noJobs: "ジョブはありません"
 _cw:
   hide: "Hide"
   show: "See more"
