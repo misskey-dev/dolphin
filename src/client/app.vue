@@ -1,7 +1,10 @@
 <template>
 <div class="dp-app">
 	<transition name="title-left">
-		<h1 class="title" v-text="title" :key="title"></h1>
+		<div class="title" :key="title">
+			<h1 v-text="title"></h1>
+			<h2 v-text="subTitle"></h2>
+		</div>
 	</transition>
 	<main>
 		<transition name="title-top">
@@ -29,7 +32,9 @@ export default Vue.extend({
 	metaInfo() {
 		return {
 			changed: meta => {
-				this.title = meta.titleChunk;
+				const title = meta.titleChunk.split('|');
+				this.title = title.shift().trim();
+				this.subTitle = title.join('|').trim();
 				this.showTitle = !['index', 'user', 'note'].includes(this.$route.name);
 			}
 		};
@@ -44,6 +49,7 @@ export default Vue.extend({
 	data() {
 		return {
 			title: null,
+			subTitle: null,
 			showTitle: false
 		};
 	},
@@ -51,6 +57,7 @@ export default Vue.extend({
 	watch:{
 		$route(to, from) {
 			this.title = null;
+			this.subTitle = null;
 		}
 	}
 });
@@ -88,7 +95,6 @@ export default Vue.extend({
 		position: fixed;
 		z-index: -1;
 		top: 64px;
-		margin: 0;
 		width: calc(50% - 352px);
 		text-align: right;
 		padding-left: 32px;
@@ -96,6 +102,15 @@ export default Vue.extend({
 
 		@media (max-width: 1024px) {
 			display: none;
+		}
+
+		> h1 {
+			margin: 0;
+		}
+
+		> h2 {
+			margin: 0;
+			opacity: 0.5;
 		}
 	}
 
