@@ -1,5 +1,5 @@
 <template>
-<component class="ui-button"
+<component class="ui-button _button"
 	:is="link ? 'a' : 'button'"
 	:class="{ inline, primary }"
 	:type="type"
@@ -109,16 +109,11 @@ export default Vue.extend({
 	font-weight: normal;
 	font-size: 14px;
 	line-height: 24px;
-	border: none;
-	outline: none;
 	box-shadow: none;
 	text-decoration: none;
-	user-select: none;
 	background: rgba(0, 0, 0, 0.05);
 	border-radius: 6px;
 	overflow: hidden;
-	cursor: pointer;
-	color: var(--fg);
 
 	&:not(:disabled):hover {
 		background: rgba(0, 0, 0, 0.1);
@@ -151,11 +146,6 @@ export default Vue.extend({
 		&:not(:disabled):active {
 			background: lighten($primary, 5%);
 		}
-	}
-
-	* {
-		pointer-events: none;
-		user-select: none;
 	}
 
 	&:disabled {

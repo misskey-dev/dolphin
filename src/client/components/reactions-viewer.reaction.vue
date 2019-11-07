@@ -1,6 +1,6 @@
 <template>
 <span
-	class="reaction"
+	class="reaction _button"
 	:class="{ reacted: note.myReaction == reaction }"
 	@click="toggleReaction(reaction)"
 	v-if="count > 0"
@@ -15,7 +15,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Icon from './reaction-icon.vue';
 import XDetails from './reactions-viewer.details.vue';
 import XReactionIcon from './reaction-icon.vue';
 
@@ -145,21 +144,6 @@ export default Vue.extend({
 	margin: 2px;
 	padding: 0 6px;
 	border-radius: 4px;
-	cursor: pointer;
-
-	&, * {
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-	}
-
-	* {
-		user-select: none;
-		pointer-events: none;
-	}
 
 	&.reacted {
 		background: $primary;

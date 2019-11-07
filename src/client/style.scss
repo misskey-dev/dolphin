@@ -159,11 +159,15 @@ a {
 	color: var(--fg);
 	touch-action: manipulation;
 	font-size: 1em;
-	user-select: none;
+
+	&, * {
+		user-select: none;
+		-webkit-user-select: none;
+		-webkit-touch-callout: none;
+	}
 
 	* {
 		pointer-events: none;
-		user-select: none;
 	}
 
 	&:focus {

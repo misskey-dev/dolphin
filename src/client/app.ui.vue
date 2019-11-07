@@ -376,10 +376,6 @@ export default Vue.extend({
 				font-size: 22px;
 			}
 
-			&:focus {
-				outline: none;
-			}
-
 			&:disabled {
 				cursor: default;
 

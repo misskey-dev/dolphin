@@ -1,5 +1,5 @@
 <template>
-<button class="wfliddvnhxvyusikowhxozkyxyenqxqr"
+<button class="wfliddvnhxvyusikowhxozkyxyenqxqr _button"
 	:class="{ wait, active: isFollowing || hasPendingFollowRequestFromYou }"
 	@click="onClick"
 	:disabled="wait"
@@ -108,12 +108,9 @@ export default Vue.extend({
 .wfliddvnhxvyusikowhxozkyxyenqxqr {
 	position: relative;
 	display: inline-block;
-	user-select: none;
-	cursor: pointer;
 	font-weight: bold;
 	color: $primary;
 	background: transparent;
-	outline: none;
 	border: solid 1px $primary;
 	padding: 0;
 	width: 31px;
@@ -162,10 +159,6 @@ export default Vue.extend({
 	&.wait {
 		cursor: wait !important;
 		opacity: 0.7;
-	}
-
-	* {
-		pointer-events: none;
 	}
 }
 </style>
