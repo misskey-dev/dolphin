@@ -11,17 +11,13 @@
 		<canvas ref="chart"></canvas>
 	</div>
 	<div class="content" style="max-height: 180px; overflow: auto;">
-		<sequential-entrance :delay="15">
-			<div v-for="(job, i) in jobs" :key="job.id" :data-index="i">
-				<template v-if="domain === 'deliver'">
-					<span>{{ job.data.to }}</span>
-				</template>
-				<template v-if="domain === 'inbox'">
-					<span>{{ job.data.activity.id }}</span>
-				</template>
-				<span>{{ `(${job.attempts}/${job.maxAttempts}, ${Math.floor((jobsFetched - job.timestamp) / 1000 / 60)}min)` }}</span>
+		<sequential-entrance :delay="15" v-if="jobs.length > 0">
+			<div v-for="(job, i) in jobs" :key="job[0]" :data-index="i">
+				<span>{{ job[0] }}</span>
+				<span style="margin-left: 8px; opacity: 0.7;">({{ job[1] | number }} jobs)</span>
 			</div>
 		</sequential-entrance>
+		<span v-else style="opacity: 0.5;">{{ $t('noJobs') }}</span>
 	</div>
 </section>
 </template>
@@ -54,64 +50,7 @@ export default Vue.extend({
 	data() {
 		return {
 			chart: null,
-			jobs: [{
-				id: 5950761,
-				data: {
-					to: 'https://misskey.nagaseyami.com/inbox',
-					activity: {
-						id: 'aaaaaaaaaaaaaaaaaaaa'
-					}
-				},
-				attempts: 2,
-				maxAttempts: 0,
-				timestamp: Date.now() - 100000,
-			}, {
-				id: 5950762,
-				data: {
-					to: 'https://misskey.nagaseyami.com/inbox',
-					activity: {
-						id: 'aaaaaaaaaaaaaaaaaaaa'
-					}
-				},
-				attempts: 2,
-				maxAttempts: 0,
-				timestamp: Date.now() - 100000,
-			}, {
-				id: 5950763,
-				data: {
-					to: 'https://misskey.nagaseyami.com/inbox',
-					activity: {
-						id: 'aaaaaaaaaaaaaaaaaaaa'
-					}
-				},
-				attempts: 2,
-				maxAttempts: 0,
-				timestamp: Date.now() - 100000,
-			}, {
-				id: 5950764,
-				data: {
-					to: 'https://misskey.nagaseyami.com/inbox',
-					activity: {
-						id: 'aaaaaaaaaaaaaaaaaaaa'
-					}
-				},
-				attempts: 2,
-				maxAttempts: 0,
-				timestamp: Date.now() - 100000,
-			}, {
-				id: 5950765,
-				data: {
-					to: 'https://misskey.nagaseyami.com/inbox',
-					activity: {
-						id: 'aaaaaaaaaaaaaaaaaaaa'
-					}
-				},
-				attempts: 2,
-				maxAttempts: 0,
-				timestamp: Date.now() - 100000,
-			}],
-			jobsLimit: 50,
-			jobsFetched: Date.now(),
+			jobs: [],
 			activeSincePrevTick: 0,
 			active: 0,
 			waiting: 0,
@@ -235,13 +174,8 @@ export default Vue.extend({
 		},
 
 		fetchJobs() {
-			this.$root.api('admin/queue/jobs', {
-				domain: this.domain,
-				state: 'delayed',
-				limit: this.jobsLimit
-			}).then(jobs => {
-				this.jobsFetched = Date.now();
-				//this.jobs = jobs;
+			this.$root.api(this.domain === 'inbox' ? 'admin/queue/inbox-delayed' : this.domain === 'deliver' ? 'admin/queue/deliver-delayed' : null, {}).then(jobs => {
+				this.jobs = jobs;
 			});
 		},
 	}
