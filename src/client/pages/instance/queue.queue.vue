@@ -152,6 +152,10 @@ export default Vue.extend({
 
 	methods: {
 		onStats(stats) {
+			this.activeSincePrevTick = stats[this.domain].activeSincePrevTick;
+			this.active = stats[this.domain].active;
+			this.waiting = stats[this.domain].waiting;
+			this.delayed = stats[this.domain].delayed;
 			this.chart.data.labels.push('');
 			this.chart.data.datasets[0].data.push(stats[this.domain].activeSincePrevTick);
 			this.chart.data.datasets[1].data.push(stats[this.domain].active);
