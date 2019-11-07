@@ -1,4 +1,3 @@
-import * as Deque from 'double-ended-queue';
 import Xev from 'xev';
 import { deliverQueue, inboxQueue } from '../../queue';
 
@@ -10,10 +9,10 @@ const interval = 10000;
  * Report queue stats regularly
  */
 export default function() {
-	const log = new Deque<any>();
+	const log = [] as any[];
 
 	ev.on('requestQueueStatsLog', x => {
-		ev.emit(`queueStatsLog:${x.id}`, log.toArray().slice(0, x.length || 50));
+		ev.emit(`queueStatsLog:${x.id}`, log.slice(0, x.length || 50));
 	});
 
 	let activeDeliverJobs = 0;
