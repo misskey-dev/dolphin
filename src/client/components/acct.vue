@@ -2,19 +2,22 @@
 <span class="dp-acct" v-once>
 	<span class="name">@{{ user.username }}</span>
 	<span class="host" v-if="user.host || detail || $store.state.settings.showFullAcct">@{{ user.host || host }}</span>
-	<fa v-if="user.isLocked == true" class="locked" icon="lock" fixed-width/>
+	<fa v-if="user.isLocked == true" class="locked" :icon="faLock" fixed-width/>
 </span>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { host } from '../config';
 import { toUnicode } from 'punycode';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { host } from '../config';
+
 export default Vue.extend({
 	props: ['user', 'detail'],
 	data() {
 		return {
-			host: toUnicode(host)
+			host: toUnicode(host),
+			faLock
 		};
 	}
 });
