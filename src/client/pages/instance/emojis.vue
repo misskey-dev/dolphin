@@ -24,7 +24,7 @@
 	<section class="_section remote">
 		<div class="title"><fa :icon="faLaugh"/> {{ $t('customEmojisOfRemote') }}</div>
 		<div class="content">
-			<x-input v-model="host" :debounce="true" style="margin-top: 0;"><template #title>{{ $t('host') }}</template></x-input>
+			<x-input v-model="host" :debounce="true" style="margin-top: 0;"><span>{{ $t('host') }}</span></x-input>
 			<x-pagination :pagination="remotePagination" class="emojis" ref="remoteEmojis">
 				<template #empty><span>{{ $t('noCustomEmojis') }}</span></template>
 				<template #default="{items}">

@@ -6,7 +6,7 @@
 	<ul ref="choices">
 		<li v-for="(choice, i) in choices" :key="i">
 			<x-input class="input" :value="choice" @input="onInput(i, $event)">
-				<template #title>{{ $t('_poll.choiceN', { n: i + 1 }) }}</template>
+				<span>{{ $t('_poll.choiceN', { n: i + 1 }) }}</span>
 			</x-input>
 			<button @click="remove(i)" class="_button">
 				<fa :icon="faTimes"/>
@@ -26,15 +26,15 @@
 			</x-select>
 			<section v-if="expiration === 'at'">
 				<x-input v-model="atDate" type="date">
-					<template #title>{{ $t('_poll.deadlineDate') }}</template>
+					<span>{{ $t('_poll.deadlineDate') }}</span>
 				</x-input>
 				<x-input v-model="atTime" type="time">
-					<template #title>{{ $t('_poll.deadlineTime') }}</template>
+					<span>{{ $t('_poll.deadlineTime') }}</span>
 				</x-input>
 			</section>
 			<section v-if="expiration === 'after'">
 				<x-input v-model="after" type="number">
-					<template #title>{{ $t('_poll.duration') }}</template>
+					<span>{{ $t('_poll.duration') }}</span>
 				</x-input>
 				<x-select v-model="unit">
 					<option value="second">{{ $t('_time.second') }}</option>

@@ -135,7 +135,7 @@ export default Vue.extend({
 	},
 	computed: {
 		filled(): boolean {
-			return this.v != '' && this.v != null;
+			return this.v !== '' && this.v != null;
 		},
 		filePlaceholder(): string {
 			if (this.type != 'file') return null;

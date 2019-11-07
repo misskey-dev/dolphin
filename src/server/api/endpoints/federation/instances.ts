@@ -21,7 +21,19 @@ export const meta = {
 			validator: $.optional.nullable.bool,
 		},
 
-		markedAsClosed: {
+		suspended: {
+			validator: $.optional.nullable.bool,
+		},
+
+		federating: {
+			validator: $.optional.nullable.bool,
+		},
+
+		subscribing: {
+			validator: $.optional.nullable.bool,
+		},
+
+		publishing: {
 			validator: $.optional.nullable.bool,
 		},
 
@@ -84,11 +96,35 @@ export default define(meta, async (ps, me) => {
 		}
 	}
 
-	if (typeof ps.markedAsClosed === 'boolean') {
-		if (ps.markedAsClosed) {
+	if (typeof ps.suspended === 'boolean') {
+		if (ps.suspended) {
 			query.andWhere('instance.isSuspended = TRUE');
 		} else {
 			query.andWhere('instance.isSuspended = FALSE');
+		}
+	}
+
+	if (typeof ps.federating === 'boolean') {
+		if (ps.federating) {
+			query.andWhere('((instance.followingCount > 0) OR (instance.followersCount > 0))');
+		} else {
+			query.andWhere('((instance.followingCount = 0) AND (instance.followersCount = 0))');
+		}
+	}
+
+	if (typeof ps.subscribing === 'boolean') {
+		if (ps.subscribing) {
+			query.andWhere('instance.followersCount > 0');
+		} else {
+			query.andWhere('instance.followersCount = 0');
+		}
+	}
+
+	if (typeof ps.publishing === 'boolean') {
+		if (ps.publishing) {
+			query.andWhere('instance.followingCount > 0');
+		} else {
+			query.andWhere('instance.followingCount = 0');
 		}
 	}
 
