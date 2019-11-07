@@ -1,6 +1,5 @@
 <template>
 <div class="dp-settings-page">
-	<header>{{ $t('settings') }}</header>
 	<x-profile-setting/>
 	<x-privacy-setting/>
 	<x-reaction-setting/>
@@ -46,18 +45,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .dp-settings-page {
-	> header {
-		padding: 16px;
-		margin-bottom: 16px;
-		font-weight: bold;
-		text-align: center;
-		background: rgba(0, 0, 0, 0.3);
-		color: #fff;
-		-webkit-backdrop-filter: blur(16px);
-		backdrop-filter: blur(16px);
-		border-radius: 6px;
-	}
-
 	> .logout {
 		margin: 8px auto;
 	}

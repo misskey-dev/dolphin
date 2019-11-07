@@ -10,6 +10,11 @@ import Progress from '../scripts/loading';
 import XHomeTimeline from './index.home.timeline.vue';
 
 export default Vue.extend({
+	metaInfo() {
+		return {
+			title: this.$t('timeline')
+		};
+	},
 	components: {
 		XHomeTimeline
 	},

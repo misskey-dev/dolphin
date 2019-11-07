@@ -1,7 +1,5 @@
 <template>
 <div v-if="meta" class="dp-instance-page">
-	<header>{{ $t('instance') }}</header>
-
 	<section class="_section info">
 		<div class="title"><fa :icon="faInfoCircle"/> {{ $t('instanceInfo') }}</div>
 		<div class="content">
@@ -128,18 +126,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .dp-instance-page {
-	> header {
-		padding: 16px;
-		margin-bottom: 16px;
-		font-weight: bold;
-		text-align: center;
-		background: rgba(0, 0, 0, 0.3);
-		color: #fff;
-		-webkit-backdrop-filter: blur(16px);
-		backdrop-filter: blur(16px);
-		border-radius: 6px;
-	}
-
 	> .info {
 		> .deps {
 			> div {

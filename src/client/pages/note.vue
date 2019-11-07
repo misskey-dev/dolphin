@@ -17,6 +17,11 @@ import XNote from '../components/note.vue';
 
 export default Vue.extend({
 	i18n,
+	metaInfo() {
+		return {
+			title: this.$t('note')
+		};
+	},
 	components: {
 		XNote
 	},
