@@ -1,6 +1,6 @@
 $primary: #5da1c1;
 $lightHtml: #edf3f7;
-$darkHtml: #050606;
+$darkHtml: #000;
 
 :root {
 	--bg: #fff;
@@ -15,7 +15,7 @@ $darkHtml: #050606;
 	--radius: 8px;
 
 	@media (prefers-color-scheme: dark) {
-		--bg: #111213;
+		--bg: #0c0d0e;
 		--fg: #c7d1d8;
 		--scrollbarHandle: rgba(255, 255, 255, 0.2);
 		--scrollbarHandleHover: rgba(255, 255, 255, 0.4);	
