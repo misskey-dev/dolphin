@@ -42,7 +42,7 @@
 					</div>
 					<div class="cell">
 						<div class="label"><fa :icon="faPencilAlt" fixed-width class="icon"/>{{ $t('notes') }}</div>
-						<div class="data clickable" @click="showNotes()">{{ instance.notesCount | number }}</div>
+						<div class="data">{{ instance.notesCount | number }}</div>
 					</div>
 				</div>
 				<div class="row">
