@@ -6,20 +6,6 @@ import { cumulativeSum } from '../prelude/array';
 import { Tree } from '../prelude/tree';
 import { emojiRegex } from '../misc/emoji-regex';
 
-export function removeOrphanedBrackets(s: string): string {
-	const openBrackets = ['(', '「', '['];
-	const closeBrackets = [')', '」', ']'];
-	const xs = cumulativeSum(s.split('').map(c => {
-		if (openBrackets.includes(c)) return 1;
-		if (closeBrackets.includes(c)) return -1;
-		return 0;
-	}));
-	const firstOrphanedCloseBracket = xs.findIndex(x => x < 0);
-	if (firstOrphanedCloseBracket !== -1) return s.substr(0, firstOrphanedCloseBracket);
-	const lastMatched = xs.lastIndexOf(0);
-	return s.substr(0, lastMatched + 1);
-}
-
 export function parse(source: string | null): MfmForest | null {
 	if (source == null || source == '') {
 		return null;
@@ -34,6 +20,20 @@ export function parsePlain(source: string | null): MfmForest | null {
 	}
 
 	return normalize(p(source, true));
+}
+
+function removeOrphanedBrackets(s: string): string {
+	const openBrackets = ['(', '「', '['];
+	const closeBrackets = [')', '」', ']'];
+	const xs = cumulativeSum(s.split('').map(c => {
+		if (openBrackets.includes(c)) return 1;
+		if (closeBrackets.includes(c)) return -1;
+		return 0;
+	}));
+	const firstOrphanedCloseBracket = xs.findIndex(x => x < 0);
+	if (firstOrphanedCloseBracket !== -1) return s.substr(0, firstOrphanedCloseBracket);
+	const lastMatched = xs.lastIndexOf(0);
+	return s.substr(0, lastMatched + 1);
 }
 
 const checkUrl = (source: string, cursor: number, remain: string): [Tree<MfmNode>, number] | [null, number] => {
@@ -83,60 +83,28 @@ function p(source: string, emojiOnly = false): MfmForest {
 	const res: MfmForest = [];
 	let cursor = 0;
 
-	if (emojiOnly) {
-		while (cursor < source.length) {
-			const remain = source.substr(cursor);
-	
-			const [emoji, inc] = checkEmoji(source, cursor, remain);
-			if (emoji) {
-				res.push(emoji);
+	const syntaxes: ((source: string, cursor: number, remain: string) => [Tree<MfmNode>, number] | [null, number])[]
+		= emojiOnly ? [checkEmoji] : [checkMention, checkHashtag, checkUrl, checkEmoji];
+
+	while (cursor < source.length) {
+		const remain = source.substr(cursor);
+
+		let matched = false;
+
+		for (const syntax of syntaxes) {
+			const [x, inc] = syntax(source, cursor, remain);
+			if (x) {
+				res.push(x);
 				cursor += inc;
-				continue;
+				matched = true;
+				break;
 			}
-	
+		}
+
+		if (!matched) {
 			res.push(createLeaf('text', { text: remain[0] }));
 			cursor++;
-		}	
-	} else {
-		while (cursor < source.length) {
-			const remain = source.substr(cursor);
-	
-			{
-				const [mention, inc] = checkMention(source, cursor, remain);
-				if (mention) {
-					res.push(mention);
-					cursor += inc;
-					continue;
-				}
-			}
-			{
-				const [hashtag, inc] = checkHashtag(source, cursor, remain);
-				if (hashtag) {
-					res.push(hashtag);
-					cursor += inc;
-					continue;
-				}
-			}
-			{
-				const [url, inc] = checkUrl(source, cursor, remain);
-				if (url) {
-					res.push(url);
-					cursor += inc;
-					continue;
-				}
-			}
-			{
-				const [emoji, inc] = checkEmoji(source, cursor, remain);
-				if (emoji) {
-					res.push(emoji);
-					cursor += inc;
-					continue;
-				}
-			}
-	
-			res.push(createLeaf('text', { text: remain[0] }));
-			cursor++;
-		}	
+		}
 	}
 
 	return res;
