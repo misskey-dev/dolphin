@@ -248,7 +248,7 @@ _exportOrImport:
 _charts:
   federationInstancesIncDec: "連合の増減"
   federationInstancesTotal: "Total Federated Instances"
-  usersIncDec: "ユーザーの増減"
+  usersIncDec: "Increase, or decrease in the number of users"
   usersTotal: "Total Users"
   notesIncDec: "Increase, or decrease in the number of posts"
   localNotesIncDec: "Increase, or decrease in local postings"
