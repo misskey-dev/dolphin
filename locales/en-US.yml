@@ -246,8 +246,8 @@ _exportOrImport:
   blockingList: "Block list"
   userLists: "Lists"
 _charts:
-  federationInstancesIncDec: "連合の増減"
-  federationInstancesTotal: "Total Federated Instances"
+  federationInstancesIncDec: "Increase, or decrease in federation"
+  federationInstancesTotal: "Federation in total"
   usersIncDec: "Increase, or decrease in the number of users"
   usersTotal: "Total Users"
   notesIncDec: "Increase, or decrease in the number of posts"
