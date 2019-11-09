@@ -1,7 +1,7 @@
 <template>
 <div class="dp-user-page" v-if="user">
 	<transition name="zoom" mode="out-in" appear>
-		<div class="profile _shadow" :key="user.id">
+		<div class="profile _panel" :key="user.id">
 			<div class="banner-container" :style="style">
 				<div class="banner" ref="banner" :style="style"></div>
 				<div class="fade"></div>
@@ -148,7 +148,6 @@ export default Vue.extend({
 	> .profile {
 		position: relative;
 		margin-bottom: 16px;
-		border-radius: var(--radius);
 		overflow: hidden;
 
 		@media (max-width: 500px) {
@@ -260,7 +259,6 @@ export default Vue.extend({
 
 		> .title {
 			display: none;
-			background: var(--bg);
 			text-align: center;
 			padding: 50px 0 16px 0;
 			font-weight: bold;
@@ -294,7 +292,6 @@ export default Vue.extend({
 		> .description {
 			padding: 24px 24px 24px 154px;
 			font-size: 15px;
-			background: var(--bg);
 
 			@media (max-width: 500px) {
 				padding: 16px;
@@ -305,19 +302,12 @@ export default Vue.extend({
 				margin: 0;
 				opacity: 0.5;
 			}
-
-			& + .status {
-				border-top: solid 1px var(--divider);
-			}
 		}
 
 		> .fields {
 			padding: 24px;
-			background: rgba(0, 0, 0, 0.3);
-			color: #fff;
-			-webkit-backdrop-filter: blur(16px);
-			backdrop-filter: blur(16px);
 			font-size: 14px;
+			border-top: solid 1px var(--divider);
 
 			@media (max-width: 500px) {
 				padding: 16px;
@@ -329,12 +319,7 @@ export default Vue.extend({
 				margin: 0;
 				align-items: center;
 
-				&:not(:last-child) {
-					border-bottom: solid 1px var(--divider);
-				}
-
 				> .name {
-					border-right: solid 1px var(--faceDivider);
 					padding: 4px;
 					margin: 4px;
 					width: 30%;
@@ -359,7 +344,7 @@ export default Vue.extend({
 		> .status {
 			display: flex;
 			padding: 24px;
-			background: var(--bg);
+			border-top: solid 1px var(--divider);
 
 			@media (max-width: 500px) {
 				padding: 16px;
