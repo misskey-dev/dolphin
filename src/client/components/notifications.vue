@@ -70,7 +70,6 @@ export default Vue.extend({
 		_notifications(): any[] {
 			return (this.items as any).map(notification => {
 				const date = new Date(notification.createdAt).getDate();
-				const month = new Date(notification.createdAt).getMonth() + 1;
 				notification._date = date;
 				return notification;
 			});
