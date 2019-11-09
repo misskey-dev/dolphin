@@ -10,11 +10,11 @@
 				<div class="row">
 					<div class="cell">
 						<div class="label">{{ $t('software') }}</div>
-						<div class="data">{{ instance.softwareName }}</div>
+						<div class="data">{{ instance.softwareName || '?' }}</div>
 					</div>
 					<div class="cell">
 						<div class="label">{{ $t('version') }}</div>
-						<div class="data">{{ instance.softwareVersion }}</div>
+						<div class="data">{{ instance.softwareVersion || '?' }}</div>
 					</div>
 				</div>
 			</div>
