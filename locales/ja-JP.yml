@@ -188,6 +188,9 @@ all: "全て"
 subscribing: "購読中"
 publishing: "配信中"
 notResponding: "応答なし"
+instanceFollowing: "インスタンスのフォロー"
+instanceFollowers: "インスタンスのフォロワー"
+instanceUsers: "インスタンスのユーザー"
 
 _cw:
   hide: "隠す"

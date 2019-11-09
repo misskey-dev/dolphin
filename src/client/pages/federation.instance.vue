@@ -28,21 +28,21 @@
 				<div class="row">
 					<div class="cell">
 						<div class="label"><fa :icon="faCloudDownloadAlt" fixed-width class="icon"/>{{ $t('following') }}</div>
-						<div class="data">{{ instance.followingCount | number }}</div>
+						<div class="data clickable" @click="showFollowing()">{{ instance.followingCount | number }}</div>
 					</div>
 					<div class="cell">
 						<div class="label"><fa :icon="faCloudUploadAlt" fixed-width class="icon"/>{{ $t('followers') }}</div>
-						<div class="data">{{ instance.followersCount | number }}</div>
+						<div class="data clickable" @click="showFollowers()">{{ instance.followersCount | number }}</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="cell">
 						<div class="label"><fa :icon="faUsers" fixed-width class="icon"/>{{ $t('users') }}</div>
-						<div class="data">{{ instance.usersCount | number }}</div>
+						<div class="data clickable" @click="showUsers()">{{ instance.usersCount | number }}</div>
 					</div>
 					<div class="cell">
 						<div class="label"><fa :icon="faPencilAlt" fixed-width class="icon"/>{{ $t('notes') }}</div>
-						<div class="data">{{ instance.notesCount | number }}</div>
+						<div class="data clickable" @click="showNotes()">{{ instance.notesCount | number }}</div>
 					</div>
 				</div>
 				<div class="row">
@@ -119,6 +119,7 @@ import Chart from 'chart.js';
 import i18n from '../i18n';
 import { faTimes, faCrosshairs, faCloudDownloadAlt, faCloudUploadAlt, faUsers, faPencilAlt, faFileImage, faDatabase, faTrafficLight, faLongArrowAltUp, faLongArrowAltDown } from '@fortawesome/free-solid-svg-icons';
 import XModal from '../components/modal.vue';
+import DpUsersDialog from '../components/users-dialog.vue';
 import XSelect from '../components/ui/select.vue';
 import XSwitch from '../components/ui/switch.vue';
 
@@ -406,6 +407,47 @@ export default Vue.extend({
 				}]
 			};
 		},
+
+		showFollowing() {
+			this.$root.new(DpUsersDialog, {
+				title: this.$t('instanceFollowing'),
+				pagination: {
+					endpoint: 'federation/following',
+					limit: 10,
+					params: {
+						host: this.instance.host
+					}
+				},
+				extract: item => item.follower
+			});
+		},
+
+		showFollowers() {
+			this.$root.new(DpUsersDialog, {
+				title: this.$t('instanceFollowers'),
+				pagination: {
+					endpoint: 'federation/followers',
+					limit: 10,
+					params: {
+						host: this.instance.host
+					}
+				},
+				extract: item => item.followee
+			});
+		},
+
+		showUsers() {
+			this.$root.new(DpUsersDialog, {
+				title: this.$t('instanceUsers'),
+				pagination: {
+					endpoint: 'federation/users',
+					limit: 10,
+					params: {
+						host: this.instance.host
+					}
+				}
+			});
+		}
 	}
 });
 </script>
@@ -482,6 +524,11 @@ export default Vue.extend({
 							margin-right: 4px;
 							display: none;
 						}
+					}
+
+					> .data.clickable {
+						color: $primary;
+						cursor: pointer;
 					}
 				}
 			}
