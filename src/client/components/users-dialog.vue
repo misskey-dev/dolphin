@@ -7,13 +7,13 @@
 		</div>
 
 		<sequential-entrance class="users">
-			<div v-for="(item, i) in items" class="user" :key="item.id" :data-index="i">
+			<router-link v-for="(item, i) in items" class="user" :key="item.id" :data-index="i" :to="extract ? extract(item) : item | userPage">
 				<dp-avatar :user="extract ? extract(item) : item" class="avatar" :disable-link="true"/>
 				<div class="body">
 					<dp-user-name :user="extract ? extract(item) : item" class="name"/>
 					<dp-acct :user="extract ? extract(item) : item" class="acct"/>
 				</div>
-			</div>
+			</router-link>
 		</sequential-entrance>
 
 		<button class="more _button" v-if="more" @click="fetchMore" :disabled="moreFetching">
