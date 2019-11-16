@@ -25,7 +25,6 @@ import { Poll, IPoll } from '../../models/entities/poll';
 import { createNotification } from '../create-notification';
 import { isDuplicateKeyValueError } from '../../misc/is-duplicate-key-value-error';
 import { ensure } from '../../prelude/ensure';
-import { fetchNodeinfo } from '../fetch-nodeinfo';
 
 type NotificationType = 'reply' | 'renote' | 'quote' | 'mention';
 

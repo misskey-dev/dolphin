@@ -1,6 +1,6 @@
 import * as os from 'os';
 import * as cluster from 'cluster';
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 import * as portscanner from 'portscanner';
 import * as isRoot from 'is-root';
 
@@ -28,7 +28,7 @@ function greet() {
 		//#endregion
 
 		console.log(' Welcome to Dolphin!');
-		console.log(chalk.keyword('orange')(' Dolphin is fork of Misskey. See https://github.com/syuilo/misskey'));
+		console.log(chalk.keyword('orange')(' Dolphin is open-source software. See https://github.com/syuilo/dolphin'));
 
 		console.log('');
 		console.log(chalk`< ${os.hostname()} {gray (PID: ${process.pid.toString()})} >`);
@@ -68,7 +68,7 @@ export async function masterMain() {
 		process.exit(1);
 	}
 
-	bootLogger.succ('Dolphin initialized');
+	bootLogger.succ('Dolphin is ready for launch');
 
 	require('./services/server-stats').default();
 	require('./services/queue-stats').default();
