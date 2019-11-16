@@ -11,7 +11,6 @@
 	"scripts": {
 		"start": "node ./index.js",
 		"init": "npm run migrate",
-		"ormconfig": "node ./built/ormconfig.js",
 		"migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
 		"migrateandstart": "npm run migrate && npm run start",
 		"build": "webpack && gulp build",
@@ -49,7 +48,6 @@
 		"@types/koa": "2.0.51",
 		"@types/koa-bodyparser": "5.0.2",
 		"@types/koa-compress": "2.0.9",
-		"@types/koa-cors": "0.0.0",
 		"@types/koa-favicon": "2.0.19",
 		"@types/koa-logger": "3.1.1",
 		"@types/koa-mount": "4.0.0",
