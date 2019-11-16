@@ -317,7 +317,7 @@ export async function updatePerson(uri: string, resolver?: Resolver | null, hint
 
 	if (avatar) {
 		updates.avatarId = avatar.id;
-		updates.avatarUrl = DriveFiles.getPublicUrl(avatar);
+		updates.avatarUrl = DriveFiles.getPublicUrl(avatar, true);
 	}
 
 	if (banner) {
