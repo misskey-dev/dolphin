@@ -19,9 +19,7 @@
 		"gulp": "gulp build",
 		"clean": "gulp clean",
 		"cleanall": "gulp cleanall",
-		"lint": "gulp lint",
-		"test": "gulp test",
-		"format": "gulp format"
+		"test": "gulp test"
 	},
 	"resolutions": {
 		"gulp-cssnano/cssnano/postcss-svgo/svgo/js-yaml": "^3.13.1",
