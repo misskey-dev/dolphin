@@ -5,7 +5,6 @@
 import * as webpack from 'webpack';
 import * as chalk from 'chalk';
 const { VueLoaderPlugin } = require('vue-loader');
-//const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
@@ -94,7 +93,6 @@ module.exports = {
 		}]
 	},
 	plugins: [
-		//new HardSourceWebpackPlugin(),
 		new ProgressBarPlugin({
 			format: chalk`  {cyan.bold Yes we can} {bold [}:bar{bold ]} {green.bold :percent} {gray :elapseds}`,
 			clear: false
@@ -103,9 +101,6 @@ module.exports = {
 			_VERSION_: JSON.stringify(meta.version),
 			_LANGS_: JSON.stringify(Object.entries(locales).map(([k, v]: [string, any]) => [k, v && v.meta && v.meta.lang])),
 			_ENV_: JSON.stringify(process.env.NODE_ENV)
-		}),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development')
 		}),
 		new VueLoaderPlugin(),
 	],
