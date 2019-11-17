@@ -7,6 +7,5 @@ Dockerfile
 build/
 db/
 docker-compose.yml
-elasticsearch/
 node_modules/
 redis/

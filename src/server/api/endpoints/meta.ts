@@ -78,15 +78,6 @@ export default define(meta, async (ps, me) => {
 		requireSetup: (await Users.count({})) === 0
 	};
 
-	if (ps.detail) {
-		response.features = {
-			elasticsearch: false,
-			recaptcha: config.recaptchaSiteKey && config.recaptchaSecretKey,
-			objectStorage: config.drive.storage !== 'fs',
-			serviceWorker: config.swPublicKey && config.swPrivateKey,
-		};
-	}
-
 	if (me) {
 		response.blockedHosts = instance.blockedHosts;
 		response.proxyAccount = instance.proxyAccount;

@@ -7,7 +7,6 @@ services:
     links:
       - db
       - redis
-#      - es
     ports:
       - "127.0.0.1:3000:3000"
     networks:
@@ -31,16 +30,6 @@ services:
       - .config/docker.env
     volumes:
       - ./db:/var/lib/postgresql/data
-
-#  es:
-#    restart: always
-#    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.2
-#    environment:
-#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-#    networks:
-#      - internal_network
-#    volumes:
-#      - ./elasticsearch:/usr/share/elasticsearch/data
 
 networks:
   internal_network:
