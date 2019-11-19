@@ -119,6 +119,18 @@ export default Vue.extend({
 		this.fetch();
 	},
 
+	mounted() {
+		window.addEventListener('load', this.onScroll);
+		window.addEventListener('scroll', this.onScroll, { passive: true });
+		window.addEventListener('resize', this.onScroll);
+	},
+
+	beforeDestroy() {
+		window.removeEventListener('load', this.onScroll);
+		window.removeEventListener('scroll', this.onScroll);
+		window.removeEventListener('resize', this.onScroll);
+	},
+
 	methods: {
 		fetch() {
 			Progress.start();
@@ -136,6 +148,20 @@ export default Vue.extend({
 				source: this.$refs.menu,
 				user: this.user
 			});
+		},
+
+		onScroll() {
+			const banner = this.$refs.banner as any;
+			if (banner == null) return;
+
+			const top = window.scrollY;
+
+			const z = 1.75; // 奥行き(小さいほど奥)
+			const pos = -(top / z);
+			banner.style.backgroundPosition = `center calc(50% - ${pos}px)`;
+
+			const blur = top / 32
+			if (blur <= 10) banner.style.filter = `blur(${blur}px)`;
 		},
 	}
 });
