@@ -113,9 +113,9 @@ Please install and setup these softwares:
 
 ### Install Dolphin
 
-1. Connect to misskey user
+1. Connect to Dolphin user
 
-	`su - misskey`
+	`su - dolphin`
 
 2. Clone the Dolphin repo
 
