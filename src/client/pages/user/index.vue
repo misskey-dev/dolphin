@@ -6,9 +6,7 @@
 				<div class="banner" ref="banner" :style="style"></div>
 				<div class="fade"></div>
 				<div class="title">
-					<p class="name">
-						<dp-user-name :user="user" :nowrap="false"/>
-					</p>
+					<dp-user-name class="name" :user="user" :nowrap="true"/>
 					<div>
 						<span class="username"><dp-acct :user="user" :detail="true" /></span>
 						<span v-if="user.isBot" :title="$t('is-bot')"><fa icon="robot"/></span>
@@ -253,6 +251,7 @@ export default Vue.extend({
 				left: 0;
 				width: 100%;
 				padding: 0 0 8px 154px;
+				box-sizing: border-box;
 				color: #fff;
 
 				@media (max-width: 500px) {
