@@ -28,7 +28,7 @@ function greet() {
 		//#endregion
 
 		console.log(' Welcome to Dolphin!');
-		console.log(chalk.keyword('orange')(' Dolphin is open-source software. See https://github.com/syuilo/dolphin'));
+		console.log(chalk.keyword('orange')(' Dolphin is open-source software. https://github.com/syuilo/dolphin'));
 
 		console.log('');
 		console.log(chalk`< ${os.hostname()} {gray (PID: ${process.pid.toString()})} >`);
