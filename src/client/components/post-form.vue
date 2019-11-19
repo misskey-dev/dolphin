@@ -520,13 +520,22 @@ export default Vue.extend({
 
 	> header {
 		z-index: 1000;
-		height: 50px;
+		height: 66px;
+
+		@media (max-width: 500px) {
+			height: 50px;
+		}
 
 		> .cancel {
 			padding: 0;
-			width: 50px;
-			line-height: 50px;
 			font-size: 20px;
+			width: 64px;
+			line-height: 66px;
+
+			@media (max-width: 500px) {
+				width: 50px;
+				line-height: 50px;
+			}
 		}
 
 		> div {
@@ -535,15 +544,23 @@ export default Vue.extend({
 			right: 0;
 
 			> .text-count {
-				line-height: 50px;
+				line-height: 66px;
+
+				@media (max-width: 500px) {
+					line-height: 50px;
+				}
 			}
 
 			> .submit {
-				margin: 8px;
+				margin: 16px;
 				padding: 0 16px;
 				line-height: 34px;
 				vertical-align: bottom;
 				border-radius: 4px;
+
+				@media (max-width: 500px) {
+					margin: 8px;
+				}
 
 				&:disabled {
 					opacity: 0.7;
@@ -579,10 +596,14 @@ export default Vue.extend({
 		}
 
 		> .to-specified {
-			padding: 6px 16px;
+			padding: 6px 24px;
 			margin-bottom: 8px;
 			overflow: auto;
 			white-space: nowrap;
+
+			@media (max-width: 500px) {
+				padding: 6px 16px;
+			}
 
 			> .visibleUsers {
 				display: inline;
@@ -614,7 +635,7 @@ export default Vue.extend({
 		> textarea {
 			display: block;
 			box-sizing: border-box;
-			padding: 0 16px;
+			padding: 0 24px;
 			margin: 0;
 			width: 100%;
 			font-size: 16px;
@@ -623,6 +644,10 @@ export default Vue.extend({
 			background: transparent;
 			color: var(--fg);
 			font-family: initial;
+
+			@media (max-width: 500px) {
+				padding: 0 16px;
+			}
 
 			&:focus {
 				outline: none;
@@ -636,7 +661,11 @@ export default Vue.extend({
 		> textarea {
 			max-width: 100%;
 			min-width: 100%;
-			min-height: 80px;
+			min-height: 90px;
+
+			@media (max-width: 500px) {
+				min-height: 80px;
+			}
 		}
 
 		> .dp-uploader {
@@ -653,9 +682,14 @@ export default Vue.extend({
 				display: inline-block;
 				padding: 0;
 				margin: 0;
-				width: 48px;
-				height: 48px;
 				font-size: 16px;
+				width: 64px;
+				height: 64px;
+
+				@media (max-width: 500px) {
+					width: 48px;
+					height: 48px;
+				}
 
 				&:hover {
 					background: rgba(0, 0, 0, 0.05);
