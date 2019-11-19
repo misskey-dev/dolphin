@@ -319,9 +319,11 @@ export default Vue.extend({
 				margin: 0;
 				align-items: center;
 
+				&:not(:last-child) {
+					margin-bottom: 8px;
+				}
+
 				> .name {
-					padding: 4px;
-					margin: 4px;
 					width: 30%;
 					overflow: hidden;
 					white-space: nowrap;
@@ -331,8 +333,6 @@ export default Vue.extend({
 				}
 
 				> .value {
-					padding: 4px;
-					margin: 4px;
 					width: 70%;
 					overflow: hidden;
 					white-space: nowrap;

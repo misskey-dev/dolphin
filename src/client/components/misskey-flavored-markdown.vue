@@ -20,6 +20,8 @@ export default Vue.extend({
 	&.nowrap {
 		white-space: pre;
 		word-wrap: normal; // https://codeday.me/jp/qa/20190424/690106.html
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	/deep/ .quote {

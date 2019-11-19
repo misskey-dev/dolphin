@@ -157,6 +157,7 @@ export default Vue.extend({
 
 			> .body {
 				padding: 0 8px;
+				overflow: hidden;
 
 				> .name {
 					display: block;
