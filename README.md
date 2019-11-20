@@ -9,7 +9,7 @@
 
 ## 🍀 Why Dolphin
 Dolphin is a fork of [Misskey](https://github.com/syuilo/misskey) and a sister project of it.
-While inheriting features such as reaction and high performance, it has been optimized for single-user use. As a result, it is easier to use and lighter.
+While inheriting attractive features such as reaction and high performance, it has been optimized for single-user use. As a result, it is easier to use and lighter.
 
 Looking for a lightweight, high-performance ActivityPub server? Want to use Misskey, but is it heavy to use alone? Try Dolphin.
 
@@ -96,7 +96,6 @@ X axis represents seconds. Lower is better.
 ## 📦 Install
 
 ### Create Dolphin user
-----------------------------------------------------------------
 Running dolphin as root is not a good idea so we need to create another user for that
 
 For example:
