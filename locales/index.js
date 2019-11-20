@@ -17,11 +17,13 @@ const languages = [
 	'ja-JP',
 	'en-US',
 	'ko-KR',
+	'oc-FR',
 ];
 
 const primaries = {
 	'en': 'US',
 	'ja': 'JP',
+	'oc': 'FR',
 	'zh': 'CN',
 };
 
