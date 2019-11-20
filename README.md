@@ -94,6 +94,16 @@ X axis represents seconds. Lower is better.
 <img src="http://drive.google.com/uc?export=view&id=1EoVg4R_npLYqmQz5xoxxWb_AQkM4zTF4" alt="">
 
 ## 📦 Install
+
+### Create Dolphin user
+----------------------------------------------------------------
+Running dolphin as root is not a good idea so we need to create another user for that
+
+For example:
+```
+adduser --disabled-password --disabled-login dolphin
+```
+
 ### Install dependencies
 Please install and setup these softwares:
 
@@ -103,15 +113,19 @@ Please install and setup these softwares:
 
 ### Install Dolphin
 
-1. Clone the Dolphin repo
+1. Connect to Dolphin user
+
+	`su - dolphin`
+
+2. Clone the Dolphin repo
 
 	`git clone -b master git://github.com/syuilo/dolphin.git`
 
-2. Navigate to Dolphin directory
+3. Navigate to Dolphin directory
 
 	`cd dolphin`
 
-3. Install Dolphin dependencies.
+4. Install Dolphin dependencies.
 
 	`npm i`
 
