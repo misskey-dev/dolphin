@@ -3,14 +3,14 @@ _charts:
   usersTotal: Total utilizaires
   federationInstancesTotal: Federacion en tot
   filesTotal: Fichièrs en tot
-  storageUsageTotal: Total Storage Usage
-  storageUsageIncDec: Increase, or decrease in storage use
-  filesIncDec: Increase, or decrease in the number of files
-  remoteNotesIncDec: Increase, or decrease in the number of remote postings
-  localNotesIncDec: Increase, or decrease in local postings
-  notesIncDec: Increase, or decrease in the number of posts
-  usersIncDec: Increase, or decrease in the number of users
-  federationInstancesIncDec: Increase, or decrease in federation
+  storageUsageTotal: Utilizacion totala de l’emmagazinatge
+  storageUsageIncDec: Creis o baissa de l’utilizacion de l’emmagazinatge
+  filesIncDec: Creis o baissa del nombre de fichièrs
+  remoteNotesIncDec: Creis o baissa del nombre de publicacions alonhadas
+  localNotesIncDec: Creis o baissa de las publicacions localas
+  notesIncDec: Creis o baissa del nombre de publicacions
+  usersIncDec: Creis o baissa del nombre d’utilizaires
+  federationInstancesIncDec: Creis o baissa de la federacion
 _profile:
   name: Nom
   metadataContent: Contengut
@@ -57,7 +57,8 @@ _poll:
   choiceN: Causida {n}
 pinLimitExceeded: Podètz pas penjar mai de publicacions
 remoteFilesCacheCapacityPerAccount: Limit pel cache dels comptes alonhats
-reactionSettingDescription: Personalizar lo seleccionador d’emoji de reaccions
+reactionSettingDescription: Personalizar lo seleccionador d’emoji de reaccions (separats
+  per de retorn a la linha)
 importRequested: Avètz demandat un import. Aquò pòt trigar.
 exportRequested: Avètz demandat un export. Aquò pòt trigar. Quand sià acabat, lo fichièr
   final serà ajustat al disc.
@@ -72,13 +73,13 @@ _instanceCharts:
   usersTotal: Utilizaires en tot
   requests: Requèstas
   filesTotal: Nombre total de fichièrs acumulats
-  files: Increase, or decrease in the number of files
-  cacheSizeTotal: Size of accumulated cache
-  cacheSize: Increase, or decrease in cache size
-  ffTotal: Number of follows accumulated
-  ff: Increase, or decrease in followers
-  notes: Increase, or decrease in the number of posts
-  users: Increase, or decrease in the number of users
+  files: Creis o baissa del nombre de fichièrs
+  cacheSizeTotal: Talha acumulada del cache
+  cacheSize: Creis o baissa de la talha del cache
+  ffTotal: Creis o baissa d’abonaments acumulats
+  ff: Creis o baissa dels seguidors
+  notes: Creis o baissa del nombre de publicacions
+  users: Creis o baissa del nombre d’utilizaires
 gotIt: Comprés !
 unmute: Mostrar
 mute: Rescondre
@@ -177,19 +178,21 @@ _ago:
   future: Futur
   unknown: Desconegut
 noteDeleteConfirm: Volètz vertadièrament suprimir aquesta publicacion ?
-blockedInstancesDescription: List up the hosts delimited by line breaks that you want
-  to block. Those blocked instances will not be able to interact with this instance.
+blockedInstancesDescription: Lista los òstes separats per de retorn a la linha que
+  volètz blocar. Aquelas instàncias blocadas poiràn pas mai interagir amb aquesta
+  instància.
 clearCachedFilesConfirm: Volètz vertadièrament netejar lo cache dels fichièrs alonhats ?
-clearQueueConfirmText: Undelivered notes will be not delivered any more. Normally
-  you DO NOT need to do this operation.
+clearQueueConfirmText: Las nòtas pas liuradas seràn pas mai liuradas. En temps normal
+  vos CAL PAS tocar a aquò.
 clearQueueConfirmTitle: Volètz vertadièrament escafar la fila ?
-proxyAccountDescription: "A proxy account acts, under certain conditions, as a remote\
-  \ follower for users on other instances.\nExample: When a remote user is added to\
-  \ a list, their posts would not be delivered to the instance if nobody on it follows\
-  \ them. The proxy account then follows them instead so that the posts are delivered."
-cacheRemoteFilesDescription: When this setting is disabled, remote files are loaded
-  directly from the remote instance. Disabling this will decrease storage usage, but
-  will increase traffic, because thumbnails will not be generated.
+proxyAccountDescription: "Un compte mandatari se compòrta, jos condicions, coma un\
+  \ seguidor alonhat pels utilizaires d’autras instàncias.\nExemple : quand un utilizaire\
+  \ a distància es ajustat a una lista, sas publicacions seràn pas liuradas a l’instància\
+  \ se degun lo sèc pas. Lo compte mandatari los sèc allòc per que las publicacions\
+  \ sián liuradas."
+cacheRemoteFilesDescription: Quand aqueste paramètre es desactivat, los fichièrs alonhats
+  son cargats dirèctament de l’instància alonhada. La desactivacion aumentarà l’utilizacion
+  de l’espaci d’emmagazinatge perque las vinhetas seràn pas generadas.
 emojiDeleteConfirm: Volètz vertadièrament suprimir « {name} » ?
 unsuspendConfirm: Volètz vertadièrament levar la suspension d’aqueste compte ?
 suspendConfirm: Volètz vertadièrament suspendre aqueste compte ?
