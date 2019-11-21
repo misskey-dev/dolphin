@@ -19,13 +19,13 @@ _profile:
   banner: Bandièra
   avatar: Avatar
   description: A prepaus de ieu
-  youCanIncludeHashtags: Podètz tanben inclure d'etiquetas.
-  username: Username
+  youCanIncludeHashtags: Podètz tanben inclure d’etiquetas.
+  username: Nom d’utilizaire
 _postForm:
   post: Publicacion
   quotePlaceholder: Citar aquesta publicacion...
   replyPlaceholder: Respondre a aquesta publicacion
-  placeholder: What's happening?
+  placeholder: Qué de nòu ?
 _visibility:
   specifiedDescription: Publicar solament per de personas especificadas
   specified: Dirècte
@@ -52,12 +52,12 @@ _poll:
   deadlineDate: Data de fin
   canMultipleVote: Permetre mai d’una causida
   noMore: Ne podètz pas ajustar mai
-  after: End after...
-  at: End at...
+  after: S’acabar aprèp...
+  at: S’acaba lo...
   choiceN: Causida {n}
 pinLimitExceeded: Podètz pas penjar mai de publicacions
 remoteFilesCacheCapacityPerAccount: Limit pel cache dels comptes alonhats
-reactionSettingDescription: Personalizar lo seleccionador d'emoji de reaccions
+reactionSettingDescription: Personalizar lo seleccionador d’emoji de reaccions
 importRequested: Avètz demandat un import. Aquò pòt trigar.
 exportRequested: Avètz demandat un export. Aquò pòt trigar. Quand sià acabat, lo fichièr
   final serà ajustat al disc.
@@ -66,12 +66,12 @@ _exportOrImport:
   allNotes: Totas las notas
   userLists: Listas
   blockingList: Lista de blocatges
-  followingList: Lista d'abonaments
+  followingList: Lista d’abonaments
 _instanceCharts:
   notesTotal: Publicacions en tot
   usersTotal: Utilizaires en tot
   requests: Requèstas
-  filesTotal: Total number of files accumulated
+  filesTotal: Nombre total de fichièrs acumulats
   files: Increase, or decrease in the number of files
   cacheSizeTotal: Size of accumulated cache
   cacheSize: Increase, or decrease in cache size
@@ -176,13 +176,13 @@ _ago:
   justNow: Ara meteis
   future: Futur
   unknown: Desconegut
-noteDeleteConfirm: Are you sure you want to delete this post?
+noteDeleteConfirm: Volètz vertadièrament suprimir aquesta publicacion ?
 blockedInstancesDescription: List up the hosts delimited by line breaks that you want
   to block. Those blocked instances will not be able to interact with this instance.
-clearCachedFilesConfirm: Are you sure clear all cached remote files?
+clearCachedFilesConfirm: Volètz vertadièrament netejar lo cache dels fichièrs alonhats ?
 clearQueueConfirmText: Undelivered notes will be not delivered any more. Normally
   you DO NOT need to do this operation.
-clearQueueConfirmTitle: Are you sure clearing the queue?
+clearQueueConfirmTitle: Volètz vertadièrament escafar la fila ?
 proxyAccountDescription: "A proxy account acts, under certain conditions, as a remote\
   \ follower for users on other instances.\nExample: When a remote user is added to\
   \ a list, their posts would not be delivered to the instance if nobody on it follows\
@@ -190,11 +190,11 @@ proxyAccountDescription: "A proxy account acts, under certain conditions, as a r
 cacheRemoteFilesDescription: When this setting is disabled, remote files are loaded
   directly from the remote instance. Disabling this will decrease storage usage, but
   will increase traffic, because thumbnails will not be generated.
-emojiDeleteConfirm: Are you sure you want to delete "{name}"?
-unsuspendConfirm: Are you sure you want to unsuspend this account?
-suspendConfirm: Are you sure you want to suspend this account?
-unblockConfirm: Are you sure you want to unblock this account?
-blockConfirm: Are you sure you want to block this account?
+emojiDeleteConfirm: Volètz vertadièrament suprimir « {name} » ?
+unsuspendConfirm: Volètz vertadièrament levar la suspension d’aqueste compte ?
+suspendConfirm: Volètz vertadièrament suspendre aqueste compte ?
+unblockConfirm: Volètz vertadièrament desblocar aqueste compte ?
+blockConfirm: Volètz vertadièrament blocar aqueste compte ?
 _cw:
   poll: Sondatge
   files: '{count} fichièrs'
@@ -224,7 +224,7 @@ blockedUsers: Utilizaires blocats
 mutedUsers: Utilizaires resconduts
 muteAndBlock: Rescondre / Blocar
 blockedInstances: Instàncias blocadas
-clearCachedFiles: Escafar lo cache
+clearCachedFiles: Netejar lo cache
 clearQueue: Escafar la fila
 statistics: Estatisticas
 instanceInfo: Informacions instància
@@ -275,6 +275,6 @@ unsuspend: Quitar de suspendre
 suspend: Suspendre
 unblock: Desblocar
 block: Blocar
-unfollowConfirm: Are you sure you want to unfollow {name}?
-fileDeleteConfirm: Are you sure you want to delete the file "{name}"? Notes with this
-  file attached will also be deleted.
+unfollowConfirm: Volètz vertadièrament quitar de seguir « {name} » ?
+fileDeleteConfirm: Volètz vertadièrament suprimir lo fichièr « {name} » ? Las nòtas
+  e partatges ligats seràn tanben suprimit.
