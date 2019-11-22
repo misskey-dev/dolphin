@@ -96,6 +96,7 @@ export default Vue.extend({
 		return {
 			user: null,
 			error: null,
+			parallaxAnimationId: null,
 			faEllipsisH
 		};
 	},
@@ -118,15 +119,10 @@ export default Vue.extend({
 	},
 
 	mounted() {
-		window.addEventListener('load', this.onScroll);
-		window.addEventListener('scroll', this.onScroll, { passive: true });
-		window.addEventListener('resize', this.onScroll);
-	},
-
-	beforeDestroy() {
-		window.removeEventListener('load', this.onScroll);
-		window.removeEventListener('scroll', this.onScroll);
-		window.removeEventListener('resize', this.onScroll);
+		window.requestAnimationFrame(this.parallax);
+		this.$once('hook:beforeDestroy', () => {
+			window.cancelAnimationFrame(this.parallaxAnimationId);
+		});
 	},
 
 	methods: {
@@ -148,18 +144,22 @@ export default Vue.extend({
 			});
 		},
 
-		onScroll() {
+		parallax() {
+			this.parallaxAnimationId = window.requestAnimationFrame(this.parallax);
+
 			const banner = this.$refs.banner as any;
 			if (banner == null) return;
 
 			const top = window.scrollY;
 
+			if (top < 0) return;
+
 			const z = 1.75; // 奥行き(小さいほど奥)
 			const pos = -(top / z);
 			banner.style.backgroundPosition = `center calc(50% - ${pos}px)`;
 
-			const blur = top / 32
-			if (blur <= 10) banner.style.filter = `blur(${blur}px)`;
+			//const blur = top / 32
+			//if (blur <= 10) banner.style.filter = `blur(${blur}px)`;
 		},
 	}
 });
