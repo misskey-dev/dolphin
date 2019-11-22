@@ -307,12 +307,13 @@ export default Vue.extend({
 		width: 290px;
 		height: 305px;
 		
-		@media (max-width: 812px) {
-		  left: 0;
+		@media (max-width: 849px) {
+			left: 0;
 			right: 0;
 		}
-		@media (max-width: 812px) and (orientation: landscape) {
-		  height: 230px;
+
+		@media (max-width: 849px) and (orientation: landscape) {
+			height: 230px;
 		}
 	}
 
