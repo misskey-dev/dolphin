@@ -216,7 +216,7 @@ export default async (user: User, data: Option, silent = false) => new Promise<N
 
 		const nm = new NotificationManager(user, note);
 
-		createMentionedEvents(mentionedUsers, note, nm);
+		await createMentionedEvents(mentionedUsers, note, nm);
 
 		// If has in reply to note
 		if (data.reply) {
