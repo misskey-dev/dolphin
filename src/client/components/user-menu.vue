@@ -108,7 +108,7 @@ export default Vue.extend({
 			}).then(() => {
 				this.$root.dialog({
 					type: 'success',
-					splash: true
+					iconOnly: true, autoClose: true
 				});
 			}).catch(e => {
 				this.$root.dialog({
@@ -125,7 +125,7 @@ export default Vue.extend({
 				this.user.isMuted = !this.user.isMuted;
 				this.$root.dialog({
 					type: 'success',
-					splash: true
+					iconOnly: true, autoClose: true
 				});
 			}, e => {
 				this.$root.dialog({
@@ -144,7 +144,7 @@ export default Vue.extend({
 				this.user.isBlocking = !this.user.isBlocking;
 				this.$root.dialog({
 					type: 'success',
-					splash: true
+					iconOnly: true, autoClose: true
 				});
 			}, e => {
 				this.$root.dialog({
@@ -163,7 +163,7 @@ export default Vue.extend({
 				this.user.isSuspended = !this.user.isSuspended;
 				this.$root.dialog({
 					type: 'success',
-					splash: true
+					iconOnly: true, autoClose: true
 				});
 			}, e => {
 				this.$root.dialog({

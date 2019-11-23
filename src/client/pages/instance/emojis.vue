@@ -133,7 +133,7 @@ export default Vue.extend({
 				this.$refs.emojis.reload();
 				this.$root.dialog({
 					type: 'success',
-					splash: true
+					iconOnly: true, autoClose: true
 				});
 			})
 			.finally(() => {
@@ -163,7 +163,7 @@ export default Vue.extend({
 				this.$refs.emojis.reload();
 				this.$root.dialog({
 					type: 'success',
-					splash: true
+					iconOnly: true, autoClose: true
 				});
 			}).catch(e => {
 				this.$root.dialog({

@@ -69,7 +69,7 @@ export default Vue.extend({
 				this.$root.api('admin/queue/clear', {}).then(() => {
 					this.$root.dialog({
 						type: 'success',
-						splash: true
+						iconOnly: true, autoClose: true
 					});
 				});
 			});

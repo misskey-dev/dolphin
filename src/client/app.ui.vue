@@ -167,7 +167,7 @@ export default Vue.extend({
 			}).then(res => {
 				this.$root.dialog({
 					type: 'success',
-					splash: true
+					iconOnly: true, autoClose: true
 				});
 				this.$store.commit('device/set', {
 					key: 'accounts',
@@ -203,7 +203,7 @@ export default Vue.extend({
 			await this.$root.api('users/lists/create', { name: name });
 			this.$root.dialog({
 				type: 'success',
-				splash: true
+				iconOnly: true, autoClose: true
 			});
 		},
 

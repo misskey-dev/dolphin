@@ -1,5 +1,5 @@
 <template>
-<div class="dp-dialog" :class="{ splash }">
+<div class="dp-dialog" :class="{ iconOnly }">
 	<transition name="bg-fade" appear>
 		<div class="bg" ref="bg" @click="onBgClick" v-if="show"></div>
 	</transition>
@@ -35,7 +35,7 @@
 						</optgroup>
 					</template>
 				</x-select>
-				<div class="buttons" v-if="!splash && (showOkButton || showCancelButton) && !actions">
+				<div class="buttons" v-if="!iconOnly && (showOkButton || showCancelButton) && !actions">
 					<x-button inline @click="ok" v-if="showOkButton" primary :autofocus="!input && !select && !user" :disabled="!canOk">{{ (showCancelButton || input || select || user) ? $t('ok') : $t('gotIt') }}</x-button>
 					<x-button inline @click="cancel" v-if="showCancelButton || input || select || user">{{ $t('cancel') }}</x-button>
 				</div>
@@ -108,7 +108,11 @@ export default Vue.extend({
 			type: Boolean,
 			default: true
 		},
-		splash: {
+		iconOnly: {
+			type: Boolean,
+			default: false
+		},
+		autoClose: {
 			type: Boolean,
 			default: false
 		}
@@ -140,7 +144,7 @@ export default Vue.extend({
 	mounted() {
 		if (this.user) this.canOk = false;
 
-		if (this.splash) {
+		if (this.autoClose) {
 			setTimeout(() => {
 				this.close();
 			}, 1000);
@@ -227,7 +231,7 @@ export default Vue.extend({
 	width: 100%;
 	height: 100%;
 
-	&.splash > .main {
+	&.iconOnly > .main {
 		min-width: 0;
 		width: initial;
 	}

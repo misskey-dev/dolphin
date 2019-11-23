@@ -105,7 +105,7 @@ export default Vue.extend({
 			copyToClipboard(this.note.text);
 			this.$root.dialog({
 				type: 'success',
-				splash: true
+				iconOnly: true, autoClose: true
 			});
 		},
 
@@ -113,7 +113,7 @@ export default Vue.extend({
 			copyToClipboard(`${url}/notes/${this.note.id}`);
 			this.$root.dialog({
 				type: 'success',
-				splash: true
+				iconOnly: true, autoClose: true
 			});
 		},
 
@@ -123,7 +123,7 @@ export default Vue.extend({
 			}).then(() => {
 				this.$root.dialog({
 					type: 'success',
-					splash: true
+					iconOnly: true, autoClose: true
 				});
 				this.destroyDom();
 			}).catch(e => {
@@ -158,7 +158,7 @@ export default Vue.extend({
 			}).then(() => {
 				this.$root.dialog({
 					type: 'success',
-					splash: true
+					iconOnly: true, autoClose: true
 				});
 				this.destroyDom();
 			});

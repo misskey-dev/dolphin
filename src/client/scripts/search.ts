@@ -28,7 +28,7 @@ export async function search(v: any, q: string) {
 		v.$root.$emit('warp', date);
 		v.$root.dialog({
 			icon: faHistory,
-			splash: true,
+			iconOnly: true, autoClose: true
 		});
 		return;
 	}

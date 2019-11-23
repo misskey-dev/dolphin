@@ -44,7 +44,7 @@ export default Vue.extend({
 				this.$root.api('admin/drive/clean-remote-files', {}).then(() => {
 					this.$root.dialog({
 						type: 'success',
-						splash: true
+						iconOnly: true, autoClose: true
 					});
 				});
 			});

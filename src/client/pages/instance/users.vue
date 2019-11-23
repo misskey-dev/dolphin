@@ -61,6 +61,11 @@ export default Vue.extend({
 			});
 			if (canceled2) return;
 
+			const dialog = this.$root.dialog({
+				type: 'waiting',
+				iconOnly: true
+			});
+
 			this.$root.api('admin/accounts/create', {
 				username: username,
 				password: password,
@@ -68,13 +73,15 @@ export default Vue.extend({
 				this.$refs.users.reload();
 				this.$root.dialog({
 					type: 'success',
-					splash: true
+					iconOnly: true, autoClose: true
 				});
 			}).catch(e => {
 				this.$root.dialog({
 					type: 'error',
 					text: e.id
 				});
+			}).finally(() => {
+				dialog.close();
 			});
 		}
 	}

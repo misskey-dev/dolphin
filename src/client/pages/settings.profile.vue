@@ -196,7 +196,7 @@ export default Vue.extend({
 				if (notify) {
 					this.$root.dialog({
 						type: 'success',
-						splash: true
+						iconOnly: true, autoClose: true
 					});
 				}
 			}).catch(err => {
