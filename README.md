@@ -2,7 +2,7 @@
 
 <div>
 <h1 align="center">Dolphin</h1>
-<p align="center">Dolphin is a lightweight ActivityPub server optimized for single user  (or few users) use.</p>
+<p align="center">Dolphin is a lightweight ActivityPub server for personal (or team).</p>
 </div>
 
 <p align="center"><a href="https://www.patreon.com/syuilo"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron!" width="160" /></a></p>
