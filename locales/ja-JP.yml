@@ -191,6 +191,12 @@ notResponding: "応答なし"
 instanceFollowing: "インスタンスのフォロー"
 instanceFollowers: "インスタンスのフォロワー"
 instanceUsers: "インスタンスのユーザー"
+changePassword: "パスワードを変更"
+security: "セキュリティ"
+retypedNotMatch: "入力が一致しません。"
+currentPassword: "現在のパスワード"
+newPassword: "新しいパスワード"
+newPasswordRetype: "新しいパスワード(再入力)"
 
 _cw:
   hide: "隠す"

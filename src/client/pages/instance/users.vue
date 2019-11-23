@@ -3,7 +3,7 @@
 	<div class="title"><fa :icon="faUsers"/> {{ $t('users') }}</div>
 	<div class="content">
 		<x-pagination :pagination="pagination" #default="{items}" class="users" ref="users">
-			<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i">
+			<div class="user" v-for="(user, i) in items" :key="user.id" :data-index="i" @click="selected = user" :class="{ selected: selected && (selected.id === user.id) }">
 				<dp-avatar :user="user" class="avatar"/>
 				<div class="body">
 					<dp-user-name :user="user" class="name"/>
@@ -13,7 +13,8 @@
 		</x-pagination>
 	</div>
 	<div class="footer">
-		<x-button primary @click="addUser()"><fa :icon="faPlus"/> {{ $t('addUser') }}</x-button>
+		<x-button inline primary @click="addUser()"><fa :icon="faPlus"/> {{ $t('addUser') }}</x-button>
+		<x-button inline :disabled="selected == null" @click="changePassword()">{{ $t('changePassword') }}</x-button>
 	</div>
 </section>
 </template>
@@ -38,6 +39,7 @@ export default Vue.extend({
 
 	data() {
 		return {
+			selected: null,
 			pagination: {
 				endpoint: 'admin/show-users',
 				limit: 10,
@@ -83,12 +85,46 @@ export default Vue.extend({
 			}).finally(() => {
 				dialog.close();
 			});
+		},
+
+		async changePassword() {
+			const { canceled: canceled, result: newPassword } = await this.$root.dialog({
+				title: this.$t('newPassword'),
+				input: {
+					type: 'password'
+				}
+			});
+			if (canceled) return;
+
+			const dialog = this.$root.dialog({
+				type: 'waiting',
+				iconOnly: true
+			});
+			
+			this.$root.api('admin/change-password', {
+				userId: this.selected.id,
+				newPassword
+			}).then(() => {
+				this.$root.dialog({
+					type: 'success',
+					iconOnly: true, autoClose: true
+				});
+			}).catch(e => {
+				this.$root.dialog({
+					type: 'error',
+					text: e
+				});
+			}).finally(() => {
+				dialog.close();
+			});
 		}
 	}
 });
 </script>
 
 <style lang="scss" scoped>
+@import '../../theme';
+
 .dp-instance-users {
 	> .content {
 		max-height: 300px;
@@ -98,6 +134,12 @@ export default Vue.extend({
 			> .user {
 				display: flex;
 				align-items: center;
+
+				&.selected {
+					background: $primary;
+					box-shadow: 0 0 0 8px $primary;
+					color: #fff;
+				}
 
 				> .avatar {
 					width: 50px;

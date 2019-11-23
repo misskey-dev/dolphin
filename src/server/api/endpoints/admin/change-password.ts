@@ -2,14 +2,9 @@ import $ from 'cafy';
 import { ID } from '../../../../misc/cafy-id';
 import define from '../../define';
 import * as bcrypt from 'bcryptjs';
-import rndstr from 'rndstr';
 import { Users, UserProfiles } from '../../../../models';
 
 export const meta = {
-	desc: {
-		'ja-JP': '指定したユーザーのパスワードをリセットします。',
-	},
-
 	tags: ['admin'],
 
 	requireCredential: true,
@@ -23,6 +18,10 @@ export const meta = {
 				'en-US': 'The user ID which you want to suspend'
 			}
 		},
+
+		newPassword: {
+			validator: $.str
+		}
 	}
 };
 
@@ -33,18 +32,11 @@ export default define(meta, async (ps) => {
 		throw new Error('user not found');
 	}
 
-	const passwd = rndstr('a-zA-Z0-9', 8);
-
 	// Generate hash of password
-	const hash = bcrypt.hashSync(passwd);
+	const salt = await bcrypt.genSalt(8);
+	const hash = await bcrypt.hash(ps.newPassword, salt);
 
-	await UserProfiles.update({
-		userId: user.id
-	}, {
+	await UserProfiles.update({ userId: user.id }, {
 		password: hash
 	});
-
-	return {
-		password: passwd
-	};
 });

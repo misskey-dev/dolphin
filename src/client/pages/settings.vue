@@ -7,6 +7,7 @@
 	<x-drive/>
 	<x-general/>
 	<x-mute-block/>
+	<x-security/>
 
 	<x-button @click="$root.signout()" primary class="logout">{{ $t('logout') }}</x-button>
 </div>
@@ -21,6 +22,7 @@ import XDrive from './settings.drive.vue';
 import XGeneral from './settings.general.vue';
 import XReactionSetting from './settings.reaction.vue';
 import XMuteBlock from './settings.mute-block.vue';
+import XSecurity from './settings.security.vue';
 import XButton from '../components/ui/button.vue';
 
 export default Vue.extend({
@@ -38,6 +40,7 @@ export default Vue.extend({
 		XGeneral,
 		XReactionSetting,
 		XMuteBlock,
+		XSecurity,
 		XButton,
 	},
 });

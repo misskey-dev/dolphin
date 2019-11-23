@@ -56,7 +56,7 @@ export default Vue.extend({
 		save() {
 			this.$root.api('i/update', {
 				isLocked: !!this.isLocked,
-			})
+			});
 		}
 	}
 });
