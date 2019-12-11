@@ -67,7 +67,7 @@ export default define(meta, async (ps, me) => {
 		.andWhere('note.text ILIKE :q', { q: `%${ps.query}%` })
 		.leftJoinAndSelect('note.user', 'user');
 
-	if (me) generateVisibilityQuery(query, me);
+	generateVisibilityQuery(query, me);
 	if (me) generateMuteQuery(query, me);
 
 	const notes = await query.take(ps.limit!).getMany();
