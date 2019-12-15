@@ -89,7 +89,7 @@ export default class Logger {
 					level === 'info' ? this.syslogClient.info :
 					null as never;
 
-				send(message);
+				send.bind(this.syslogClient)(message);
 			}
 		}
 	}
