@@ -2,6 +2,7 @@ import redis from '../db/redis';
 import { User } from '../models/entities/user';
 import { Note } from '../models/entities/note';
 import { UserList } from '../models/entities/user-list';
+import config from '../config';
 
 class Publisher {
 	private publish = (channel: string, type: string | null, value?: any): void => {
@@ -9,7 +10,7 @@ class Publisher {
 			{ type: type, body: null } :
 			{ type: type, body: value };
 
-		redis.publish('dolphin', JSON.stringify({
+		redis.publish(config.host, JSON.stringify({
 			channel: channel,
 			message: message
 		}));
