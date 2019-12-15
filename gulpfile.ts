@@ -5,9 +5,9 @@
 import * as fs from 'fs';
 import * as gulp from 'gulp';
 import * as ts from 'gulp-typescript';
-const cssnano = require('gulp-cssnano');
 import * as rimraf from 'rimraf';
 import * as rename from 'gulp-rename';
+const cleanCSS = require('gulp-clean-css');
 const sass = require('gulp-sass');
 
 const locales = require('./locales');
@@ -56,7 +56,7 @@ gulp.task('cleanall', gulp.parallel('clean', cb =>
 gulp.task('build:client:styles', () =>
 	gulp.src('./src/client/style.scss')
 		.pipe(sass())
-		.pipe((cssnano as any)())
+		.pipe(cleanCSS())
 		.pipe(gulp.dest('./built/client/assets/'))
 );
 
