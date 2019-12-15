@@ -119,9 +119,13 @@ export default Vue.extend({
 	},
 
 	mounted() {
-		window.requestAnimationFrame(this.parallax);
+		window.requestAnimationFrame(this.parallaxLoop);
+		window.addEventListener('scroll', this.parallax, { passive: true });
+		document.addEventListener('touchmove', this.parallax, { passive: true });
 		this.$once('hook:beforeDestroy', () => {
 			window.cancelAnimationFrame(this.parallaxAnimationId);
+			window.removeEventListener('scroll', this.parallax);
+			document.removeEventListener('touchmove', this.parallax);
 		});
 	},
 
@@ -144,9 +148,12 @@ export default Vue.extend({
 			});
 		},
 
-		parallax() {
-			this.parallaxAnimationId = window.requestAnimationFrame(this.parallax);
+		parallaxLoop() {
+			this.parallaxAnimationId = window.requestAnimationFrame(this.parallaxLoop);
+			this.parallax();
+		},
 
+		parallax() {
 			const banner = this.$refs.banner as any;
 			if (banner == null) return;
 
@@ -157,9 +164,6 @@ export default Vue.extend({
 			const z = 1.75; // 奥行き(小さいほど奥)
 			const pos = -(top / z);
 			banner.style.backgroundPosition = `center calc(50% - ${pos}px)`;
-
-			//const blur = top / 32
-			//if (blur <= 10) banner.style.filter = `blur(${blur}px)`;
 		},
 	}
 });
