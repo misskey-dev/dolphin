@@ -155,6 +155,7 @@ export default async function renderNote(note: Note, dive = true): Promise<any> 
 		content,
 		_misskey_content: text,
 		_misskey_quote: quote,
+		quoteUrl: quote,
 		published: note.createdAt.toISOString(),
 		to,
 		cc,

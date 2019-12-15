@@ -75,12 +75,14 @@ export interface INote extends IObject {
 	type: 'Note' | 'Question' | 'Article' | 'Audio' | 'Document' | 'Image' | 'Page' | 'Video';
 	_misskey_content?: string;
 	_misskey_quote?: string;
+	quoteUrl?: string;
 }
 
 export interface IQuestion extends IObject {
 	type: 'Note' | 'Question';
 	_misskey_content?: string;
 	_misskey_quote?: string;
+	quoteUrl?: string;
 	oneOf?: IQuestionChoice[];
 	anyOf?: IQuestionChoice[];
 	endTime?: Date;
