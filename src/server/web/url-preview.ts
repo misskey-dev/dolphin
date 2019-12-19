@@ -7,7 +7,7 @@ import { query } from '../../prelude/url';
 
 const logger = new Logger('url-preview');
 
-module.exports = async (ctx: Koa.BaseContext) => {
+module.exports = async (ctx: Koa.Context) => {
 	logger.info(config.summalyProxy
 		? `(Proxy) Getting preview of ${ctx.query.url}@${ctx.query.lang} ...`
 		: `Getting preview of ${ctx.query.url}@${ctx.query.lang} ...`);
