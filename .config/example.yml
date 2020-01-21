@@ -120,11 +120,15 @@ drive:
 #     S3: see https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
 #     GCS: not needed (just delete the region line)
 #
+# * Replace <baseUrl> to
+#     S3: https://bucket-name.<endpoint>
+#     GCS: https://<endpoint>/bucket-name
+#
 #drive:
 #  storage: 'minio'
 #  bucket: bucket-name
 #  prefix: files
-#  baseUrl: https://bucket-name.<endpoint>
+#  baseUrl: <baseUrl>
 #  endpoint: <endpoint>
 #  region: <region>
 #  useSSL: true
