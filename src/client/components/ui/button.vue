@@ -194,7 +194,7 @@ export default Vue.extend({
 		border-radius: 6px;
 		overflow: hidden;
 
-		/deep/ div {
+		::v-deep div {
 			position: absolute;
 			width: 2px;
 			height: 2px;
@@ -206,7 +206,7 @@ export default Vue.extend({
 		}
 	}
 
-	&.primary > .ripples /deep/ div {
+	&.primary > .ripples ::v-deep div {
 		background: rgba(0, 0, 0, 0.15);
 	}
 

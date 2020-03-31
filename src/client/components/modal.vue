@@ -71,7 +71,7 @@ export default Vue.extend({
 		overflow: auto;
 		margin: auto;
 
-		/deep/ > * {
+		::v-deep > * {
 			position: absolute;
 			top: 0;
 			bottom: 0;
