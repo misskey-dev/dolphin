@@ -27,7 +27,7 @@ export const meta = {
 
 export default define(meta, async (ps, me) => {
 	const noUsers = (await Users.count({})) === 0;
-	if (!noUsers && me == null) throw new Error('access denied');
+	if (!noUsers && !me?.isAdmin) throw new Error('access denied');
 
 	// Generate hash of password
 	const salt = await bcrypt.genSalt(8);
