@@ -1,0 +1,7 @@
+# See https://git-scm.com/docs/gitattributes for more about git attribute files.
+
+# Mark the Yarn files as having been vendored.
+.yarn/* linguist-vendored
+
+# Mark the Yarn lockfile as having been generated.
+yarn.lock linguist-generated
