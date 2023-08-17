@@ -1,0 +1,143 @@
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Dolphin configuration
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+#   ┌─────┐
+#───┘ URL └─────────────────────────────────────────────────────────────────────
+
+# The user-accessible URL of the server. Once you have started the instance, DO
+# NOT CHANGE THIS! Doing so will break *everything*.
+url: https://example.com
+
+#   ┌───────────────────────┐
+#───┘ Port and TLS settings └───────────────────────────────────────────────────
+
+# Dolphin requires a reverse-proxy to support HTTPS connections.
+#
+#                 +--------- https://example.com ---------+
+#   +------+      |+-------------+      +----------------+|
+#   | User | ---> || Proxy (443) | ---> | Dolphin (3000) ||
+#   +------+      |+-------------+      +----------------+|
+#                 +---------------------------------------+
+#
+# You need to set up a reverse-proxy like NGINX. An encrypted connection with
+# HTTPS is required, as communications between the backend and the frontend may
+# include personal authentication tokens.
+
+# The port Dolphin's server should listen on.
+port: 3000
+
+#   ┌──────────────────────────┐
+#───┘ PostgreSQL configuration └────────────────────────────────────────────────
+
+db:
+  # The name of the database that Dolphin uses.
+  database: dolphin_development
+
+  # Whether or not queries should be cached.
+  # disableCache: true
+
+  # A hash of extra connection options to be passed onto the client.
+  # extra:
+  #   ssl: true
+
+  # The hostname of the server that PostgreSQL is running on.
+  host: localhost
+
+  # The password of the user that Dolphin uses.
+  password: password
+
+  # The port that the PostgreSQL server is running on.
+  port: 5432
+
+  # The username of the user that Dolphin uses.
+  username: dolphin
+
+#   ┌─────────────────────┐
+#───┘ Redis configuration └─────────────────────────────────────────────────────
+
+redis:
+  # The Redis database that Dolphin uses.
+  # database: 1
+
+  # Which IP family Dolphin uses to communicate to Redis. `0` is both, `4` is
+  # IPv4, and `6` is IPv6.
+  # family: 0
+
+  # The hostname of the server that Redis is running on.
+  host: localhost
+
+  # The password of the Redis server that Dolphin uses.
+  # password: password
+
+  # The prefix that Dolphin uses for its data.
+  # prefix: dolphin
+
+  # The port that the Redis server is running on.
+  port: 6379
+
+#   ┌───────────────┐
+#───┘ ID generation └───────────────────────────────────────────────────────────
+
+# The ID generation method to use. Once you have started the instance, DO NOT
+# CHANGE THIS! Doing so will break *everything*. Available options are `aid`,
+# `meid`, `ulid`, and `objectid`.
+id: 'meid'
+
+#   ┌─────────────────────┐
+#───┘ Other configuration └─────────────────────────────────────────────────────
+
+# The maximum number of child processes that Dolphin can use.
+# clusterLimit: 1
+
+# The number of concurrent jobs each worker can use.
+# deliverJobConcurrency: 128
+# inboxJobConcurrency: 16
+# relationshipJobConcurrency: 16
+
+# The maximum number of jobs per second that Dolphin can run.
+# deliverJobPerSecond: 128
+# inboxJobPerSecond: 16
+# relationshipJobPerSecond: 64
+
+# The maximum number of attempts for a single job.
+# deliverJobMaxAttempts: 12
+# inboxJobMaxAttempts: 8
+
+# The IP address family that Dolphin uses for outgoing requests. Available
+# options are `ipv4`, `ipv6`, and `dual`.
+# outgoingAddressFamily: ipv4
+
+# A proxy Dolphin should use for HTTP/HTTPS connections.
+# proxy: http://127.0.0.1:3128
+
+# An array of hosts that can bypass going through the proxy.
+proxyBypassHosts:
+  - api.deepl.com
+  - api-free.deepl.com
+  - challenges.cloudflare.com
+  - hcaptcha.com
+  - www.recaptcha.net
+
+# A proxy Dolphin should use for SMTP/SMTPS connections.
+# proxySmtp: http://127.0.0.1:3128 # Use HTTP/1.1 CONNECT
+# proxySmtp: socks4://127.0.0.1:1080 # Use SOCKS4
+# proxySmtp: socks5://127.0.0.1:1080 # Use SOCKS5
+
+# A media proxy that Dolphin should use. This can be used as a common cache
+# between instances. A reference implementation is located at
+# https://github.com/misskey-dev/media-proxy.
+# mediaProxy: https://example.com/proxy
+
+# Whether or not remote files are proxied.
+# proxyRemoteFiles: true
+
+# Whether or not ActivityPub GET requests are signed.
+signToActivityPubGet: true
+
+# An array of allowed private networks that can access Dolphin.
+# allowedPrivateNetworks:
+#   - 127.0.0.1/32
+
+# The maximum download/upload file size in bytes.
+# maxFileSize: 262144000
